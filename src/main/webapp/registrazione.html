@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <style>
+        .block{
+            display: inline-block;
+            margin-right: 200px;
+        }
+        p{
+            text-align: center;
+
+        }
+        fieldset {
+            width: 400px; /* Imposta la larghezza del fieldset */
+            padding: 10px; /* Aggiunge spazio interno al fieldset */
+            border: 2px solid #000; /* Aggiunge un bordo al fieldset */
+        }
+
+    </style>
+</head>
+<body>
+<fieldset class="block" >
+    <legend><h3 style="color: #3a6977">Registrati</h3></legend>
+    <form action="insert-utente">
+        <label for="nomeUtente">nome utente</label>
+        <input type="text" id="nomeUtente" name="nomeUtente"><br><br>
+        <label for="email">e-mail</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="pw">password</label>
+        <input type="password" id="pw" name="pw"><br><br>
+        <input type="radio" id="standard" name="tipo" value="standard">
+        <label for="standard">Standard</label>
+        <input type="radio" id="premium" name="tipo" value="premium">
+        <label for="premium">Premium</label>
+        <input type="radio" id="amministratore" name="tipo" value="amministratore">
+        <label for="amministratore">Amministratore</label><br><br>
+        <input type="submit" value="Registrati" align="right">
+    </form>
+</fieldset>
+<p class="block"> Scegliendo di essere un cliente premium avrai la possibilità di ottenere una tessera<br>
+    per accumulare punti ottenendo sconti impredibili!</p>
+
+
+</body>
+</html>
