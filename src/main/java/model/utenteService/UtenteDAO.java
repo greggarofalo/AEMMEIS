@@ -6,17 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A small table of banking customers for testing.
- */
 
-public class UtenteDAO {
-
-
-    /**
-     * Finds the customer with the given ID.
-     * Returns null if there is no match.
-     */
+public class
+UtenteDAO {
 
     public Utente doRetrieveById(String email) {
         try (Connection con = ConPool.getConnection()) {
@@ -39,25 +31,27 @@ public class UtenteDAO {
     }
 
 
-    // la funzione seguente � inutile perch� il DB � riempito tramite tool esterno
-    // sarebbe utile se l'applicazione fornisse un form per riempirlo. IDEA! aggiungi questa feature all'applicazione
-    // � un buon modo per verificare la sua correttezza
-
     public void doSave(Utente utente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO utente (nomeUtente, email, codiceSicurezza, tipo) VALUES(?, ?,?,?)");
+                    "INSERT INTO utente (nomeUtente, email, codiceSicurezza, tipo) VALUES(?,?,?,?)");
             ps.setString(1, utente.getNomeUtente());
             ps.setString(2, utente.getEmail());
             ps.setString(3, utente.getCodiceSicurezza());
             ps.setString(4, utente.getTipo());
+
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
+            }
+
+            for(String tel : utente.getTelefoni()){
+                addTelefono(utente.getEmail(), tel);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public List<Utente> doRetrieveAll() {
@@ -103,6 +97,45 @@ public class UtenteDAO {
             ps.setString(1, email);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteTelefono(String email, String numeroTelefono){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM telefono WHERE email=? AND numeroTelefono=?");
+            ps.setString(1, email);
+            ps.setString(2, numeroTelefono);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteTelefoni(String email){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM telefono WHERE email=?");
+            ps.setString(1, email);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addTelefono(String email, String numeroTelefono){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO telefono (numeroTelefono, email) VALUES(?,?)");
+            ps.setString(1, numeroTelefono);
+            ps.setString(2, email);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

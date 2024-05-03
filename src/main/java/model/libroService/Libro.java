@@ -55,4 +55,6 @@ public class Libro {
     public void setAnnoPubblicazioni(int annoPubblicazioni) {
         this.annoPubblicazioni = annoPubblicazioni;
     }
+
+
 }

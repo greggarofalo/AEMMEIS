@@ -7,7 +7,7 @@ import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 
 @WebServlet(name = "insertUtente", value = "/insert-utente")
-public class InsertUtente extends HttpServlet {
+public class RegistroUtente extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Utente utente = new Utente();
@@ -22,7 +22,7 @@ public class InsertUtente extends HttpServlet {
 
         UtenteDAO service = new UtenteDAO();
         service.doSave(utente);
-
+        request.getSession().setAttribute("utente", utente);
 
     }
 

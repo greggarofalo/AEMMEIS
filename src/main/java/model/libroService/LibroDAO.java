@@ -94,4 +94,21 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public Autore getScrittura(String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT cf FROM scrittura WHERE isbn=?");
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String cf = rs.getString(1);
+                AutoreDAO service = new AutoreDAO();
+                return service.searchAutore(cf);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -34,16 +34,20 @@ public class AutoreDAO {
         }
     }
 
-    public boolean searchAutore(String cf) {
+    public Autore searchAutore(String cf) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT nome, cognome FROM autore WHERE cf=?");
             ps.setString(1, cf);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return true;
+                Autore autore = new Autore();
+                autore.setCf(cf);
+                autore.setNome(rs.getString(1));
+                autore.setCognome(rs.getString(2));
+                return autore;
             }
-            return false;
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,11 +1,14 @@
 package model.utenteService;
 
 
+import java.util.List;
+
 public class Utente {
   private String nomeUtente;
   private String codiceSicurezza;
   private String email;
   private String tipo;
+  private List<String> telefoni;
 
 
   public String getCodiceSicurezza() {
@@ -38,5 +41,13 @@ public class Utente {
 
   public void setTipo(String tipo) {
     this.tipo = tipo;
+  }
+
+  public List<String> getTelefoni() {
+    return telefoni;
+  }
+
+  public void setTelefoni(List<String> telefoni) {
+    this.telefoni = telefoni;
   }
 }
