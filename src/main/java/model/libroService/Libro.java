@@ -7,6 +7,8 @@ public class Libro {
     private int annoPubblicazioni;
     private double prezzo;
     private int sconto;
+    private String trama;
+    private String immagine;
 
     public String getTitolo() {
         return titolo;
@@ -54,5 +56,21 @@ public class Libro {
 
     public void setAnnoPubblicazioni(int annoPubblicazioni) {
         this.annoPubblicazioni = annoPubblicazioni;
+    }
+
+    public String getTrama() {
+        return trama;
+    }
+
+    public void setTrama(String trama) {
+        this.trama = trama;
+    }
+
+    public String getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
     }
 }

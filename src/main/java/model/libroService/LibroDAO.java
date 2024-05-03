@@ -10,13 +10,15 @@ public class LibroDAO {
     public void doSave(Libro libro){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO libro (isbn, titolo, genere, annoPubblicazione, prezzo, sconto) VALUES(?,?,?,?,?,?)");
+                    "INSERT INTO libro (isbn, titolo, genere, annoPubblicazione, prezzo, sconto, trama, immagine) VALUES(?,?,?,?,?,?, ?, ?)");
             ps.setString(1, libro.getIsbn());
             ps.setString(2, libro.getTitolo());
             ps.setString(3, libro.getGenere());
             ps.setInt(4, libro.getAnnoPubblicazioni());
             ps.setDouble(5, libro.getPrezzo());
             ps.setInt(6, libro.getSconto());
+            ps.setString(7, libro.getTrama());
+            ps.setString(8, libro.getImmagine());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -65,6 +67,8 @@ public class LibroDAO {
                 p.setAnnoPubblicazioni(rs.getInt(4));
                 p.setPrezzo(rs.getDouble(5));
                 p.setSconto(rs.getInt(6));
+                p.setTrama(rs.getString(7));
+                p.setImmagine(rs.getString(8));
                 libri.add(p);
             }
             return libri;
@@ -87,6 +91,8 @@ public class LibroDAO {
                 p.setAnnoPubblicazioni(rs.getInt(4));
                 p.setPrezzo(rs.getDouble(5));
                 p.setSconto(rs.getInt(6));
+                p.setTrama(rs.getString(7));
+                p.setImmagine(rs.getString(8));
                 return p;
             }
             return null;
@@ -94,4 +100,5 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
     }
+
 }
