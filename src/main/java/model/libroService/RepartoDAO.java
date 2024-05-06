@@ -13,9 +13,8 @@ public class RepartoDAO {
     public void doSave(Reparto reparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO reparto (IdReparto, Descrizione) VALUES(?,?)");
-            ps.setInt(1, reparto.getIdReparto());
-            ps.setString(2, reparto.getDescrizione());
+                    "INSERT INTO reparto (Descrizione) VALUES(?)");
+            ps.setString(1, reparto.getDescrizione());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");

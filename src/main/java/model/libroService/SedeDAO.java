@@ -1,6 +1,7 @@
 package model.libroService;
 
 import model.ConPool;
+import model.gestoreService.Gestore;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,12 +14,11 @@ public class SedeDAO {
     public void doSave(Sede sede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Sede (idSede, citta, via, numeroCivico, cap) VALUES(?,?,?,?,?)");
-            ps.setInt(1, sede.getIdSede());
-            ps.setString(2, sede.getCitta());
-            ps.setString(3, sede.getVia());
-            ps.setInt(4, sede.getCivico());
-            ps.setString(5, sede.getCap());
+                    "INSERT INTO Sede (citta, via, numeroCivico, cap) VALUES(?,?,?,?)");
+            ps.setString(1, sede.getCitta());
+            ps.setString(2, sede.getVia());
+            ps.setInt(3, sede.getCivico());
+            ps.setString(4, sede.getCap());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -37,6 +37,22 @@ public class SedeDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateSede(Sede sede){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE Sede SET citta = ?, via = ?, numeroCivico = ?, cap = ? WHERE idSede = ?");
+            ps.setString(1, sede.getCitta());
+            ps.setString(2, sede.getVia());
+            ps.setInt(3, sede.getCivico());
+            ps.setString(4, sede.getCap());
+            ps.setInt(5, sede.getIdSede());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public List<Sede> doRetrivedAll(){
