@@ -1,49 +1,47 @@
 package model.libroService;
 
 public class Sede {
-    private int IdSede;
-    private String Citta;
-    private String Via;
-    private int Civico;
-    private String Cap;
+    private int idSede;
+    private String citta;
+    private String via;
+    private int civico;
+    private String cap;
 
     public int getIdSede() {
-        return IdSede;
+        return idSede;
     }
 
     public void setIdSede(int idSede) {
-        IdSede = idSede;
+        this.idSede = idSede;
     }
 
     public String getCitta() {
-        return Citta;
+        return citta;
     }
 
-    public void setCitta(String citta) {
-        Citta = citta;
-    }
+    public void setCitta(String citta) {this.citta = citta;}
 
     public String getVia() {
-        return Via;
+        return via;
     }
 
     public void setVia(String via) {
-        Via = via;
+        this.via = via;
     }
 
     public int getCivico() {
-        return Civico;
+        return civico;
     }
 
     public void setCivico(int civico) {
-        Civico = civico;
+        this.civico = civico;
     }
 
     public String getCap() {
-        return Cap;
+        return cap;
     }
 
     public void setCap(String cap) {
-        Cap = cap;
+        this.cap = cap;
     }
 }

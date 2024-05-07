@@ -10,7 +10,7 @@ public class LibroDAO {
     public void doSave(Libro libro){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO libro (isbn, titolo, genere, annoPubblicazione, prezzo, sconto, trama, immagine) VALUES(?,?,?,?,?,?, ?, ?)");
+                    "INSERT INTO libro (isbn, titolo, genere, annoPubblicazione, prezzo, sconto, trama, immagine) VALUES(?,?,?,?,?,?,?,?)");
             ps.setString(1, libro.getIsbn());
             ps.setString(2, libro.getTitolo());
             ps.setString(3, libro.getGenere());
@@ -52,7 +52,7 @@ public class LibroDAO {
 
     }
 
-    public List<Libro> doRetrivedAll(){
+    public List<Libro> doRetriveAll(){
         List<Libro> libri = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
