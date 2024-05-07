@@ -13,7 +13,7 @@ public class RepartoDAO {
     public void doSave(Reparto reparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO reparto (Descrizione) VALUES(?)");
+                    "INSERT INTO reparto (descrizione) VALUES(?)");
             ps.setString(1, reparto.getDescrizione());
 
             if (ps.executeUpdate() != 1) {
@@ -24,11 +24,11 @@ public class RepartoDAO {
         }
     }
 
-    public void deleteReparto(int IdReparto){
+    public void deleteReparto(int idReparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM reparto WHERE IdReparto=?");
-            ps.setInt(1, IdReparto);
+                    con.prepareStatement("DELETE FROM reparto WHERE idReparto=?");
+            ps.setInt(1, idReparto);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
@@ -38,7 +38,7 @@ public class RepartoDAO {
 
     public void updateReparto(Reparto reparto){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET descrizione = ? WHERE IdReparto = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET descrizione = ? WHERE idReparto = ?");
             ps.setString(1, reparto.getDescrizione());
             ps.setInt(2, reparto.getIdReparto());
 
@@ -69,11 +69,11 @@ public class RepartoDAO {
         }
     }
 
-    public Reparto doRetrieveById(int IdReparto) {
+    public Reparto doRetrieveById(int idReparto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM reparto WHERE IdReparto=?");
-            ps.setInt(1, IdReparto);
+                    con.prepareStatement("SELECT * FROM reparto WHERE idReparto=?");
+            ps.setInt(1, idReparto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Reparto p = new Reparto();
@@ -87,11 +87,11 @@ public class RepartoDAO {
         }
     }
 
-    public Libro getAppartenenza(int IdReparto){
+    public Libro getAppartenenza(int idReparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT isbn FROM apparteneza WHERE idReparto=?");
-            ps.setInt(1, IdReparto);
+            ps.setInt(1, idReparto);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String isbn = rs.getString(1);

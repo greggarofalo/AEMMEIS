@@ -1,22 +1,22 @@
 package model.libroService;
 
 public class Reparto {
-    private int IdReparto;
-    private String Descrizione;
+    private int idReparto;
+    private String descrizione;
 
     public int getIdReparto() {
-        return IdReparto;
+        return idReparto;
     }
 
     public void setIdReparto(int idReparto) {
-        IdReparto = idReparto;
+        idReparto = idReparto;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public void setDescrizione(String descrizione) {
-        Descrizione = descrizione;
+        descrizione = descrizione;
     }
 }

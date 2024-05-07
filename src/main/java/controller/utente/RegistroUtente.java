@@ -1,6 +1,9 @@
 package controller.utente;
 
 import java.io.*;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.utenteService.Utente;
@@ -9,7 +12,8 @@ import model.utenteService.UtenteDAO;
 @WebServlet(name = "insertUtente", value = "/insert-utente")
 public class RegistroUtente extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         Utente utente = new Utente();
         String nomeUtente = request.getParameter("nomeUtente");
         String email = request.getParameter("email");
@@ -24,6 +28,8 @@ public class RegistroUtente extends HttpServlet {
         service.doSave(utente);
         request.getSession().setAttribute("utente", utente);
 
+        RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/login.jsp");
+        dispatcher.forward(request, response);
     }
 
     public void destroy() {

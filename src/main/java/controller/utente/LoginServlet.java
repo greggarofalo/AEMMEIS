@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.carrelloService.Carrello;
 import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 
@@ -22,6 +23,11 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO service = new UtenteDAO();
         if(service.doRetrieveById(utente.getEmail()) == null){
             //pagina di errore --> registrazione
+        }
+        else{
+            HttpSession session = request.getSession();
+            Carrello c = (Carrello) session.getAttribute("carrello");
+
         }
 
 
