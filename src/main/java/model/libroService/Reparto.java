@@ -9,7 +9,7 @@ public class Reparto {
     }
 
     public void setIdReparto(int idReparto) {
-        idReparto = idReparto;
+        this.idReparto = idReparto;
     }
 
     public String getDescrizione() {
@@ -17,6 +17,6 @@ public class Reparto {
     }
 
     public void setDescrizione(String descrizione) {
-        descrizione = descrizione;
+        this.descrizione = descrizione;
     }
 }

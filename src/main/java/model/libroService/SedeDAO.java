@@ -27,11 +27,11 @@ public class SedeDAO {
         }
     }
 
-    public void deleteSede(int IdSede){
+    public void deleteSede(int idSede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM Sede WHERE IdSede=?");
-            ps.setInt(1, IdSede);
+                    con.prepareStatement("DELETE FROM Sede WHERE idSede=?");
+            ps.setInt(1, idSede);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
@@ -77,11 +77,11 @@ public class SedeDAO {
         }
     }
 
-    public Sede doRetrieveById(int IdSede) {
+    public Sede doRetrieveById(int idSede) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM sede WHERE IdSede=?");
-            ps.setInt(1, IdSede);
+                    con.prepareStatement("SELECT * FROM sede WHERE idSede=?");
+            ps.setInt(1, idSede);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Sede p = new Sede();
@@ -98,11 +98,11 @@ public class SedeDAO {
         }
     }
 
-    public Libro getPresenza(int IdSede){
+    public Libro getPresenza(int idSede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT isbn FROM presenza WHERE idSede=?");
-            ps.setInt(1, IdSede);
+            ps.setInt(1, idSede);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String isbn = rs.getString(1);

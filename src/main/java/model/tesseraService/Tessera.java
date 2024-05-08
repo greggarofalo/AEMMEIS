@@ -2,49 +2,49 @@ package model.tesseraService;
 import java.time.LocalDate;
 
 public class Tessera {
-    private String Numero;
-    private LocalDate DataCreazione;
-    private LocalDate DataScadenza;
-    private int Punti;
-    private String Email;
+    private String numero;
+    private LocalDate dataCreazione;
+    private LocalDate dataScadenza;
+    private int punti;
+    private String email;
 
     public String getNumero() {
-        return Numero;
+        return numero;
     }
 
     public void setNumero(String numero) {
-        this.Numero = numero;
+        this.numero = numero;
     }
 
     public LocalDate getDataCreazione() {
-        return DataCreazione;
+        return dataCreazione;
     }
 
     public void setDataCreazione(LocalDate dataCreazione) {
-        this.DataCreazione = dataCreazione;
+        this.dataCreazione = dataCreazione;
     }
 
     public LocalDate getDataScadenza() {
-        return DataScadenza;
+        return dataScadenza;
     }
 
     public void setDataScadenza(LocalDate dataScadenza) {
-        this.DataScadenza = dataScadenza;
+        this.dataScadenza = dataScadenza;
     }
 
     public int getPunti() {
-        return Punti;
+        return punti;
     }
 
     public void setPunti(int punti) {
-        this.Punti = punti;
+        this.punti = punti;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
 }

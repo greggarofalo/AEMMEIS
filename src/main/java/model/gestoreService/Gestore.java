@@ -1,22 +1,22 @@
 package model.gestoreService;
 
 public class Gestore {
-    private String Matricola;
-    private double Stipendio;
+    private String matricola;
+    private double stipendio;
 
     public String getMatricola() {
-        return Matricola;
+        return matricola;
     }
 
     public void setMatricola(String matricola) {
-        this.Matricola = matricola;
+        this.matricola = matricola;
     }
 
     public double getStipendio() {
-        return Stipendio;
+        return stipendio;
     }
 
     public void setStipendio(double stipendio) {
-        this.Stipendio = stipendio;
+        this.stipendio = stipendio;
     }
 }
