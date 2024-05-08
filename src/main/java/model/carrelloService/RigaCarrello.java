@@ -3,7 +3,6 @@ package model.carrelloService;
 public class RigaCarrello {
     private String idCarrello;
     private String isbn;
-    private double prezzoUnitario;
     private int quantita;
 
     public String getIdCarrello() {
@@ -20,14 +19,6 @@ public class RigaCarrello {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public double getPrezzoUnitario() {
-        return prezzoUnitario;
-    }
-
-    public void setPrezzoUnitario(double prezzoUnitario) {
-        this.prezzoUnitario = prezzoUnitario;
     }
 
     public int getQuantita() {

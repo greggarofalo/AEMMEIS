@@ -24,8 +24,7 @@ public class RigaCarrelloDAO {
                 RigaCarrello p = new RigaCarrello();
                 p.setIdCarrello(rs.getString(1));
                 p.setIsbn(rs.getString(2));
-                p.setPrezzoUnitario(rs.getDouble(3));
-                p.setQuantita(rs.getInt(4));
+                p.setQuantita(rs.getInt(3));
                 lista.add(p);
             }
             return lista;
@@ -45,8 +44,7 @@ public class RigaCarrelloDAO {
                 RigaCarrello p = new RigaCarrello();
                 p.setIdCarrello(rs.getString(1));
                 p.setIsbn(rs.getString(2));
-                p.setPrezzoUnitario(rs.getDouble(3));
-                p.setQuantita(rs.getInt(4));
+                p.setQuantita(rs.getInt(3));
                 return p;
             }
             return null;
@@ -57,11 +55,10 @@ public class RigaCarrelloDAO {
     public void doSave(RigaCarrello rigaCarrello){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO rigaCarrello (idCarrello, isbn, prezzoUnitario, quantita) VALUES(?,?,?,?)");
+                    "INSERT INTO rigaCarrello (idCarrello, isbn, quantita) VALUES(?,?,?)");
             ps.setString(1, rigaCarrello.getIdCarrello());
             ps.setString(2, rigaCarrello.getIsbn());
-            ps.setDouble(3, rigaCarrello.getPrezzoUnitario());
-            ps.setInt(4, rigaCarrello.getQuantita());
+            ps.setInt(3, rigaCarrello.getQuantita());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }

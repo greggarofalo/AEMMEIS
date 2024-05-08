@@ -1,0 +1,17 @@
+.container {
+    text-align: right; /* Allinea il contenitore a destra */
+    margin-right: 20px;
+}
+
+.image {
+    display: inline-block; /* Imposta le immagini come blocchi inline */
+    margin-right: 20px;
+}
+
+.spaced-image{
+    margin-right: 25px;
+}
+
+a {
+    text-decoration: none;
+}

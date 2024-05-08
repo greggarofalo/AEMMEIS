@@ -4,36 +4,23 @@
 <html>
 <head>
     <title>AEMME-HOMEPAGE</title>
-    <style>
-        .container {
-            text-align: right; /* Allinea il contenitore a destra */
-            margin-right: 20px;
-        }
-
-        .image {
-            display: inline-block; /* Imposta le immagini come blocchi inline */
-            margin-right: 20px;
-        }
-
-        .spaced-image{
-            margin-right: 25px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./css/topCss.css">
 
 </head>
 <body>
 
 <div class="container">
     <a href="show-wishlist">
-        <img src="../../images/hearts-icon.png" width="25" height="25" class="image">
+        <img src="./images/hearts-icon.png" width="25" height="25" class="image">
     </a>
-    <img src="../../images/icon-cart.png" width="25" height="25" class="spaced-image image " >
 
-    <img src="../../images/icon-user.png" width="24" height="25" class="image">
+    <a href="cart-servlet>">
+        <img src="./images/icon-cart.png" width="25" height="25" class="spaced-image image " >
+    </a>
+
+    <a href="area-personale">
+        <img src="./images/icon-user.png" width="24" height="25" class="image">
+    </a>
 </div>
 
 <ul>

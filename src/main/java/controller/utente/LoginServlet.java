@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Carrello c = (Carrello) session.getAttribute("carrello");
 
+
         }
 
 
