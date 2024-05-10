@@ -96,4 +96,21 @@ public class OrdineDAO {
         }
     }
 
+    public void deleteOrdiniByEmail(String email){
+        List<Ordine> ordini = this.doRetrieveByUtente(email);
+        RigaOrdineDAO service = new RigaOrdineDAO();
+        for(Ordine o : ordini ){
+            service.deleteRigaOrdineByIdOrdine(o.getIdOrdine());
+        }
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM ordine WHERE email=?");
+            ps.setString(1, email);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

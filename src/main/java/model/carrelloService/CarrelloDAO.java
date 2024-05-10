@@ -1,6 +1,7 @@
 package model.carrelloService;
 
 import model.ConPool;
+import model.tesseraService.Tessera;
 import model.utenteService.Utente;
 
 import java.sql.Connection;
@@ -35,6 +36,19 @@ public class CarrelloDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateCarrello(Carrello carrello){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE carrello SET totale = ? WHERE idCarrello = ?");
+            ps.setDouble(1, carrello.getTotale());
+            ps.setString(2, carrello.getIdCarrello());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Carrello doRetriveById(String idCarrello){
