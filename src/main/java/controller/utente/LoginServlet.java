@@ -15,6 +15,7 @@ import model.libroService.Libro;
 import model.libroService.LibroDAO;
 import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
+import model.wishList.WishList;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,6 +78,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
                 session.setAttribute("carrello", carrelloDb);
+                session.setAttribute("WishList", new WishList());
                 //session.setAttribute("righeCarrello", rigaCarrelloDb);
             }
         }

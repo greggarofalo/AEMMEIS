@@ -21,7 +21,7 @@ public class RigaCarrelloDAO {
             ps.setString(1, idCarrello);
             ResultSet rs = ps.executeQuery();
             List<RigaCarrello> lista = new ArrayList<>();
-            if (rs.next()) {
+            while (rs.next()) {
                 RigaCarrello p = new RigaCarrello();
                 LibroDAO libroService= new LibroDAO();
                 p.setIdCarrello(rs.getString(1));
@@ -84,6 +84,18 @@ public class RigaCarrelloDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void deleteRigheCarrelloByIdCarrello(String idCarrello){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM rigaCarrello WHERE idCarrello=?");
+            ps.setString(1, idCarrello);
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void updateQuantita(RigaCarrello rigaCarrello){
         try(Connection con = ConPool.getConnection()){

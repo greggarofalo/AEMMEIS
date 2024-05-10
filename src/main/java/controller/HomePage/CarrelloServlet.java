@@ -21,7 +21,7 @@ public class CarrelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //da cambiare tutto
         //potrebbe non servire
-        HttpSession session = request.getSession(false);
+        /*HttpSession session = request.getSession(false);
         if(session != null){
 
             Carrello carrello = (Carrello) session.getAttribute("carrello");
@@ -36,6 +36,6 @@ public class CarrelloServlet extends HttpServlet {
             carrello.setTotale(totale);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/stampaCarrello.jsp");
             dispatcher.forward(request, response);
-        }
+        }*/
     }
 }
