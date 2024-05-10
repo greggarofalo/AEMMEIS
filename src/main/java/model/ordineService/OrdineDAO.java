@@ -94,7 +94,6 @@ public class OrdineDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }
