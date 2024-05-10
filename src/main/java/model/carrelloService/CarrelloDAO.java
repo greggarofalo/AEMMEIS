@@ -45,9 +45,31 @@ public class CarrelloDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Carrello carrello = new Carrello();
+                RigaCarrelloDAO rigaService = new RigaCarrelloDAO();
                 carrello.setIdCarrello(idCarrello);
                 carrello.setTotale(rs.getDouble(2));
                 carrello.setEmail(rs.getString(3));
+                carrello.setRigheCarrello(rigaService.doRetrieveByIdCarrello(idCarrello));
+                return carrello;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Carrello doRetriveByUtente(String email){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM carrello WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Carrello carrello = new Carrello();
+                RigaCarrelloDAO rigaService = new RigaCarrelloDAO();
+                carrello.setIdCarrello(rs.getString(1));
+                carrello.setTotale(rs.getDouble(2));
+                carrello.setEmail(rs.getString(3));
+                carrello.setRigheCarrello(rigaService.doRetrieveByIdCarrello(carrello.getIdCarrello()));
                 return carrello;
             }
             return null;

@@ -1,8 +1,11 @@
 package model.carrelloService;
 
+import model.libroService.Libro;
+
 public class RigaCarrello {
     private String idCarrello;
-    private String isbn;
+    private Libro libro;
+    //private String isbn;
     private int quantita;
 
     public String getIdCarrello() {
@@ -13,13 +16,21 @@ public class RigaCarrello {
         this.idCarrello = idCarrello;
     }
 
-    public String getIsbn() {
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+
+    /*public String getIsbn() {
         return isbn;
     }
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
+    }*/
 
     public int getQuantita() {
         return quantita;

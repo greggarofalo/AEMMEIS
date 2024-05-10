@@ -2,6 +2,7 @@ package model.carrelloService;
 
 import model.ConPool;
 import model.libroService.Libro;
+import model.libroService.LibroDAO;
 import model.utenteService.Utente;
 
 import java.sql.Connection;
@@ -22,8 +23,11 @@ public class RigaCarrelloDAO {
             List<RigaCarrello> lista = new ArrayList<>();
             if (rs.next()) {
                 RigaCarrello p = new RigaCarrello();
+                LibroDAO libroService= new LibroDAO();
                 p.setIdCarrello(rs.getString(1));
-                p.setIsbn(rs.getString(2));
+                String isbn=rs.getString(2);
+                p.setLibro(libroService.doRetrieveById(isbn));
+                //p.setIsbn(rs.getString(2));
                 p.setQuantita(rs.getInt(3));
                 lista.add(p);
             }
@@ -42,8 +46,10 @@ public class RigaCarrelloDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 RigaCarrello p = new RigaCarrello();
+                LibroDAO libroService= new LibroDAO();
                 p.setIdCarrello(rs.getString(1));
-                p.setIsbn(rs.getString(2));
+                p.setLibro(libroService.doRetrieveById(isbn));
+                //p.setIsbn(rs.getString(2));
                 p.setQuantita(rs.getInt(3));
                 return p;
             }
@@ -57,7 +63,7 @@ public class RigaCarrelloDAO {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO rigaCarrello (idCarrello, isbn, quantita) VALUES(?,?,?)");
             ps.setString(1, rigaCarrello.getIdCarrello());
-            ps.setString(2, rigaCarrello.getIsbn());
+            ps.setString(2, rigaCarrello.getLibro().getIsbn());
             ps.setInt(3, rigaCarrello.getQuantita());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -83,7 +89,7 @@ public class RigaCarrelloDAO {
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("UPDATE rigaCarrello SET quantita = ? WHERE isbn = ? AND idCarrello=?");
             ps.setInt(1,rigaCarrello.getQuantita());
-            ps.setString(2, rigaCarrello.getIsbn());
+            ps.setString(2, rigaCarrello.getLibro().getIsbn());
             ps.setString(3, rigaCarrello.getIdCarrello());
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("UPDATE error.");

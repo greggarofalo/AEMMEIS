@@ -24,9 +24,10 @@ public class RegistroUtente extends HttpServlet {
         utente.setTipo(tipo);
         utente.setCodiceSicurezza(codiceSicurezza);
 
+        //aggiungere il controllo se è già presente un utente con la stessa email
         UtenteDAO service = new UtenteDAO();
         service.doSave(utente);
-        request.getSession().setAttribute("utente", utente);
+        //request.getSession().setAttribute("utente", utente);
 
         RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/login.jsp");
         dispatcher.forward(request, response);

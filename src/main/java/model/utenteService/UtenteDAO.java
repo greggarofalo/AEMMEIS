@@ -30,6 +30,27 @@ UtenteDAO {
         }
     }
 
+    public Utente doRetrieveByEmailPassword(String email, String password) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT nomeUtente, email, codiceSicurezza, tipo FROM utente WHERE email=? AND codiceSicurezza=?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Utente p = new Utente();
+                p.setNomeUtente(rs.getString(1));
+                p.setEmail(rs.getString(2));
+                p.setCodiceSicurezza(rs.getString(3));
+                p.setTipo(rs.getString(4));
+                return p;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void doSave(Utente utente) {
         try (Connection con = ConPool.getConnection()) {

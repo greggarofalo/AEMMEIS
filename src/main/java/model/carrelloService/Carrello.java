@@ -1,9 +1,12 @@
 package model.carrelloService;
 
+import java.util.List;
+
 public class Carrello {
     private String idCarrello;
     private double totale;
     private String email;
+    private List<RigaCarrello> righeCarrello;
 
     public String getIdCarrello() {
         return idCarrello;
@@ -27,5 +30,13 @@ public class Carrello {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<RigaCarrello> getRigheCarrello() {
+        return righeCarrello;
+    }
+
+    public void setRigheCarrello(List<RigaCarrello> righeCarrello) {
+        this.righeCarrello = righeCarrello;
     }
 }
