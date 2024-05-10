@@ -1,6 +1,7 @@
 package model.carrelloService;
 
 import model.ConPool;
+import model.gestoreService.Gestore;
 import model.tesseraService.Tessera;
 import model.utenteService.Utente;
 
@@ -8,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarrelloDAO {
     public void doSave(Carrello carrello){
@@ -88,6 +91,21 @@ public class CarrelloDAO {
             }
             return null;
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<String> doRetrivedAllIdCarrelli(){
+        List<String>  idCarrello = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM carrello");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idCarrello.add(rs.getString(1));
+            }
+            return idCarrello;
+        } catch(SQLException e){
             throw new RuntimeException(e);
         }
     }

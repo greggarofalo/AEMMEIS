@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO service = new UtenteDAO();
 
         if(service.doRetrieveByEmailPassword(utente.getEmail(), utente.getCodiceSicurezza()) == null){
-            RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/errore.jsp");
+            RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/loginError.jsp");
             dispatcher.forward(request, response); //provvisorio
         }
         else{

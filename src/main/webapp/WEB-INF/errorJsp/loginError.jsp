@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-   <h1>Errore!</h1>
+   <h1>Email o password errati!</h1>
 
 </body>
 </html>
