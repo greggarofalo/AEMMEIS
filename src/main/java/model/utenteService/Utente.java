@@ -1,7 +1,13 @@
 package model.utenteService;
 
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+
 
 public class Utente {
   private String nomeUtente;
@@ -15,8 +21,19 @@ public class Utente {
     return codiceSicurezza;
   }
 
-  public void setCodiceSicurezza(String codiceSicurezza) {
-    this.codiceSicurezza = codiceSicurezza;
+  public void setCodiceSicurezza(String codiceSicurezza) {// password è inserita dall’utente
+    //this.codiceSicurezza=codiceSicurezza;
+     try {
+        MessageDigest digest =
+                MessageDigest.getInstance("SHA-1");
+        digest.reset();
+        digest.update(codiceSicurezza.getBytes(StandardCharsets.UTF_8));
+        this.codiceSicurezza = String.format("%040x", new
+                BigInteger(1, digest.digest()));
+      } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+
+      }
   }
 
   public String getEmail() {

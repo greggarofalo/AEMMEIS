@@ -1,6 +1,7 @@
 package controller.utente;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,10 +24,14 @@ public class RegistroUtente extends HttpServlet {
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
+        String numero = request.getParameter("telefono");
+        List<String> telefoni=new ArrayList<>();
+        telefoni.add(numero);
         utente.setNomeUtente(nomeUtente);
         utente.setEmail(email);
         utente.setTipo(tipo);
         utente.setCodiceSicurezza(codiceSicurezza);
+        utente.setTelefoni(telefoni);
 
         if(codiceSicurezza.length() > 16){
             //rimanda a una pagina di errore per password troppo lunga
@@ -44,11 +49,12 @@ public class RegistroUtente extends HttpServlet {
             String newId;
             Random random =new Random();
             do {
-                char a = (char) random.nextInt(65, 90);
-                char b = (char) random.nextInt(65, 90);
-                char c = (char) random.nextInt(65, 90);
-                newId = a + b + c + String.valueOf( random.nextInt(10, 100));
+                char a = (char)(65+ random.nextInt(90-65));
+                char b = (char) (65+ random.nextInt(90-65));
+                char c = (char) (65+ random.nextInt(90-65));
+                newId = a + b + c + String.valueOf( 10+ random.nextInt(100-10));
             }while(id.contains(newId));
+
             carrello.setIdCarrello(newId);
             carrelloService.doSave(carrello);
 

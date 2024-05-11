@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO service = new UtenteDAO();
 
         if(service.doRetrieveByEmailPassword(utente.getEmail(), utente.getCodiceSicurezza()) == null){
-            RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/loginError.jsp");
+           RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/errorJsp/loginError.jsp");
             dispatcher.forward(request, response); //provvisorio
         }
         else{
@@ -51,16 +51,17 @@ public class LoginServlet extends HttpServlet {
             Carrello carrelloDb = carrelloService.doRetriveByUtente(utente.getEmail());// Recupera il carrello dal database
            //RigaCarrelloDAO rigaCarrelloService= new RigaCarrelloDAO();
             List<RigaCarrello> rigaCarrelloDb = carrelloDb.getRigheCarrello();
-
+            for(RigaCarrello riga : rigaCarrelloDb)
+                System.out.println(riga.getLibro().getIsbn());
 
             if (righeLocali != null) {
                 // Fusiona i carrelli
-                for (int i=0; i<righeLocali.size(); i++) {
+                for (int i = 0; i < righeLocali.size(); i++) {
                     RigaCarrello riga = righeLocali.get(i);
-                    for(int j=0; j<rigaCarrelloDb.size(); j++){
-                        RigaCarrello riga2=rigaCarrelloDb.get(j);
-                        if(riga2.getLibro().getIsbn().equals(riga.getLibro().getIsbn())){ //se l'isbn è già presente nel carrello del DB
-                            riga2.setQuantita(riga2.getQuantita()+riga.getQuantita()); //incremento semplicemente la quantità
+                    for (int j = 0; j < rigaCarrelloDb.size(); j++) {
+                        RigaCarrello riga2 = rigaCarrelloDb.get(j);
+                        if (riga2.getLibro().getIsbn().equals(riga.getLibro().getIsbn())) { //se l'isbn è già presente nel carrello del DB
+                            riga2.setQuantita(riga2.getQuantita() + riga.getQuantita()); //incremento semplicemente la quantità
                             /*LibroDAO libroService = new LibroDAO();
                             Libro libro= libroService.doRetrieveById(riga2.getIsbn());
                             Double prezzoAggiuntivo;
@@ -70,20 +71,22 @@ public class LoginServlet extends HttpServlet {
                                 prezzoAggiuntivo =
                                 =(libro.getPrezzo()*);
                             carrelloDb.setTotale(carrelloDb.getTotale());*/
-                        }
-                        else{
+                        } else {
                             riga.setIdCarrello(carrelloDb.getIdCarrello());
                             rigaCarrelloDb.add(riga); //altrimenti lo aggiungo nel carrello
                         }
                     }
                 }
-                session.setAttribute("carrello", carrelloDb);
-                session.setAttribute("WishList", new WishList());
-                //session.setAttribute("righeCarrello", rigaCarrelloDb);
             }
+            session.setAttribute("carrello", carrelloDb);
+            session.setAttribute("WishList", new WishList());
+            //session.setAttribute("righeCarrello", rigaCarrelloDb);
+
+
         }
-        RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/homepage.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("index.html");
+        /*RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/homepage.jsp");
+        dispatcher.forward(request, response);*/
 
 
 

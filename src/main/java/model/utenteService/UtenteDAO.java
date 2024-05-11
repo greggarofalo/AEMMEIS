@@ -5,6 +5,10 @@ import model.ConPool;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class
@@ -32,8 +36,9 @@ UtenteDAO {
 
     public Utente doRetrieveByEmailPassword(String email, String password) {
         try (Connection con = ConPool.getConnection()) {
+
             PreparedStatement ps =
-                    con.prepareStatement("SELECT nomeUtente, email, codiceSicurezza, tipo FROM utente WHERE email=? AND codiceSicurezza=?");
+                    con.prepareStatement("SELECT nomeUtente, email, codiceSicurezza, tipo FROM utente WHERE email=? AND  codiceSicurezza=?");//SHA1(?)
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -66,7 +71,7 @@ UtenteDAO {
             }
 
             for(String tel : utente.getTelefoni()){
-                addTelefono(utente.getEmail(), tel);
+                this.addTelefono(utente.getEmail(), tel);
             }
 
         } catch (SQLException e) {

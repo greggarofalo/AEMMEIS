@@ -14,7 +14,7 @@
         <img src="./images/hearts-icon.png" width="25" height="25" class="image">
     </a>
 
-    <a href="cart-servlet>">
+    <a href="cart-servlet">
         <img src="./images/icon-cart.png" width="25" height="25" class="spaced-image image " >
     </a>
 

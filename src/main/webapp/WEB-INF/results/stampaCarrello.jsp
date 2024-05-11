@@ -12,8 +12,8 @@
     <title>Stampo Carrello</title>
 </head>
 <body>
-    <c:forEach items="${rigaCarrello}" var="libro">
-        <li>${libro.titolo}
+    <c:forEach items="${carrello.righeCarrello}" var="rigaCarrello">
+        <li>${rigaCarrello.libro.titolo}
         </li>
     </c:forEach>
 
