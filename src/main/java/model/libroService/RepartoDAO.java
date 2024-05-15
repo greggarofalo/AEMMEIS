@@ -87,18 +87,20 @@ public class RepartoDAO {
         }
     }
 
-    public Libro getAppartenenza(int idReparto){
+    public List<Libro> getAppartenenza(int idReparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT isbn FROM apparteneza WHERE idReparto=?");
             ps.setInt(1, idReparto);
+            List<Libro> lista=new ArrayList<>();
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String isbn = rs.getString(1);
-                LibroDAO service = new LibroDAO();
-                return service.doRetrieveById(isbn);
+                LibroDAO p = new LibroDAO();
+                Libro libro=p.doRetrieveById(isbn);
+                lista.add(libro);
             }
-            return null;
+            return lista;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

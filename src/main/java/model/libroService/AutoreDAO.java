@@ -3,6 +3,9 @@ import model.ConPool;
 import model.utenteService.Utente;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class AutoreDAO {
     public void doSave(Autore autore){
@@ -52,4 +55,24 @@ public class AutoreDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Libro> getScrittura(String cf){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT isbn FROM scrittura WHERE cf=?");
+            ps.setString(1, cf);
+            List<Libro> lista = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String isbn = rs.getString(1);
+                LibroDAO p = new LibroDAO();
+                Libro libro=p.doRetrieveById(isbn);
+                lista.add(libro);
+            }
+            return lista;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

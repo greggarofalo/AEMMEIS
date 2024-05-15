@@ -117,5 +117,38 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
     }
+    public Reparto getAppartenenzaReparto(String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT idReparto FROM apparteneza WHERE isbn=?");
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int idReparto = rs.getInt(1);
+                RepartoDAO service = new RepartoDAO();
+                return service.doRetrieveById(idReparto);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Sede getPresenzaSede(String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT idSede FROM presenza WHERE isbn=?");
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int idSede = rs.getInt(1);
+                SedeDAO service = new SedeDAO();
+                return service.doRetrieveById(idSede);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

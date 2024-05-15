@@ -1,6 +1,7 @@
 package model.libroService;
 
 import model.ConPool;
+import model.carrelloService.RigaCarrello;
 import model.gestoreService.Gestore;
 
 import java.sql.Connection;
@@ -98,18 +99,20 @@ public class SedeDAO {
         }
     }
 
-    public Libro getPresenza(int idSede){
+    public List<Libro> getPresenza(int idSede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT isbn FROM presenza WHERE idSede=?");
             ps.setInt(1, idSede);
+            List<Libro> lista=new ArrayList<>();
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String isbn = rs.getString(1);
-                LibroDAO service = new LibroDAO();
-                return service.doRetrieveById(isbn);
+                LibroDAO p = new LibroDAO();
+                Libro libro=p.doRetrieveById(isbn);
+                lista.add(libro);
             }
-            return null;
+            return lista;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
