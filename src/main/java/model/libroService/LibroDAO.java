@@ -30,7 +30,27 @@ public class LibroDAO {
     public void deleteLibro(String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM libro WHERE isbn=?");
+                    con.prepareStatement("DELETE FROM rigaCarrello WHERE isbn=?");
+            ps.setString(1, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+
+            ps = con.prepareStatement("DELETE FROM wishList WHERE isbn=?");
+            ps.setString(1, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+
+            ps = con.prepareStatement("DELETE FROM reparto WHERE isbn=?");
+            ps.setString(1, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+
+            ps = con.prepareStatement("DELETE FROM sede WHERE isbn=?");
+            ps.setString(1, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+
+            ps = con.prepareStatement("DELETE FROM libro WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
