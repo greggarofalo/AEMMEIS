@@ -1,6 +1,7 @@
 <%@ page import="model.libroService.LibroDAO" %>
 <%@ page import="model.libroService.Libro" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
   Created by IntelliJ IDEA.
   User: M.DELUCIA18
   Date: 14/05/2024
@@ -10,11 +11,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Product Management</title>
+    <title>Gestione Prodotti</title>
 </head>
 <body>
 <h1>Product List</h1>
-<a href="newProduct.jsp">Add New Product</a>
+<a href="nuovoProdotto.jsp">Add New Product</a>
 <table border="1" width="100%">
     <tr>
         <th>Titolo</th>
@@ -23,16 +24,12 @@
         <th>Prezzo</th>
         <th>Azione</th>
     </tr>
-    <%
-        LibroDAO productDAO = new LibroDAO();
-        List<Libro> libri = productDAO.doRetriveAll();
-        for (Libro libro : libri) {
-    %>
-    <tr>
-        <td><%= libro.getTitolo() %></td>
-        <td><%= libro.getIsbn() %></td>
-        <td><%= libro.getSconto() %></td>
-        <td><%= libro.getPrezzo() %></td>
+    <c:forEach items="${libri}" var="libro">
+        <tr>
+            <td>${libro.titolo}</td>
+            <td>${libro.isbn}</td>
+            <td>${libro.sconto}</td>
+            <td>${libro.prezzo}</td>
         <td>
             <form action="modifica-libro">
                 <input type="hidden" name="isbn" value="${libro.isbn}">
@@ -40,14 +37,13 @@
             </form>
             <form action="elimina-libro">
                 <input type="hidden" name="isbn" value="${libro.isbn}">
+                <input type="submit" value="Elimina">
             </form>
             <%-- <a href="editProduct.jsp?id=<%= product.getId() %>">Edit</a>
             <a href="deleteProduct.jsp?id=<%= product.getId() %>">Delete</a>--%>
         </td>
     </tr>
-    <%
-        }
-    %>
+    </c:forEach>
 </table>
 
 </body>

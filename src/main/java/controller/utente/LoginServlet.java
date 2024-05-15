@@ -30,18 +30,19 @@ public class LoginServlet extends HttpServlet {
 
         Utente utente = new Utente();
         utente.setEmail(request.getParameter("email"));
-        utente.setNomeUtente(request.getParameter("nomeUtente"));
+        //utente.setNomeUtente(request.getParameter("nomeUtente"));
         utente.setCodiceSicurezza(request.getParameter("pw"));
-        utente.setTipo(request.getParameter("tipo"));
+        //utente.setTipo(request.getParameter("tipo"));
 
         UtenteDAO service = new UtenteDAO();
 
         if(service.doRetrieveByEmailPassword(utente.getEmail(), utente.getCodiceSicurezza()) == null){
            RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/errorJsp/loginError.jsp");
-            dispatcher.forward(request, response); //provvisorio
+           dispatcher.forward(request, response); //provvisorio
         }
         else{
             HttpSession session = request.getSession();
+            utente=service.doRetrieveById(request.getParameter("email"));
             session.setAttribute("utente", utente);
 
             Carrello carrelloLocale = (Carrello) session.getAttribute("carrello");// Recupera il carrello locale dalla sessione

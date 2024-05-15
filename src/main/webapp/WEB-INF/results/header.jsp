@@ -11,12 +11,13 @@
     <a href="area-personale">
         <img src="./images/icon-user.png" width="24" height="25" class="image">
     </a>
+</div>
     <ul>
         <c:forEach items="${reparti}" var="reparto">
             <li>${reparto.descrizione}
             </li>
         </c:forEach>
     </ul>
-</div>
+
 
 

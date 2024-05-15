@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
+import model.libroService.Reparto;
+import model.libroService.Sede;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/modifica-libro")
 public class ModificaLibroServlet extends HttpServlet {
@@ -20,8 +23,12 @@ public class ModificaLibroServlet extends HttpServlet {
         Libro libro = new Libro();
         libro = service.doRetrieveById(isbn);
 
+        List<Sede> sedi= (List<Sede>) service.getPresenzaSede(libro.getIsbn());
+        List<Reparto> reparti= (List<Reparto>) service.getAppartenenzaReparto(libro.getIsbn());
 
         request.setAttribute("libro", libro);
+        request.setAttribute("sedi", sedi);
+        request.setAttribute("reparti", reparti);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/modificaLibro.jsp");
         dispatcher.forward(request, response);
     }

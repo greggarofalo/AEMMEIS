@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: M.DELUCIA18
-  Date: 14/05/2024
-  Time: 17:36
+  Date: 15/05/2024
+  Time: 12:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Modifica Libro</title>
+    <title>Admin HomePage</title>
 </head>
 <body>
-
+<a href="gestisci-prodotti">Modifica Prodotti</a>
 </body>
 </html>
