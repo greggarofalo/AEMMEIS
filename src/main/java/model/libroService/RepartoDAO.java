@@ -61,6 +61,7 @@ public class RepartoDAO {
                 Reparto p = new Reparto();
                 p.setIdReparto(rs.getInt(1));
                 p.setDescrizione(rs.getString(2));
+                p.setLibri(this.getAppartenenza(p.getIdReparto()));
                 reparti.add(p);
             }
             return reparti;
@@ -79,6 +80,7 @@ public class RepartoDAO {
                 Reparto p = new Reparto();
                 p.setIdReparto(rs.getInt(1));
                 p.setDescrizione(rs.getString(2));
+                p.setLibri(this.getAppartenenza(idReparto));
                 return p;
             }
             return null;
@@ -90,7 +92,7 @@ public class RepartoDAO {
     public List<Libro> getAppartenenza(int idReparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT isbn FROM apparteneza WHERE idReparto=?");
+                    con.prepareStatement("SELECT isbn FROM appartenenza WHERE idReparto=?");
             ps.setInt(1, idReparto);
             List<Libro> lista=new ArrayList<>();
             ResultSet rs = ps.executeQuery();
@@ -105,4 +107,6 @@ public class RepartoDAO {
             throw new RuntimeException(e);
         }
     }
+
+
 }

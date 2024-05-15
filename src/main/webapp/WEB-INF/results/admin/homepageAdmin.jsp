@@ -11,6 +11,8 @@
     <title>Admin HomePage</title>
 </head>
 <body>
-<a href="gestisci-prodotti">Modifica Prodotti</a>
+<a href="gestisci-prodotti">Modifica Prodotti</a><br><br>
+<a href="gestisci-utenti">Modifica Utenti</a>
+
 </body>
 </html>

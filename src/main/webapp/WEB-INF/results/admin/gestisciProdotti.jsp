@@ -14,8 +14,8 @@
     <title>Gestione Prodotti</title>
 </head>
 <body>
-<h1>Product List</h1>
-<a href="nuovoProdotto.jsp">Add New Product</a>
+<h1>Lista di prodotti</h1>
+<a href="nuovo-prodotto">Add New Product</a>
 <table border="1" width="100%">
     <tr>
         <th>Titolo</th>
