@@ -17,19 +17,19 @@
         <label for="titolo">Titolo</label>
         <input type="text" id="titolo" name="titolo"><br><br>
         <label for="isbn">Isbn</label>
-        <input type="text" id="isbn" name="isbn" pattern="[0-9]{16}"><br><br>
+        <input type="text" id="isbn" name="isbn" pattern="[0-9]{13}"><br><br>
         <label for="genere">Genere</label>
         <input type="text" id="genere" name="genere"><br><br>
-        <label for = "annoPubb">Anno Pubblicazione</label>
-        <input type="text" id="annoPubb" nome="annoPubb"><br><br>
+        <label for ="annoPubb">Anno Pubblicazione</label>
+        <input type="text" id="annoPubb" name="annoPubb"><br><br>
         <label for="prezzo">Prezzo</label>
         <input type="text" id="prezzo" name="prezzo"><br><br>
         <label for="sconto">Sconto</label>
         <input type="text" id="sconto" name="sconto"><br><br>
         <label for="trama">Trama</label>
         <textarea id="trama" name="trama"> </textarea><br><br>
-        <label for="immagine">Sconto</label>
-        <input type="text" id="immagine" name="trama"><br><br>
+        <label for="immagine">Immagine</label>
+        <input type="text" id="immagine" name="immagine"><br><br>
         <input type="submit" value="Inserisci">
     </form>
 </fieldset>

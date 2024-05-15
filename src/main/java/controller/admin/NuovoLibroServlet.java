@@ -19,7 +19,7 @@ public class NuovoLibroServlet extends HttpServlet {
         String isbn = request.getParameter("isbn");
         String titolo = request.getParameter("titolo");
         String genere = request.getParameter("genere");
-        int annoPubblicazioni = Integer.parseInt(request.getParameter("annoPubb"));
+        String annoPubblicazioni = request.getParameter("annoPubb");
         double prezzo = Double.parseDouble(request.getParameter("prezzo"));
         int sconto = Integer.parseInt(request.getParameter("sconto"));
         String trama = request.getParameter("trama");

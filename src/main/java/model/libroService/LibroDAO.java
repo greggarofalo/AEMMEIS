@@ -14,7 +14,7 @@ public class LibroDAO {
             ps.setString(1, libro.getIsbn());
             ps.setString(2, libro.getTitolo());
             ps.setString(3, libro.getGenere());
-            ps.setInt(4, libro.getAnnoPubblicazioni());
+            ps.setString(4, libro.getAnnoPubblicazioni());
             ps.setDouble(5, libro.getPrezzo());
             ps.setInt(6, libro.getSconto());
             ps.setString(7, libro.getTrama());
@@ -33,27 +33,27 @@ public class LibroDAO {
                     con.prepareStatement("DELETE FROM rigaCarrello WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE1 error.");
 
             ps = con.prepareStatement("DELETE FROM wishList WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE2 error.");
 
             ps = con.prepareStatement("DELETE FROM reparto WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE3 error.");
 
             ps = con.prepareStatement("DELETE FROM sede WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE4 error.");
 
             ps = con.prepareStatement("DELETE FROM libro WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE5 error.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -84,7 +84,7 @@ public class LibroDAO {
                 p.setIsbn(rs.getString(1));
                 p.setTitolo(rs.getString(2));
                 p.setGenere(rs.getString(3));
-                p.setAnnoPubblicazioni(rs.getInt(4));
+                p.setAnnoPubblicazioni(rs.getString(4));
                 p.setPrezzo(rs.getDouble(5));
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
@@ -108,7 +108,7 @@ public class LibroDAO {
                 p.setIsbn(rs.getString(1));
                 p.setTitolo(rs.getString(2));
                 p.setGenere(rs.getString(3));
-                p.setAnnoPubblicazioni(rs.getInt(4));
+                p.setAnnoPubblicazioni(rs.getString(4));
                 p.setPrezzo(rs.getDouble(5));
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
@@ -137,34 +137,36 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
     }
-    public Reparto getAppartenenzaReparto(String isbn){
+    public List<Reparto> getAppartenenzaReparto(String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT idReparto FROM apparteneza WHERE isbn=?");
+                    con.prepareStatement("SELECT idReparto FROM appartenenza WHERE isbn=?");
             ps.setString(1, isbn);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            List<Reparto> reparti = new ArrayList<>();
+            while (rs.next()) {
                 int idReparto = rs.getInt(1);
                 RepartoDAO service = new RepartoDAO();
-                return service.doRetrieveById(idReparto);
+                reparti.add(service.doRetrieveById(idReparto));
             }
             return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public Sede getPresenzaSede(String isbn){
+    public List<Sede> getPresenzaSede(String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT idSede FROM presenza WHERE isbn=?");
             ps.setString(1, isbn);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            List<Sede> sedi = new ArrayList<>();
+            while (rs.next()) {
                 int idSede = rs.getInt(1);
                 SedeDAO service = new SedeDAO();
-                return service.doRetrieveById(idSede);
+                sedi.add(service.doRetrieveById(idSede));
             }
-            return null;
+            return sedi;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -4,7 +4,7 @@ public class Libro {
     private String isbn;
     private String titolo;
     private String genere;
-    private int annoPubblicazioni;
+    private String annoPubblicazioni;
     private double prezzo;
     private int sconto;
     private String trama;
@@ -50,11 +50,11 @@ public class Libro {
         this.genere = genere;
     }
 
-    public int getAnnoPubblicazioni() {
+    public String getAnnoPubblicazioni() {
         return annoPubblicazioni;
     }
 
-    public void setAnnoPubblicazioni(int annoPubblicazioni) {
+    public void setAnnoPubblicazioni(String annoPubblicazioni) {
         this.annoPubblicazioni = annoPubblicazioni;
     }
 
