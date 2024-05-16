@@ -4,6 +4,8 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin/nuovoProdotto.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin/reparti/gestisciReparti.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin/reparti" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin/reparti/stampaLibri.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/admin/reparti" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results/homepage.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/results" />
       </map>
     </option>

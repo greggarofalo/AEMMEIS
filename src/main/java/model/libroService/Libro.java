@@ -81,6 +81,6 @@ public class Libro {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Libro libro = (Libro) o;
-        return prezzo==libro.prezzo && sconto == libro.sconto && isbn.equals(libro.isbn) && titolo.equals(libro.titolo) && genere.equals(libro.genere) && annoPubblicazioni.equals(libro.annoPubblicazioni) && trama.equals(libro.trama) && immagine.equals(libro.immagine);
+        return prezzo==libro.prezzo && sconto == libro.sconto && isbn.equals(libro.isbn) && titolo.equals(libro.titolo) && genere.equals(libro.genere) && annoPubblicazioni.equals(libro.annoPubblicazioni);
     }
 }

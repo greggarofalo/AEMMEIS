@@ -2,10 +2,7 @@ package model.libroService;
 
 import model.ConPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +10,16 @@ public class RepartoDAO {
     public void doSave(Reparto reparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO reparto (descrizione) VALUES(?)");
+                    "INSERT INTO reparto (descrizione) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, reparto.getDescrizione());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            reparto.setIdReparto(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -26,11 +27,23 @@ public class RepartoDAO {
 
     public void deleteReparto(int idReparto){
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM reparto WHERE idReparto=?");
+
+            //prima cancello da appartenenza (che ha riferimenti a reparto) solo se ci sono elementi
+            List<Libro> l = this.getAppartenenza(idReparto);
+            Reparto r = this.doRetrieveById(idReparto);
+            if (l!=null && !l.isEmpty()) {
+                PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM appartenenza WHERE idReparto=?");
+                ps.setInt(1, idReparto);
+                r.setLibri(null);
+                if(ps.executeUpdate() < 1)
+                    throw new RuntimeException("DELETE error from appartenenza.");
+            }
+            //poi elimino il reparto in questione
+            PreparedStatement ps = con.prepareStatement("DELETE FROM reparto WHERE idReparto=?");
             ps.setInt(1, idReparto);
             if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+                throw new RuntimeException("DELETE error from reparto.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,6 +61,42 @@ public class RepartoDAO {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void removeLibroReparto(int idReparto, String isbn){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("DELETE FROM appartenenza WHERE idReparto=? AND isbn = ?");
+            ps.setInt(1,idReparto);
+            ps.setString(2, isbn);
+
+            Reparto p = this.doRetrieveById(idReparto);
+            LibroDAO libroService = new LibroDAO();
+            Libro l = libroService.doRetrieveById(isbn);
+            p.getLibri().remove(l); //ho tolto il contains perchè credo lo faccia da solo.
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void aggiungiLibroReparto(Reparto reparto, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO appartenenza (idReparto, isbn) VALUES(?, ?)");
+            ps.setInt(1, reparto.getIdReparto());
+            ps.setString(2, isbn);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+            LibroDAO libroService = new LibroDAO();
+            reparto.getLibri().add(libroService.doRetrieveById(isbn));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Reparto> doRetrivedAll(){

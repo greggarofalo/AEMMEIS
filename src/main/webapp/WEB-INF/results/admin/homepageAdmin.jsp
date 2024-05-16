@@ -12,7 +12,7 @@
 </head>
 <body>
 <a href="gestisci-prodotti">Modifica Prodotti</a><br><br>
-<a href="gestisci-utenti">Modifica Utenti</a>
+<a href="gestisci-reparti">Modifica Reparti</a>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.admin.gestisciReparti;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ public class GestisciRepartiServlet extends HttpServlet {
         List<Reparto> reparti = repartoService.doRetrivedAll();
         request.setAttribute("reparti", reparti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/gestisciReparti.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/reparti/gestisciReparti.jsp");
         dispatcher.forward(request, response);
     }
 

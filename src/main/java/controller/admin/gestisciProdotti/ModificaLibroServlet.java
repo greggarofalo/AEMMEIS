@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.admin.gestisciProdotti;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -46,7 +46,7 @@ public class ModificaLibroServlet extends HttpServlet {
         request.setAttribute("sediNonPresenti", sediNonPresenti);
         request.setAttribute("repartiNonPresenti", repartiNonPresenti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/modificaLibro.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/prodotti/modificaLibro.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.admin.gestisciProdotti;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

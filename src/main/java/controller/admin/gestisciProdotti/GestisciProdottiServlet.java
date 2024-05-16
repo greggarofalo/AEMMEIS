@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.admin.gestisciProdotti;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ public class GestisciProdottiServlet extends HttpServlet {
         libri= service.doRetriveAll();
         request.setAttribute("libri", libri);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/gestisciProdotti.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/prodotti/gestisciProdotti.jsp");
         dispatcher.forward(request, response);
     }
 

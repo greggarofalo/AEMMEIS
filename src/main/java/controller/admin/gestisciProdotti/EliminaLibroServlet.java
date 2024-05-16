@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.admin.gestisciProdotti;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +15,6 @@ public class EliminaLibroServlet extends HttpServlet {
         LibroDAO serviceLibro = new LibroDAO();
         serviceLibro.deleteLibro(isbn);
 
-        response.sendRedirect("/WEB-INF/results/admin/gestisciProdotti.jsp");
+        response.sendRedirect("/WEB-INF/results/admin/prodotti/gestisciProdotti.jsp");
     }
 }
