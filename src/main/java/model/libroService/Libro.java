@@ -1,5 +1,7 @@
 package model.libroService;
 
+import java.util.Objects;
+
 public class Libro {
     private String isbn;
     private String titolo;
@@ -74,5 +76,11 @@ public class Libro {
         this.immagine = immagine;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Libro libro = (Libro) o;
+        return prezzo==libro.prezzo && sconto == libro.sconto && isbn.equals(libro.isbn) && titolo.equals(libro.titolo) && genere.equals(libro.genere) && annoPubblicazioni.equals(libro.annoPubblicazioni) && trama.equals(libro.trama) && immagine.equals(libro.immagine);
+    }
 }

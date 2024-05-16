@@ -107,6 +107,32 @@ public class RepartoDAO {
             throw new RuntimeException(e);
         }
     }
+    public void deleteFromAppartenenzaLibro(int idReparto, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM Appartenenza WHERE idReparto=? AND isbn=?");
+            ps.setInt(1, idReparto);
+            ps.setString(2, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doSaveAppartenenza(int idReparto, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Appartenenza (idReparto, isbn) VALUES(?,?)");
+            ps.setInt(1, idReparto);
+            ps.setString(2, isbn);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

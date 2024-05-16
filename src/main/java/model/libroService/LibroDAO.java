@@ -59,7 +59,7 @@ public class LibroDAO {
         }
     }
 
-    public void updateLibro(Libro libro){
+    public void updateLibroSconto(Libro libro){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("UPDATE libro SET sconto = ? WHERE isbn = ?");
             ps.setInt(1, libro.getSconto());
@@ -70,6 +70,25 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void updateLibro(Libro libro){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE libro SET titolo = ?, genere = ?, " +
+                    "annoPubblicazione = ?, prezzo = ?, sconto = ?, trama = ?, immagine = ? WHERE isbn = ?");
+            ps.setString(1, libro.getTitolo());
+            ps.setString(2, libro.getGenere());
+            ps.setString(3, libro.getAnnoPubblicazioni());
+            ps.setDouble(4, libro.getPrezzo());
+            ps.setInt(5, libro.getSconto());
+            ps.setString(6, libro.getTrama());
+            ps.setString(7, libro.getImmagine());
+            ps.setString(8, libro.getIsbn());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Libro> doRetriveAll(){
@@ -149,7 +168,7 @@ public class LibroDAO {
                 RepartoDAO service = new RepartoDAO();
                 reparti.add(service.doRetrieveById(idReparto));
             }
-            return null;
+            return reparti;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,7 @@
 package model.libroService;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Reparto {
     private int idReparto;
@@ -30,4 +31,13 @@ public class Reparto {
     public void setLibri(List<Libro> libri) {
         this.libri = libri;
     }
+
+    @Override
+    public boolean equals(Object o) { //per il metodo contains
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reparto reparto = (Reparto) o;
+        return idReparto == reparto.idReparto && descrizione.equals(reparto.descrizione);
+    }
+
 }

@@ -117,5 +117,31 @@ public class SedeDAO {
             throw new RuntimeException(e);
         }
     }
+    public void deleteFromPresenzaLibro(int idSede, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM Presenza WHERE idSede=? AND isbn=?");
+            ps.setInt(1, idSede);
+            ps.setString(2, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doSavePresenza(int idSede, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Presenza (idSede, isbn) VALUES(?,?)");
+            ps.setInt(1, idSede);
+            ps.setString(2, isbn);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

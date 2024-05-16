@@ -19,9 +19,9 @@ public class ModificaLibroServlet extends HttpServlet {
         LibroDAO service = new LibroDAO();
         Libro libro= service.doRetrieveById(isbn);
         SedeDAO sedeService = new SedeDAO();
+        RepartoDAO repartoService = new RepartoDAO();
 
         List<Sede> sedi= service.getPresenzaSede(libro.getIsbn());
-        List<Reparto> reparti= service.getAppartenenzaReparto(libro.getIsbn());
         List<Sede> sediNonPresenti = sedeService.doRetrivedAll();
         for(int i=0; i<sediNonPresenti.size(); i++){
             Sede sede=sediNonPresenti.get(i);
@@ -30,10 +30,21 @@ public class ModificaLibroServlet extends HttpServlet {
             }
         }
 
+
+        List<Reparto> reparti= service.getAppartenenzaReparto(libro.getIsbn());
+        List<Reparto> repartiNonPresenti = repartoService.doRetrivedAll();
+        for(int i=0; i<repartiNonPresenti.size(); i++){
+            Reparto reparto=repartiNonPresenti.get(i);
+            if(sedi.contains(reparto)) {
+                repartiNonPresenti.remove(i);
+            }
+        }
+
         request.setAttribute("libro", libro);
         request.setAttribute("sedi", sedi);
         request.setAttribute("reparti", reparti);
         request.setAttribute("sediNonPresenti", sediNonPresenti);
+        request.setAttribute("repartiNonPresenti", repartiNonPresenti);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/modificaLibro.jsp");
         dispatcher.forward(request, response);
