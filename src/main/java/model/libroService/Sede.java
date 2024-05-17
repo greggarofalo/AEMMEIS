@@ -1,5 +1,7 @@
 package model.libroService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Sede {
@@ -8,6 +10,7 @@ public class Sede {
     private String via;
     private int civico;
     private String cap;
+    private List<Libro> libri;
 
     public int getIdSede() {
         return idSede;
@@ -55,4 +58,11 @@ public class Sede {
         return idSede == sede.idSede && civico == sede.civico && citta.equals(sede.citta) && via.equals(sede.via) && cap.equals(sede.cap);
     }
 
+    public List<Libro> getLibri() {
+        return libri;
+    }
+
+    public void setLibri(List<Libro> libri) {
+        this.libri = libri;
+    }
 }

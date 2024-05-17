@@ -56,6 +56,43 @@ public class SedeDAO {
 
     }
 
+    public void removeLibroSede(int idSede, String isbn){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("DELETE FROM presenza WHERE idSede=? AND isbn = ?");
+            ps.setInt(1,idSede);
+            ps.setString(2, isbn);
+
+            Sede p = this.doRetrieveById(idSede);
+            LibroDAO libroService = new LibroDAO();
+            Libro l = libroService.doRetrieveById(isbn);
+            p.getLibri().remove(l); //ho tolto il contains perchè credo lo faccia da solo.
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void addLibroSede(Sede sede, String isbn){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO presenza (idSede, isbn) VALUES(?, ?)");
+            ps.setInt(1, sede.getIdSede());
+            ps.setString(2, isbn);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+            LibroDAO libroService = new LibroDAO();
+            sede.getLibri().add(libroService.doRetrieveById(isbn));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Sede> doRetrivedAll(){
         List<Sede> sedi = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
@@ -70,6 +107,7 @@ public class SedeDAO {
                 p.setVia(rs.getString(3));
                 p.setCivico(rs.getInt(4));
                 p.setCap(rs.getString(5));
+                p.setLibri(this.getPresenza(p.getIdSede()));
                 sedi.add(p);
             }
             return sedi;
@@ -91,6 +129,7 @@ public class SedeDAO {
                 p.setVia(rs.getString(3));
                 p.setCivico(rs.getInt(4));
                 p.setCap(rs.getString(5));
+                p.setLibri(this.getPresenza(p.getIdSede()));
                 return p;
             }
             return null;

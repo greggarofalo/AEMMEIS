@@ -12,7 +12,8 @@
 </head>
 <body>
 <a href="gestisci-prodotti">Modifica Prodotti</a><br><br>
-<a href="gestisci-reparti">Modifica Reparti</a>
+<a href="gestisci-reparti">Modifica Reparti</a><br><br>
+<a href="gestisci-sedi">Modifica Sedi</a>
 
 </body>
 </html>
