@@ -1,16 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: aless
-  Date: 14/05/2024
-  Time: 16:07
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<footer>
 
-</body>
-</html>
+    <div class="row">
+
+        <div class="col">
+            <img src="./images/logo.png" class="logo">
+            <p>Footer sito web example</p>
+        </div>
+
+        <div class="col">
+            <h3>Contact us</h3>
+            <p class="email-id">a.raia7@studenti.unisa.it</p>
+            <p class="email-id">m.delucia18@studenti.unisa.it</p>
+            <p class="email-id">c.stefanile1@studenti.unisa.it</p>
+            <h4>+39 - 3347628932</h4>
+            <h4>+39 - 3312055191</h4>
+            <h4>+39 - 3936504913</h4>
+
+        </div>
+
+        <div class="col">
+            <h3>Links</h3>
+            <p class="links"><a href="index.html" class="ls">Home</a> </p>
+            <p class="links"><a href="" class="ls">Services</a> </p>
+            <p class="links"><a href="" class="ls">About Us</a> </p>
+            <p class="links"><a href="" class="ls">Contacts</a> </p>
+        </div>
+
+        <div class="col">
+            <div class="footer-social">
+                <h3>Seguici su</h3>
+                <p class="social-icons"><a href="https://www.facebook.com" target="_blank"><img src="./images/facebook-icon.png" alt="Facebook" class="image"></a></p>
+                <p class="social-icons"><a href="https://www.twitter.com" target="_blank"><img src="./images/twitter-icon.png" alt="Twitter" class="image"></a></p>
+                <p class="social-icons"><a href="https://www.instagram.com" target="_blank"><img src="./images/instagram-icon.png" alt="Instagram" class="image"></a></p>
+            </div>
+        </div>
+
+    </div>
+
+</footer>

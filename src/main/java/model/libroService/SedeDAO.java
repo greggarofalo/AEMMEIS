@@ -4,10 +4,7 @@ import model.ConPool;
 import model.carrelloService.RigaCarrello;
 import model.gestoreService.Gestore;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,7 @@ public class SedeDAO {
     public void doSave(Sede sede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Sede (citta, via, numeroCivico, cap) VALUES(?,?,?,?)");
+                    "INSERT INTO Sede (citta, via, numeroCivico, cap) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sede.getCitta());
             ps.setString(2, sede.getVia());
             ps.setInt(3, sede.getCivico());
@@ -23,6 +20,10 @@ public class SedeDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            sede.setIdSede(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -30,6 +31,18 @@ public class SedeDAO {
 
     public void deleteSede(int idSede){
         try (Connection con = ConPool.getConnection()) {
+            //prima cancello da appartenenza (che ha riferimenti a reparto) solo se ci sono elementi
+            List<Libro> l = this.getPresenza(idSede);
+            Sede s = this.doRetrieveById(idSede);
+            if (l!=null && !l.isEmpty()) {
+                PreparedStatement ps =
+                        con.prepareStatement("DELETE FROM presenza WHERE idSede=?");
+                ps.setInt(1, idSede);
+                s.setLibri(null);
+                if(ps.executeUpdate() < 1)
+                    throw new RuntimeException("DELETE error from appartenenza.");
+            }
+            //poi elimino il reparto in questione
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM Sede WHERE idSede=?");
             ps.setInt(1, idSede);

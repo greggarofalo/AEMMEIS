@@ -1,9 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+
+}
 .container {
     text-align: right; /* Allinea il contenitore a destra */
     margin-right: 20px;
 }
 
-.image {
+.container .image {
     display: inline-block; /* Imposta le immagini come blocchi inline */
     margin-right: 20px;
 }
@@ -12,6 +19,6 @@
     margin-right: 25px;
 }
 
-a {
+.container a {
     text-decoration: none;
 }

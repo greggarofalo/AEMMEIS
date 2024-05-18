@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: carla
@@ -10,12 +11,12 @@
 <head>
     <title>Gestione Sedi</title>
     <style>
-        .repartoItem {
+        .sedeItem {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
-        .repartoItem span {
+        .sedeItem span {
             flex-grow: 1;
         }
         .buttons {
@@ -33,9 +34,9 @@
 <a href="nuova-sede">Aggiungi una nuova sede</a><br><br>
 <c:forEach items="${sedi}" var="sede">
     <li> ${sede.citta} (${sede.via}, ${sede.civico})</li>
-    <c:forEach items="${reparto.libri}" var="libro">
+    <c:forEach items="${sede.libri}" var="libro">
         <ul>
-            <li class="SedeItem">
+            <li class="sedeItem">
                 <span><b>${libro.titolo}</b>,  ISBN: ${libro.isbn},  ANNO PUBBLICAZIONE: ${libro.annoPubblicazioni}</span>
                 <div class="buttons">
                     <form action="modifica-sede">
@@ -47,10 +48,11 @@
             </li>
         </ul>
     </c:forEach>
-    <br><br><form action="aggiungi-libro">
+    <br><br>
+    <form action="aggiungi-libro-sede">
     <input type="hidden" name="idSede" value="${sede.idSede}">
     <input type="submit" value="Aggiungi libro">
-</form>
+    </form>
     <form action="elimina-sede">
         <input type="hidden" name="idSede" value="${sede.idSede}">
         <input type="submit" value="Elimina Sede">

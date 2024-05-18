@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet("/nuova-sede")
 public class AggiungiSedeServletAppoggio extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/sedi/aggiungiSede.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/sedi/aggiungiSedi.jsp");
         dispatcher.forward(request, response);
     }
 

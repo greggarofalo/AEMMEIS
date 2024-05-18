@@ -14,7 +14,7 @@
 <fieldset>
     <legend><h3 style="color: #3a6977">Nuova Sede</h3></legend>
     <form action="aggiungi-sede">
-        <label for="citta">Citta</label>
+        <label for="citta">Città</label>
         <textarea id="citta" name="citta"> </textarea><br><br>
         <label for="via">Via</label>
         <textarea id="via" name="via"> </textarea><br><br>

@@ -5,11 +5,13 @@
 <head>
     <title>AEMME-HOMEPAGE</title>
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
 </head>
 <body>
  <%@include file="header.jsp"%>
 
+<%@include file="footer.jsp"%>
 
 </body>
 </html>

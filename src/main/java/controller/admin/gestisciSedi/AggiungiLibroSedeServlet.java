@@ -11,7 +11,7 @@ import model.libroService.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/aggiungi-libro")
+@WebServlet("/aggiungi-libro-sede")
 public class AggiungiLibroSedeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
