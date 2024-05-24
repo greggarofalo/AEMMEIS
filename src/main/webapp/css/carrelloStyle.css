@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.book-item {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.book-image {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.book-details {
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.book-author {
+    color: #555;
+    margin: 5px 0;
+}
+
+.book-availability {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.availability-status {
+    color: green;
+    font-weight: bold;
+}
+
+.availability-info {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.book-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.book-discount {
+    color: red;
+    font-weight: bold;
+}
+
+.book-old-price {
+    text-decoration: line-through;
+}
+
+.book-new-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.book-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.favorite-button, .remove-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.favorite-button img, .remove-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.book-quantity input {
+    width: 50px;
+    text-align: center;
+}

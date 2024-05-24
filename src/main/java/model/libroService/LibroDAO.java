@@ -140,18 +140,19 @@ public class LibroDAO {
         }
     }
 
-    public Autore getScrittura(String isbn){
+    public List<Autore> getScrittura(String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT cf FROM scrittura WHERE isbn=?");
             ps.setString(1, isbn);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            List<Autore> autori = new ArrayList<>();
+            while (rs.next()) {
                 String cf = rs.getString(1);
                 AutoreDAO service = new AutoreDAO();
-                return service.searchAutore(cf);
+                autori.add(service.searchAutore(cf));
             }
-            return null;
+            return autori;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
