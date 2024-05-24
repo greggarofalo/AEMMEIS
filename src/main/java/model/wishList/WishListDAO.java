@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class WishListDAO {
     public void doSave(WishList wishList, String isbn){
@@ -34,6 +35,7 @@ public class WishListDAO {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             WishList wishList = new WishList();
+            wishList.setLibri(new ArrayList<>());
             while (rs.next()) {
                 wishList.setEmail(rs.getString(1));
                 LibroDAO libroService = new LibroDAO();

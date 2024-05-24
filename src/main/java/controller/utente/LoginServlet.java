@@ -16,6 +16,7 @@ import model.libroService.LibroDAO;
 import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 import model.wishList.WishList;
+import model.wishList.WishListDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,8 +53,6 @@ public class LoginServlet extends HttpServlet {
             Carrello carrelloDb = carrelloService.doRetriveByUtente(utente.getEmail());// Recupera il carrello dal database
            //RigaCarrelloDAO rigaCarrelloService= new RigaCarrelloDAO();
             List<RigaCarrello> rigaCarrelloDb = carrelloDb.getRigheCarrello();
-            for(RigaCarrello riga : rigaCarrelloDb)
-                System.out.println(riga.getLibro().getIsbn());
 
             if (righeLocali != null) {
                 // Fusiona i carrelli
@@ -79,8 +78,11 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
             }
+            WishListDAO wishListService = new WishListDAO();
+            WishList wishList = wishListService.doRetrieveByEmail(utente.getEmail());
+
             session.setAttribute("carrello", carrelloDb);
-            session.setAttribute("WishList", new WishList());
+            session.setAttribute("wishList", wishList);
             //session.setAttribute("righeCarrello", rigaCarrelloDb);
 
 
