@@ -21,6 +21,7 @@
     int i=0;%>
  <c:forEach items="${libriHome}" var="libro">
     <div>
+        <img src="${libro.immagine}" width="100" height="150">
         <li>${libro.titolo}, ISBN: ${libro.isbn}, ANNO PUBBLICAZIONE: ${libro.annoPubblicazioni}
         </li>
         <% String path="./images/hearts-icon.png";
