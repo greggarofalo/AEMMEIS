@@ -14,6 +14,7 @@ import model.libroService.LibroDAO;
 import model.utenteService.Utente;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/aggiungi-carrello")
@@ -29,16 +30,20 @@ public class AggiungiCartServlet extends HttpServlet {
         LibroDAO libroService = new LibroDAO();
         Libro libro = libroService.doRetrieveById(isbn);
 
+        List<RigaCarrello> righeCarrello =new ArrayList<>();
+        if(carrello.getRigheCarrello() != null) {
+            righeCarrello = carrello.getRigheCarrello();
+        }
 
-        List<RigaCarrello> righeCarrello = carrello.getRigheCarrello();
-        boolean flag=true; // libro non presente
-        for(int i=0; i<righeCarrello.size() && flag; i++) {
+        boolean flag = true; // libro non presente
+        for (int i = 0; i < righeCarrello.size() && flag; i++) {
             Libro libroRiga = righeCarrello.get(i).getLibro(); // libro della rigaCarrello
             if (libroRiga.equals(libro)) {
-                righeCarrello.get(i).setQuantita((righeCarrello.get(i).getQuantita())+1); // libro presente, incremento la quantità
+                righeCarrello.get(i).setQuantita((righeCarrello.get(i).getQuantita()) + 1); // libro presente, incremento la quantità
                 flag = false; // libro presente
             }
-        }if(flag) { // se il libro non è presente, lo aggiungo
+        }
+        if (flag) { // se il libro non è presente, lo aggiungo
             RigaCarrello riga = new RigaCarrello();
             riga.setIdCarrello(carrello.getIdCarrello());
             riga.setLibro(libro);

@@ -12,8 +12,8 @@ public class Carrello {
         return idCarrello;
     }
 
-    public void setIdCarrello(String diCarrello) {
-        this.idCarrello = diCarrello;
+    public void setIdCarrello(String idCarrello) {
+        this.idCarrello = idCarrello;
     }
 
     public double getTotale() {

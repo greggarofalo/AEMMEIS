@@ -50,30 +50,33 @@ public class LoginServlet extends HttpServlet {
             List<RigaCarrello> righeLocali = carrelloLocale.getRigheCarrello();
 
             CarrelloDAO carrelloService= new CarrelloDAO();
-            Carrello carrelloDb = carrelloService.doRetriveByUtente(utente.getEmail());// Recupera il carrello dal database
-           //RigaCarrelloDAO rigaCarrelloService= new RigaCarrelloDAO();
-            List<RigaCarrello> rigaCarrelloDb = carrelloDb.getRigheCarrello();
+            Carrello carrelloDb = null;
+            if(carrelloService.doRetriveByUtente(utente.getEmail()) != null) {
+                carrelloDb = carrelloService.doRetriveByUtente(utente.getEmail());// Recupera il carrello dal database
+                //RigaCarrelloDAO rigaCarrelloService= new RigaCarrelloDAO();
+                List<RigaCarrello> rigaCarrelloDb = carrelloDb.getRigheCarrello();
 
-            if (righeLocali != null) {
-                // Fusiona i carrelli
-                for (int i = 0; i < righeLocali.size(); i++) {
-                    RigaCarrello riga = righeLocali.get(i);
-                    for (int j = 0; j < rigaCarrelloDb.size(); j++) {
-                        RigaCarrello riga2 = rigaCarrelloDb.get(j);
-                        if (riga2.getLibro().getIsbn().equals(riga.getLibro().getIsbn())) { //se l'isbn è già presente nel carrello del DB
-                            riga2.setQuantita(riga2.getQuantita() + riga.getQuantita()); //incremento semplicemente la quantità
-                            /*LibroDAO libroService = new LibroDAO();
-                            Libro libro= libroService.doRetrieveById(riga2.getIsbn());
-                            Double prezzoAggiuntivo;
-                            if(libro.getSconto()>0){
-                                Double sconto=(libro.getPrezzo()* libro.getSconto())/100;
+                if (righeLocali != null) {
+                    // Fusiona i carrelli
+                    for (int i = 0; i < righeLocali.size(); i++) {
+                        RigaCarrello riga = righeLocali.get(i);
+                        for (int j = 0; j < rigaCarrelloDb.size(); j++) {
+                            RigaCarrello riga2 = rigaCarrelloDb.get(j);
+                            if (riga2.getLibro().getIsbn().equals(riga.getLibro().getIsbn())) { //se l'isbn è già presente nel carrello del DB
+                                riga2.setQuantita(riga2.getQuantita() + riga.getQuantita()); //incremento semplicemente la quantità
+                                /*LibroDAO libroService = new LibroDAO();
+                                Libro libro= libroService.doRetrieveById(riga2.getIsbn());
+                                Double prezzoAggiuntivo;
+                                if(libro.getSconto()>0){
+                                    Double sconto=(libro.getPrezzo()* libro.getSconto())/100;
+                                }
+                                    prezzoAggiuntivo =
+                                    =(libro.getPrezzo()*);
+                                carrelloDb.setTotale(carrelloDb.getTotale());*/
+                            } else {
+                                riga.setIdCarrello(carrelloDb.getIdCarrello());
+                                rigaCarrelloDb.add(riga); //altrimenti lo aggiungo nel carrello
                             }
-                                prezzoAggiuntivo =
-                                =(libro.getPrezzo()*);
-                            carrelloDb.setTotale(carrelloDb.getTotale());*/
-                        } else {
-                            riga.setIdCarrello(carrelloDb.getIdCarrello());
-                            rigaCarrelloDb.add(riga); //altrimenti lo aggiungo nel carrello
                         }
                     }
                 }
