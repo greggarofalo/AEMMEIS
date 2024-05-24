@@ -8,6 +8,7 @@
 <head>
 
     <title>AEMME-HOMEPAGE</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 

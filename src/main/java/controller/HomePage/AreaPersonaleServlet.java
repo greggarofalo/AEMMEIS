@@ -17,11 +17,14 @@ public class AreaPersonaleServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("email") != null) {
-            //manda a area personale jsp
+        String address;
+        if (session != null && session.getAttribute("utente") != null) {
+            address = "/WEB-INF/results/areaPersonale.jsp";
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
-            dispatcher.forward(request, response);
+            address = "/WEB-INF/results/login.jsp";
         }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        dispatcher.forward(request, response);
     }
 }

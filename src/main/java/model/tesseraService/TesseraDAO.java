@@ -28,11 +28,11 @@ public class TesseraDAO {
         }
     }
 
-    public void deleteTessera(int numero){
+    public void deleteTessera(String numero){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM tessera WHERE numero=?");
-            ps.setInt(1, numero);
+            ps.setString(1, numero);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
@@ -80,6 +80,27 @@ public class TesseraDAO {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM tessera WHERE numero=?");
             ps.setString(1, numero);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Tessera p = new Tessera();
+                p.setNumero(rs.getString(1));
+                p.setDataCreazione(rs.getDate(2).toLocalDate());
+                p.setDataScadenza(rs.getDate(3).toLocalDate());
+                p.setPunti(rs.getInt(4));
+                p.setEmail(rs.getString(5));
+                return p;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Tessera doRetrieveByEmail(String email) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM tessera WHERE email=?");
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Tessera p = new Tessera();
