@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 
             CarrelloDAO carrelloService= new CarrelloDAO();
             Carrello carrelloDb = null;
+
             if(carrelloService.doRetriveByUtente(utente.getEmail()) != null) {
                 carrelloDb = carrelloService.doRetriveByUtente(utente.getEmail());// Recupera il carrello dal database
                 //RigaCarrelloDAO rigaCarrelloService= new RigaCarrelloDAO();
@@ -60,23 +61,17 @@ public class LoginServlet extends HttpServlet {
                     // Fusiona i carrelli
                     for (int i = 0; i < righeLocali.size(); i++) {
                         RigaCarrello riga = righeLocali.get(i);
-                        for (int j = 0; j < rigaCarrelloDb.size(); j++) {
+                        boolean flag=true;//non presente
+                        for (int j = 0; j < rigaCarrelloDb.size() && flag; j++) {
                             RigaCarrello riga2 = rigaCarrelloDb.get(j);
                             if (riga2.getLibro().getIsbn().equals(riga.getLibro().getIsbn())) { //se l'isbn è già presente nel carrello del DB
-                                riga2.setQuantita(riga2.getQuantita() + riga.getQuantita()); //incremento semplicemente la quantità
-                                /*LibroDAO libroService = new LibroDAO();
-                                Libro libro= libroService.doRetrieveById(riga2.getIsbn());
-                                Double prezzoAggiuntivo;
-                                if(libro.getSconto()>0){
-                                    Double sconto=(libro.getPrezzo()* libro.getSconto())/100;
-                                }
-                                    prezzoAggiuntivo =
-                                    =(libro.getPrezzo()*);
-                                carrelloDb.setTotale(carrelloDb.getTotale());*/
-                            } else {
-                                riga.setIdCarrello(carrelloDb.getIdCarrello());
-                                rigaCarrelloDb.add(riga); //altrimenti lo aggiungo nel carrello
+                                riga2.setQuantita(riga2.getQuantita() + riga.getQuantita());//incremento semplicemente la quantità
+                                flag=false;
                             }
+                        }
+                        if(flag){
+                            riga.setIdCarrello(carrelloDb.getIdCarrello());
+                            rigaCarrelloDb.add(riga); //altrimenti lo aggiungo nel carrello
                         }
                     }
                 }

@@ -29,26 +29,28 @@
                     <div class="book-price">
                         <%if(libro.getSconto()!=0){%>
                         <span class="book-discount">-<%=libro.getSconto()%>%</span>
-                        <span class="book-new-price"><script>
+                        <span id="newPrice" class="book-new-price"><script>
                         function myFunction(p1, p2) {
-                            return p1 - (p1 * p2 / 100)
+                            return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
                         }
 
                         let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
-                        document.getElementById("demo").innerHTML = result;
+                        document.getElementById("newPrice").innerHTML = result;
                     </script>€</span>
-                        <span class="book-old-price"><%=libro.getPrezzo()%> €</span>
+                        <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
                         <%
                         }else
                         %>
-                        <span class="book-new-price"><%=libro.getPrezzo()%> €</span>
+                        <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
 
                     </div>
                     <%
                         WishList wishList = (WishList) session.getAttribute("wishList");
                         String address="images/hearts-icon.png";
-                        if(wishList.getLibri().contains(libro))
-                            address="images/heartsBlack-icon.png";
+                        if(wishList!=null) {
+                            if (wishList.getLibri().contains(libro))
+                                address = "images/heartsBlack-icon.png";
+                        }
                         %>
 
                     <div class="book-actions">
