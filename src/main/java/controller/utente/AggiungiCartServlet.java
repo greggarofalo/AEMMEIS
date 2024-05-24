@@ -30,10 +30,7 @@ public class AggiungiCartServlet extends HttpServlet {
         LibroDAO libroService = new LibroDAO();
         Libro libro = libroService.doRetrieveById(isbn);
 
-        List<RigaCarrello> righeCarrello =new ArrayList<>();
-        if(carrello.getRigheCarrello() != null) {
-            righeCarrello = carrello.getRigheCarrello();
-        }
+        List<RigaCarrello> righeCarrello = carrello.getRigheCarrello();
 
         boolean flag = true; // libro non presente
         for (int i = 0; i < righeCarrello.size() && flag; i++) {
@@ -50,7 +47,9 @@ public class AggiungiCartServlet extends HttpServlet {
             riga.setQuantita(1);
             righeCarrello.add(riga);
         }
+
         session.setAttribute("carrello", carrello);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }
