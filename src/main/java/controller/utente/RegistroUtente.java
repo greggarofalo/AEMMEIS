@@ -1,6 +1,7 @@
 package controller.utente;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +12,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.carrelloService.Carrello;
 import model.carrelloService.CarrelloDAO;
+import model.tesseraService.Tessera;
+import model.tesseraService.TesseraDAO;
 import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 
@@ -33,13 +36,34 @@ public class RegistroUtente extends HttpServlet {
         utente.setCodiceSicurezza(codiceSicurezza);
         utente.setTelefoni(telefoni);
 
+
+
         if(codiceSicurezza.length() > 16){
             //rimanda a una pagina di errore per password troppo lunga
         }
         else{
             //aggiungere il controllo se è già presente un utente con la stessa email
             UtenteDAO utenteService = new UtenteDAO();
-            utenteService.doSave(utente);
+            if(utenteService.doRetrieveById(utente.getEmail()) == null){
+                utenteService.doSave(utente);
+            }
+
+            if(utente.getTipo().equalsIgnoreCase("premium")){
+                TesseraDAO tesseraService = new TesseraDAO();
+                Tessera tessera = new Tessera();
+                tessera.setEmail(utente.getEmail());
+                tessera.setDataCreazione(LocalDate.now());
+                tessera.setDataScadenza(LocalDate.now().plusYears(2));
+                List<String> numeri = tesseraService.doRetrivedAllByNumero();
+                String numT;
+                Random random =new Random();
+                do {
+                    numT = "T" + random.nextInt(10) + random.nextInt(10) + random.nextInt(10);
+                }while(numeri.contains(numT));
+                tessera.setNumero(numT);
+
+                tesseraService.doSave(tessera);
+            }
             //request.getSession().setAttribute("utente", utente);
             CarrelloDAO carrelloService = new CarrelloDAO();
             Carrello carrello = new Carrello();

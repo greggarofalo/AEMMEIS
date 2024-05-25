@@ -26,6 +26,7 @@ UtenteDAO {
                 p.setEmail(rs.getString(2));
                 p.setCodiceSicurezza(rs.getString(3));
                 p.setTipo(rs.getString(4));
+                p.setTelefoni(this.cercaTelefoni(p.getEmail()));
                 return p;
             }
             return null;
@@ -48,6 +49,7 @@ UtenteDAO {
                 p.setEmail(rs.getString(2));
                 p.setCodiceSicurezza(rs.getString(3));
                 p.setTipo(rs.getString(4));
+                p.setTelefoni(this.cercaTelefoni(p.getEmail()));
                 return p;
             }
             return null;
@@ -166,6 +168,23 @@ UtenteDAO {
             throw new RuntimeException(e);
         }
     }
+
+
+//mi serve una funzione che cerchi i numeri di telefono di un utente e li salvi nella lista
+//così da non perdere l'informazione quando si fa il login.
+    public List<String> cercaTelefoni(String email) {
+        List<String> telefoni = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT numeroTelefono FROM telefono WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                telefoni.add(rs.getString(1));
+            }
+            return telefoni;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
-
-

@@ -14,15 +14,17 @@ public class TesseraDAO {
     public void doSave(Tessera tessera){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO libro (numero, dataCreazione, dataScadenza, punti, email) VALUES(?,?,?,?,?)");
+                    "INSERT INTO tessera (numero, dataCreazione, dataScadenza, email) VALUES(?,?,?,?)");
             ps.setString(1, tessera.getNumero());
             ps.setDate(2, java.sql.Date.valueOf(tessera.getDataCreazione()));
             ps.setDate(3, java.sql.Date.valueOf(tessera.getDataScadenza()));
-            ps.setInt(4, tessera.getPunti());
-            ps.setString(5, tessera.getEmail());
+            ps.setString(4, tessera.getEmail());
+
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
+
+            tessera.setPunti(this.doRetrieveById(tessera.getNumero()).getPunti());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -70,6 +72,21 @@ public class TesseraDAO {
                 tessere.add(p);
             }
             return tessere;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public List<String> doRetrivedAllByNumero(){
+        List<String> numeri = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM tessera");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                numeri.add(rs.getString(1));
+            }
+            return numeri;
         } catch(SQLException e){
             throw new RuntimeException(e);
         }

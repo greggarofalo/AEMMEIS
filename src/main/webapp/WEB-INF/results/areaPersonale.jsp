@@ -36,9 +36,6 @@
                     <li>${utente.email}</li>
 
                 </ul>
-                <form action="modifica-email-supporto" class="button">
-                    <input type="submit" value="Modifica email">
-                </form>
             </fieldset>
 
 
@@ -65,20 +62,24 @@
                 <li>
                     Punti tessera: <%= tessera.getPunti() %>
                 </li>
-                <form id="standardForm" action="cambia-tipo-supporto" method="post" class="button">
+                <form id="standardForm" action="cambia-tipo" class="button">
                     <input type="submit" value="Diventa utente Standard">
                 </form>
                 <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
-                <form id="premiumForm" action="cambia-tipo-supporto" method="post" class="button">
+                <form id="premiumForm" action="cambia-tipo" class="button">
                     <input type="submit" value="Diventa utente Premium">
                 </form>
                 <% } %>
+
             </fieldset>
+        </div>
+
+        <%@include file="footer.jsp"%>
 
         <script>
             document.getElementById('standardForm')?.addEventListener('submit', function(event) {
                 event.preventDefault();
-                var confirmed = confirm('Sei sicuro di voler diventare un utente Standard?');
+                var confirmed = confirm('Sei sicuro di voler diventare un utente Standard? Perderai i punti accumulati');
                 if (confirmed) {
                     this.submit();
                 }
@@ -93,8 +94,5 @@
             });
         </script>
 
-
-
-    <%@include file="footer.jsp"%>
 </body>
 </html>
