@@ -15,7 +15,6 @@
 .dropdown-container {
     position: absolute; /* Posiziona assolutamente il menu a tendina sopra l'immagine */
     top: 150px; /* Posiziona il menu a 200 pixel dall'alto del contenitore */
-    left: 50px; /* Posiziona il menu a 50 pixel dal lato sinistro del contenitore */
     width: 100%; /* Assicura che il contenitore copra l'intera larghezza dell'immagine */
     display: flex; /* Usa il flexbox per centrare il menu a tendina */
     justify-content: center; /* Centra il menu a tendina orizzontalmente */
@@ -23,15 +22,14 @@
 }
 
 .descrizione{
-    display: flex; /* Usa il flexbox per centrare il menu a tendina */
-    justify-content: center; /* Centra il menu a tendina orizzontalmente */
-    align-items: center; /* Centra il menu a tendina verticalmente */
     text-align: center;
     font-family: 'Georgia', serif;
     font-size: 18px;
     line-height: 1.6; /* interlinea */
     color: #444;
     Padding: 30px;
+    margin-left: 500px;
+    margin-right: 500px;
 }
 
 /* Stile per il menu a tendina */
