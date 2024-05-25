@@ -1,6 +1,5 @@
 package model.libroService;
 import model.ConPool;
-import model.utenteService.Utente;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +20,10 @@ public class LibroDAO {
             ps.setString(8, libro.getImmagine());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
+            }
+
+            for(Autore autore : libro.getAutori()){
+                this.addAutore(libro.getIsbn(), autore);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -46,6 +49,11 @@ public class LibroDAO {
                 throw new RuntimeException("DELETE3 error.");
 
             ps = con.prepareStatement("DELETE FROM sede WHERE isbn=?");
+            ps.setString(1, isbn);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE4 error.");
+
+            ps = con.prepareStatement("DELETE FROM scrittura WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE4 error.");
@@ -108,6 +116,7 @@ public class LibroDAO {
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
                 p.setImmagine(rs.getString(8));
+                p.setAutori(this.getScrittura(p.getIsbn()));
                 libri.add(p);
             }
             return libri;
@@ -132,6 +141,7 @@ public class LibroDAO {
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
                 p.setImmagine(rs.getString(8));
+                p.setAutori(this.getScrittura(p.getIsbn()));
                 return p;
             }
             return null;
@@ -187,6 +197,37 @@ public class LibroDAO {
                 sedi.add(service.doRetrieveById(idSede));
             }
             return sedi;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteAutoreScrittura(String isbn, Autore autore){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM Scrittura WHERE isbn=? AND cf=?");
+            ps.setString(1, isbn);
+            ps.setString(2, autore.getCf());
+
+            AutoreDAO service = new AutoreDAO();
+            service.deleteAutore(autore.getCf());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void addAutore(String isbn, Autore autore){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO scrittura (cf, isbn) VALUES(?,?)");
+            ps.setString(1, autore.getCf());
+            ps.setString(2, isbn);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

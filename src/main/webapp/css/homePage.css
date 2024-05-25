@@ -1,0 +1,29 @@
+.griglia {
+    display: grid;/*griglia */
+    grid-template-columns: repeat(auto-fill,300px);/*Colonne con larghezza fissa di 300px */
+    gap: 50px; /* Spazio tra i libri */
+    padding: 20px;
+    margin: 10px;
+}
+.item {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+}
+.img {
+    width: 230px;
+    height: 310px;
+    box-shadow: -15px 0px 10px #9c9c9c; /* il 1° valore aggiunge l'ombra a sinistra o destra,
+                                           il 2° la aggiunge sopra o sotto, il 3° è la dimensione dell'ombra */
+}
+.azioni {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.titolo {
+    font-weight: bold;
+}
+.autori {
+    color: gray;
+}

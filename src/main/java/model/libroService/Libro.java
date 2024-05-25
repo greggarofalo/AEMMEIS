@@ -1,5 +1,6 @@
 package model.libroService;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Libro {
@@ -11,6 +12,8 @@ public class Libro {
     private int sconto;
     private String trama;
     private String immagine;
+    private List<Autore> autori;
+
 
     public String getTitolo() {
         return titolo;
@@ -76,6 +79,13 @@ public class Libro {
         this.immagine = immagine;
     }
 
+    public List<Autore> getAutori() {
+        return autori;
+    }
+
+    public void setAutori(List<Autore> autori) {
+        this.autori = autori;
+    }
 
     @Override
     public boolean equals(Object o) {

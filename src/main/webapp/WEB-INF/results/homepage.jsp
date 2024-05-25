@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
-
+    <link rel="stylesheet" type="text/css" href="./css/homePage.css">
 </head>
 <body>
  <%@include file="header.jsp"%>
@@ -19,35 +19,50 @@
     <% WishList wishList = (WishList) session.getAttribute("wishList");
     List<Libro> libri = (List<Libro>) request.getAttribute("libriHome");
     int i=0;%>
- <c:forEach items="${libriHome}" var="libro">
-    <div>
-        <img src="${libro.immagine}" width="100" height="150">
-        <li>${libro.titolo}, ISBN: ${libro.isbn}, ANNO PUBBLICAZIONE: ${libro.annoPubblicazioni}
-        </li>
-        <% String path="./images/hearts-icon.png";
-        if(wishList!=null && wishList.getLibri()!=null) {
-            if(wishList.getLibri().contains(libri.get(i))){
-                path="./images/heartsBlack-icon.png";
-            }
-        }
-        i++;%>
-        <%--<a href="show-wishlist">
-            <img src="<%=path%>>" width="20" height="20" class="image">
-        </a>
-        <a href="cart-servlet>">
-            <img src="./images/icon-cart.png" width="20" height="20" class="spaced-image image " >
-        </a>--%>
-        <form action="modifica-preferiti">
-            <input type="hidden" name="isbn" value="${libro.isbn}">
-            <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
-        </form>
-        <form action="aggiungi-carrello">
-            <input type="hidden" name="isbn" value="${libro.isbn}">
-            <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
-        </form>
+ <div class="griglia">
+     <c:forEach items="${libriHome}" var="libro">
+        <div class="item">
+            <img class="img" src="${libro.immagine}">
 
-    </c:forEach>
-    </div>
+            <% String path="./images/hearts-icon.png";
+                if(wishList!=null && wishList.getLibri()!=null) {
+                    if(wishList.getLibri().contains(libri.get(i))){
+                        path="./images/heartsBlack-icon.png";
+                    }
+                }
+                i++;%>
+
+            <div class="azioni">
+                <form action="modifica-preferiti">
+                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                    <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
+                </form>
+                <form action="aggiungi-carrello">
+                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                    <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
+                </form>
+            </div>
+
+
+            <p class="titolo">${libro.titolo}</p>
+            <p class=autori>
+                <c:forEach var="autore" items="${libro.autori}" varStatus="status">
+                    ${autore.nome}${autore.cognome}
+                    <c:if test="${!status.last}">
+                        ,
+                    </c:if>
+                </c:forEach>
+            </p>
+        </div>
+
+            <%--<a href="show-wishlist">
+                <img src="<%=path%>>" width="20" height="20" class="image">
+            </a>
+            <a href="cart-servlet>">
+                <img src="./images/icon-cart.png" width="20" height="20" class="spaced-image image " >
+            </a>--%>
+     </c:forEach>
+ </div>
 
 <%@include file="footer.jsp"%>
 
