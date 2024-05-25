@@ -10,8 +10,10 @@ public class RepartoDAO {
     public void doSave(Reparto reparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO reparto (descrizione) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, reparto.getDescrizione());
+                    "INSERT INTO reparto (nome,descrizione,immaaìgine) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, reparto.getNome());
+            ps.setString(2, reparto.getDescrizione());
+            ps.setString(3, reparto.getImmagine());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -51,9 +53,10 @@ public class RepartoDAO {
 
     public void updateReparto(Reparto reparto){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET descrizione = ? WHERE idReparto = ?");
-            ps.setString(1, reparto.getDescrizione());
-            ps.setInt(2, reparto.getIdReparto());
+            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET nome = ?, descrizione = ? WHERE idReparto = ?");
+            ps.setString(1,reparto.getNome());
+            ps.setString(2, reparto.getDescrizione());
+            ps.setInt(3, reparto.getIdReparto());
 
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("UPDATE error.");
@@ -109,7 +112,9 @@ public class RepartoDAO {
             while (rs.next()) {
                 Reparto p = new Reparto();
                 p.setIdReparto(rs.getInt(1));
-                p.setDescrizione(rs.getString(2));
+                p.setNome(rs.getString(2));
+                p.setDescrizione(rs.getString(3));
+                p.setImmagine(rs.getString(4));
                 p.setLibri(this.getAppartenenza(p.getIdReparto()));
                 reparti.add(p);
             }
@@ -128,7 +133,9 @@ public class RepartoDAO {
             if (rs.next()) {
                 Reparto p = new Reparto();
                 p.setIdReparto(rs.getInt(1));
-                p.setDescrizione(rs.getString(2));
+                p.setNome(rs.getString(2));
+                p.setDescrizione(rs.getString(3));
+                p.setImmagine(rs.getString(4));
                 p.setLibri(this.getAppartenenza(idReparto));
                 return p;
             }

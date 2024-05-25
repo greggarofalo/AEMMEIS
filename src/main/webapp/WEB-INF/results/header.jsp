@@ -25,7 +25,7 @@
     <ul>
         <li><a class="active" href="index.html">Home</a></li>
         <c:forEach items="${reparti}" var="reparto">
-            <li><a href="mostra-reparto">${reparto.descrizione}</a></li>
+            <li><a href="mostra-reparto?id=${reparto.idReparto}">${reparto.nome}</a></li>
         </c:forEach>
 
     </ul><br><br>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/homePage.css">
+    <link rel="stylesheet" type="text/css" href="./css/homePageStyle.css">
 </head>
 <body>
  <%@include file="header.jsp"%>

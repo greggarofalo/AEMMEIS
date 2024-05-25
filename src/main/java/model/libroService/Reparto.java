@@ -5,7 +5,9 @@ import java.util.Objects;
 
 public class Reparto {
     private int idReparto;
+    private String nome;
     private String descrizione;
+    private String immagine;
     private List<Libro> libri;
 
     public int getIdReparto() {
@@ -40,4 +42,19 @@ public class Reparto {
         return idReparto == reparto.idReparto && descrizione.equals(reparto.descrizione);
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
+    }
 }
