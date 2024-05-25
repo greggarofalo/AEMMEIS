@@ -95,3 +95,31 @@ body {
     width: 50px;
     text-align: center;
 }
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.total {
+    font-size: 1.2em;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cart-actions button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #427b8a;
+    color: white;
+    border: none; /* Rimuove il bordo */
+}

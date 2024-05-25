@@ -23,7 +23,7 @@
                     Libro libro = riga.getLibro();
         %>
             <div class="book-item">
-                <%--<img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">--%>
+                <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
                 <div class="book-details">
                     <h3 class="book-title"><%=libro.getTitolo()%></h3>
                     <div class="book-price">
@@ -65,6 +65,10 @@
                             <input type="number" name="quantita" value=<%=riga.getQuantita()%> min="1">
                         </div>
                     </div>
+
+                    <!-- Input nascosto per memorizzare i dati del libro -->
+                    <input type="hidden" class="book-price-info" data-price="<%=libro.getPrezzo()%>" data-sconto="<%=libro.getSconto()%>" data-quantita="<%=riga.getQuantita()%>">
+
                 </div>
 
             </div>
@@ -72,7 +76,19 @@
             }
                     }
                 %>
-        <button onclick="saveCart()">Chiudi carrello</button>
+    </div>
+
+    <!-- Totale e pulsanti in fondo -->
+    <div class="cart-summary">
+        <div class="total">
+            Totale: <span id="total-amount">0.00</span> €
+            <br>
+            Punti Aemme: <span id="aemme-points">0</span>
+        </div>
+        <div class="cart-actions">
+            <button onclick="saveCart()">Chiudi carrello</button>
+            <button onclick="window.location.href='checkout.jsp'">Acquista ora</button>
+        </div>
     </div>
     <script>
         function addToFavorites(isbn) {
@@ -185,6 +201,39 @@
                 window.location.href = "index.html";
 
         }
+
+        // Funzione per aggiornare il totale del carrello e i punti Effe
+        function updateCart() {
+            var total = 0;
+            var bookPriceInfos = document.querySelectorAll('.book-price-info');
+            var puntiAemme=0;
+            // Itera attraverso tutti gli elementi selezionati
+            bookPriceInfos.forEach(function(info) {
+                var price = parseFloat(info.getAttribute('data-price'));
+                var sconto = parseFloat(info.getAttribute('data-sconto'));
+                var quantita = parseInt(info.getAttribute('data-quantita'));
+
+                // Calcola il prezzo totale tenendo conto dello sconto, se presente
+                if (sconto > 0) {
+                    total += (price - (price * sconto / 100)) * quantita;
+                } else {
+                    total += price * quantita;
+                }
+            });
+
+            // Calcola i punti Effe come il numero di libri nel carrello moltiplicato per 5
+            bookPriceInfos.forEach(function(info) {
+                var quantita = parseInt(info.getAttribute('data-quantita')); // Quantità del libro nel carrello
+                puntiAemme += quantita * 5;
+            });
+
+            //aggiornamento del DOM
+            document.getElementById('total-amount').innerText = total.toFixed(2);
+            document.getElementById('aemme-points').innerText = puntiAemme;
+        }
+
+        // Inizializza il carrello quando la pagina viene caricata
+        document.addEventListener('DOMContentLoaded', updateCart);
 
 
 
