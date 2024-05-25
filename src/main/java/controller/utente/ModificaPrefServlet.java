@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class ModificaPrefServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
+        String source=request.getParameter("source");
 
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
@@ -31,7 +32,7 @@ public class ModificaPrefServlet extends HttpServlet {
         }
 
         else {
-            if(request.getParameter("rimuoviPref") != null){// controllo se il bottone è stato selezionato nella show WishList
+            if(source!= null && source.equals("wishList")){// controllo se il bottone è stato selezionato nella show WishList
                 address="/WEB-INF/results/showWishList.jsp";
             }
             WishList wishList = (WishList) session.getAttribute("wishList");

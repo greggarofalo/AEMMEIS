@@ -10,18 +10,34 @@
 <html>
 <head>
     <title>WishList</title>
+    <link rel="stylesheet" type="text/css" href="./css/carrelloStyle.css">
 </head>
 <body>
 <h1>Wish List</h1>
+<div class="book-list">
 <c:forEach items="${wishList.libri}" var="libro">
-    <li>${libro.titolo}, ISBN: ${libro.isbn}, ANNO PUBBLICAZIONE: ${libro.annoPubblicazioni}
-    </li>
-    <form action="modifica-preferiti">
-        <input type="hidden" name="isbn" value="${libro.isbn}">
-        <input type="submit" name="rimuoviPref" value="Rimuovi">
-    </form>
-</c:forEach>
-<a href="index.html">HomePage</a>
+    <div class="book-item">
+        <img src="${libro.immagine}" alt="${libro.titolo}<" class="book-image">
+        <div class="book-details">
+            <h3 class="book-title">${libro.titolo}</h3>
+            <div class="book-actions">
+                <a  href="modifica-preferiti?isbn=${libro.isbn}&source=wishList">
+                    <img src="images/heartsBlack-icon.png" width="30" height="30" class="image">
+                </a>
+                <%--<form action="modifica-preferiti">
+                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                    <input class="favorite-button"  type="submit" name="rimuoviPref" value="images/heartsBlack-icon.png">
+                </form>--%>
+            </div>
+        </div>
+    </div>
+    </c:forEach>
+    <div class="cart-summary">
+        <div class="cart-actions">
+            <button onclick="window.location.href='index.html'">HomePage</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
