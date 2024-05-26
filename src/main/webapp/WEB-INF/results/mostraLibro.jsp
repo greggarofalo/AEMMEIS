@@ -20,13 +20,15 @@
 <%@include file="header.jsp"%>
 <div class="book-container">
     <h1>${libro.titolo}</h1>
-    <h2>di
-        <c:forEach items="${autori}" var="autore" varStatus="status"><!--Aggiunta dell'attributo varStatus="status" al tag forEach
-         Questo introduce una variabile status che tiene traccia dello stato del loop,
-         inclusa la proprietà last che indica se l'elemento corrente è l'ultimo nell'iterazione.-->
-            <h2> ${autore.nome} ${autore.cognome}</h2><c:if test="${!status.last}">, </c:if>
-        </c:forEach>
-    </h2>
+
+    <h2><h3 style="display: inline;">di </h3></h2>
+    <c:forEach items="${autori}" var="autore" varStatus="status">
+        <!-- Aggiunta dell'attributo varStatus="status" al tag forEach
+        Questo introduce una variabile status che tiene traccia dello stato del loop,
+        inclusa la proprietà last che indica se l'elemento corrente è l'ultimo nell'iterazione. -->
+        <h3 style="display: inline;">${autore.nome} ${autore.cognome}</h3>
+        <c:if test="${!status.last}">, </c:if>
+    </c:forEach>
     <div class="book-details">
         <div class="book-image">
             <img src="${libro.immagine}" alt="${libro.titolo}">
@@ -47,6 +49,32 @@
             <button class="add-to-cart">Aggiungi al carrello</button>
 
         </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="nav-tabs">
+        <a href="#descrizione" class="nav-link">Descrizione</a>
+        <a href="#dettagli" class="nav-link">Dettagli</a>
+    </div>
+
+    <!-- New Description and Details Section -->
+    <div id="descrizione" class="book-description-details">
+        <h2>Descrizione</h2>
+        <p>${libro.trama}</p>
+    </div>
+    <div id="dettagli" class="book-description-details">
+        <h3>Dettagli</h3>
+        <ul>
+            <li>Autore: <c:forEach items="${autori}" var="autore" varStatus="status">
+                <!-- Aggiunta dell'attributo varStatus="status" al tag forEach
+                Questo introduce una variabile status che tiene traccia dello stato del loop,
+                inclusa la proprietà last che indica se l'elemento corrente è l'ultimo nell'iterazione. -->
+                ${autore.nome} ${autore.cognome}
+                <c:if test="${!status.last}">, </c:if>
+            </c:forEach></li>
+            <li>Anno edizione: ${libro.annoPubblicazioni}</li>
+            <li>ISBN: ${libro.isbn}</li>
+        </ul>
     </div>
 </div>
 <%@include file="footer.jsp"%>

@@ -17,7 +17,9 @@
 <div class="book-list">
 <c:forEach items="${wishList.libri}" var="libro">
     <div class="book-item">
-        <img src="${libro.immagine}" alt="${libro.titolo}<" class="book-image">
+        <a href="mostra-libro?isbn=${libro.isbn}">
+            <img src="${libro.immagine}" alt="${libro.titolo}<" class="book-image">
+        </a>
         <div class="book-details">
             <h3 class="book-title">${libro.titolo}</h3>
             <div class="book-actions">

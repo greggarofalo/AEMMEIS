@@ -22,7 +22,9 @@
  <div class="griglia">
      <c:forEach items="${libriHome}" var="libro">
         <div class="item">
-            <img class="img" src="${libro.immagine}">
+            <a href="mostra-libro?isbn=${libro.isbn}">
+                <img class="img" src="${libro.immagine}">
+            </a>
 
             <% String path="./images/hearts-icon.png";
                 if(wishList!=null && wishList.getLibri()!=null) {

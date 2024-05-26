@@ -5,7 +5,7 @@ body {
 
 /* Stile del contenitore principale del libro */
 .book-container {
-    width: 60%; /* Larghezza del contenitore: 60% della larghezza della finestra */
+    width: 70%; /* Larghezza del contenitore: 60% della larghezza della finestra */
     margin: 0 auto; /* Centra il contenitore orizzontalmente */
     padding: 20px; /* Padding interno di 20px */
     border: 1px solid #ddd; /* Bordo grigio chiaro */
@@ -90,4 +90,83 @@ body {
 /* Stile per i link all'interno di .book-info quando sono in hover */
 .book-info a:hover {
     text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
+
+
+
+/* Stile per i link di navigazione */
+.nav-tabs {
+    margin-top: 10px;
+    display: flex; /* Disposizione dei link in linea */
+    justify-content: flex-start; /* Allineamento a sinistra */
+    margin-bottom: 20px; /* Spazio sotto i link */
+    border-bottom: 1px solid #ddd; /* Bordo inferiore */
+}
+
+.nav-tabs .nav-link {
+    margin-right: 20px; /* Spazio a destra di ogni link */
+    padding-bottom: 5px; /* Padding inferiore */
+    color: grey; /* Colore del testo */
+    text-decoration: none; /* Nessuna sottolineatura */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link.active {
+    color: red; /* Colore rosso per il link attivo o al passaggio del mouse */
+    border-bottom: 2px solid red; /* Bordo inferiore rosso */
+}
+
+/* Stile per la nuova sezione descrittiva e dei dettagli del libro */
+.book-description-details {
+    margin-top: 20px; /* Spazio sopra la nuova sezione */
+    padding: 20px; /* Padding interno */
+    border-top: 1px solid #ddd; /* Bordo superiore per separare dalla sezione sopra */
+}
+
+/* Stile per il titolo della descrizione */
+.book-description-details h2 {
+    font-size: 1.5em; /* Dimensione del font */
+    color: #333; /* Colore del testo */
+    margin-bottom: 10px; /* Spazio sotto il titolo */
+}
+
+/* Stile per il paragrafo della descrizione */
+.book-description-details p {
+    font-size: 1em; /* Dimensione del font */
+    color: #555; /* Colore del testo */
+    line-height: 1.5; /* Altezza della linea */
+    margin-bottom: 20px; /* Spazio sotto il paragrafo */
+}
+
+/* Stile per il titolo dei dettagli */
+.book-description-details h3 {
+    font-size: 1.3em; /* Dimensione del font */
+    color: #333; /* Colore del testo */
+    margin-bottom: 10px; /* Spazio sotto il titolo */
+}
+
+/* Stile per la lista dei dettagli */
+.book-description-details ul {
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0; /* Rimuove il padding */
+}
+
+/* Stile per ogni elemento della lista dei dettagli */
+.book-description-details ul li {
+    font-size: 1em; /* Dimensione del font */
+    color: #555; /* Colore del testo */
+    line-height: 1.5; /* Altezza della linea */
+    margin-bottom: 5px; /* Spazio sotto ogni elemento */
+}
+
+/* Stile per le etichette degli elementi della lista */
+.book-description-details ul li span.label {
+    font-weight: bold; /* Testo in grassetto */
+    color: #333; /* Colore del testo */
+}
+
+/* Esempio di stile per una chiave specifica dei dettagli */
+.book-description-details ul li span.value {
+    color: #888; /* Colore grigio per i valori */
 }
