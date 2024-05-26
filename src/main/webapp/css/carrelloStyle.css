@@ -123,3 +123,6 @@ body {
     color: white;
     border: none; /* Rimuove il bordo */
 }
+.cart-actions button:hover {
+    background-color: #356876; /* Sfondo verde più scuro */
+}

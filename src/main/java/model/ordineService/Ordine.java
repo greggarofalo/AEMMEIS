@@ -2,6 +2,7 @@ package model.ordineService;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public class Ordine {
     private String idOrdine;
@@ -15,6 +16,8 @@ public class Ordine {
     private String stato;
     private String matricola;
     private String email;
+    //aggiunto questo
+    private List<RigaOrdine> righeOrdine;
 
     public String getCitta() {
         return citta;
@@ -104,4 +107,12 @@ public class Ordine {
         this.matricola = matricola;
     }
 
+    //aggiunto questi
+    public List<RigaOrdine> getRigheOrdine() {
+        return righeOrdine;
+    }
+
+    public void setRigheOrdine(List<RigaOrdine> righeOrdine) {
+        this.righeOrdine = righeOrdine;
+    }
 }

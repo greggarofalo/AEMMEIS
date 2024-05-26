@@ -21,12 +21,16 @@ import java.util.List;
 public class AggiungiCartServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
+        String source= request.getParameter("source");
 
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 
         String address="index.html";
+        if(source.equals("mostraLibro"))
+            address="mostra-libro";
+
         LibroDAO libroService = new LibroDAO();
         Libro libro = libroService.doRetrieveById(isbn);
 

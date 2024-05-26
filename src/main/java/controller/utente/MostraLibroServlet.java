@@ -22,18 +22,18 @@ public class MostraLibroServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String isbn=request.getParameter("isbn");
-        System.out.println(isbn);
         HttpSession session= request.getSession();
         Carrello carrello= (Carrello) session.getAttribute("carrello");
         WishList wishList = (WishList) session.getAttribute("wishList");
         Libro libro  =new Libro();
         LibroDAO libroService= new LibroDAO();
-
+        boolean presenza=false;
         if(carrello!=null){
             for(RigaCarrello riga: carrello.getRigheCarrello()){
                 Libro libroRiga= riga.getLibro();
                 if(libroRiga.getIsbn().equals(isbn)) {
                     libro = libroRiga;
+                    presenza=true;
                     break;
                 }
 
@@ -43,13 +43,15 @@ public class MostraLibroServlet extends HttpServlet {
             for(Libro libro1: wishList.getLibri()){
                 if(libro1.getIsbn().equals(isbn)){
                     libro = libro1;
+                    presenza = true;
                     break;
                 }
             }
         }
-        else{
+        if(!presenza){
             libro=libroService.doRetrieveById(isbn);
         }
+
         List<Autore> autori= libroService.getScrittura(isbn);
 
 
