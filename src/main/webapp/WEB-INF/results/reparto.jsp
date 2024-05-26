@@ -30,7 +30,9 @@
          <form id="repartoForm" action="mostra-reparto" method="GET">
            <select id="repartoSelect" class="dropdown-menu" name="id" onchange="document.getElementById('repartoForm').submit()">
              <c:forEach items="${reparti}" var="rep">
-               <option value="${rep.idReparto}" <c:if test="${repartoAttuale == rep.idReparto}">selected</c:if>>${rep.nome}</option>
+               <c:if test="${rep.idReparto != 5}">
+                <option value="${rep.idReparto}" <c:if test="${repartoAttuale == rep.idReparto}">selected</c:if>>${rep.nome}</option>
+               </c:if>
              </c:forEach>
            </select>
            <noscript><input type="submit" value="Submit"></noscript>

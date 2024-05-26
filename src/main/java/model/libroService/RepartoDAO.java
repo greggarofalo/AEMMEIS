@@ -53,9 +53,10 @@ public class RepartoDAO {
 
     public void updateReparto(Reparto reparto){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET nome = ?, descrizione = ? WHERE idReparto = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE reparto SET nome = ?, descrizione = ?, immagine = ? WHERE idReparto = ?");
             ps.setString(1,reparto.getNome());
             ps.setString(2, reparto.getDescrizione());
+            ps.setString(3, reparto.getImmagine());
             ps.setInt(3, reparto.getIdReparto());
 
             if(ps.executeUpdate() != 1)

@@ -5,7 +5,7 @@
     <title>Scegli i libri</title>
 </head>
 <body>
-    <h1>Scegli i libri da aggiungere al reparto ${reparto.idReparto}: ${reparto.descrizione}</h1>
+    <h1>Scegli i libri da aggiungere al reparto ${reparto.idReparto}: ${reparto.nome}</h1>
     <form action="insert-libroReparto">
         <input type="hidden" name="idReparto" value="${reparto.idReparto}">
         <ul>

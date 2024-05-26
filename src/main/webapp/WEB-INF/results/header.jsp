@@ -25,7 +25,9 @@
     <ul>
         <li><a class="active" href="index.html">Home</a></li>
         <c:forEach items="${reparti}" var="reparto">
-            <li><a href="mostra-reparto?id=${reparto.idReparto}">${reparto.nome}</a></li>
+            <c:if test="${reparto.idReparto != 5}">
+                <li><a href="mostra-reparto?id=${reparto.idReparto}">${reparto.nome}</a></li>
+            </c:if>
         </c:forEach>
 
     </ul><br><br>

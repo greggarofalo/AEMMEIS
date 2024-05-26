@@ -73,7 +73,7 @@
         <div style="text-align: left;">
             <ul>
                 <c:forEach items="${reparti}" var="reparto">
-                    <li> ${reparto.descrizione}</li>
+                    <li> ${reparto.nome}</li>
                     <form action="eliminaLibro-reparto">
                         <input type="hidden" name="isbn" value="${libro.isbn}">
                         <input type="hidden" name="idReparto" value="${reparto.idReparto}">
@@ -87,7 +87,7 @@
             <% i=0; %>
             <c:forEach items="${repartiNonPresenti}" var="reparto2">
                 <input type="checkbox" id="reparto<%=i%>" name="repartoSelezionato" value="${reparto2.idReparto}">
-                <label for="reparto<%=i%>">${reparto2.descrizione}</label><br>
+                <label for="reparto<%=i%>">${reparto2.nome}</label><br>
             </c:forEach>
 
                 <input type="hidden" name="isbn" value="${libro.isbn}">
