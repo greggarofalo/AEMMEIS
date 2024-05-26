@@ -21,7 +21,7 @@
   <body>
      <%@include file="header.jsp"%>
      <% WishList wishList = (WishList) session.getAttribute("wishList");
-       Reparto reparto = (Reparto) session.getAttribute("reparto");
+       Reparto reparto = (Reparto) request.getAttribute("reparto");
        List<Reparto> reparti = (List<Reparto>) session.getAttribute("reparti");
      int i = 0;%>
      <div class="reparto">

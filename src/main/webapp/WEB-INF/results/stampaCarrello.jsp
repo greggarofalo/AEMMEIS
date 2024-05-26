@@ -23,7 +23,9 @@
                     Libro libro = riga.getLibro();
         %>
             <div class="book-item">
-                <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
+                <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
+                    <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
+                </a>
                 <div class="book-details">
                     <h3 class="book-title"><%=libro.getTitolo()%></h3>
                     <div class="book-price">
@@ -39,9 +41,10 @@
                     </script>€</span>
                         <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
                         <%
-                        }else
+                        }else {
                         %>
                         <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
+                        <%}%>
 
                     </div>
                     <%

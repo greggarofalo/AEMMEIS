@@ -10,7 +10,7 @@ public class RepartoDAO {
     public void doSave(Reparto reparto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO reparto (nome,descrizione,immaaìgine) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO reparto (nome,descrizione,immagine) VALUES(?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, reparto.getNome());
             ps.setString(2, reparto.getDescrizione());
             ps.setString(3, reparto.getImmagine());

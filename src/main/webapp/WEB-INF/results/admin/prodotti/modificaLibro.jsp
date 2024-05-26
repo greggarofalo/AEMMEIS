@@ -15,26 +15,27 @@
 
 <fieldset>
     <legend><h3 style="color: #3a6977">Nuovo Libro</h3></legend>
-    <form action="aggiorna-libro">
-        <label for="titolo">Titolo</label>
-        <input type="text" id="titolo" name="titolo" value="${libro.titolo}"><br><br>
-        <label for="isbn">Isbn</label>
-        <input type="text" id="isbn" name="isbn" pattern="[0-9]{13}" value="${libro.isbn}" readonly><br><br>
-        <label for="annoPubb">Anno Pubblicazione</label>
-        <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}"><br><br>
-        <label for="genere">Genere</label>
-        <input type="text" id="genere" name="genere" value="${libro.genere}"><br><br>
-        <label for="prezzo">Prezzo</label>
-        <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}"><br><br>
-        <label for="sconto">Sconto</label>
-        <input type="text" id="sconto" name="sconto" value="${libro.sconto}"><br><br>
-        <label for="immagine">Genere</label>
-        <input type="text" id="immagine" name="immagine" value="${libro.immagine}"><br><br>
-        <label for="trama">Trama</label>
-        <textarea id="trama" name="trama" rows="4" cols="50">${libro.trama}</textarea>
-        <input type="submit" value="Modifica">
-
-    </form>
+    <div class="info-libro">
+        <form action="aggiorna-libro">
+            <label for="titolo">Titolo</label>
+            <input type="text" id="titolo" name="titolo" value="${libro.titolo}"><br><br>
+            <label for="isbn">Isbn</label>
+            <input type="text" id="isbn" name="isbn" pattern="[0-9]{13}" value="${libro.isbn}" readonly><br><br>
+            <label for="annoPubb">Anno Pubblicazione</label>
+            <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}"><br><br>
+            <label for="genere">Genere</label>
+            <input type="text" id="genere" name="genere" value="${libro.genere}"><br><br>
+            <label for="prezzo">Prezzo</label>
+            <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}"><br><br>
+            <label for="sconto">Sconto</label>
+            <input type="text" id="sconto" name="sconto" value="${libro.sconto}"><br><br>
+            <label for="immagine">Immagine</label>
+            <input type="text" id="immagine" name="immagine" value="${libro.immagine}"><br><br>
+            <label for="trama">Trama</label>
+            <textarea id="trama" name="trama" rows="4" cols="50">${libro.trama}</textarea>
+            <input type="submit" value="Modifica">
+        </form>
+    </div>
 </fieldset>
 
     <fieldset class="block" >
