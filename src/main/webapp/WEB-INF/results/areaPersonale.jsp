@@ -16,6 +16,15 @@
     <%@include file="header.jsp"%>
 
     <div class="dati">
+
+            <div class="azioni">
+                <ul>
+                    <li><a href="visualizza-ordini">Visualizza Ordini</a></li>
+                    <li><a href="elimina-account" onclick="return confirm('Sei sicuro di voler eliminare il tuo account?')">Elimina Account</a></li>
+                    <li><a href="log-out" onclick="return confirm('Sei sicuro di voler fare logout?')">Logout</a></li>
+                </ul>
+            </div>
+
             <fieldset class="blocco">
                 <legend><h3>I miei dati</h3></legend>
                 <ul>
@@ -25,9 +34,8 @@
                         <li>${telefono}</li>
                     </c:forEach>
                 </ul>
-                <form action="modifica-dati-supporto" class="button">
-                    <input type="submit" value="Modifica dati">
-                </form>
+                <a href="modifica-dati-supporto" class="button"> Modifica dati
+                </a>
             </fieldset>
 
             <fieldset class="blocco">
@@ -41,8 +49,8 @@
 
             <fieldset class="blocco">
                 <legend><h3>Password</h3></legend>
-                <form action="modifica-password-supporto" class="button">
-                    <input type="submit" value="Modifica password">
+                <form action="modifica-password-supporto">
+                    <input type="button" value="Modifica password" class="button">
                 </form>
             </fieldset>
 
@@ -62,12 +70,12 @@
                 <li>
                     Punti tessera: <%= tessera.getPunti() %>
                 </li>
-                <form id="standardForm" action="cambia-tipo" class="button">
-                    <input type="submit" value="Diventa utente Standard">
+                <form id="standardForm" action="cambia-tipo" >
+                    <input type="submit" value="Diventa utente Standard" class="button">
                 </form>
                 <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
-                <form id="premiumForm" action="cambia-tipo" class="button">
-                    <input type="submit" value="Diventa utente Premium">
+                <form id="premiumForm" action="cambia-tipo">
+                    <input type="button" value="Diventa utente Premium" class="button">
                 </form>
                 <% } %>
 

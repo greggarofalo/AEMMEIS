@@ -1,6 +1,11 @@
 package model.utenteService;
 
 import model.ConPool;
+import model.carrelloService.Carrello;
+import model.carrelloService.CarrelloDAO;
+import model.carrelloService.RigaCarrelloDAO;
+import model.ordineService.OrdineDAO;
+import model.tesseraService.TesseraDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -112,6 +117,12 @@ UtenteDAO {
             ps.setString(4, utente.getEmail());
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("UPDATE error.");
+            List<String> telefoni = this.cercaTelefoni(utente.getEmail());
+            for (String tel : utente.getTelefoni() ){
+                if(!(telefoni.contains(tel))){
+                    this.addTelefono(utente.getEmail(), tel);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,12 +130,30 @@ UtenteDAO {
     }
 
     public void deleteUtente(String email){
+
+        if(this.doRetrieveById(email).getTipo().equalsIgnoreCase("premium")){
+            TesseraDAO tesseraDAO = new TesseraDAO();
+            tesseraDAO.deleteTessera(tesseraDAO.doRetrieveByEmail(email).getNumero()); //cancello eventuale tessera
+        }
+        this.deleteTelefoni(email); //relazione con telefoni
+
+        RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
+        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        OrdineDAO ordineDAO = new OrdineDAO();
+
+        ordineDAO.deleteOrdiniByEmail(email);
+        Carrello carrello = carrelloDAO.doRetriveByUtente(email);
+        rigaCarrelloDAO.deleteRigheCarrelloByIdCarrello(carrello.getIdCarrello());
+        carrelloDAO.deleteCarrello(carrello.getIdCarrello());
+
+
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM utente WHERE email=?");
             ps.setString(1, email);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

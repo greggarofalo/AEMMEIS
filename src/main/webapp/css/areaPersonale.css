@@ -6,7 +6,39 @@
     gap: 20px; /* Spazio tra i fieldset */
     margin-top: 10px;
 }
+.azioni {
+    width: 200px;
+    padding: 20px; /*Aggiunge uno spazio interno di 20 pixel su tutti i lati della barra laterale,
+    garantendo che il contenuto all'interno della barra non tocchi direttamente i bordi.*/
+    background-color: #f4f4f4;
+    border: 1px solid #2b2d30;
+    margin-right: 20px;
+    float: left;
+}
 
+.azioni ul {
+    list-style-type: none; /*Rimuove i punti elenco predefiniti da tutti gli elementi li all'interno dell'elemento ul.*/
+    padding: 0; /*Rimuove il padding predefinito dell'elemento ul, in modo che non ci sia spazio aggiuntivo attorno all'elenco.*/
+    margin: 0;
+}
+
+.azioni li {
+    margin-bottom: 10px; /*Aggiunge uno spazio di 10 pixel
+    sotto ciascun elemento li all'interno della barra laterale,
+    separando visivamente gli elementi dell'elenco.*/
+}
+.azioni li a {
+    text-decoration: none; /* Rimuove la sottolineatura dai link */
+    color: #000; /* Colore del testo */
+    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile */
+    padding: 10px; /* Aggiunge spazio attorno al testo */
+    border-radius: 4px; /* Arrotonda gli angoli */
+    transition: background-color 0.3s; /* Aggiunge un effetto di transizione */
+}
+
+.azioni li a:hover {
+    background-color: #ddd; /* Colore di sfondo quando l'elemento è al passaggio del mouse */
+}
 .blocco{
     width: 400px;
     height: 300px;
@@ -23,7 +55,8 @@
     margin: 5px 0; /* Aggiunge margine per separare gli elementi della lista */
 }
 .blocco .button{
-    text-align: left;
+    color: #041e30;
+    text-align: right;
     text-decoration: underline;
     overflow: hidden;
 }

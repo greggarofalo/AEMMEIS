@@ -13,8 +13,12 @@ import java.io.IOException;
 public class AggiungiRepartoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Reparto reparto = new Reparto();
+        String nome = request.getParameter("nome");
         String decrizione = request.getParameter("descrizione");
+        String immagine = request.getParameter("immagine");
         reparto.setDescrizione(decrizione);
+        reparto.setNome(nome);
+        reparto.setImmagine(immagine);
 
         RepartoDAO repartoService = new RepartoDAO();
         repartoService.doSave(reparto);

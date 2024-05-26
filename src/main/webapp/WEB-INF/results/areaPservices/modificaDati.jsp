@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Modifica email</title>
+    <title>Modifica dati</title>
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
@@ -22,6 +22,7 @@
 
         .email .fieldset{
             text-align: center;
+            padding: 20px;
             margin: 0 auto; /* Center the fieldset */
             margin-bottom: 20px;
 
@@ -34,11 +35,7 @@
             margin: 10px 0;
 
         }
-        .email button {
-            align-self: flex-start; /* Align button to the top-left */
-            margin-left: 20px; /* Add some left margin */
-            margin-bottom: 20px; /* Add some bottom margin */
-        }
+
     </style>
 </head>
 <body>
