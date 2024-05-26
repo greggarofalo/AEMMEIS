@@ -45,8 +45,11 @@
                     </c:otherwise>
                 </c:choose>
             </p>
-
-            <button class="add-to-cart">Aggiungi al carrello</button>
+            <form action="aggiungi-carrello">
+                <input type="hidden" name="isbn" value="${libro.isbn}">
+                <input type="hidden" name="source" value="mostraLibro">
+                <input class= "add-to-cart" type="submit" value="Aggiungi al carrello">
+            </form>
 
         </div>
     </div>

@@ -63,7 +63,7 @@ body {
 
 /* Stile per il pulsante "Aggiungi al carrello" */
 .add-to-cart {
-    background-color: #4CAF50; /* Sfondo verde */
+    background-color: #427b8a; /* Sfondo verde */
     color: white; /* Testo bianco */
     padding: 10px 20px; /* Padding interno */
     border: none; /* Nessun bordo */
@@ -73,7 +73,7 @@ body {
 
 /* Stile per il pulsante "Aggiungi al carrello" quando è in hover */
 .add-to-cart:hover {
-    background-color: #45a049; /* Sfondo verde più scuro */
+    background-color: #356876; /* Sfondo verde più scuro */
 }
 
 /* Stile per i punti Effe */
@@ -96,7 +96,7 @@ body {
 
 /* Stile per i link di navigazione */
 .nav-tabs {
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex; /* Disposizione dei link in linea */
     justify-content: flex-start; /* Allineamento a sinistra */
     margin-bottom: 20px; /* Spazio sotto i link */
