@@ -16,7 +16,7 @@ public class RigaOrdineDAO {
     public void doSave(RigaOrdine rigaOrdine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO rigaCarrello (idOrdine, isbn, prezzoUnitario, quantita) VALUES(?,?,?, ?)");
+                    "INSERT INTO rigaOrdine (idOrdine, isbn, prezzoUnitario, quantita) VALUES(?,?,?, ?)");
             ps.setString(1, rigaOrdine.getIdCarrello());
             ps.setString(2, rigaOrdine.getLibro().getIsbn());
             ps.setDouble(3, rigaOrdine.getPrezzoUnitario());

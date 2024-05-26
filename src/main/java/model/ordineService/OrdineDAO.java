@@ -30,6 +30,11 @@ public class OrdineDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        //aggiunto questo
+        RigaOrdineDAO rigaService=new RigaOrdineDAO();
+        for(RigaOrdine riga: ordine.getRigheOrdine()){
+            rigaService.doSave(riga);
+        }
     }
     public Ordine doRetrieveById(String idOrdine) {
         try (Connection con = ConPool.getConnection()) {
@@ -39,6 +44,8 @@ public class OrdineDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Ordine p = new Ordine();
+                //aggiunto questo
+                RigaOrdineDAO rigaService=new RigaOrdineDAO();
                 p.setIdOrdine(rs.getString(1));
                 p.setCosto(rs.getDouble(2));
                 p.setIndirizzoSpedizione(rs.getString(3));
@@ -58,6 +65,8 @@ public class OrdineDAO {
                 p.setStato(rs.getString(9));
                 p.setMatricola(rs.getString(10));
                 p.setEmail(rs.getString(11));
+                //aggiunto questo
+                p.setRigheOrdine(rigaService.doRetrivedByOrdine(idOrdine));
 
                 return p;
             }
@@ -106,6 +115,21 @@ public class OrdineDAO {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM ordine WHERE email=?");
             ps.setString(1, email);
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("DELETE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //aggiunto questo
+    public void deleteOrdine(String idOrdine){
+        RigaOrdineDAO service = new RigaOrdineDAO();
+        service.deleteRigaOrdineByIdOrdine(idOrdine);
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("DELETE FROM Ordine WHERE idOrdine=?");
+            ps.setString(1, idOrdine);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
