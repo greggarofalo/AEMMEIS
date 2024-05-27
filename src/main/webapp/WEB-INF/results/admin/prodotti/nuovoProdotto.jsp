@@ -9,10 +9,11 @@
 <html>
 <head>
     <title>Inserisci Libro</title>
+    <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
 </head>
 <body>
-<fieldset>
-    <legend><h3 style="color: #3a6977">Nuovo Libro</h3></legend>
+<div class="form">
+    <h3>Nuovo Libro</h3>
     <form action="insert-libro">
         <label for="titolo">Titolo</label>
         <input type="text" id="titolo" name="titolo"><br><br>
@@ -29,10 +30,10 @@
         <label for="trama">Trama</label>
         <textarea id="trama" name="trama"> </textarea><br><br>
         <label for="immagine">Immagine</label>
-        <input type="text" id="immagine" name="immagine"><br><br>
+        <input type="text" id="immagine" name="immagine"><br>
         <input type="submit" value="Inserisci">
     </form>
-</fieldset>
+</div>
 
 </body>
 </html>

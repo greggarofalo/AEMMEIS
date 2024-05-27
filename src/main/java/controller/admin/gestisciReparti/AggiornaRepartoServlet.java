@@ -17,14 +17,12 @@ import java.io.IOException;
 public class AggiornaRepartoServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             int id= Integer.parseInt(request.getParameter("idReparto"));
-            String nome=request.getParameter("nome");
             String descrizione=request.getParameter("descrizione");
             String immagine=request.getParameter("immagine");
 
             RepartoDAO repartoService = new RepartoDAO();
             Reparto reparto= new Reparto();
             reparto.setIdReparto(id);
-            reparto.setNome(nome);
             reparto.setDescrizione(descrizione);
             reparto.setImmagine(immagine);
 

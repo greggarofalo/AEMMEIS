@@ -19,18 +19,6 @@
             margin-top: 30px; /* Aggiungi spazio sopra il titolo */
         }
 
-        /* Stile del link per aggiungere un nuovo reparto */
-        a {
-            margin: 20px;
-            padding: 20px;
-            color: #000000; /* Colore del testo blu */
-            text-decoration: none; /* Rimuovi la sottolineatura */
-        }
-
-        a:hover{
-            color: #3a6977;
-        }
-
         /* Contenitore principale dei reparti */
         .reparto-container {
             width: 80%; /* Larghezza del 90% del contenitore genitore */
@@ -38,16 +26,18 @@
             margin: 50px;
         }
 
+        /* Contenitore per ogni reparto */
         .reparto {
             display: flex;
             justify-content: space-between; /* Distribuisce lo spazio in modo uniforme */
             align-items: flex-start; /* Allinea gli elementi in alto */
             gap: 50px;/* spazio fra i contenitori sulla stessa riga */
+            border-top: 1px solid #ddd;
         }
 
         /* Stile dei pulsanti */
         input[type="submit"] {
-            background-color: #3a6977;
+            background-color: #427b8a;
             color: #fff;
             font-size: 16px;
             border: none; /* Rimuove il contorno */
@@ -57,11 +47,19 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #466871;
+            background-color: #356876;
+        }
+
+        .elimina-reparto input[type="submit"]:hover {
+            background-color: #ed0d0d;
         }
 
         .libri {
             flex: 1;
+        }
+
+        .nuovo-reparto{
+            margin: 50px;
         }
 
         .modificaReparto {
@@ -79,48 +77,36 @@
             box-sizing: border-box; /* Include padding e bordo nella larghezza */
             margin-bottom: 10px; /* Margine inferiore */
         }
-
-        /* Stile del pulsante di invio del form */
-        .reparto-form input[type="submit"] {
-            background-color: #3a6977; /* Colore di sfondo blu */
-            color: #fff; /* Colore del testo bianco */
-            border: none; /* Nessun bordo */
-            cursor: pointer; /* Cambia il cursore al passaggio */
-            font-size: 16px; /* Dimensione del testo */
-            padding: 12px 20px; /* Spazio interno */
-            border-radius: 4px; /* Bordo arrotondato */
-            text-transform: uppercase; /* Trasforma il testo in maiuscolo */
-        }
-
-        .reparto-form input[type="submit"]:hover {
-            background-color: #a1aeb4; /* Colore di sfondo blu scuro al passaggio */
-        }
     </style>
 </head>
 
 <body>
 <h1>Lista dei reparti</h1>
 
-<a href="nuovo-reparto">Aggiungi un nuovo reparto</a><br><br>
+<div class="nuovo-reparto">
+    <form action="nuovo-reparto">
+        <input type="hidden" name="idReparto" value="${reparto.idReparto}">
+        <input type="submit" value="Nuovo Reparto">
+    </form>
+</div>
 
 <c:forEach items="${reparti}" var="reparto">
     <div class="reparto-container">
-        <h3>${reparto.idReparto}: ${reparto.nome}</h3>
+
         <div class="reparto">
             <div class="libri">
+                <h3>${reparto.idReparto}: ${reparto.nome}</h3><br>
                 <c:forEach items="${reparto.libri}" var="libro">
-                    <ul>
-                        <li class="repartoItem">
-                            <span><b>${libro.titolo}</b>,  ISBN: ${libro.isbn},  ANNO PUBBLICAZIONE: ${libro.annoPubblicazioni}</span>
-                            <div class="buttons">
-                                <form action="modifica-reparto">
-                                    <input type="hidden" name="idReparto" value="${reparto.idReparto}">
-                                    <input type="hidden" name="isbn" value="${libro.isbn}">
-                                    <input type="submit" value="Elimina">
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="repartoItem">
+                        <b>TITOLO: </b>${libro.titolo},<b>  ISBN:</b> ${libro.isbn},<b> ANNO PUBBLICAZIONE:</b> ${libro.annoPubblicazioni}
+                        <div class="buttons">
+                            <form action="modifica-reparto">
+                                <input type="hidden" name="idReparto" value="${reparto.idReparto}">
+                                <input type="hidden" name="isbn" value="${libro.isbn}">
+                                <input type="submit" value="Elimina">
+                            </form>
+                        </div>
+                    </div>
                 </c:forEach>
                 <div class="aggiungi-libro">
                     <form action="aggiungi-libro">
@@ -131,11 +117,10 @@
             </div>
 
             <div class="modificaReparto">
+                <br><br><br>
                 <div class="aggiorna-reparto">
                     <form action="aggiorna-reparto">
                         <input type="hidden" name="idReparto" value="${reparto.idReparto}">
-                        <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" value="${reparto.nome}"><br><br>
                         <label for="descrizione">Descrizione</label>
                         <textarea id="descrizione" name="descrizione" rows="4" cols="50">${reparto.descrizione}</textarea><br><br>
                         <label for="immagine">Immagine</label>

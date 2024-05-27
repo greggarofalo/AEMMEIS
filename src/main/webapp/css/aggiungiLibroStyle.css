@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    flex:1;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Stile dei pulsanti */
+button{
+    float: right;
+    background-color: #427b8a;
+    color: #fff;
+    font-size: 16px;
+    border: none; /* Rimuove il contorno */
+    padding: 6px;
+    border-radius: 10px; /* Bordo arrotondato */
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #356876;
+}

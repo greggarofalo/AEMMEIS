@@ -9,22 +9,23 @@
 <html>
 <head>
     <title>Aggiungi la nuova sede</title>
+    <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
 </head>
 <body>
-<fieldset>
-    <legend><h3 style="color: #3a6977">Nuova Sede</h3></legend>
+<div class="form">
+    <h3>Nuova Sede</h3>
     <form action="aggiungi-sede">
         <label for="citta">Città</label>
-        <textarea id="citta" name="citta"> </textarea><br><br>
+        <input type="text" id="citta" name="citta"> <br><br>
         <label for="via">Via</label>
-        <textarea id="via" name="via"> </textarea><br><br>
+        <input type="text" id="via" name="via"> <br><br>
         <label for="civico">Civico</label>
-        <textarea id="civico" name="civico"> </textarea><br><br>
+        <input type="text" id="civico" name="civico"> <br><br>
         <label for="cap">Cap</label>
-        <textarea id="cap" name="cap"> </textarea><br><br>
+        <input type="text" id="cap" name="cap"><br>
         <input type="submit" value="Aggiungi">
     </form>
-</fieldset>
+</div>
 </body>
 </html>
 

@@ -10,46 +10,113 @@
 <head>
     <title>Login</title>
     <style>
-        p  {
-            color: dimgrey;
-            text-align: center;
-        }
-        .block {
-            display: inline-block; /* Imposta le immagini come blocchi inline */
-            margin-right: 100px;
-            margin-left: 100px;
+        /* Stile per il contenitore generale */
+        .container {
+            display: flex; /* Utilizza Flexbox per disporre i contenitori sulla stessa riga */
+            justify-content: center; /* Centra il contenuto orizzontalmente */
+            align-items: center; /* Centra il contenuto verticalmente */
+            padding: 20px; /* Aggiunge spazio intorno al contenitore */
+            gap: 50px
         }
 
-        fieldset {
-            width: 400px; /* Imposta la larghezza del fieldset */
-            padding: 10px; /* Aggiunge spazio interno al fieldset */
-            border: 2px solid #000; /* Aggiunge un bordo al fieldset */
+        .accedi{
+            width: 350px;
+        }
+
+        .registrati{
+            display: flex; /* Utilizza Flexbox per centrare il contenuto */
+            flex-direction: column; /* Dispone il contenuto in colonna */
+            justify-content: center; /* Centra il contenuto verticalmente */
+            align-items: center; /* Centra il contenuto orizzontalmente */
+            text-align: center;
+        }
+
+        /* Stile per ogni blocco */
+        .block {
+            align-items: center;
+            background-color: #f9f9f9; /* Colore di sfondo leggero */
+            padding: 20px; /* Aggiunge spazio interno */
+            border: 1px solid #ddd; /* Bordo sottile */
+            border-radius: 10px; /* Angoli arrotondati */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+        }
+
+        /* Stile per il titolo delle sezioni */
+        h3 {
+            color: #3a6977; /* Colore del testo del titolo */
+            font-family: 'Arial', sans-serif; /* Font del titolo */
+            margin-top: 0; /* Rimuove il margine superiore */
+        }
+
+        /* Stile per le etichette dei campi */
+        label {
+            display: block; /* Mostra le etichette come blocchi */
+            margin-bottom: 5px; /* Spazio sotto le etichette */
+            color: #333; /* Colore del testo delle etichette */
+            font-family: 'Arial', sans-serif; /* Font delle etichette */
+        }
+
+        /* Stile per i campi di input */
+        input[type="email"],
+        input[type="password"] {
+            width: 80%;
+            padding: 10px; /* Padding interno */
+            margin-bottom: 15px; /* Spazio sotto i campi */
+            border: 1px solid #ccc; /* Bordo dei campi */
+            border-radius: 5px; /* Bordo arrotondato */
+            font-family: 'Arial', sans-serif; /* Font dei campi */
+        }
+
+        /* Stile dei pulsanti */
+        input[type="submit"] {
+            background-color: #427b8a;
+            color: #fff;
+            font-size: 16px;
+            border: none; /* Rimuove il contorno */
+            padding: 6px;
+            border-radius: 10px; /* Bordo arrotondato */
+            margin-top: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #356876;
+        }
+
+        /* Stile per i paragrafi */
+        p {
+            color: #333; /* Colore del testo */
+            font-family: 'Arial', sans-serif; /* Font del testo */
+            line-height: 1.6; /* Altezza della linea */
         }
     </style>
 </head>
 <body>
-<div>
-    <fieldset class="block">
-        <legend><h3 style="color: #3a6977">Accedi</h3></legend>
-        <form action="login-servlet">
-            <label for="email">e-mail</label>
-            <input type="email" id="email" name="email"><br><br>
-            <label for="pw">password</label>
-            <input type="password" id="pw" name="pw"><br><br>
-            <input type="submit" value="Accedi" align="right">
-        </form>
-    </fieldset>
+<div class="container">
+    <div class="block">
+          <div class="accedi">
+              <legend><h3>Accedi</h3></legend>
+              <form action="login-servlet">
+                  <label for="email">e-mail</label>
+                  <input type="email" id="email" name="email">
+                  <label for="pw">password</label>
+                  <input type="password" id="pw" name="pw"><br>
+                  <input type="submit" value="Accedi">
+              </form>
+          </div>
+    </div>
 
-    <form action="registrazione.html" class="block">
-        <p>
-            <h3 style="color: #3a6977">Non sei ancora registrato?</h3><br>
-            Registrati inserendo i tuoi dati.<br>
-            La registrazione è semplice e gratuita.<br><br>
-            <input type="submit" value="Registrati">
-
-        </p>
-    </form>
+    <div class="block">
+       <div class="registrati">
+           <h3>Non sei ancora registrato?</h3>
+           <p>
+               Registrati inserendo i tuoi dati.<br>
+               La registrazione è semplice e gratuita.
+           </p>
+           <form action="registrazione.html">
+               <input type="submit" value="Registrati">
+           </form>
+       </div>
+    </div>
 </div>
-
 </body>
 </html>

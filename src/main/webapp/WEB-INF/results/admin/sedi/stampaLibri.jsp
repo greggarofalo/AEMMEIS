@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Scegli i libri</title>
+    <link rel="stylesheet" type="text/css" href="./css/aggiungiLibroStyle.css">
 </head>
 <body>
 <h1>Scegli i libri da aggiungere alla sede ${sede.idSede}: ${sede.citta} (${sede.via}, ${sede.civico})</h1>
