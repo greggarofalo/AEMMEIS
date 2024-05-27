@@ -136,5 +136,20 @@ public class OrdineDAO {
             throw new RuntimeException(e);
         }
     }
+    public List<String> doRetrivedAllByIdOrdini(){
+        List<String> idOrdini = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM ordine");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idOrdini.add(rs.getString(1));
+            }
+            return idOrdini;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
 }

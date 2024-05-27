@@ -17,7 +17,7 @@ public class RigaOrdineDAO {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO rigaOrdine (idOrdine, isbn, prezzoUnitario, quantita) VALUES(?,?,?, ?)");
-            ps.setString(1, rigaOrdine.getIdCarrello());
+            ps.setString(1, rigaOrdine.getIdOrdine());
             ps.setString(2, rigaOrdine.getLibro().getIsbn());
             ps.setDouble(3, rigaOrdine.getPrezzoUnitario());
             ps.setInt(4, rigaOrdine.getQuantita());
@@ -38,7 +38,7 @@ public class RigaOrdineDAO {
             while (rs.next()) {
                 RigaOrdine p = new RigaOrdine();
                 LibroDAO libroService= new LibroDAO();
-                p.setIdCarrello(rs.getString(1));
+                p.setIdOrdine(rs.getString(1));
                 String isbn=rs.getString(2);
                 p.setLibro(libroService.doRetrieveById(isbn));
                 //p.setIsbn(rs.getString(2));
@@ -62,7 +62,7 @@ public class RigaOrdineDAO {
             if (rs.next()) {
                 RigaOrdine p = new RigaOrdine();
                 LibroDAO libroService= new LibroDAO();
-                p.setIdCarrello(rs.getString(1));
+                p.setIdOrdine(rs.getString(1));
                 p.setLibro(libroService.doRetrieveById(isbn));
                 //p.setIsbn(rs.getString(2));
                 p.setPrezzoUnitario(rs.getDouble(3));

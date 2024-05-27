@@ -16,7 +16,7 @@ public class CarrelloServlet extends HttpServlet {
         //da cambiare tutto
         //potrebbe non servire
         HttpSession session = request.getSession();
-      //  Carrello carrello = (Carrello) session.getAttribute("carrello");
+        //Carrello carrello = (Carrello) session.getAttribute("carrello");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/stampaCarrello.jsp");
         dispatcher.forward(request, response);
     }

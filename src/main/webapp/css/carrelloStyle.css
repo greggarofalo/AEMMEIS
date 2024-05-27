@@ -115,7 +115,7 @@ body {
     gap: 10px;
 }
 
-.cart-actions button {
+.cart-actions .button{
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
@@ -123,6 +123,6 @@ body {
     color: white;
     border: none; /* Rimuove il bordo */
 }
-.cart-actions button:hover {
+.cart-actions .button:hover {
     background-color: #356876; /* Sfondo verde più scuro */
 }

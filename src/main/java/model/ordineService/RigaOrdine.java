@@ -3,18 +3,18 @@ package model.ordineService;
 import model.libroService.Libro;
 
 public class RigaOrdine {
-    private String idCarrello;
+    private String idOrdine;
     private Libro libro;
     //private String isbn;
     private double prezzoUnitario;
     private int quantita;
 
-    public String getIdCarrello() {
-        return idCarrello;
+    public String getIdOrdine() {
+        return idOrdine;
     }
 
-    public void setIdCarrello(String idCarrello) {
-        this.idCarrello = idCarrello;
+    public void setIdOrdine(String idOrdine) {
+        this.idOrdine = idOrdine;
     }
 
     public Libro getLibro() {

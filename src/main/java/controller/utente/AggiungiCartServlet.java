@@ -28,8 +28,12 @@ public class AggiungiCartServlet extends HttpServlet {
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 
         String address="index.html";
-        if(source.equals("mostraLibro"))
-            address="mostra-libro";
+        if(source!= null) { //ho aggiunto il controllo per source potrebbe essere null
+            if (source.equals("mostraLibro"))
+                address = "mostra-libro";
+            else if (source.equals("riepilogoOrdine"))
+                address = "riepilogo-ordine";
+        }
 
         LibroDAO libroService = new LibroDAO();
         Libro libro = libroService.doRetrieveById(isbn);
@@ -37,11 +41,13 @@ public class AggiungiCartServlet extends HttpServlet {
         List<RigaCarrello> righeCarrello = carrello.getRigheCarrello();
 
         boolean flag = true; // libro non presente
-        for (int i = 0; i < righeCarrello.size() && flag; i++) {
-            Libro libroRiga = righeCarrello.get(i).getLibro(); // libro della rigaCarrello
-            if (libroRiga.equals(libro)) {
-                righeCarrello.get(i).setQuantita((righeCarrello.get(i).getQuantita()) + 1); // libro presente, incremento la quantità
-                flag = false; // libro presente
+        if(!righeCarrello.isEmpty()) {
+            for (int i = 0; i < righeCarrello.size() && flag; i++) {
+                Libro libroRiga = righeCarrello.get(i).getLibro(); // libro della rigaCarrello
+                if (libroRiga.equals(libro)) {
+                    righeCarrello.get(i).setQuantita((righeCarrello.get(i).getQuantita()) + 1); // libro presente, incremento la quantità
+                    flag = false; // libro presente
+                }
             }
         }
         if (flag) { // se il libro non è presente, lo aggiungo
