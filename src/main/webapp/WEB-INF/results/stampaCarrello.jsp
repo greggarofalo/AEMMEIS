@@ -12,9 +12,13 @@
 <html>
 <head>
     <title>Stampa Carrello</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
+    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/carrelloStyle.css">
 </head>
 <body>
+<%@include file="header.jsp"%>
     <div class="book-list">
         <%
             Carrello cart = (Carrello) session.getAttribute("carrello");
@@ -90,12 +94,13 @@
             Punti Aemme: <span id="aemme-points">0</span>
         </div>
         <div class="cart-actions">
-            <button onclick="saveCart()" class="button">Chiudi carrello</button>
-
-            </form>
             <button type="submit" form="form" class="button">Acquista ora </button>
+            </form>
+
+            <button onclick="saveCart()" class="button">Chiudi carrello</button>
         </div>
     </div>
+<%@include file="footer.jsp"%>
     <script>
         function addToFavorites(isbn) {
             // Crea una nuova istanza di XMLHttpRequest
@@ -205,7 +210,6 @@
 
         function closeCart() {
                 window.location.href = "index.html";
-
         }
 
         // Funzione per aggiornare il totale del carrello e i punti Effe

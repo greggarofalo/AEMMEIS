@@ -23,6 +23,7 @@ footer{
 .col{
     flex-basis: 25%;
     padding: 10px;
+    box-sizing: border-box;
 }
 
 .col:nth-child(2), .col:nth-child(3), .col:nth-child(4){
@@ -54,6 +55,7 @@ footer{
     width: fit-content;
     border-bottom: 1px solid #ccc;
     margin: 20px 0;
+    color:white;
 }
 
 .footer-social .social-icons{
@@ -70,4 +72,30 @@ footer{
     text-align: center;
     margin-right: 15px;
     cursor: pointer;
+}
+
+/* Stili responsivi */
+@media (max-width: 576px) {  /* Media query per schermi con larghezza massima di 576px */
+    .row {
+        flex-direction: column;  /* Dispone i blocchi figli in una colonna invece che in una riga */
+        align-items: center;     /* Allinea gli elementi al centro della colonna */
+    }
+
+    .col {
+        flex-basis: 100%;        /* Imposta la larghezza delle colonne al 100% del contenitore */
+        margin-bottom: 20px;     /* Aggiunge uno spazio inferiore tra le colonne */
+    }
+
+    .col:nth-child(2), .col:nth-child(3), .col:nth-child(4) {
+        flex-basis: 100%;        /* Imposta la larghezza delle colonne specifiche al 100% del contenitore */
+    }
+
+    .footer-social .social-icons {
+        display: flex;           /* Imposta il layout dei social icons su flexbox */
+        justify-content: center; /* Centra i social icons orizzontalmente */
+    }
+
+    .footer-social .image {
+        margin-right: 5px;       /* Riduce il margine destro delle icone per ridurre lo spazio tra di loro */
+    }
 }

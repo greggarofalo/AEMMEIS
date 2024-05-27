@@ -9,9 +9,9 @@
 
         <div class="col">
             <h3>Contact us</h3>
-            <p class="email-id">a.raia7@studenti.unisa.it</p>
-            <p class="email-id">m.delucia18@studenti.unisa.it</p>
-            <p class="email-id">c.stefanile1@studenti.unisa.it</p>
+            <a href="mailto:a.raia7@studenti.unisa.it" class="email-id">a.raia7@studenti.unisa.it</a>
+            <a href="mailto:m.delucia18@studenti.unisa.it" class="email-id">m.delucia18@studenti.unisa.it</a>
+            <a href="mailto:c.stefanile1@studenti.unisa.it" class="email-id">c.stefanile1@studenti.unisa.it</a>
             <h4>+39 - 3347628932</h4>
             <h4>+39 - 3312055191</h4>
             <h4>+39 - 3936504913</h4>

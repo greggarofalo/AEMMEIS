@@ -88,9 +88,25 @@
             font-family: 'Arial', sans-serif; /* Font del testo */
             line-height: 1.6; /* Altezza della linea */
         }
+
+        /* Stili responsivi */
+        @media (max-width: 576px) {
+            .container {
+                flex-direction: column; /* Disponi i blocchi in colonna */
+                align-items: center; /* Allinea i blocchi al centro orizzontalmente */
+            }
+
+            .block {
+                width: 80%; /* Imposta la larghezza al 100% */
+                margin-bottom: 10px; /* Aggiunge spazio sotto i blocchi */
+            }
+        }
     </style>
 </head>
 <body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <div class="container">
     <div class="block">
           <div class="accedi">

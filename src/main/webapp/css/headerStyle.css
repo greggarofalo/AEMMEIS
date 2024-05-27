@@ -16,12 +16,20 @@
     gap: 10px; /* Spazio tra le icone */
 }
 
+.icons-and-menu {
+    display: flex;
+    align-items: center; /* Allinea il pulsante del menu e le icone sulla stessa linea */
+}
+
+
+
 .search-bar{
     margin-top: 10px;
     margin-right: 20px;
     background-color: lightgray;
     border-radius: 40px;
     padding: 13px 100px;
+    margin-bottom: 20px;
 }
 .search-bar input[type="search"]{
     width: 400px;
@@ -67,6 +75,79 @@
 
 .active {
     background-color: #04AA6D;
+}
+
+.menu-toggle {
+    background: transparent; /* Imposta lo sfondo trasparente */
+    border: none; /* Rimuove eventuali bordi */
+    cursor: pointer; /* Cambia il cursore quando si passa sopra */
+}
+
+
+/* Media Queries per rendere l'header responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Cambia la direzione degli elementi a colonna */
+        align-items: flex-start; /* Allinea gli elementi all'inizio */
+    }
+
+    .search-bar {
+        flex-grow: 1;
+        width: 100%; /* La barra di ricerca occupa tutta la larghezza disponibile */
+        margin-bottom: 10px; /* Spazio sotto la barra di ricerca */
+    }
+
+    .search-bar input[type="search"] {
+        width: 100%; /* La barra di ricerca occupa tutta la larghezza */
+        font-size: 16px; /* Riduce la dimensione del font */
+    }
+
+    .icons-and-menu {
+        width: 100%;
+        justify-content: space-between; /* Distribuisce spazio tra elementi */
+    }
+
+    .icons {
+        margin-left: auto; /* Sposta le icone a destra */
+        gap: 10px; /* Spazio tra le icone */
+    }
+
+    ul {
+        display: none; /* Nasconde il menu di navigazione */
+        width: 100%;
+        flex-direction: column;
+    }
+
+    ul.show {
+        display: flex; /* Mostra il menu di navigazione quando il pulsante è cliccato */
+    }
+
+    ul li {
+        width: 100%;
+        text-align: left;
+    }
+
+    .header li {
+        float: none; /* Rimuove il galleggiamento per gli elementi della lista */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-bar input[type="search"] {
+        font-size: 14px; /* Riduce ulteriormente la dimensione del font */
+    }
+
+    .icons a img {
+        width: 20px; /* Riduce la dimensione delle icone */
+        height: 20px; /* Riduce la dimensione delle icone */
+    }
+}
+
+/* Nascondi il pulsante del menu a discesa su schermi grandi */
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
 }
 
 

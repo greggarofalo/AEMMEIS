@@ -126,3 +126,59 @@ body {
 .cart-actions .button:hover {
     background-color: #356876; /* Sfondo verde più scuro */
 }
+
+/* Media Queries per rendere il layout responsive */
+
+
+
+/* Media Queries per rendere il layout responsive */
+
+/* Per schermi con larghezza massima di 768px */
+@media (max-width: 768px) {
+    /* Regole per gli elementi all'interno di .book-item quando la larghezza dello schermo è inferiore a 768px */
+    .book-info {
+        flex-direction: column; /* Disponi gli elementi in colonna */
+        align-items: center; /* Allineamento orizzontale al centro */
+        text-align: center; /* Allineamento del testo al centro */
+    }
+
+    .book-info input[type="checkbox"] {
+        margin-bottom: 10px; /* Aggiunge spazio sotto il checkbox */
+    }
+
+    .book-info .book-image {
+        margin-right: 0; /* Rimuove il margine destro dell'immagine */
+    }
+}
+
+/* Per schermi con larghezza massima di 576px */
+@media (max-width: 576px) {
+    /* Regole aggiuntive per dispositivi con larghezza massima di 576px */
+    .book-info input[type="checkbox"] {
+        margin-bottom: 0; /* Rimuove lo spazio inferiore aggiunto al checkbox */
+        margin-right: 10px; /* Aggiunge spazio a destra al checkbox */
+    }
+
+    .book-info .book-image {
+        max-width: 80px; /* Riduce la larghezza massima dell'immagine */
+    }
+
+    .cart-summary {
+        flex-direction: column; /* Disposizione degli elementi in colonna */
+        align-items: center; /* Allineamento al centro */
+    }
+
+
+    .cart-actions {
+        flex-direction: row; /* Disposizione degli elementi in riga */
+        gap: 10px; /* Aggiunge spazio tra gli elementi */
+        justify-content: center; /* Allineamento al centro */
+    }
+
+    .cart-actions .button {
+        width: auto; /* Imposta la larghezza automatica*/
+    }
+
+}
+
+

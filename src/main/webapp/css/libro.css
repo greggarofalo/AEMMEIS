@@ -150,6 +150,8 @@ body {
 .book-description-details ul {
     list-style-type: none; /* Rimuove i punti elenco */
     padding: 0; /* Rimuove il padding */
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
 /* Stile per ogni elemento della lista dei dettagli */
@@ -170,3 +172,5 @@ body {
 .book-description-details ul li span.value {
     color: #888; /* Colore grigio per i valori */
 }
+
+/* Stile per i dettagli del libro quando lo schermo è ridotto */

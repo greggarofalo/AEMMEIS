@@ -10,9 +10,13 @@
 <html>
 <head>
     <title>WishList</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
+    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/carrelloStyle.css">
 </head>
 <body>
+<%@include file="header.jsp"%>
 <h1>Wish List</h1>
 <div class="book-list">
 <c:forEach items="${wishList.libri}" var="libro">
@@ -40,6 +44,7 @@
         </div>
     </div>
 </div>
+<%@include file="footer.jsp"%>
 
 </body>
 </html>
