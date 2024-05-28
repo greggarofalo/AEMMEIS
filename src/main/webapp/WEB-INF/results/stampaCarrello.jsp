@@ -25,9 +25,7 @@
             if(cart.getRigheCarrello()!=null){
                 for(RigaCarrello riga : cart.getRigheCarrello()){
                     Libro libro = riga.getLibro();
-        %><form action="do-ordine" id="form">
-            <div class="book-item">
-                <input type="checkbox" name="checkbox" value="<%=libro.getIsbn()%>">
+        %><div class="book-item">
                 <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
                     <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
                 </a>
@@ -94,9 +92,9 @@
             Punti Aemme: <span id="aemme-points">0</span>
         </div>
         <div class="cart-actions">
+            <form action="ordine-supporto" id="form">
             <button type="submit" form="form" class="button">Acquista ora </button>
             </form>
-
             <button onclick="saveCart()" class="button">Chiudi carrello</button>
         </div>
     </div>

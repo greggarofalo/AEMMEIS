@@ -29,10 +29,10 @@ import java.util.Random;
 public class OrdineServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String[] libri = request.getParameterValues("checkbox");
         Carrello carrello = (Carrello) session.getAttribute("carrello");
         Utente utente = (Utente) session.getAttribute("utente");
         List<RigaCarrello> righeCarrello = carrello.getRigheCarrello();
+        List<String> libri = new ArrayList<>();
 
         if(libri != null){
             OrdineDAO ordineDAO = new OrdineDAO();

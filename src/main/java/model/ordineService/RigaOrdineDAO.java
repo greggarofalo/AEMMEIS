@@ -92,7 +92,7 @@ public class RigaOrdineDAO {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM rigaOrdine WHERE idOrdine=?");
             ps.setString(1, idOrdine);
-            if(ps.executeUpdate() != 1)
+            if(ps.executeUpdate() < 1)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -90,7 +90,8 @@ public class RigaCarrelloDAO {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM rigaCarrello WHERE idCarrello=?");
             ps.setString(1, idCarrello);
-                throw new RuntimeException("DELETE error.");
+            if(ps.executeUpdate() < 1)
+                throw new RuntimeException("UPDATE error.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
