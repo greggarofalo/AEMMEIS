@@ -4,8 +4,9 @@
     /*grid-template-columns: repeat(auto-fill, 300px); /*Colonne con larghezza fissa di 300px */
     gap: 50px; /* Spazio tra i libri */
     padding: 20px;
-    margin-left:80px ;
     justify-content: center; /* Centra la griglia orizzontalmente */
+    margin-left: 20px;
+    margin-right: 20px;
 
 }
 
@@ -33,52 +34,73 @@
 }
 
 /* Media Queries per schermi più piccoli */
+@media (max-width: 1200px) {
+    .griglia {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Colonne con larghezza minima di 220px */
+    }
+    .img {
+        width: 220px;
+        height: 290px;
+    }
+}
+
 @media (max-width: 1024px) {
     .griglia {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonne con larghezza minima di 200px */
     }
     .img {
-        width: 200px; /* Riduci la larghezza dell'immagine */
-        height: 270px; /* Riduci l'altezza dell'immagine */
+        width: 200px;
+        height: 270px;
+    }
+}
+
+@media (max-width: 900px) {
+    .griglia {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Colonne con larghezza minima di 180px */
+    }
+    .img {
+        width: 180px;
+        height: 240px;
     }
 }
 
 @media (max-width: 768px) {
     .griglia {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Colonne con larghezza minima di 150px */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Colonne con larghezza minima di 160px */
     }
     .img {
-        width: 150px; /* Riduci ulteriormente la larghezza dell'immagine */
-        height: 210px; /* Riduci ulteriormente l'altezza dell'immagine */
+        width: 160px;
+        height: 210px;
+    }
+}
+
+@media (max-width: 600px) {
+    .griglia {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Colonne con larghezza minima di 140px */
+    }
+    .img {
+        width: 140px;
+        height: 190px;
     }
 }
 
 @media (max-width: 480px) {
+    .griglia {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Colonne con larghezza minima di 120px */
+    }
+    .img {
+        width: 120px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 390px) {
     .griglia {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Colonne con larghezza minima di 100px */
         gap: 20px; /* Riduci lo spazio tra i libri */
     }
     .img {
-        width: 100px; /* Riduci ulteriormente la larghezza dell'immagine */
-        height: 140px; /* Riduci ulteriormente l'altezza dell'immagine */
+        width: 100px;
+        height: 140px;
     }
 }
-/*
- Media Queries per schermi più piccoli
-@media (max-width: 1024px) {
-    .item {
-        width: calc(33.33% - 32px);  /*Regola per avere 3 colonne
-    }
-}
-
-@media (max-width: 768px) {
-    .item {
-        width: calc(50% - 32px); /* Regola per avere 2 colonne
-    }
-}
-
-@media (max-width: 480px) {
-    .item {
-        width: calc(100% - 32px); /* Regola per avere 1 colonna
-    }
-}*/

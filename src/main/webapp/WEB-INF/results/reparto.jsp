@@ -23,9 +23,9 @@
      <% WishList wishList = (WishList) session.getAttribute("wishList");
        Reparto reparto = (Reparto) request.getAttribute("reparto");
        List<Reparto> reparti = (List<Reparto>) session.getAttribute("reparti");
-     int i = 0;%>
+      int i = 0;%>
      <div class="reparto">
-       <img class="imgReparto" src="${reparto.immagine}">
+       <img class="imgReparto" src="<%=reparto.getImmagine()%>">
        <div class="dropdown-container">
          <form id="repartoForm" action="mostra-reparto" method="GET">
            <select id="repartoSelect" class="dropdown-menu" name="id" onchange="document.getElementById('repartoForm').submit()">

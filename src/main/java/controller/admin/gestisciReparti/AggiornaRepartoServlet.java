@@ -3,6 +3,7 @@ package controller.admin.gestisciReparti;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.libroService.Libro;
@@ -14,7 +15,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.io.IOException;
 
 @WebServlet("/aggiorna-reparto")
-public class AggiornaRepartoServlet {
+public class AggiornaRepartoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             int id= Integer.parseInt(request.getParameter("idReparto"));
             String descrizione=request.getParameter("descrizione");
@@ -27,7 +28,8 @@ public class AggiornaRepartoServlet {
             reparto.setImmagine(immagine);
 
             repartoService.updateReparto(reparto);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("modifica-libro");
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/reparti/gestisciReparti.jsp");
             dispatcher.forward(request, response);
     }
 }
