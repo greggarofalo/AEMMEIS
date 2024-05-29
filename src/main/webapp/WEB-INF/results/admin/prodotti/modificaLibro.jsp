@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Modifica Libro</title>
-    <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/formStyle2.css">
 </head>
 <body>
 

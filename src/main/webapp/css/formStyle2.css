@@ -4,18 +4,17 @@
     justify-content: center; /* Centra il contenuto orizzontalmente */
     align-items: flex-start; /* Centra il contenuto verticalmente */
     padding: 20px; /* Aggiunge spazio intorno al contenitore */
-    gap: 50px
+    gap: 70px
 }
 
 .form {
     align-content: start;
-    margin: 50px;
     border: 1px solid #ddd;
     padding: 20px; /* Aumentato il padding per più spazio interno */
     border-radius: 10px; /* Bordo arrotondato per un aspetto più morbido */
     background-color: #f9f9f9; /* Colore di sfondo leggermente grigio */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunta di un'ombra per effetto di profondità */
-    width: 260px; /* Limita la larghezza massima del form */
+    width: 300px; /* la larghezza del form */
 }
 
 p{
@@ -53,7 +52,7 @@ p{
 /* Stile per i campi di input e textarea */
 .form input[type="text"],
 .form textarea {
-    width: 80%; /* Larghezza del 100% meno il padding e il bordo */
+    width: 85%; /* Larghezza del 100% meno il padding e il bordo */
     padding: 10px; /* Padding interno per i campi */
     margin-bottom: 15px; /* Spazio sotto i campi */
     border: 1px solid #ccc; /* Bordo dei campi */

@@ -9,20 +9,22 @@
 <html>
 <head>
     <title>Aggiungi il nuovo reparto</title>
-    <link rel="stylesheet" type="text/css" href="./css/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/formStyle2.css">
 </head>
 <body>
-<div class="form">
-    <h3>Nuovo Reparto</h3>
-    <form action="aggiungi-reparto">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome">
-        <label for="descrizione">Descrizione</label>
-        <textarea id="descrizione" name="descrizione"></textarea>
-        <label for="immagine">Immagine</label>
-        <input type="text" id="immagine" name="immagine">
-        <input type="submit" value="Aggiungi">
-    </form>
+<div class="form-conteiner">
+    <div class="form">
+        <h3>Nuovo Reparto</h3>
+        <form action="aggiungi-reparto">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome">
+            <label for="descrizione">Descrizione</label>
+            <textarea id="descrizione" name="descrizione"></textarea>
+            <label for="immagine">Immagine</label>
+            <input type="text" id="immagine" name="immagine">
+            <input type="submit" value="Aggiungi">
+        </form>
+    </div>
 </div>
 </body>
 </html>

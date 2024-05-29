@@ -59,7 +59,7 @@
         /* Stile per i campi di input */
         input[type="email"],
         input[type="password"] {
-            width: 80%;
+            width: 85%;
             padding: 10px; /* Padding interno */
             margin-bottom: 15px; /* Spazio sotto i campi */
             border: 1px solid #ccc; /* Bordo dei campi */
