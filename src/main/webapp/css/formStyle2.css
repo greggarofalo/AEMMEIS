@@ -19,6 +19,7 @@
 
 p{
     font-family: 'Arial', sans-serif; /* Font */
+    font-size: 16px;
 }
 
 /* Stile per l'intestazione del form */
@@ -74,4 +75,23 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #356876;
+}
+
+@media(max-width: 1020px){
+    .form-conteiner {
+        padding: 10px; /* Riduci il padding per adattarsi agli schermi più piccoli */
+        flex-direction: column; /* Disponi i blocchi in colonna */
+        align-items: center; /* Allinea i blocchi al centro orizzontalmente */
+    }
+
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 480px) {
+
+    .form {
+        width: 90%; /* la larghezza del form */
+        padding: 15px; /* Riduzione del padding interno */
+        gap: 40px;
+    }
 }

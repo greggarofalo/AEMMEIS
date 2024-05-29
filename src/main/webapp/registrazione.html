@@ -3,87 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrazione</title>
-    <style>
-        .container{
-            display: flex; /* Utilizza Flexbox per disporre i contenitori sulla stessa riga */
-            justify-content: center; /* Centra il contenuto orizzontalmente */
-            align-items: center; /* Centra il contenuto verticalmente */
-            padding: 20px; /* Aggiunge spazio intorno al contenitore */
-            gap:50px;
-        }
-        .block{
-            align-items: center;
-        }
-
-        h3 {
-            color: #3a6977; /* Colore del testo del titolo */
-            font-family: 'Arial', sans-serif; /* Font del titolo */
-            margin-top: 0; /* Rimuove il margine superiore */
-        }
-
-        form{
-            width: 350px;
-            background-color: #f9f9f9; /* Colore di sfondo leggero */
-            padding: 20px; /* Aggiunge spazio interno */
-            border: 1px solid #ddd; /* Bordo sottile */
-            border-radius: 10px; /* Angoli arrotondati */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
-        }
-
-        /* Stile per le etichette dei campi */
-        label {
-            width: 200px;
-            display: block; /* Mostra le etichette come blocchi */
-            margin-bottom: 5px; /* Spazio sotto le etichette */
-            color: #333; /* Colore del testo delle etichette */
-            font-family: 'Arial', sans-serif; /* Font delle etichette */
-            width: 80%;
-        }
-
-       .checkbox{
-           font-family: 'Arial', sans-serif; /* Font dei campi */
-           display: flex; /* Usa Flexbox per l'allineamento */
-           align-items: center; /* Allinea verticalmente al centro */
-           margin:0px;
-       }
-
-        /* Stile per i campi di input */
-        input[type="email"],
-        input[type="password"],
-        input[type="text"]{
-            width: 85%;
-            padding: 10px; /* Padding interno */
-            margin-bottom: 15px; /* Spazio sotto i campi */
-            border: 1px solid #ccc; /* Bordo dei campi */
-            border-radius: 5px; /* Bordo arrotondato */
-            font-family: 'Arial', sans-serif; /* Font dei campi */
-        }
-
-        /* Stile dei pulsanti */
-        input[type="submit"] {
-            background-color: #427b8a;
-            color: #fff;
-            font-size: 16px;
-            border: none; /* Rimuove il contorno */
-            padding: 6px;
-            border-radius: 10px; /* Bordo arrotondato */
-            margin-top: 5px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #356876;
-        }
-
-        p{
-            text-align: center;
-            line-height: 1.6; /* Altezza della linea */
-        }
-        .add-phone{
-            background: transparent;
-            text-align: right;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./css/registrazioneStyle2.css">
 </head>
 <body>
 <div class="container">
@@ -91,32 +11,29 @@
         <form action="insert-utente">
             <h3>Registrati</h3>
             <label for="nomeUtente">nome utente</label>
-            <input type="text" id="nomeUtente" name="nomeUtente">
+            <input type="text" id="nomeUtente" name="nomeUtente" required>
             <label for="email">e-mail</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" required>
             <label for="pw">password</label>
-            <input type="password" id="pw" name="pw">
-
-            <!--<label for="ntelefono">Numero di Telefono</label>
-            <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}"><br>-->
+            <input type="password" id="pw" name="pw" maxlength="16" required >
 
             <div id="phone-fields">
                 <label for="ntelefono">Numero di Telefono</label>
-                <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">
+                <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono" required>
             </div>
             <button type="button" class="add-phone" onclick="addPhoneField()">
-                <img src="images/add-icon.png" alt="Menu" width="20" height="20">
+                <img src="images/add-icon3.png" alt="Menu" width="18" height="18"><br>
             </button>
 
             <div class="checkbox">
-                <input type="radio" id="standard" name="tipo" value="standard">
+                <input type="radio" id="standard" name="tipo" value="standard" required>
                 <label for="standard">Standard</label>
                 <input type="radio" id="premium" name="tipo" value="premium">
                 <label for="premium">Premium</label>
                 <input type="radio" id="amministratore" name="tipo" value="amministratore">
                 <label for="amministratore">Amministratore</label><br><br>
             </div>
-            <p class="block"> Scegliendo di essere un cliente premium avrai la possibilità di ottenere una tessera<br>
+            <p class="block"> Scegliendo di essere un cliente premium avrai la possibilità di ottenere una tessera
                 per accumulare punti ottenendo sconti impredibili!</p><br>
             <input type="submit" value="Registrati">
         </form>
@@ -127,7 +44,7 @@
     function addPhoneField() {
         var container = document.getElementById('phone-fields');
         var newField = document.createElement('div');
-        newField.innerHTML = '<label>Numero di Telefono</label><input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
+        newField.innerHTML = '<input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
         container.appendChild(newField);
     }
 </script>

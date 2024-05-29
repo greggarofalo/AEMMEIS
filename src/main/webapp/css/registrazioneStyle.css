@@ -1,0 +1,125 @@
+.container{
+    display: flex; /* Utilizza Flexbox per disporre i contenitori sulla stessa riga */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+    padding-top: 20px; /* Aggiunge spazio intorno al contenitore */
+    gap:50px;
+    flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+}
+.block{
+    align-items: center;
+
+    max-width: 100%; /* Limita la larghezza massima del blocco */
+}
+
+h3 {
+    color: #3a6977; /* Colore del testo del titolo */
+    font-family: 'Arial', sans-serif; /* Font del titolo */
+    margin-top: 0; /* Rimuove il margine superiore */
+}
+
+form{
+    width: 100%; /* Larghezza del form */
+    max-width: 350px; /* Larghezza massima del form */
+    background-color: #f9f9f9; /* Colore di sfondo leggero */
+    padding: 20px; /* Aggiunge spazio interno */
+    border: 1px solid #ddd; /* Bordo sottile */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+}
+
+/* Stile per le etichette dei campi */
+label {
+    display: block; /* Mostra le etichette come blocchi */
+    margin-bottom: 5px; /* Spazio sotto le etichette */
+    color: #333; /* Colore del testo delle etichette */
+    font-family: 'Arial', sans-serif; /* Font delle etichette */
+    /*width: 80%;*/
+}
+
+.checkbox{
+    font-family: 'Arial', sans-serif; /* Font dei campi */
+    display: flex; /* Usa Flexbox per l'allineamento */
+    align-items: center; /* Allinea verticalmente al centro */
+    margin:0px;
+
+}
+
+/* Margine delle checkbox */
+.checkbox input {
+    margin-right: 5px; /* Spazio a destra delle checkbox */
+}
+
+.checkbox label {
+    margin-right: 15px; /* Spazio a destra delle etichette */
+}
+
+/* Stile per i campi di input */
+input[type="email"],
+input[type="password"],
+input[type="text"]{
+    width: calc(100% - 22px); /* Calcola la larghezza considerando il padding */
+    /*width: 85%;*/
+    padding: 10px; /* Padding interno */
+    margin-bottom: 15px; /* Spazio sotto i campi */
+    border: 1px solid #ccc; /* Bordo dei campi */
+    border-radius: 5px; /* Bordo arrotondato */
+    font-family: 'Arial', sans-serif; /* Font dei campi */
+}
+
+/* Stile dei pulsanti */
+input[type="submit"] {
+    background-color: #427b8a;
+    color: #fff;
+    font-size: 16px;
+    border: none; /* Rimuove il contorno */
+    padding: 6px;
+    border-radius: 10px; /* Bordo arrotondato */
+    margin-top: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #356876;
+}
+
+p{
+    text-align: center;
+    line-height: 1.6; /* Altezza della linea */
+}
+.add-phone{
+    background: transparent;
+    border: none;
+    margin-left: 80%;
+    margin-bottom: 3px;
+
+    display: block; /* Mostra come blocco */
+}
+
+@media (max-width: 768px) {
+    form {
+        max-width: 60%; /* Riduce ulteriormente la larghezza massima su schermi piccoli */
+        padding:30px;
+    }
+    /* Margine delle checkbox */
+    .checkbox input {
+        margin-right: 3px; /* Spazio a destra delle checkbox */
+    }
+
+    .checkbox label {
+        margin-right: 12px; /* Spazio a destra delle etichette */
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        max-width: 80%; /* Occupa tutta la larghezza disponibile su schermi molto piccoli */
+        padding : 40px;
+    }
+    .checkbox input {
+        margin-right: 0px; /* Spazio a destra delle checkbox */
+    }
+
+    .checkbox label {
+        margin-right: 7px; /* Spazio a destra delle etichette */
+    }
+}

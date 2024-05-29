@@ -38,6 +38,43 @@
         .icon a:hover {
             color: #3a6977 /* Cambia colore del testo al passaggio del cursore */
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .icon {
+                margin: 10px;
+            }
+
+            .icon img {
+                height: auto;
+            }
+
+            .icon a {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .contenitore {
+                padding: 10px;
+            }
+
+            .icon {
+                margin: 5px;
+            }
+
+            .icon img {
+                height: auto;
+            }
+
+            .icon a {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>

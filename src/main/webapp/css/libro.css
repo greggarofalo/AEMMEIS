@@ -17,7 +17,12 @@ body {
 /* Stile per la sezione dettagli del libro */
 .book-details {
     display: flex; /* Utilizza il layout flexbox */
+
+    flex-wrap: wrap; /* Permette di avvolgere i contenuti */
+
     align-items: flex-start; /* Allinea gli elementi all'inizio verticalmente */
+
+    overflow: visible; /* Assicura che il contenuto sia visibile */
 }
 
 /* Stile per la sezione immagine del libro */
@@ -122,6 +127,8 @@ body {
     margin-top: 20px; /* Spazio sopra la nuova sezione */
     padding: 20px; /* Padding interno */
     border-top: 1px solid #ddd; /* Bordo superiore per separare dalla sezione sopra */
+
+    overflow: visible;/* Assicura che il contenuto sia visibile */
 }
 
 /* Stile per il titolo della descrizione */
@@ -174,3 +181,9 @@ body {
 }
 
 /* Stile per i dettagli del libro quando lo schermo è ridotto */
+@media (max-width: 768px) {
+    .book-description-details ul {
+        display: block; /* Assicura che gli elementi siano ancora visibili */
+        /*padding: 10px; /* Aggiungi padding appropriato */
+    }
+}
