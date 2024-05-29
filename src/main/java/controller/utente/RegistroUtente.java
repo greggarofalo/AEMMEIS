@@ -27,9 +27,16 @@ public class RegistroUtente extends HttpServlet {
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
-        String numero = request.getParameter("telefono");
+        String[] numeriTelefono = request.getParameterValues("telefono");
         List<String> telefoni=new ArrayList<>();
-        telefoni.add(numero);
+        for(String telefono : numeriTelefono){
+            if(telefono.length()!=10){
+                //pagina di errore
+            }
+            else telefoni.add(telefono);
+        }
+
+
         utente.setNomeUtente(nomeUtente);
         utente.setEmail(email);
         utente.setTipo(tipo);

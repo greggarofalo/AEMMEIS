@@ -135,15 +135,17 @@ UtenteDAO {
             TesseraDAO tesseraDAO = new TesseraDAO();
             tesseraDAO.deleteTessera(tesseraDAO.doRetrieveByEmail(email).getNumero()); //cancello eventuale tessera
         }
-        this.deleteTelefoni(email); //relazione con telefoni
+        if(!this.doRetrieveById(email).getTelefoni().isEmpty())
+            this.deleteTelefoni(email); //relazione con telefoni
 
         RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
         CarrelloDAO carrelloDAO = new CarrelloDAO();
         OrdineDAO ordineDAO = new OrdineDAO();
-
-        ordineDAO.deleteOrdiniByEmail(email);
+        if(!ordineDAO.doRetrieveByUtente(email).isEmpty())
+            ordineDAO.deleteOrdiniByEmail(email);
         Carrello carrello = carrelloDAO.doRetriveByUtente(email);
-        rigaCarrelloDAO.deleteRigheCarrelloByIdCarrello(carrello.getIdCarrello());
+        if(!rigaCarrelloDAO.doRetrieveByIdCarrello(carrello.getIdCarrello()).isEmpty())
+            rigaCarrelloDAO.deleteRigheCarrelloByIdCarrello(carrello.getIdCarrello());
         carrelloDAO.deleteCarrello(carrello.getIdCarrello());
 
 
@@ -175,10 +177,10 @@ UtenteDAO {
     public void deleteTelefoni(String email){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM telefono WHERE email=?");
+                    con.prepareStatement("DELETE FROM telefono WHERE email=?");//Per farlo funzionare bisogna togliere la safe mode dal db
             ps.setString(1, email);
-            if(ps.executeUpdate() != 1)
-                throw new RuntimeException("DELETE error.");
+            if(ps.executeUpdate() < 1)
+                throw new RuntimeException("DELETE error. Email: " + email + " not present in the db");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

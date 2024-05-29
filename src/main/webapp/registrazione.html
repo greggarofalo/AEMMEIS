@@ -78,6 +78,11 @@
             text-align: center;
             line-height: 1.6; /* Altezza della linea */
         }
+        .add-phone{
+            background: transparent;
+            text-align: right;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -92,8 +97,17 @@
             <label for="pw">password</label>
             <input type="password" id="pw" name="pw">
 
-            <label for="ntelefono">Numero di Telefono</label>
-            <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}"><br>
+            <!--<label for="ntelefono">Numero di Telefono</label>
+            <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}"><br>-->
+
+            <div id="phone-fields">
+                <label for="ntelefono">Numero di Telefono</label>
+                <input type="text" id="ntelefono" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">
+            </div>
+            <button type="button" class="add-phone" onclick="addPhoneField()">
+                <img src="images/add-icon.png" alt="Menu" width="20" height="20">
+            </button>
+
             <div class="checkbox">
                 <input type="radio" id="standard" name="tipo" value="standard">
                 <label for="standard">Standard</label>
@@ -102,12 +116,21 @@
                 <input type="radio" id="amministratore" name="tipo" value="amministratore">
                 <label for="amministratore">Amministratore</label><br><br>
             </div>
+            <p class="block"> Scegliendo di essere un cliente premium avrai la possibilità di ottenere una tessera<br>
+                per accumulare punti ottenendo sconti impredibili!</p><br>
             <input type="submit" value="Registrati">
         </form>
     </div>
-    <p class="block"> Scegliendo di essere un cliente premium avrai la possibilità di ottenere una tessera<br>
-        per accumulare punti ottenendo sconti impredibili!</p>
 </div>
+
+<script>
+    function addPhoneField() {
+        var container = document.getElementById('phone-fields');
+        var newField = document.createElement('div');
+        newField.innerHTML = '<label>Numero di Telefono</label><input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
+        container.appendChild(newField);
+    }
+</script>
 
 </body>
 </html>

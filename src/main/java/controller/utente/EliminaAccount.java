@@ -14,7 +14,7 @@ import java.io.IOException;
 public class EliminaAccount extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        Utente utente = (Utente) request.getAttribute("utente");
+        Utente utente = (Utente) session.getAttribute("utente");
         UtenteDAO utenteDAO = new UtenteDAO();
         utenteDAO.deleteUtente(utente.getEmail());
 
