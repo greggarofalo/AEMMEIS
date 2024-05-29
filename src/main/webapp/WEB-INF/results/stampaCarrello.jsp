@@ -9,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Stampa Carrello</title>
@@ -68,7 +69,7 @@
                             <img src="images/trash-icon.png" alt="Rimuovi">
                         </button>
                         <div class="book-quantity">
-                            <input type="number" name="quantita" value=<%=riga.getQuantita()%> min="1">
+                            <input type="number" name="quantita" value="<%=riga.getQuantita()%>" min="1" onchange="updateQuantity(this, '<%=libro.getIsbn()%>')">
                         </div>
                     </div>
 
@@ -95,7 +96,7 @@
             <form action="ordine-supporto" id="form">
             <button type="submit" form="form" class="button">Acquista ora </button>
             </form>
-            <button onclick="saveCart()" class="button">Chiudi carrello</button>
+            <button onclick="closeCart()" class="button">Chiudi carrello</button>
         </div>
     </div>
 <%@include file="footer.jsp"%>
@@ -162,7 +163,7 @@
             xhttp.send();
         }
 
-
+/*
         function saveCart() {
             // Seleziona tutti gli elementi del carrello (assumendo che ogni libro nel carrello sia contenuto in un elemento con la classe 'book-item')
             var cartItems = document.querySelectorAll('.book-item');
@@ -204,17 +205,90 @@
             xhttp.send(JSON.stringify(cartData));
 
             closeCart();
-        }
+        }*/
 
         function closeCart() {
                 window.location.href = "index.html";
+        }
+
+        function updateQuantity(input, isbn) {
+            var quantity = parseInt(input.value);
+            if (quantity < 1) {
+            quantity = 1;
+            input.value = 1;
+            }
+
+            // Trova il libro specifico usando l'ISBN
+            var bookItem = input.closest('.book-item');
+            var bookPriceInfo = bookItem.querySelector('.book-price-info');
+            var price = parseFloat(bookPriceInfo.getAttribute('data-price'));
+            var sconto = parseFloat(bookPriceInfo.getAttribute('data-sconto'));
+
+            // Aggiorna la quantità nel dataset
+            bookPriceInfo.setAttribute('data-quantita', quantity);
+
+            // Calcola il nuovo prezzo
+            var newPrice;
+            if (sconto > 0) {
+            newPrice = (price - (price * sconto / 100)) * quantity;
+        } else {
+            newPrice = price * quantity;
+        }
+
+            // Aggiorna il DOM con il nuovo prezzo
+            var newPriceSpan = bookItem.querySelector('.book-new-price');
+            newPriceSpan.innerText = newPrice.toFixed(2) + ' €';
+
+            // Se c'è uno sconto, aggiorna anche il prezzo vecchio
+            var oldPriceSpan = bookItem.querySelector('.book-old-price');
+            if (oldPriceSpan) {
+            oldPriceSpan.innerText = (price * quantity).toFixed(2) + ' €';
+        }
+
+            // Aggiorna il totale del carrello e i punti Effe
+            updateCart();
+
+            // Invia una richiesta AJAX per aggiornare la sessione sul server
+            updateServerCart(isbn, quantity);
+        }
+
+        function updateServerCart(isbn, quantity) {
+            // Crea una nuova istanza di XMLHttpRequest
+            var xhttp = new XMLHttpRequest();
+
+            // Definisce la funzione di gestione degli eventi per la risposta ricevuta
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        // Carrello salvato con successo
+                        console.log('Carrello aggiornato con successo');
+                    }
+                        else{
+                        // Gestisci eventuali errori
+                        console.error('Errore durante l\'aggiornamento della sessione del carrello:', this.status);
+                    }
+                }
+            };
+
+            // Imposta il metodo e l'URL della richiesta
+            xhttp.open("POST", "aggiorna-carrello", true);
+
+            // Imposta l'intestazione Content-Type
+            xhttp.setRequestHeader("Content-Type", "application/json");
+
+            // Prepara i dati da inviare
+            var data = JSON.stringify({ isbn: isbn, quantity: quantity });
+
+            // Invia la richiesta con i dati
+            xhttp.send(data);
         }
 
         // Funzione per aggiornare il totale del carrello e i punti Effe
         function updateCart() {
             var total = 0;
             var bookPriceInfos = document.querySelectorAll('.book-price-info');
-            var puntiAemme=0;
+            var puntiAemme = 0;
+
             // Itera attraverso tutti gli elementi selezionati
             bookPriceInfos.forEach(function(info) {
                 var price = parseFloat(info.getAttribute('data-price'));
@@ -227,15 +301,12 @@
                 } else {
                     total += price * quantita;
                 }
-            });
 
-            // Calcola i punti Effe come il numero di libri nel carrello moltiplicato per 5
-            bookPriceInfos.forEach(function(info) {
-                var quantita = parseInt(info.getAttribute('data-quantita')); // Quantità del libro nel carrello
+                // Calcola i punti Effe come il numero di libri nel carrello moltiplicato per 5
                 puntiAemme += quantita * 5;
             });
 
-            //aggiornamento del DOM
+            // Aggiorna il DOM
             document.getElementById('total-amount').innerText = total.toFixed(2);
             document.getElementById('aemme-points').innerText = puntiAemme;
         }
