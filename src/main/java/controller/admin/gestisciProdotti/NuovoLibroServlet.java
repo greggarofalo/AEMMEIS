@@ -24,6 +24,7 @@ public class NuovoLibroServlet extends HttpServlet {
         int sconto = Integer.parseInt(request.getParameter("sconto"));
         String trama = request.getParameter("trama");
         String immagine = request.getParameter("immagine");
+        Boolean disponibile = Boolean.parseBoolean(request.getParameter("disponibile"));
 
         libro.setIsbn(isbn);
         libro.setTitolo(titolo);
@@ -33,6 +34,7 @@ public class NuovoLibroServlet extends HttpServlet {
         libro.setSconto(sconto);
         libro.setTrama(trama);
         libro.setImmagine(immagine);
+        libro.setDisponibile(disponibile);
 
         LibroDAO libroService = new LibroDAO();
         libroService.doSave(libro);

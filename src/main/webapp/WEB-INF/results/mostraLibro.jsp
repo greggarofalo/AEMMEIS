@@ -45,12 +45,19 @@
                     </c:otherwise>
                 </c:choose>
             </p>
-            <form action="aggiungi-carrello">
-                <input type="hidden" name="isbn" value="${libro.isbn}">
-                <input type="hidden" name="source" value="mostraLibro">
-                <input class= "add-to-cart" type="submit" value="Aggiungi al carrello">
-            </form>
-
+            <c:choose>
+                <c:when test="${libro.disponibile}">
+                    <form action="aggiungi-carrello">
+                        <input type="hidden" name="isbn" value="${libro.isbn}">
+                        <input type="hidden" name="source" value="mostraLibro">
+                        <input class="add-to-cart" type="submit" value="Aggiungi al carrello">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <p class="not-available">Libro non disponibile</p>
+                    <button class="add-to-cart" disabled style="background-color: #ccc;">Aggiungi al carrello</button>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 

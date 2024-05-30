@@ -154,6 +154,7 @@
             <th>ISBN</th>
             <th>Sconto</th>
             <th>Prezzo</th>
+            <th>Disponibilita'</th>
             <th>Azione</th>
         </tr>
         <c:forEach items="${libri}" var="libro">
@@ -162,16 +163,27 @@
                 <td>${libro.isbn}</td>
                 <td>${libro.sconto}</td>
                 <td>${libro.prezzo}</td>
+                <td>${libro.disponibile ? 'Disponibile' : 'Non dispoibile'}</td>
                 <td>
                     <div class="actions">
                         <form action="modifica-libro">
                             <input type="hidden" name="isbn" value="${libro.isbn}">
                             <input type="submit" value="Modifica">
                         </form>
-                        <form action="elimina-libro">
-                            <input type="hidden" name="isbn" value="${libro.isbn}">
-                            <input type="submit" value="Elimina">
-                        </form>
+                        <c:choose>
+                            <c:when test="${!libro.disponibile}">
+                                <form action="disponibile">
+                                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                                    <input type="submit" value="Disponibile">
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                <form action="non-disponibile">
+                                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                                    <input type="submit" value="Non disponibile">
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </td>
             </tr>

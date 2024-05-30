@@ -39,10 +39,19 @@
                     <input type="hidden" name="isbn" value="${libro.isbn}">
                     <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
                 </form>
-                <form action="aggiungi-carrello">
-                    <input type="hidden" name="isbn" value="${libro.isbn}">
-                    <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
-                </form>
+
+                <c:choose>
+                    <c:when test="${libro.disponibile}">
+                        <form action="aggiungi-carrello">
+                            <input type="hidden" name="isbn" value="${libro.isbn}">
+                            <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="isbn" value="${libro.isbn}">
+                        <input type="image" src="./images/icon-cart-disabled.png" name="aggCarBut" alt="Carrello" width="20" height="20">
+                    </c:otherwise>
+                </c:choose>
             </div>
 
 

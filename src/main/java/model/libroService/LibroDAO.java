@@ -99,6 +99,18 @@ public class LibroDAO {
         }
     }
 
+    public void updateDisponibile(Libro libro){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE libro SET disponibile = ? WHERE isbn = ?");
+            ps.setBoolean(1, libro.isDisponibile());
+            ps.setString(2, libro.getIsbn());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Libro> doRetriveAll(){
         List<Libro> libri = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
@@ -116,6 +128,7 @@ public class LibroDAO {
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
                 p.setImmagine(rs.getString(8));
+                p.setDisponibile(rs.getBoolean(9));
                 p.setAutori(this.getScrittura(p.getIsbn()));
                 libri.add(p);
             }
@@ -141,6 +154,7 @@ public class LibroDAO {
                 p.setSconto(rs.getInt(6));
                 p.setTrama(rs.getString(7));
                 p.setImmagine(rs.getString(8));
+                p.setDisponibile(rs.getBoolean(9));
                 p.setAutori(this.getScrittura(p.getIsbn()));
                 return p;
             }
