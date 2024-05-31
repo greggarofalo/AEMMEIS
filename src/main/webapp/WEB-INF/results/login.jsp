@@ -100,6 +100,12 @@
                 width: 80%; /* Imposta la larghezza al 100% */
                 margin-bottom: 10px; /* Aggiunge spazio sotto i blocchi */
             }
+            /* Stile per i campi di input */
+            input[type="email"],
+            input[type="password"] {
+                width: 70%;
+                padding: 9px; /* Padding interno */
+            }
         }
     </style>
 </head>

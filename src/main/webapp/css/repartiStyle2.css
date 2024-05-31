@@ -1,0 +1,91 @@
+.reparto {
+    position: relative;
+    display: block; /* Modifica in block per consentire il cambiamento di larghezza */
+    margin: 0 auto; /* Centra il contenitore */
+}
+
+.imgReparto {
+    /*width: 1500px; /* Imposta la larghezza dell'immagine al 100% del contenitore */
+    height: 400px;
+    width: 100%; /* Imposta la larghezza massima al 100% del contenitore */
+    /*height: auto; /* Mantieni l'aspect ratio */
+    display: block;
+}
+
+.dropdown-container {
+    position: absolute; /* Posiziona assolutamente il menu a tendina sopra l'immagine */
+    top: 150px; /* Posiziona il menu a 200 pixel dall'alto del contenitore */
+    width: 100%; /* Assicura che il contenitore copra l'intera larghezza dell'immagine */
+    display: flex; /* Usa il flexbox per centrare il menu a tendina */
+    justify-content: center; /* Centra il menu a tendina orizzontalmente */
+    align-items: center; /* Centra il menu a tendina verticalmente */
+}
+
+.descrizione{
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    padding: 30px;
+    margin: 0 auto; /* Centra il testo */
+    max-width: 800px; /* Imposta una larghezza massima per migliorare la leggibilità */
+}
+
+.dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+    outline: none;
+    width: 100%; /* Imposta la larghezza al 100% del contenitore */
+    max-width: 300px; /* Imposta una larghezza massima per migliorare la leggibilità */
+    margin: 0 auto; /* Centra il menu */
+}
+
+/* Media queries per adattarsi a diverse dimensioni dello schermo */
+@media screen and (max-width: 768px) {
+    .dropdown-menu {
+        font-size: 14px;
+    }
+    .imgReparto {
+        max-width: 120%;
+        height: auto;
+    }
+
+    .descrizione {
+        font-size: 15px;
+        padding: 25px;
+    }
+
+    .dropdown-menu {
+        max-width: 200px;
+    }
+    .dropdown-container {
+        top: 115px; /* Posiziona il menu a 200 pixel dall'alto del contenitore */
+    }
+}
+@media screen and (max-width: 480px) {
+    .imgReparto {
+        max-width: 135%;
+        height: auto;
+    }
+    .descrizione {
+        font-size: 13px;
+        padding: 20px;
+    }
+    .dropdown-container {
+        top: 80px; /* Posiziona il menu a 200 pixel dall'alto del contenitore */
+    }
+}
+
+@media screen and (max-width: 390px) {
+    imgReparto {
+        max-width: 140%;
+        height: auto;
+    }
+    .dropdown-container {
+        top: 70px; /* Posiziona il menu a 200 pixel dall'alto del contenitore */
+    }
+}

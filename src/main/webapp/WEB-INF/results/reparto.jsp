@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/homePageStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/repartiStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/repartiStyle2.css">
   </head>
   <body>
      <%@include file="header.jsp"%>

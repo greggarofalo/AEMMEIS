@@ -36,11 +36,11 @@
             display: flex;
             align-items: center;
             margin-left:50px;
-            margin-top: 20px; /* Aggiungi spazio sopra */
+            margin-top: 10px; /* Aggiungi spazio sopra */
         }
 
         .buttons{
-            position: absolute;
+            margin-left:auto;/* Spinge i bottoni all'estrema destra */
             right: 50px;
         }
 
@@ -57,6 +57,28 @@
 
         input[type="submit"]:hover {
             background-color: #356876;
+        }
+
+        @media (max-width: 768px) {
+            h3, .sedeItem {
+                margin-left: 5%; /* Riduci il margine per schermi piccoli */
+                margin-right: 5%; /* Riduci il margine per schermi piccoli */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sedeItem {
+                flex-direction: column; /* Dispone gli elementi in colonna su schermi piccoli */
+                align-items: flex-start; /* Allinea gli elementi a sinistra */
+            }
+
+            .buttons {
+                margin-left: 0;
+                margin-top: 10px; /* Aggiungi spazio sopra i bottoni */
+            }
+            input[type="submit"] {
+                margin-left:5px;
+            }
         }
     </style>
 </head>

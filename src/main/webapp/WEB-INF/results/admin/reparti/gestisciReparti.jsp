@@ -41,7 +41,7 @@
             color: #fff;
             font-size: 16px;
             border: none; /* Rimuove il contorno */
-            padding: 6px;
+            padding: 10px;/*6*/
             border-radius: 10px; /* Bordo arrotondato */
             margin-top: 5px;
         }
@@ -60,6 +60,7 @@
 
         .nuovo-reparto{
             margin: 50px;
+            text-align: center; /* Centra il pulsante */
         }
 
         .modificaReparto {
@@ -77,6 +78,40 @@
             box-sizing: border-box; /* Include padding e bordo nella larghezza */
             margin-bottom: 10px; /* Margine inferiore */
         }
+
+        .aggiorna-reparto form{
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+
+        }
+
+
+        @media (max-width: 768px) {
+            .reparto {
+                flex-direction: column; /* Dispone gli elementi in colonna per schermi piccoli */
+                align-items: center;
+                gap:0px;
+            }
+
+            .libri, .modificaReparto {
+                min-width: 100%; /* Larghezza completa per schermi piccoli */
+            }
+
+            .reparto-form input[type="text"],
+            .reparto-form textarea {
+                font-size: 14px; /* Riduce la dimensione del testo per schermi piccoli */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .aggiorna-reparto form textarea {
+                width: 95%; /* Larghezza della textarea ridotta al 90% */
+                margin-bottom: 10px; /* Spazio sotto la textarea */
+            }
+        }
+
+
     </style>
 </head>
 
