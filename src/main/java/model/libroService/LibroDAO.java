@@ -236,7 +236,8 @@ public class LibroDAO {
     public void addAutore(String isbn, Autore autore){
         try (Connection con = ConPool.getConnection()) {
             AutoreDAO autoreService=new AutoreDAO();
-            autoreService.doSave(autore);
+            if(autoreService.searchAutore(autore.getCf())==null)
+                autoreService.doSave(autore);
 
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO scrittura (cf, isbn) VALUES(?,?)");
