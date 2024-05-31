@@ -14,19 +14,38 @@ import java.io.IOException;
 @WebServlet("/aggiungi-sede")
 public class AggiungiSedeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Sede sede = new Sede();
-        String citta = request.getParameter("citta");
-        sede.setCitta(citta);
-        String via = request.getParameter("via");
-        sede.setVia(via);
-        int civico = Integer.parseInt(request.getParameter("civico"));
-        sede.setCivico(civico);
-        String cap = request.getParameter("cap");
-        sede.setCap(cap);
 
-        SedeDAO sedeService = new SedeDAO();
-        sedeService.doSave(sede);
-        response.sendRedirect("gestisci-sedi");
+        String citta = request.getParameter("citta");
+        String via = request.getParameter("via");
+        String civ = request.getParameter("civico");
+        String cap = request.getParameter("cap");
+        //controllo paramentri del form
+        if(citta==null || via==null || civ==null || cap==null)
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
+
+        int civico;
+        Sede sede = new Sede();
+        try{
+            civico=Integer.parseInt(civ);
+            sede.setCitta(citta);
+            sede.setVia(via);
+            sede.setCivico(civico);
+            sede.setCap(cap);
+
+            SedeDAO sedeService = new SedeDAO();
+            sedeService.doSave(sede);
+            response.sendRedirect("gestisci-sedi");
+
+        }catch (NumberFormatException e){
+            response.sendRedirect("/WEB-INF/errorJsp/erroreFormato.jsp");
+        }
+
+
+
+
+
+
+
 
     }
 }

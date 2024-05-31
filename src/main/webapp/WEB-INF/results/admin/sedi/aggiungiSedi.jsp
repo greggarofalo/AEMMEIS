@@ -17,13 +17,13 @@
         <h3>Nuova Sede</h3>
         <form action="aggiungi-sede">
             <label for="citta">Città</label>
-            <input type="text" id="citta" name="citta"> <br><br>
+            <input type="text" id="citta" name="citta" required> <br><br>
             <label for="via">Via</label>
-            <input type="text" id="via" name="via"> <br><br>
+            <input type="text" id="via" name="via" required> <br><br>
             <label for="civico">Civico</label>
-            <input type="text" id="civico" name="civico"> <br><br>
+            <input type="text" id="civico" name="civico" required> <br><br>
             <label for="cap">Cap</label>
-            <input type="text" id="cap" name="cap"><br>
+            <input type="text" id="cap" name="cap" required ><br>
             <input type="submit" value="Aggiungi">
         </form>
     </div>

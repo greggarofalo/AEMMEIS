@@ -119,9 +119,9 @@
               <legend><h3>Accedi</h3></legend>
               <form action="login-servlet">
                   <label for="email">e-mail</label>
-                  <input type="email" id="email" name="email">
+                  <input type="email" id="email" name="email" required>
                   <label for="pw">password</label>
-                  <input type="password" id="pw" name="pw"><br>
+                  <input type="password" id="pw" name="pw" maxlength="16" required><br>
                   <input type="submit" value="Accedi">
               </form>
           </div>

@@ -29,10 +29,16 @@ import java.util.Objects;
 public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //controllo dei form
+        String email = request.getParameter("email");
+        String password = request.getParameter("pw");
+        if(email==null || password== null || !email.contains("@") || password.length()>16){
+            response.sendRedirect("/WEB-INF/errorJsp/loginError.jsp");
+        }
         Utente utente = new Utente();
-        utente.setEmail(request.getParameter("email"));
+        utente.setEmail(email);
         //utente.setNomeUtente(request.getParameter("nomeUtente"));
-        utente.setCodiceSicurezza(request.getParameter("pw"));
+        utente.setCodiceSicurezza(password);
         //utente.setTipo(request.getParameter("tipo"));
 
         UtenteDAO service = new UtenteDAO();
@@ -43,7 +49,7 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             HttpSession session = request.getSession();
-            utente=service.doRetrieveById(request.getParameter("email"));
+            utente=service.doRetrieveById(email);
             session.setAttribute("utente", utente);
 
             Carrello carrelloLocale = (Carrello) session.getAttribute("carrello");// Recupera il carrello locale dalla sessione

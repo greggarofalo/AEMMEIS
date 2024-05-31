@@ -235,10 +235,14 @@ public class LibroDAO {
 
     public void addAutore(String isbn, Autore autore){
         try (Connection con = ConPool.getConnection()) {
+            AutoreDAO autoreService=new AutoreDAO();
+            autoreService.doSave(autore);
+
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO scrittura (cf, isbn) VALUES(?,?)");
             ps.setString(1, autore.getCf());
             ps.setString(2, isbn);
+
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
