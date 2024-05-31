@@ -65,13 +65,6 @@
                 </c:forEach>
             </p>
         </div>
-
-            <%--<a href="show-wishlist">
-                <img src="<%=path%>>" width="20" height="20" class="image">
-            </a>
-            <a href="cart-servlet>">
-                <img src="./images/icon-cart.png" width="20" height="20" class="spaced-image image " >
-            </a>--%>
      </c:forEach>
  </div>
 

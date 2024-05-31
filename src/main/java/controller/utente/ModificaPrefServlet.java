@@ -9,11 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
+import model.libroService.Reparto;
 import model.utenteService.Utente;
 import model.wishList.WishList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 @WebServlet("/modifica-preferiti")
 public class ModificaPrefServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +37,18 @@ public class ModificaPrefServlet extends HttpServlet {
         else {
             if(source!= null && source.equals("wishList")){// controllo se il bottone è stato selezionato nella show WishList
                 address="/WEB-INF/results/showWishList.jsp";
+            }
+            else if(source!= null && source.equals("reparto")){// controllo se il bottone è stato selezionato nel reparto
+                if(request.getParameter("repartoAttuale")!=null) {
+                    int idReparto = Integer.parseInt(request.getParameter("repartoAttuale"));
+                    List<Reparto> reparti = (List<Reparto>) getServletContext().getAttribute("reparti");
+                    for(Reparto r : reparti) {
+                        if(r.getIdReparto()==idReparto) {
+                            request.setAttribute("reparto", r);
+                        }
+                    }
+                    address = "/WEB-INF/results/reparto.jsp";
+                }
             }
             WishList wishList = (WishList) session.getAttribute("wishList");
             boolean flag = true; // libro non presente

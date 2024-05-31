@@ -20,14 +20,16 @@ public class MostraRepartoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idReparto = Integer.parseInt(request.getParameter("id"));
 
-        Reparto reparto;
-        RepartoDAO service = new RepartoDAO();
-        reparto = service.doRetrieveById(idReparto);
+        Reparto reparto = new Reparto();
+        List<Reparto> reparti = (List<Reparto>) getServletContext().getAttribute("reparti");
+        for(Reparto r : reparti) {
+            if(r.getIdReparto() == idReparto) {
+                reparto = r;
+            }
+        }
 
         if (reparto != null) {
-            List<Reparto> reparti = service.doRetrivedAll();
             request.setAttribute("reparto", reparto);
-            request.setAttribute("reparti", reparti);
 
             HttpSession session = request.getSession();
             session.setAttribute("repartoAttuale", idReparto);
