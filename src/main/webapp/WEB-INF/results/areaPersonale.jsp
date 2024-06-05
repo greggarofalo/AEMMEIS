@@ -75,7 +75,7 @@
                 </form>
                 <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
                 <form id="premiumForm" action="cambia-tipo">
-                    <input type="button" value="Diventa utente Premium" class="button">
+                    <input type="submit" value="Diventa utente Premium" class="button">
                 </form>
                 <% } %>
 

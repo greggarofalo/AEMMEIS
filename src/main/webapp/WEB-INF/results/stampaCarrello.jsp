@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model.carrelloService.RigaCarrello" %>
 <%@ page import="model.carrelloService.Carrello" %>
 <%@ page import="model.libroService.Libro" %>
@@ -100,6 +101,8 @@
         </div>
     </div>
 <%@include file="footer.jsp"%>
+
+
     <script>
         function addToFavorites(isbn) {
             // Crea una nuova istanza di XMLHttpRequest

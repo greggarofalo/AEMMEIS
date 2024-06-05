@@ -22,6 +22,7 @@
      <%@include file="header.jsp"%>
      <% WishList wishList = (WishList) session.getAttribute("wishList");
        Reparto reparto = (Reparto) request.getAttribute("reparto");
+       //List<Reparto> reparti = (List<Reparto>) session.getAttribute("reparti");
       int i = 0;%>
      <div class="reparto">
        <img class="imgReparto" src="<%=reparto.getImmagine()%>">
@@ -59,8 +60,6 @@
           <div class="azioni">
             <form action="modifica-preferiti">
               <input type="hidden" name="isbn" value="${libro.isbn}">
-              <input type="hidden" name="source" value="reparto">
-              <input type="hidden" name="repartoAttuale" value="<%=reparto.getIdReparto()%>">
               <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
             </form>
             <c:choose>
