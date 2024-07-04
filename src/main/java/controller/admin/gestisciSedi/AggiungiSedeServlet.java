@@ -20,7 +20,7 @@ public class AggiungiSedeServlet extends HttpServlet {
         String civ = request.getParameter("civico");
         String cap = request.getParameter("cap");
         //controllo paramentri del form
-        if(citta==null || via==null || civ==null || cap==null)
+        if(citta.length()==0 || via.length()==0|| civ.length()==0 || cap.length()==0)
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
 
         int civico;
@@ -37,7 +37,7 @@ public class AggiungiSedeServlet extends HttpServlet {
             response.sendRedirect("gestisci-sedi");
 
         }catch (NumberFormatException e){
-            response.sendRedirect("/WEB-INF/errorJsp/erroreFormato.jsp");
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
         }
 
 

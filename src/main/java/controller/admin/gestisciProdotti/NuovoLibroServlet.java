@@ -29,8 +29,9 @@ public class NuovoLibroServlet extends HttpServlet {
         String immagine = request.getParameter("immagine");
 
 
-        if(isbn==null || titolo==null || genere==null || annoPubblicazioni==null || price==null || trama==null || immagine==null)
-            response.sendRedirect("/WEB-INF/errorJsp/erroreFormato.jsp");
+        if(isbn.length()==0 || titolo.length()==0 || genere.length()==0 || annoPubblicazioni.length()==0 ||
+                price.length()==0 || trama.length()==0|| immagine.length()==0)
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
 
         try {
             double prezzo = Double.parseDouble(price);

@@ -45,7 +45,7 @@
 
         <form action="modifica-password" class="pm">
             <label for="pass">Password</label>
-            <input type="password" id="pass" name="password" placeholder="*****"><br><br>
+            <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>
             <input type="submit" value="Conferma" class="bottone">
         </form>
     </div>

@@ -17,11 +17,11 @@
         <h3>Nuovo Reparto</h3>
         <form action="aggiungi-reparto">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome">
+            <input type="text" id="nome" name="nome" required>
             <label for="descrizione">Descrizione</label>
-            <textarea id="descrizione" name="descrizione"></textarea>
+            <textarea id="descrizione" name="descrizione" required></textarea>
             <label for="immagine">Immagine</label>
-            <input type="text" id="immagine" name="immagine">
+            <input type="text" id="immagine" name="immagine" required>
             <input type="submit" value="Aggiungi">
         </form>
     </div>

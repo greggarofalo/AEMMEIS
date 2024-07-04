@@ -27,11 +27,16 @@ public class RegistroUtente extends HttpServlet {
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
+        if(nomeUtente.length()==0 || (email.length()==0 || !email.contains("@")) || codiceSicurezza.length()==0){
+            //pagina di errore per inserimento parametri errato
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+        }
         String[] numeriTelefono = request.getParameterValues("telefono");
         List<String> telefoni=new ArrayList<>();
         for(String telefono : numeriTelefono){
             if(telefono.length()!=10){
-                //pagina di errore
+                //pagina di errore per inserimento parametri errato
+                response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
             }
             else telefoni.add(telefono);
         }
@@ -47,54 +52,58 @@ public class RegistroUtente extends HttpServlet {
 
         if(codiceSicurezza.length() > 16){
             //rimanda a una pagina di errore per password troppo lunga
+            //pagina di errore per inserimento parametri errato
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
-        else{
-            //aggiungere il controllo se è già presente un utente con la stessa email
+        else {
             UtenteDAO utenteService = new UtenteDAO();
-            if(utenteService.doRetrieveById(utente.getEmail()) == null){
+            if (utenteService.doRetrieveById(utente.getEmail()) == null) {
                 utenteService.doSave(utente);
-            }
 
-            if(utente.getTipo().equalsIgnoreCase("premium")){
-                TesseraDAO tesseraService = new TesseraDAO();
-                Tessera tessera = new Tessera();
-                tessera.setEmail(utente.getEmail());
-                tessera.setDataCreazione(LocalDate.now());
-                tessera.setDataScadenza(LocalDate.now().plusYears(2));
-                List<String> numeri = tesseraService.doRetrivedAllByNumero();
-                String numT;
-                Random random =new Random();
+                if (utente.getTipo().equalsIgnoreCase("premium")) {
+                    TesseraDAO tesseraService = new TesseraDAO();
+                    Tessera tessera = new Tessera();
+                    tessera.setEmail(utente.getEmail());
+                    tessera.setDataCreazione(LocalDate.now());
+                    tessera.setDataScadenza(LocalDate.now().plusYears(2));
+                    List<String> numeri = tesseraService.doRetrivedAllByNumero();
+                    String numT;
+                    Random random = new Random();
+                    do {
+                        numT = "T" + random.nextInt(10) + random.nextInt(10) + random.nextInt(10);
+                    } while (numeri.contains(numT));
+                    tessera.setNumero(numT);
+
+                    tesseraService.doSave(tessera);
+                }
+                //request.getSession().setAttribute("utente", utente);
+                CarrelloDAO carrelloService = new CarrelloDAO();
+                Carrello carrello = new Carrello();
+                carrello.setEmail(utente.getEmail());
+                carrello.setTotale(0);
+                List<String> id = carrelloService.doRetrivedAllIdCarrelli();
+                String newId;
+                Random random = new Random();
                 do {
-                    numT = "T" + random.nextInt(10) + random.nextInt(10) + random.nextInt(10);
-                }while(numeri.contains(numT));
-                tessera.setNumero(numT);
+                    char a = (char) (65 + random.nextInt(90 - 65));
+                    char b = (char) (65 + random.nextInt(90 - 65));
+                    char c = (char) (65 + random.nextInt(90 - 65));
+                    newId = a + b + c + String.valueOf(10 + random.nextInt(100 - 10));
+                } while (id.contains(newId));
 
-                tesseraService.doSave(tessera);
+                carrello.setIdCarrello(newId);
+                carrelloService.doSave(carrello);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                //creare pagina di errore dicendo che è già presente un utente con la stessa email, chiedere se vuole fare il login
             }
-            //request.getSession().setAttribute("utente", utente);
-            CarrelloDAO carrelloService = new CarrelloDAO();
-            Carrello carrello = new Carrello();
-            carrello.setEmail(utente.getEmail());
-            carrello.setTotale(0);
-            List<String> id = carrelloService.doRetrivedAllIdCarrelli();
-            String newId;
-            Random random =new Random();
-            do {
-                char a = (char)(65+ random.nextInt(90-65));
-                char b = (char) (65+ random.nextInt(90-65));
-                char c = (char) (65+ random.nextInt(90-65));
-                newId = a + b + c + String.valueOf( 10+ random.nextInt(100-10));
-            }while(id.contains(newId));
-
-            carrello.setIdCarrello(newId);
-            carrelloService.doSave(carrello);
-
-            RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/results/login.jsp");
-            dispatcher.forward(request, response);
         }
+
+
 
     }
-
-    public void destroy() {
+    public void destroy(){
     }
 }
