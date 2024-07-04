@@ -16,6 +16,11 @@
     <div class="form">
         <h3>Nuova Sede</h3>
         <form action="aggiungi-sede">
+            <%String esito= (String) request.getAttribute("esito");
+                if(esito!=null && esito.equals("non riuscito")){
+            %>
+            <p style="color: red">Sede già esistente</p>
+            <%}%>
             <label for="citta">Città</label>
             <input type="text" id="citta" name="citta" required> <br><br>
             <label for="via">Via</label>

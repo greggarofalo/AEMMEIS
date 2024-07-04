@@ -18,7 +18,7 @@
     <div class="form">
         <h3>Nuovo Libro</h3>
         <div class="info-libro">
-            <form action="aggiorna-libro">
+            <form action="aggiorna-libro" method="post">
                 <label for="titolo">Titolo</label>
                 <input type="text" id="titolo" name="titolo" value="${libro.titolo}"><br><br>
                 <label for="isbn">Isbn</label>

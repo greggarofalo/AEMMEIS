@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         //controllo dei form
         String email = request.getParameter("email");
         String password = request.getParameter("pw");
-        if(email==null || password== null || !email.contains("@") || password.length()>16){
+        if((email==null || email.length()==0 || !email.contains("@")) || (password== null || password.length()==0 || password.length()>16)){
             response.sendRedirect("/WEB-INF/errorJsp/loginError.jsp");
         }
         Utente utente = new Utente();
@@ -96,9 +96,10 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);*/
 
 
-
-
-
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
 }

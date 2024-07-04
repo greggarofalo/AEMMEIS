@@ -14,7 +14,12 @@
 <body>
 <div class="form">
     <h3>Nuovo Libro</h3>
-    <form action="insert-libro">
+    <form action="insert-libro" method="post">
+        <%String esito= (String) request.getAttribute("esito");
+        if(esito!=null && esito.equals("non riuscito")){
+            %>
+        <p style="color: red">Libro già presente</p>
+        <%}%>
         <label for="titolo">Titolo</label>
         <input type="text" id="titolo" name="titolo" required><br><br>
         <label for="isbn">Isbn</label>

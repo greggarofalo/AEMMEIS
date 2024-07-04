@@ -1,10 +1,13 @@
 package controller.admin.gestisciProdotti;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.libroService.Autore;
+import model.libroService.AutoreDAO;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
 
@@ -15,9 +18,10 @@ import java.util.List;
 @WebServlet("/insert-libro")
 public class NuovoLibroServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Libro libro = new Libro();
+        LibroDAO libroService = new LibroDAO();
 
         String isbn = request.getParameter("isbn");
         String titolo = request.getParameter("titolo");
@@ -29,10 +33,11 @@ public class NuovoLibroServlet extends HttpServlet {
         String immagine = request.getParameter("immagine");
 
 
-        if(isbn.length()==0 || titolo.length()==0 || genere.length()==0 || annoPubblicazioni.length()==0 ||
-                price.length()==0 || trama.length()==0|| immagine.length()==0)
+        if(isbn==null || isbn.length()==0 || titolo==null || titolo.length()==0 || genere==null || genere.length()==0 ||
+                annoPubblicazioni==null || annoPubblicazioni.length()==0 || price==null || price.length()==0 ||
+                sconto1==null || trama==null || immagine==null){
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
-
+        }
         try {
             double prezzo = Double.parseDouble(price);
             int sconto;
@@ -47,8 +52,12 @@ public class NuovoLibroServlet extends HttpServlet {
             String[] cfAutori = request.getParameterValues("cf");
 
             List<Autore> autori = new ArrayList<>();
+
             if (nomiAutori != null && cognomiAutori != null && cfAutori != null) {
                 for (int i = 0; i < nomiAutori.length; i++) {
+                    if(nomiAutori[i].length()==0 || cognomiAutori[i].length()==0 || cfAutori[i].length()==0) {
+                        response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
+                    }
                     Autore autore = new Autore();
                     autore.setNome(nomiAutori[i]);
                     autore.setCognome(cognomiAutori[i]);
@@ -68,13 +77,26 @@ public class NuovoLibroServlet extends HttpServlet {
             libro.setDisponibile(true);
             libro.setAutori(autori);
 
-            LibroDAO libroService = new LibroDAO();
-            libroService.doSave(libro);
-            response.sendRedirect("gestisci-prodotti");
+            List<Libro> libri= libroService.doRetriveAll();
+            if(!libri.contains(libro)) {
+                libroService.doSave(libro);
+                response.sendRedirect("gestisci-prodotti");
+            }
+            else {
+                request.setAttribute("esito", "non riuscito");//per poter mostrare un errore nell'inserimento
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/prodotti/nuovoProdotto.jsp");
+                dispatcher.forward(request, response);
+            }
+
 
         }catch(NumberFormatException e){
             response.sendRedirect("/WEB-INF/errorJsp/erroreFormato.jsp");
 
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
     }
 }

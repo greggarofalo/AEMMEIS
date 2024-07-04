@@ -1,5 +1,6 @@
 package controller.utente;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,5 +33,10 @@ public class ModificaDatiServlet extends HttpServlet {
         services.updateUtente(utente); //cambio tutto nel db
         response.sendRedirect("modifica-dati-supporto");
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
     }
 }

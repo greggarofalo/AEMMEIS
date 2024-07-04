@@ -16,6 +16,11 @@
     <div class="form">
         <h3>Nuovo Reparto</h3>
         <form action="aggiungi-reparto">
+            <%String esito= (String) request.getAttribute("esito");
+                if(esito!=null && esito.equals("non riuscito")){
+            %>
+            <p style="color: red">Reparto già esistente</p>
+            <%}%>
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" required>
             <label for="descrizione">Descrizione</label>

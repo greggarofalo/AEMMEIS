@@ -117,7 +117,7 @@
     <div class="block">
           <div class="accedi">
               <legend><h3>Accedi</h3></legend>
-              <form action="login-servlet">
+              <form action="login-servlet" method="post">
                   <label for="email">e-mail</label>
                   <input type="email" id="email" name="email" required>
                   <label for="pw">password</label>

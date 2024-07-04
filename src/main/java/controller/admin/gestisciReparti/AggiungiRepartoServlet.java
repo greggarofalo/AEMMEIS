@@ -1,5 +1,7 @@
 package controller.admin.gestisciReparti;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,12 +14,12 @@ import java.util.List;
 
 @WebServlet("/aggiungi-reparto")
 public class AggiungiRepartoServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Reparto reparto = new Reparto();
         String nome = request.getParameter("nome");
         String descrizione = request.getParameter("descrizione");
         String immagine = request.getParameter("immagine");
-        if(nome.length()==0 || descrizione.length()==0 || immagine.length()==0){
+        if(nome==null || nome.length()==0 || descrizione==null || descrizione.length()==0 || immagine==null || immagine.length()==0){
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
@@ -28,14 +30,19 @@ public class AggiungiRepartoServlet extends HttpServlet {
 
         RepartoDAO repartoService = new RepartoDAO();
         List<Reparto> reparti= repartoService.doRetrivedAll();
+        boolean flag=true;
         for (Reparto rep:reparti){
             if(rep.getNome().equals(reparto.getNome())){
-                //pagina di errore perchè esise già un reparto con lo stesso nome
+                request.setAttribute("esito", "non riuscito");//per poter mostrare un errore nell'inserimento
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/sedi/aggiungiSedi.jsp");
+                dispatcher.forward(request, response);
+                flag=false;
             }
         }
-
-        repartoService.doSave(reparto);
-        response.sendRedirect("gestisci-reparti");
+        if(flag) {
+            repartoService.doSave(reparto);
+            response.sendRedirect("gestisci-reparti");
+        }
 
     }
 }

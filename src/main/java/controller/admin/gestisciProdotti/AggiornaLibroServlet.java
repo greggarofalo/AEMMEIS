@@ -38,4 +38,9 @@ public class AggiornaLibroServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("modifica-libro");
         dispatcher.forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
 }

@@ -27,7 +27,8 @@ public class RegistroUtente extends HttpServlet {
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
-        if(nomeUtente.length()==0 || (email.length()==0 || !email.contains("@")) || codiceSicurezza.length()==0){
+        if(nomeUtente==null || nomeUtente.length()==0 || (email==null || email.length()==0 || !email.contains("@")) ||
+                codiceSicurezza==null || codiceSicurezza.length()==0 || tipo==null){
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
@@ -104,6 +105,9 @@ public class RegistroUtente extends HttpServlet {
 
 
     }
-    public void destroy(){
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req,resp);
     }
 }

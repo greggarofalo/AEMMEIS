@@ -49,7 +49,7 @@
 
         <fieldset class="fieldset">
             <legend><h3>Dati</h3></legend>
-                <form action="modifica-dati">
+                <form action="modifica-dati" method="post">
                     <label for="nomeUtente">Nome utente: </label>
                     <input type="email" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
 
