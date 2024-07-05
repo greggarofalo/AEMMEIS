@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.utenteService.Utente" %><%--
   Created by IntelliJ IDEA.
   User: aless
   Date: 25/05/2024
@@ -38,11 +38,18 @@
 <body>
     <%@include file="/WEB-INF/results/header.jsp"%>
     <div class="pass">
+        <% Utente user = (Utente) session.getAttribute("utente");
+            if(user.getTipo().equalsIgnoreCase("Amministratore")){
+        %>
+            <form action="area-personaleAdmin">
+                <input type="submit" value="Torna indietro">
+            </form>
+        <%}else{%>
 
         <form action="area-personale">
             <input type="submit" value="Torna indietro">
         </form>
-
+        <%}%>
         <form action="modifica-password" class="pm">
             <label for="pass">Password</label>
             <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>

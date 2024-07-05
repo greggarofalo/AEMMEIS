@@ -26,6 +26,13 @@
 <div class="dati">
     <div class="azioni">
         <ul>
+            <li>
+                <div class="back-home">
+                    <form action="index.html">
+                        <input type="submit" value="Torna alla homepage">
+                    </form>
+                </div>
+            </li>
             <li><a href="elimina-account" onclick="return confirm('Sei sicuro di voler eliminare il tuo account?')">Elimina Account</a></li>
             <li><a href="log-out" onclick="return confirm('Sei sicuro di voler fare logout?')">Logout</a></li>
         </ul>

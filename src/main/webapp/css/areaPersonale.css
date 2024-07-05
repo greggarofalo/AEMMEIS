@@ -27,7 +27,7 @@
     sotto ciascun elemento li all'interno della barra laterale,
     separando visivamente gli elementi dell'elenco.*/
 }
-.azioni li a {
+.azioni li a{
     text-decoration: none; /* Rimuove la sottolineatura dai link */
     color: #000; /* Colore del testo */
     display: block; /* Fa sì che l'intero elemento <li> sia cliccabile */
@@ -36,7 +36,7 @@
     transition: background-color 0.3s; /* Aggiunge un effetto di transizione */
 }
 
-.azioni li a:hover {
+.azioni li a:hover, input[type="submit"]:hover{
     background-color: #ddd; /* Colore di sfondo quando l'elemento è al passaggio del mouse */
 }
 .blocco{
@@ -54,9 +54,19 @@
 .blocco li{
     margin: 5px 0; /* Aggiunge margine per separare gli elementi della lista */
 }
-.blocco .button{
+/*.blocco .button{
     color: #041e30;
     text-align: right;
-    text-decoration: underline;
+    text-decoration: none;
     overflow: hidden;
+}*/
+
+input[type="submit"]{
+    border: none;
+    background-color: transparent;
+    font-family: serif;
+    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile */
+    padding: 10px; /* Aggiunge spazio attorno al testo */
+    border-radius: 4px; /* Arrotonda gli angoli */
+    transition: background-color 0.3s; /* Aggiunge un effetto di transizione */
 }
