@@ -1,6 +1,5 @@
 
 footer{
-    margin-top: 25px;
     width: 100%;
     background: linear-gradient(to right, #041e30, rgba(89, 155, 175, 0.51));
     color: #fff;
@@ -9,6 +8,7 @@ footer{
     font-size: 16px;
     line-height: 20px;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .row{

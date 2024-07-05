@@ -34,7 +34,7 @@ public class AggiungiRepartoServlet extends HttpServlet {
         for (Reparto rep:reparti){
             if(rep.getNome().equals(reparto.getNome())){
                 request.setAttribute("esito", "non riuscito");//per poter mostrare un errore nell'inserimento
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/sedi/aggiungiSedi.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/reparti/aggiungiReparto.jsp");
                 dispatcher.forward(request, response);
                 flag=false;
             }

@@ -8,10 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <title>Admin HomePage</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
+    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/areaPersonale.css">
+
     <style>
         body {
-            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -19,23 +24,26 @@
             font-family: Arial, sans-serif;
         }
 
+        .header .icons .image{
+            text-align: center;
+        }
         .contenitore {
             text-align: center;
         }
-        .icon {
+        .iconAmm {
             margin: 20px;
         }
-        .icon img {
+        .iconAmm img {
             margin: 0 auto;
         }
-        .icon a {
+        .iconAmm a {
             display: block;
             margin-top: 10px;
             font-size: 20px;
             text-decoration: none;
             color: #000;
         }
-        .icon a:hover {
+        .iconAmm a:hover {
             color: #3a6977 /* Cambia colore del testo al passaggio del cursore */
         }
 
@@ -44,15 +52,15 @@
                 padding: 10px;
             }
 
-            .icon {
+            .iconAmm {
                 margin: 10px;
             }
 
-            .icon img {
+            .iconAmm img {
                 height: auto;
             }
 
-            .icon a {
+            .iconAmm a {
                 font-size: 18px;
             }
         }
@@ -63,43 +71,44 @@
                 padding: 10px;
             }
 
-            .icon {
+            .iconAmm {
                 margin: 5px;
             }
 
-            .icon img {
+            .iconAmm img {
                 height: auto;
             }
 
-            .icon a {
+            .iconAmm a {
                 font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
+    <%@include file="headerAdmin.jsp"%>
     <div class="contenitore">
-        <div class="icon">
+        <div class="iconAmm">
             <a href="gestisci-prodotti">
                 <img src="./images/book-icon.png" width="50" height="50" class="image">
                 <a href="gestisci-prodotti">Modifica Prodotti</a><br><br>
             </a>
         </div>
 
-        <div class="icon">
+        <div class="iconAmm">
             <a href="gestisci-reparti">
                 <img src="./images/elenco-icon.png" width="60" height="70" class="image">
                 <a href="gestisci-reparti">Modifica Reparti</a><br><br>
             </a>
         </div>
 
-        <div class="icon">
+        <div class="iconAmm">
             <a href="gestisci-sedi">
                 <img src="./images/sede-icon.png" width="30" height="45" class="image">
                 <a href="gestisci-sedi">Modifica Sedi</a>
             </a>
         </div>
     </div>
-
+    <%@include file="/WEB-INF/results/footer.jsp"%>
 </body>
 </html>

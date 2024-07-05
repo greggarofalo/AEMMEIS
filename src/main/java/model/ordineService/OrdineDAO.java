@@ -13,7 +13,7 @@ public class OrdineDAO {
     public void doSave(Ordine ordine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Ordine (idOrdine, costo, indirizzoSpedizione, citta, puntiOttenuti, puntiSpesi, dataEffettuazione, stato, email) VALUES(?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO Ordine (idOrdine, costo, indirizzoSpedizione, citta, puntiOttenuti, puntiSpesi, dataEffettuazione, stato,matricola, email) VALUES(?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, ordine.getIdOrdine());
             ps.setDouble(2, ordine.getCosto());
             ps.setString(3, ordine.getIndirizzoSpedizione());
@@ -22,7 +22,8 @@ public class OrdineDAO {
             ps.setInt(6, ordine.getPuntiSpesi());
             ps.setDate(7, java.sql.Date.valueOf(ordine.getDataEffettuazione()));
             ps.setString(8, ordine.getStato());
-            ps.setString(9, ordine.getEmail());
+            ps.setString(9, ordine.getMatricola());
+            ps.setString(10, ordine.getEmail());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -82,7 +83,7 @@ public class OrdineDAO {
             ps.setString(1, email);
             List<Ordine> ordini=new ArrayList<>();
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 ordini.add(doRetrieveById(rs.getString(1)));
             }
             return ordini;

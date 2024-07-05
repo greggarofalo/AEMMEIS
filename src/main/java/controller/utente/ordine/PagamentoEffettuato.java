@@ -27,11 +27,12 @@ public class PagamentoEffettuato extends HttpServlet {
         //dubbio sul metterlo direttamente in sessione...anche se non credo si agiusto salvarlo in sessione.
         ordine.setCitta(request.getParameter("citta"));
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
+        ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
 
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
             int punti = 0;
-            if(puntiString != null)
+            if((!puntiString.isEmpty()) && puntiString != null)
                 punti = Integer.parseInt(puntiString);
             Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
             if(tessera.getDataScadenza().isBefore(LocalDate.now())){

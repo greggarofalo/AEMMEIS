@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.carrelloService.Carrello;
+import model.carrelloService.CarrelloDAO;
 import model.carrelloService.RigaCarrello;
 import model.carrelloService.RigaCarrelloDAO;
+import model.gestoreService.Gestore;
+import model.gestoreService.GestoreDAO;
 import model.libroService.Libro;
 import model.ordineService.Ordine;
 import model.ordineService.OrdineDAO;
@@ -41,6 +44,8 @@ public class OrdineServlet extends HttpServlet {
         Ordine ordine = new Ordine();
         RigaOrdineDAO rigaOrdineDAO = new RigaOrdineDAO();
         RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
+        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        Carrello carrelloDB = carrelloDAO.doRetriveByUtente(utente.getEmail());
 
         //parametri passati da servlet a jsp...
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
@@ -86,7 +91,29 @@ public class OrdineServlet extends HttpServlet {
             costo += ((rigaCarrello.getQuantita() * prezzoUnitario) - (ordine.getPuntiSpesi() * 0.10)); //tolgo
             puntiAcquisiti += 5* rigaCarrello.getQuantita();
 
-            rigaCarrelloDAO.deleteRigaCarrello(l.getIsbn(), carrello.getIdCarrello()); //cancello la riga carrello poichè ho acquistato
+
+            //quando scorro la losgta delle righe del carrello che voglio acquistare
+            //devo eventualmente cancellare la riga in sessione e nel db, o settare la quantità.
+            for(int i=0; i<carrelloDB.getRigheCarrello().size(); i++){
+                RigaCarrello rc = carrelloDB.getRigheCarrello().get(i);
+                Libro libroRC = rc.getLibro();
+                if(libroRC.equals(l)){
+                    int differenza = rc.getQuantita() - rigaCarrello.getQuantita();
+                    if (differenza <= 0){
+                        rigaCarrelloDAO.deleteRigaCarrello(l.getIsbn(), carrelloDB.getIdCarrello());
+
+                    }
+                }
+            }
+            for(int j = 0; j<carrello.getRigheCarrello().size(); j++){
+                RigaCarrello rigaInSessione = carrello.getRigheCarrello().get(j);
+                if(rigaInSessione.getLibro().equals(l)){
+                    carrello.getRigheCarrello().remove(j);
+                    break;
+                }
+            }
+
+            //rigaCarrelloDAO.deleteRigaCarrello(l.getIsbn(), carrello.getIdCarrello()); //cancello la riga carrello poichè ho acquistato
 
         }
 
@@ -102,16 +129,14 @@ public class OrdineServlet extends HttpServlet {
         ordine.setRigheOrdine(righeOrdine);
 
         ordine.setStato("In Lavorazione");
-
+        GestoreDAO gestoreDAO = new GestoreDAO();
+        Random rand = new Random();
+        List<Gestore> gestoriDispo = gestoreDAO.doRetrivedAll();
+        ordine.setMatricola(gestoriDispo.get(rand.nextInt(gestoriDispo.size())).getMatricola());
 
         ordineDAO.doSave(ordine);
 
-        for(RigaOrdine o : ordine.getRigheOrdine()){
-
-            rigaOrdineDAO.doSave(o);
-        }
-
-        response.sendRedirect("cart-servlet");
+        response.sendRedirect("index.html");
     }
 }
 
