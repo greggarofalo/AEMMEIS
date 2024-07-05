@@ -19,6 +19,9 @@
             margin-top: 30px; /* Aggiungi spazio sopra il titolo */
         }
 
+        .back-home{
+            margin-left: 50px;
+        }
         /* Contenitore principale dei reparti */
         .reparto-container {
             width: 80%; /* Larghezza del 90% del contenitore genitore */
@@ -118,6 +121,11 @@
 <body>
 <h1>Lista dei reparti</h1>
 
+<div class="back-home">
+    <form action="index.html">
+        <input type="submit" value="Torna alla homepage">
+    </form>
+</div>
 <div class="nuovo-reparto">
     <form action="nuovo-reparto">
         <input type="hidden" name="idReparto" value="${reparto.idReparto}">

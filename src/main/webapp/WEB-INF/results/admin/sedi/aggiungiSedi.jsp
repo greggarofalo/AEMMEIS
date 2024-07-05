@@ -13,8 +13,14 @@
 </head>
 <body>
 <div class="form-conteiner">
+
     <div class="form">
         <h3>Nuova Sede</h3>
+        <div class="torna-indietro">
+            <form action="gestisci-sedi">
+                <input type="submit" value="Torna indietro">
+            </form>
+        </div>
         <form action="aggiungi-sede">
             <%String esito= (String) request.getAttribute("esito");
                 if(esito!=null && esito.equals("non riuscito")){

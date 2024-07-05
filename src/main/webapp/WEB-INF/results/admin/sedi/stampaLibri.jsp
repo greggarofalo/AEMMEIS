@@ -14,6 +14,11 @@
 </head>
 <body>
 <h1>Scegli i libri da aggiungere alla sede ${sede.idSede}: ${sede.citta} (${sede.via}, ${sede.civico})</h1>
+<div class="torna-indietro">
+    <form action="gestisci-sedi">
+        <button type="submit">Torna indietro</button>
+    </form>
+</div>
 <form action="insert-libroSede">
     <input type="hidden" name="idSede" value="${sede.idSede}">
     <ul>

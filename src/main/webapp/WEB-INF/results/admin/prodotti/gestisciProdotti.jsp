@@ -142,6 +142,11 @@
 <body>
 <h1>Lista di prodotti</h1>
 <div class="container">
+    <div class="back-home">
+        <form action="index.html">
+            <input type="submit" value="Torna alla homepage">
+        </form>
+    </div>
     <div class="nuovo-prodotto">
         <form action="nuovo-prodotto">
             <input type="hidden" name="isbn" value="${libro.isbn}">

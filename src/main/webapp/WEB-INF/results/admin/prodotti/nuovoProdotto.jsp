@@ -14,6 +14,11 @@
 <body>
 <div class="form">
     <h3>Nuovo Libro</h3>
+    <div class="torna-indietro">
+        <form action="gestisci-prodotti">
+            <input type="submit" value="Torna indietro">
+        </form>
+    </div>
     <form action="insert-libro" method="post">
         <%String esito= (String) request.getAttribute("esito");
         if(esito!=null && esito.equals("non riuscito")){

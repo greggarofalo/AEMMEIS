@@ -9,10 +9,17 @@
 <html>
 <head>
     <title>Area Personale Admin</title>
-    <link rel="stylesheet" type="text/css" href="./css/generale.css">
-    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerAdmin.css">
     <link rel="stylesheet" type="text/css" href="./css/areaPersonale.css">
+
+    <style>
+        .header{
+            text-align: center;
+            border-bottom-style: groove;
+            padding: 10px;
+        }
+    </style>
+
 </head>
 <body>
 <%@include file="headerAdmin.jsp"%>

@@ -7,6 +7,11 @@
 </head>
 <body>
 <h1>Scegli i libri da aggiungere al reparto ${reparto.idReparto}: ${reparto.nome}</h1>
+<div class="torna-indietro">
+    <form action="gestisci-reparti">
+        <button type="submit">Torna indietro</button>
+    </form>
+</div>
 <form action="insert-libroReparto">
     <input type="hidden" name="idReparto" value="${reparto.idReparto}">
     <ul>

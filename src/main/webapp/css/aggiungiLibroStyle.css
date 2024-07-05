@@ -51,6 +51,10 @@ button{
     margin-top: 5px;
 }
 
-button:hover {
+button:hover{
     background-color: #356876;
+}
+
+.torna-indietro button{
+    float: left;
 }

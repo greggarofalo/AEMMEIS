@@ -15,6 +15,11 @@
 <body>
 
 <div class="form-conteiner">
+    <div class="torna-indietro">
+        <form action="gestisci-prodotti">
+            <input type="submit" value="Torna indietro">
+        </form>
+    </div>
     <div class="form">
         <h3>Nuovo Libro</h3>
         <div class="info-libro">

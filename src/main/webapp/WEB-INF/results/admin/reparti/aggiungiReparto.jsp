@@ -15,6 +15,11 @@
 <div class="form-conteiner">
     <div class="form">
         <h3>Nuovo Reparto</h3>
+        <div class="torna-indietro">
+            <form action="gestisci-reparti">
+                <input type="submit" value="Torna indietro">
+            </form>
+        </div>
         <form action="aggiungi-reparto">
             <%String esito= (String) request.getAttribute("esito");
                 if(esito!=null && esito.equals("non riuscito")){

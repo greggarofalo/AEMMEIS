@@ -10,12 +10,15 @@
 <head>
 
     <title>Admin HomePage</title>
-    <link rel="stylesheet" type="text/css" href="./css/generale.css">
-    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/areaPersonale.css">
 
+    <link rel="stylesheet" type="text/css" href="./css/footerAdmin.css">
     <style>
+        .header{
+            text-align: center;
+            border-bottom-style: groove;
+            padding: 10px;
+        }
+
         body {
             justify-content: center;
             align-items: center;

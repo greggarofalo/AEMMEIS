@@ -85,7 +85,11 @@
 
 <body>
 <h1>Lista delle sedi</h1>
-
+<div class="back-home">
+    <form action="index.html">
+        <input type="submit" value="Torna alla homepage">
+    </form>
+</div>
 <div class="nuova-sede">
     <form action="nuova-sede">
         <input type="hidden" name="idSede" value="${sede.idSede}">
