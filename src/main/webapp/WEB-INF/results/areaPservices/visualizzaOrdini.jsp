@@ -17,36 +17,55 @@
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
     <style>
-
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
-<%@include file="/WEB-INF/results/header.jsp"%>
 
-    <div class="ordini">
-        <c:forEach items="${ordini}" var="ordine">
-            <div class="ordine">
-                <ul>
-                    <li><h3>ID ORDINE: </h3> ${ordine.idOrdine}</li>
-                    <li><h3>COSTO: </h3> ${ordine.costo}€</li>
-                    <li><h3>INDIRIZZO SPEDIZIONE: </h3> ${ordine.indirizzoSpedizione} (${ordine.citta})</li>
-                    <li><h3>PUNTI OTTENUTI: </h3> ${ordine.puntiOttenuti}</li>
-                    <li><h3>DATA EFFETTUAZIONE: </h3> ${ordine.dataEffettuazione}</li>
-                    <li>
-                        <h3>STATO: </h3> ${ordine.stato}
-                        <c:if test="${ordine.dataArrivo} != null ">
-                            <h3> IN DATA: </h3> ${ordine.dataArrivo}
-                        </c:if>
-                    </li>
-                </ul>
-            <form action="riepilogo-ordine">
-                <input type="hidden" name="idOrdine" value="${ordine.idOrdine}">
-                <input type="submit" value="Riepilogo ordine" class="button">
-            </form>
+<div class="wrapper">
+    <%@include file="/WEB-INF/results/header.jsp"%>
+        <div class="content">
+
+            <div class="ordini">
+                <c:forEach items="${ordini}" var="ordine">
+                    <div class="ordine">
+                        <ul>
+                            <li><h3>ID ORDINE: </h3> ${ordine.idOrdine}</li>
+                            <li><h3>COSTO: </h3> ${ordine.costo}€</li>
+                            <li><h3>INDIRIZZO SPEDIZIONE: </h3> ${ordine.indirizzoSpedizione} (${ordine.citta})</li>
+                            <li><h3>PUNTI OTTENUTI: </h3> ${ordine.puntiOttenuti}</li>
+                            <li><h3>DATA EFFETTUAZIONE: </h3> ${ordine.dataEffettuazione}</li>
+                            <li>
+                                <h3>STATO: </h3> ${ordine.stato}
+                                <c:if test="${ordine.dataArrivo} != null ">
+                                    <h3> IN DATA: </h3> ${ordine.dataArrivo}
+                                </c:if>
+                            </li>
+                        </ul>
+                    <form action="riepilogo-ordine">
+                        <input type="hidden" name="idOrdine" value="${ordine.idOrdine}">
+                        <input type="submit" value="Riepilogo ordine" class="button">
+                    </form>
+                    </div>
+                </c:forEach>
             </div>
-        </c:forEach>
-    </div>
-
-<%@include file="/WEB-INF/results/footer.jsp"%>
+        </div>
+        <%@include file="/WEB-INF/results/footer.jsp"%>
+</div>
 </body>
 </html>

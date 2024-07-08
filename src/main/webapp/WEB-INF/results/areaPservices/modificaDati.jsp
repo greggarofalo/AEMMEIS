@@ -36,6 +36,20 @@
 
         }
 
+        input[type="submit"] {
+            background-color: #427b8a;
+            color: #fff;
+            font-size: 16px;
+            border: none; /* Rimuove il contorno */
+            padding: 6px;
+            border-radius: 10px; /* Bordo arrotondato */
+            margin-top: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #356876;
+        }
+
     </style>
 </head>
 <body>

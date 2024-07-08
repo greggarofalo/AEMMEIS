@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <form action="pagamento-effettuato">
+    <form action="pagamento-effettuato" method="post">
         <input type="hidden" value="${ordine.indirizzoSpedizione}" name="indirizzo">
         <input type="hidden" value="${ordine.citta}" name="citta">
         <div class="form-pag">
@@ -24,12 +24,13 @@
 
         <div class="form-pag">
             <label for="cardNumber">Numero della Carta</label>
-            <input type="text" id="cardNumber" name="cardNumber" pattern="\d{16}" required>
+            <input type="text" id="cardNumber" name="cardNumber" pattern="\d{16}" required><!--l pattern \d{16} è una regex (espressione regolare)
+                                                                                            \d: corrisponde a qualsiasi cifra numerica (da 0 a 9)-->
         </div>
 
         <div class="form-pag">
             <label for="expiryDate">Data di Scadenza</label>
-            <input type="month" id="expiryDate" name="expiryDate" required>
+            <input type="date" id="expiryDate" name="expiryDate" required>
         </div>
 
         <div class="form-pag">

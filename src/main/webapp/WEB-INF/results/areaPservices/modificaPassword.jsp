@@ -14,6 +14,24 @@
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
     <style>
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            margin-top: auto;
+        }
+
         .pass{
             display: flex;
             flex-direction: column;
@@ -33,32 +51,50 @@
         .pass .pm .bottone{
             text-align: right;
         }
+
+        input[type="submit"] {
+            background-color: #427b8a;
+            color: #fff;
+            font-size: 16px;
+            border: none; /* Rimuove il contorno */
+            padding: 6px;
+            border-radius: 10px; /* Bordo arrotondato */
+            margin-top: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #356876;
+        }
+
     </style>
 </head>
 <body>
+<div class="wrapper">
     <%@include file="/WEB-INF/results/header.jsp"%>
-    <div class="pass">
-        <% Utente user = (Utente) session.getAttribute("utente");
-            if(user.getTipo().equalsIgnoreCase("Amministratore")){
-        %>
-            <form action="area-personaleAdmin">
+    <div class="content">
+
+        <div class="pass">
+            <% Utente user = (Utente) session.getAttribute("utente");
+                if(user.getTipo().equalsIgnoreCase("Amministratore")){
+            %>
+                <form action="area-personaleAdmin">
+                    <input type="submit" value="Torna indietro">
+                </form>
+            <%}else{%>
+
+            <form action="area-personale">
                 <input type="submit" value="Torna indietro">
             </form>
-        <%}else{%>
-
-        <form action="area-personale">
-            <input type="submit" value="Torna indietro">
-        </form>
-        <%}%>
-        <form action="modifica-password" class="pm">
-            <label for="pass">Password</label>
-            <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>
-            <input type="submit" value="Conferma" class="bottone">
-        </form>
+            <%}%>
+            <form action="modifica-password" class="pm">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>
+                <input type="submit" value="Conferma" class="bottone">
+            </form>
+        </div>
     </div>
-
-
     <%@include file="/WEB-INF/results/footer.jsp"%>
+</div>
 
 </body>
 </html>

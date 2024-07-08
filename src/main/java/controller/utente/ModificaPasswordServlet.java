@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ModificaPasswordServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String password = request.getParameter("password");
-        if (password == null || password.length() == 0 || password.length() > 16) {
+        if (password == null || password.isEmpty() || password.length() > 16) {
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
         }
         UtenteDAO serviceUtente = new UtenteDAO();

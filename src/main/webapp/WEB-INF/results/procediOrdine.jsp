@@ -78,7 +78,7 @@
 
         if (section === 'indirizzo') {
         content.innerHTML = `
-        <form action="do-pagamento">
+        <form action="do-pagamento" method="post">
             <input type = "hidden" value = "indirizzo" name = "typeForm">
             <div>
                 <label for="indirizzo" class="label-ind">Indirizzo:</label>
@@ -90,7 +90,7 @@
             </div>
             <div>
                 <label for="cap" class="label-ind">CAP:</label>
-                <input type="text" id="cap" name="cap" required>
+                <input type="text" id="cap" name="cap" required pattern="[0-9]{5}">
             </div>
             <div>
                 <input type="submit" value="Procedi con il pagamento">

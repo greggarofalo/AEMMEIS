@@ -24,7 +24,7 @@ public class PagamentoEffettuato extends HttpServlet {
         TesseraDAO tesseraDAO = new TesseraDAO();
         Ordine ordine = new Ordine();
         //sto salvando sempre sulla request questi parametri poichè li devo mantenere fino a salvataggio ordine
-        //dubbio sul metterlo direttamente in sessione...anche se non credo si agiusto salvarlo in sessione.
+        //dubbio sul metterlo direttamente in sessione...anche se non credo sia giusto salvarlo in sessione.
         ordine.setCitta(request.getParameter("citta"));
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
         ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
@@ -59,9 +59,32 @@ public class PagamentoEffettuato extends HttpServlet {
         String expiryDate = request.getParameter("expiryDate");
         String cvv = request.getParameter("cvv");
 
+        if(cardName==null || cardName.isEmpty() || !isNumeric(cardNumber) || expiryDate==null || isValidDate(expiryDate) || !isNumeric(cvv)){
+            //pagina di errore per inserimento parametri errato
+            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+        }
+
         request.setAttribute("ordine", ordine);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/ordineEffettuato.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private static boolean isNumeric(String str) {//metodo che utilizza espressione regolare per verificare che una stringa contenga solo numeri
+        return str != null && str.matches("\\d+");
+    }
+
+    private boolean isValidDate(String dateStr) {
+        try {
+            LocalDate.parse(dateStr); // Prova a fare il parsing della stringa come LocalDate
+            return true;
+        } catch(Exception e) {
+            return false; // Se l'eccezione viene lanciata, la stringa non è una data valida
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
     }
 }

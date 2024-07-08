@@ -10,7 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Stampa Carrello</title>
@@ -18,89 +18,113 @@
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/carrelloStyle.css">
+
+    <!--questo style aggiuntivo serve per spostare il footer in basso alla bagina-->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
-<%@include file="header.jsp"%>
-    <div class="book-list">
-        <%
-            Carrello cart = (Carrello) session.getAttribute("carrello");
-            if(cart.getRigheCarrello()!=null){
-                for(RigaCarrello riga : cart.getRigheCarrello()){
-                    Libro libro = riga.getLibro();
-        %><div class="book-item">
-                <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
-                    <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
-                </a>
-                <div class="book-details">
-                    <h3 class="book-title"><%=libro.getTitolo()%></h3>
-                    <div class="book-price">
-                        <%if(libro.getSconto()!=0){%>
-                        <span class="book-discount">-<%=libro.getSconto()%>%</span>
-                        <span id="newPrice" class="book-new-price"><script>
-                        function myFunction(p1, p2) {
-                            return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
-                        }
-
-                        let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
-                        document.getElementById("newPrice").innerHTML = result;
-                    </script>€</span>
-                        <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                        <%
-                        }else {
-                        %>
-                        <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                        <%}%>
-
-                    </div>
-                    <%
-                        WishList wishList = (WishList) session.getAttribute("wishList");
-                        String address="images/hearts-icon.png";
-                        if(wishList!=null) {
-                            if (wishList.getLibri().contains(libro))
-                                address = "images/heartsBlack-icon.png";
-                        }
-                        %>
-
-                    <div class="book-actions">
-                        <button class="favorite-button" onclick="addToFavorites('<%=libro.getIsbn()%>')" data-isbn="<%=libro.getIsbn()%>">
-                            <img src="<%=address%>" alt="Aggiungi ai preferiti">
-                        </button>
-
-                        <button class="remove-button" onclick="removeFromCart('<%=libro.getIsbn()%>')">
-                            <img src="images/trash-icon.png" alt="Rimuovi">
-                        </button>
-                        <div class="book-quantity">
-                            <input type="number" name="quantita" value="<%=riga.getQuantita()%>" min="1" onchange="updateQuantity(this, '<%=libro.getIsbn()%>')">
-                        </div>
-                    </div>
-
-                    <!-- Input nascosto per memorizzare i dati del libro -->
-                    <input type="hidden" class="book-price-info" data-price="<%=libro.getPrezzo()%>" data-sconto="<%=libro.getSconto()%>" data-quantita="<%=riga.getQuantita()%>">
-
-                </div>
-
-            </div>
+<div class="wrapper">
+    <%@include file="header.jsp"%>
+        <div class="content">
+            <div class="book-list">
                 <%
-            }
-                    }
-                %>
-    </div>
+                    Carrello cart = (Carrello) session.getAttribute("carrello");
+                    if(cart.getRigheCarrello()!=null){
+                        for(RigaCarrello riga : cart.getRigheCarrello()){
+                            Libro libro = riga.getLibro();
+                %><div class="book-item">
+                        <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
+                            <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
+                        </a>
+                        <div class="book-details">
+                            <h3 class="book-title"><%=libro.getTitolo()%></h3>
+                            <div class="book-price">
+                                <%if(libro.getSconto()!=0){%>
+                                <span class="book-discount">-<%=libro.getSconto()%>%</span>
+                                <span id="newPrice" class="book-new-price"><script>
+                                function myFunction(p1, p2) {
+                                    return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
+                                }
 
-    <!-- Totale e pulsanti in fondo -->
-    <div class="cart-summary">
-        <div class="total">
-            Totale: <span id="total-amount">0.00</span> €
-            <br>
-            Punti Aemme: <span id="aemme-points">0</span>
+                                let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
+                                document.getElementById("newPrice").innerHTML = result;
+                            </script>€</span>
+                                <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
+                                <%
+                                }else {
+                                %>
+                                <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
+                                <%}%>
+
+                            </div>
+                            <%
+                                WishList wishList = (WishList) session.getAttribute("wishList");
+                                String address="images/hearts-icon.png";
+                                if(wishList!=null) {
+                                    if (wishList.getLibri().contains(libro))
+                                        address = "images/heartsBlack-icon.png";
+                                }
+                                %>
+
+                            <div class="book-actions">
+                                <button class="favorite-button" onclick="addToFavorites('<%=libro.getIsbn()%>')" data-isbn="<%=libro.getIsbn()%>">
+                                    <img src="<%=address%>" alt="Aggiungi ai preferiti">
+                                </button>
+
+                                <button class="remove-button" onclick="removeFromCart('<%=libro.getIsbn()%>')">
+                                    <img src="images/trash-icon.png" alt="Rimuovi">
+                                </button>
+                                <div class="book-quantity">
+                                    <input type="number" name="quantita" value="<%=riga.getQuantita()%>" min="1" onchange="updateQuantity(this, '<%=libro.getIsbn()%>')">
+                                </div>
+                            </div>
+
+                            <!-- Input nascosto per memorizzare i dati del libro -->
+                            <input type="hidden" class="book-price-info" data-price="<%=libro.getPrezzo()%>" data-sconto="<%=libro.getSconto()%>" data-quantita="<%=riga.getQuantita()%>">
+
+                        </div>
+
+                    </div>
+                        <%
+                    }
+                            }
+                        %>
+            </div>
+
+            <!-- Totale e pulsanti in fondo -->
+            <div class="cart-summary">
+                <div class="total">
+                    Totale: <span id="total-amount">0.00</span> €
+                    <br>
+                    Punti Aemme: <span id="aemme-points">0</span>
+                </div>
+                <div class="cart-actions">
+                    <form action="ordine-supporto" id="form">
+                    <button type="submit" form="form" class="button">Acquista ora </button>
+                    </form>
+                    <button onclick="closeCart()" class="button">Chiudi carrello</button>
+                </div>
+            </div>
         </div>
-        <div class="cart-actions">
-            <form action="ordine-supporto" id="form">
-            <button type="submit" form="form" class="button">Acquista ora </button>
-            </form>
-            <button onclick="closeCart()" class="button">Chiudi carrello</button>
-        </div>
-    </div>
-<%@include file="footer.jsp"%>
+    <%@include file="footer.jsp"%>
+</div>
 
 
     <script>

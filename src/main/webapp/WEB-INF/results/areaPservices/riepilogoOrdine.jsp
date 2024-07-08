@@ -11,6 +11,24 @@
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/carrelloStyle.css">
     <style>
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            margin-top: auto;
+        }
+
         .ordine-actions .button {
             display: flex;
             padding: 10px 20px;
@@ -36,58 +54,62 @@
     </style>
 </head>
 <body>
-<%@include file="/WEB-INF/results/header.jsp"%>
+<div class="wrapper">
+    <%@include file="/WEB-INF/results/header.jsp"%>
+    <div class="content">
 
-<div class="book-list">
-    <%
-        Ordine ordine = (Ordine) session.getAttribute("ordine");
-        for(RigaOrdine riga : ordine.getRigheOrdine()) {
-            Libro libro = riga.getLibro();
-    %>
-    <div class="book-item">
-        <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
-            <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
-        </a>
-            <div class="book-details">
-                <h3 class="book-title"><%=libro.getTitolo()%></h3>
-                <div class="book-price">
-                    <%if(libro.getSconto()!=0){%>
-                    <span class="book-discount">-<%=libro.getSconto()%>%</span>
-                    <span id="newPrice" class="book-new-price"><script>
-                        function myFunction(p1, p2) {
-                            return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
-                        }
+        <div class="book-list">
+            <%
+                Ordine ordine = (Ordine) session.getAttribute("ordine");
+                for(RigaOrdine riga : ordine.getRigheOrdine()) {
+                    Libro libro = riga.getLibro();
+            %>
+            <div class="book-item">
+                <a href="mostra-libro?isbn=<%=libro.getIsbn()%>">
+                    <img src="<%=libro.getImmagine()%>" alt="<%=libro.getTitolo()%><" class="book-image">
+                </a>
+                    <div class="book-details">
+                        <h3 class="book-title"><%=libro.getTitolo()%></h3>
+                        <div class="book-price">
+                            <%if(libro.getSconto()!=0){%>
+                            <span class="book-discount">-<%=libro.getSconto()%>%</span>
+                            <span id="newPrice" class="book-new-price"><script>
+                                function myFunction(p1, p2) {
+                                    return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
+                                }
 
-                        let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
-                        document.getElementById("newPrice").innerHTML = result;
-                    </script>€</span>
-                    <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                    <%
-                    }else {
-                    %>
-                    <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                    <%}%>
+                                let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
+                                document.getElementById("newPrice").innerHTML = result;
+                            </script>€</span>
+                            <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
+                            <%
+                            }else {
+                            %>
+                            <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
+                            <%}%>
+                        </div>
+                        <div class="book-actions">
+                            <form action="aggiungi-carrello">
+                                <input type="hidden" name="isbn" value="${libro.isbn}">
+                                <input type="hidden" name="idOrdine" value="${ordine.idOrdine}">
+                                <input type="hidden" name="source" value="riepilogoOrdine">
+                                <input class= "add-to-cart" type="submit" value="Aggiungi al carrello">
+                            </form>
+                        </div>
                 </div>
-                <div class="book-actions">
-                    <form action="aggiungi-carrello">
-                        <input type="hidden" name="isbn" value="${libro.isbn}">
-                        <input type="hidden" name="idOrdine" value="${ordine.idOrdine}">
-                        <input type="hidden" name="source" value="riepilogoOrdine">
-                        <input class= "add-to-cart" type="submit" value="Aggiungi al carrello">
-                    </form>
-                </div>
+            </div>
+            <%
+                }
+            %>
+            <div class="ordine-actions">
+                <form action="visualizza-ordini">
+                    <input type="submit" value="Chiudi riepilogo" class="button">
+                </form>
+            </div>
         </div>
     </div>
-    <%
-        }
-    %>
-    <div class="ordine-actions">
-        <form action="visualizza-ordini">
-            <input type="submit" value="Chiudi riepilogo" class="button">
-        </form>
-    </div>
+    <%@include file="/WEB-INF/results/footer.jsp"%>
 </div>
 
-<%@include file="/WEB-INF/results/footer.jsp"%>
 </body>
 </html>

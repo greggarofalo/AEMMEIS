@@ -42,18 +42,38 @@ public class Pagamento extends HttpServlet {
         if(type.equals("indirizzo")){
             String indirizzo = request.getParameter("indirizzo") + ", " + request.getParameter("cap");
             String citta = request.getParameter("citta");
-            ordine.setCitta(citta);
-            ordine.setIndirizzoSpedizione(indirizzo);
+            if(indirizzo==null || indirizzo.isEmpty() || citta==null || citta.isEmpty() || !isNumeric(request.getParameter("cap")) || request.getParameter("cap").length()>5) {
+                //pagina di errore per inserimento parametri errato
+                response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+            }
+            else {
+                ordine.setCitta(citta);
+                ordine.setIndirizzoSpedizione(indirizzo);
+            }
         }
         else{
-        Sede sede = sedeDAO.doRetrieveById(Integer.parseInt(request.getParameter("sede")));
-            ordine.setCitta(sede.getCitta());
-            ordine.setIndirizzoSpedizione(sede.getVia() + ", " +sede.getCivico() + ", " + sede.getCap());
+            if(request.getParameter("sede")==null || request.getParameter("sede").isEmpty())
+                //pagina di errore per inserimento parametri errato
+                response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+            else {
+                Sede sede = sedeDAO.doRetrieveById(Integer.parseInt(request.getParameter("sede")));
+                ordine.setCitta(sede.getCitta());
+                ordine.setIndirizzoSpedizione(sede.getVia() + ", " + sede.getCivico() + ", " + sede.getCap());
+            }
         }
         //inizio a salvare dati per l'ordine e l'ordine in sessione, così dopo il pagamento la servlet lavora su quest'ordine
         request.setAttribute("ordine", ordine);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/pagamentoOrdine.jsp");
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
+
+    private static boolean isNumeric(String str) {//metodo che utilizza espressione regolare per verificare che una stringa contenga solo numeri
+        return str != null && str.matches("\\d+");
     }
 }
