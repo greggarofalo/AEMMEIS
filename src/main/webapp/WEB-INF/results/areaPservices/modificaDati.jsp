@@ -18,6 +18,8 @@
 
         .email form{
             width: 100%;
+            margin:10px;
+            padding-right: 15px;
         }
 
         .email .fieldset{

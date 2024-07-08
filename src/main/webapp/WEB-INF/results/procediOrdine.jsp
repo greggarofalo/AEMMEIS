@@ -19,7 +19,8 @@
     <style>
         .containerIndirizzo {
             background-color: #555555;
-            margin-left: 100px;
+            margin: auto;
+            margin-bottom: 20px;
             display: block;
             padding: 20px;
             border-radius: 10px;
@@ -32,10 +33,10 @@
         }
         .button-row {
             display: flex;
+            margin-bottom: 15px;
             gap: 20px;
             justify-content: space-around;
             align-items: center;
-            width: 10px;
         }
 
         .choice-button {
@@ -55,6 +56,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        @media (max-width: 457px) {
+            .containerIndirizzo {
+                width: 90%;
+            }
         }
     </style>
 </head>

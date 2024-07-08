@@ -1,45 +1,45 @@
-.dati{
+/*.dati{
     display: flex;
-    justify-content: space-between; /* Distribuisce spazio tra elementi */
-    align-items: center; /* Allinea gli elementi al centro verticalmente */
-    padding: 0 20px; /* Aggiunge un po' di spazio ai lati */
-    gap: 20px; /* Spazio tra i fieldset */
+    justify-content: space-between; /* Distribuisce spazio tra elementi
+    align-items: center; /* Allinea gli elementi al centro verticalmente
+    padding: 0 20px; /* Aggiunge un po' di spazio ai lati
+    gap: 20px; /* Spazio tra i fieldset
     margin-top: 10px;
 }
 .azioni {
     width: 200px;
     padding: 20px; /*Aggiunge uno spazio interno di 20 pixel su tutti i lati della barra laterale,
-    garantendo che il contenuto all'interno della barra non tocchi direttamente i bordi.*/
+    garantendo che il contenuto all'interno della barra non tocchi direttamente i bordi.
     background-color: #f4f4f4;
     border: 1px solid #2b2d30;
     margin-right: 20px;
     float: left;
-}
+}*/
 
-.azioni ul {
-    list-style-type: none; /*Rimuove i punti elenco predefiniti da tutti gli elementi li all'interno dell'elemento ul.*/
-    padding: 0; /*Rimuove il padding predefinito dell'elemento ul, in modo che non ci sia spazio aggiuntivo attorno all'elenco.*/
+/*.azioni ul {
+    list-style-type: none; /*Rimuove i punti elenco predefiniti da tutti gli elementi li all'interno dell'elemento ul.
+    padding: 0; /*Rimuove il padding predefinito dell'elemento ul, in modo che non ci sia spazio aggiuntivo attorno all'elenco.
     margin: 0;
 }
 
 .azioni li {
     margin-bottom: 10px; /*Aggiunge uno spazio di 10 pixel
     sotto ciascun elemento li all'interno della barra laterale,
-    separando visivamente gli elementi dell'elenco.*/
+    separando visivamente gli elementi dell'elenco.
 }
 .azioni li a{
-    text-decoration: none; /* Rimuove la sottolineatura dai link */
-    color: #000; /* Colore del testo */
-    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile */
-    padding: 10px; /* Aggiunge spazio attorno al testo */
-    border-radius: 4px; /* Arrotonda gli angoli */
-    transition: background-color 0.3s; /* Aggiunge un effetto di transizione */
+    text-decoration: none; /* Rimuove la sottolineatura dai link
+    color: #000; /* Colore del testo
+    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile
+    padding: 10px; /* Aggiunge spazio attorno al testo
+    border-radius: 4px; /* Arrotonda gli angoli
+    transition: background-color 0.3s; /* Aggiunge un effetto di transizione
 }
 
 .azioni li a:hover, input[type="submit"]:hover{
-    background-color: #ddd; /* Colore di sfondo quando l'elemento è al passaggio del mouse */
-}
-.blocco{
+    background-color: #ddd; /* Colore di sfondo quando l'elemento è al passaggio del mouse
+}*/
+/*.blocco{
     width: 400px;
     height: 300px;
     padding: 20px;
@@ -52,7 +52,7 @@
     background-color: white;
 }
 .blocco li{
-    margin: 5px 0; /* Aggiunge margine per separare gli elementi della lista */
+    margin: 5px 0; /* Aggiunge margine per separare gli elementi della lista
 }
 /*.blocco .button{
     color: #041e30;
@@ -61,12 +61,143 @@
     overflow: hidden;
 }*/
 
-input[type="submit"]{
+/*input[type="submit"]{
     border: none;
     background-color: transparent;
     font-family: serif;
-    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile */
-    padding: 10px; /* Aggiunge spazio attorno al testo */
-    border-radius: 4px; /* Arrotonda gli angoli */
-    transition: background-color 0.3s; /* Aggiunge un effetto di transizione */
+    display: block; /* Fa sì che l'intero elemento <li> sia cliccabile
+    padding: 10px; /* Aggiunge spazio attorno al testo
+    border-radius: 4px; /* Arrotonda gli angoli
+    transition: background-color 0.3s; /* Aggiunge un effetto di transizione
+} */
+
+/* Stili generali */
+.dati {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
 }
+
+.azioni {
+    flex: 1 1 200px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #2b2d30;
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.azioni ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.azioni li {
+    margin-bottom: 10px;
+}
+
+.azioni li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.azioni li a:hover, input[type="submit"]:hover {
+    background-color: #ddd;
+}
+
+.blocco {
+    flex: 1 1 200px;
+    padding: 20px;
+    border: 1px solid #2b2d30;
+    min-width: 200px;
+    max-width: 400px;
+    height: auto; /* Cambiato da 300px a auto */
+}
+
+/* Media queries per diversi breakpoints */
+
+/* Schermi piccoli (smartphone) */
+@media (max-width: 576px) {
+    .dati {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .azioni {
+        width: 100%;
+    }
+
+    .blocco {
+        width: 100%;
+    }
+}
+
+/* Schermi medi (tablet) */
+@media (min-width: 577px) and (max-width: 1138px) {
+    .dati {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .azioni {
+        min-width: 200px;
+    }
+
+    .blocco {
+        min-width: 200px;
+        max-width: 50%; /* Due blocchi per riga */
+    }
+
+    .blocco:nth-child(odd) {
+        order: 1;
+    }
+
+    .blocco:nth-child(even) {
+        order: 2;
+    }
+}
+
+/* Schermi larghi (laptop e desktop) */
+@media (min-width: 1139px) {
+    .dati {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .azioni {
+        min-width: 200px;
+    }
+
+    .blocco {
+        min-width: 200px;
+        max-width: 400px;
+    }
+}
+
+/* Schermi sotto 770px */
+/*@media (max-width: 770px) {
+    .dati {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .blocco {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .azioni {
+        width: 100%;
+        padding: 10px;
+    }
+}*/

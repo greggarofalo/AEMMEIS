@@ -11,9 +11,23 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
+    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/formStyle2.css">
+    <style>
+        .form{
+            margin:auto;
+            margin-bottom: 15px;
+        }
+    </style>
 
 </head>
 <body>
+
+<%@include file="header.jsp"%>
+
+<div class="form">
     <form action="pagamento-effettuato" method="post">
         <input type="hidden" value="${ordine.indirizzoSpedizione}" name="indirizzo">
         <input type="hidden" value="${ordine.citta}" name="citta">
@@ -29,13 +43,13 @@
         </div>
 
         <div class="form-pag">
-            <label for="expiryDate">Data di Scadenza</label>
-            <input type="date" id="expiryDate" name="expiryDate" required>
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" pattern="\d{3}" required>
         </div>
 
         <div class="form-pag">
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" name="cvv" pattern="\d{3}" required>
+            <label for="expiryDate">Data di Scadenza</label>
+            <input type="date" id="expiryDate" name="expiryDate" required>
         </div>
 
         <% Utente utente = (Utente) session.getAttribute("utente");
@@ -50,14 +64,17 @@
         <%}%>
 
         <div class="form-pag">
-            <label for="costoAggiornato">Costo Aggiornato:</label>
+           <br><br><label for="costoAggiornato">Costo Aggiornato:</label>
             <span id="costoAggiornato">${ordine.costo}</span> €
         </div>
 
 
         <input type="hidden" id="costoIniziale" value="${ordine.costo}" name="costo">
-        <button type="submit" class="submit-button">Paga Ora</button>
+        <input type="submit" value="Paga Ora">
     </form>
+</div>
+
+<%@include file="footer.jsp"%>
 
     <script>
         function aggiornaCosto() {

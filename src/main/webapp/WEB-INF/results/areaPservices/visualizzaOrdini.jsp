@@ -17,10 +17,12 @@
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
     <style>
+
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            font-family: Arial, sans-serif;
         }
         .wrapper {
             display: flex;
@@ -29,9 +31,52 @@
         }
         .content {
             flex: 1;
+            padding: 20px;
         }
         footer {
             margin-top: auto;
+        }
+        .ordini {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .ordine {
+            border: 1px solid #2b2d30;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .ordine ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .ordine ul li {
+            margin-bottom: 10px;
+        }
+        .ordine h3 {
+            display: inline;
+            font-size: 1em;
+            margin: 0;
+            font-weight: normal;
+        }
+        .ordine .button {
+            background-color: #427b8a;
+            color: #fff;
+            font-size: 16px;
+            border: none; /* Rimuove il contorno */
+            padding: 6px;
+            border-radius: 10px; /* Bordo arrotondato */
+            margin-top: 5px;
+        }
+        .ordine .button:hover {
+            background-color: #356876;
+        }
+        @media (max-width: 768px) {
+            .ordine {
+                padding: 15px;
+            }
         }
     </style>
 </head>

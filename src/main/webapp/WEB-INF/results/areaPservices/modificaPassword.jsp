@@ -42,6 +42,7 @@
 
         .pass form{
             width: 100%;
+            margin:15px;
         }
 
         .pass .pm{

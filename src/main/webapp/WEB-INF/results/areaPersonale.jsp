@@ -25,7 +25,7 @@
                 </ul>
             </div>
 
-            <fieldset class="blocco">
+            <fieldset class="blocco dati">
                 <legend><h3>I miei dati</h3></legend>
                 <ul>
                     <li>${utente.nomeUtente}</li>
@@ -38,7 +38,7 @@
                 </a>
             </fieldset>
 
-            <fieldset class="blocco">
+            <fieldset class="blocco email">
                 <legend><h3>Email</h3></legend>
                 <ul>
                     <li>${utente.email}</li>
@@ -47,7 +47,7 @@
             </fieldset>
 
 
-            <fieldset class="blocco">
+            <fieldset class="blocco password">
                 <legend><h3>Password</h3></legend>
                 <form action="modifica-password-supporto">
                     <input type="submit" value="Modifica password" class="button">
@@ -56,7 +56,7 @@
 
 
 
-            <fieldset class="blocco">
+            <fieldset class="blocco tessera">
 
                 <legend><h3>Tessera</h3></legend>
                 <% Utente utente = (Utente) session.getAttribute("utente");

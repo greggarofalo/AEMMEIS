@@ -52,14 +52,13 @@ public class PagamentoEffettuato extends HttpServlet {
 
         }
 
-
         //effettuare controlli su dati dell'uetnet che acquista
         String cardName = request.getParameter("cardName");
         String cardNumber = request.getParameter("cardNumber");
         String expiryDate = request.getParameter("expiryDate");
         String cvv = request.getParameter("cvv");
 
-        if(cardName==null || cardName.isEmpty() || !isNumeric(cardNumber) || expiryDate==null || isValidDate(expiryDate) || !isNumeric(cvv)){
+        if(cardName==null || cardName.isEmpty() || !isNumeric(cardNumber) || expiryDate==null || /*isValidDate(expiryDate) ||*/ !isNumeric(cvv)){
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }

@@ -112,17 +112,17 @@
         gap: 10px; /* Spazio tra le icone */
     }
 
-    ul {
+    .header ul {
         display: none; /* Nasconde il menu di navigazione */
         width: 100%;
         flex-direction: column;
     }
 
-    ul.show {
+    .header ul.show {
         display: flex; /* Mostra il menu di navigazione quando il pulsante è cliccato */
     }
 
-    ul li {
+    .header ul li {
         width: 100%;
         text-align: left;
     }

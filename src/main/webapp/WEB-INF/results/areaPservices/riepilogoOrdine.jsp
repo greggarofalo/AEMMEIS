@@ -36,21 +36,42 @@
             cursor: pointer;
             background-color: #427b8a;
             color: white;
-            border: none; /* Rimuove il bordo */
+            border: none; /* Rimuove il bordo*/
         }
         .add-to-cart {
-            background-color: #427b8a; /* Sfondo verde */
-            color: white; /* Testo bianco */
-            padding: 10px 20px; /* Padding interno */
-            border: none; /* Nessun bordo */
-            border-radius: 5px; /* Angoli arrotondati */
-            cursor: pointer; /* Puntatore del mouse a forma di mano */
+            background-color: #427b8a; /* Sfondo verde*/
+            color: white; /* Testo bianco*/
+            padding: 10px 20px; /* Padding interno*/
+            border: none; /* Nessun bordo*/
+            border-radius: 5px; /* Angoli arrotondati*/
+            cursor: pointer; /* Puntatore del mouse a forma di mano*/
         }
 
         /* Stile per il pulsante "Aggiungi al carrello" quando è in hover */
         .add-to-cart:hover {
-            background-color: #356876; /* Sfondo verde più scuro */
+            background-color: #356876; /* Sfondo verde più scuro*/
         }
+        @media (max-width: 300px) {
+            .content {
+                padding: 10px;
+            }
+            .book-item {
+                flex-direction: column;
+                align-items: center;
+            }
+            .book-item img {
+                max-width: 100px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .book-title {
+                text-align: center;
+            }
+            .book-actions {
+                text-align: center;
+            }
+        }
+
     </style>
 </head>
 <body>
