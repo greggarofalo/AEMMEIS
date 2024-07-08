@@ -31,6 +31,7 @@
             text-align: center;
         }
         .contenitore {
+            margin-top: 50px;
             text-align: center;
         }
         .iconAmm {
@@ -108,7 +109,14 @@
         <div class="iconAmm">
             <a href="gestisci-sedi">
                 <img src="./images/sede-icon.png" width="30" height="45" class="image">
-                <a href="gestisci-sedi">Modifica Sedi</a>
+                <a href="gestisci-sedi">Modifica Sedi</a><br><br>
+            </a>
+        </div>
+
+        <div class="iconAmm">
+            <a href="gestisci-ordini">
+                <img src="./images/procurement.png" width="48" height="50" class="image">
+                <a href="gestisci-ordini">Modifica Ordini</a><br><br>
             </a>
         </div>
     </div>

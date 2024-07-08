@@ -104,6 +104,29 @@ public class OrdineDAO {
             throw new RuntimeException(e);
         }
     }
+    public void updateStato(Ordine ordine){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE Ordine SET stato = ? WHERE idOrdine = ?");
+            ps.setString(1, ordine.getStato());
+            ps.setString(2, ordine.getIdOrdine());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateOrdineMatricola(Ordine ordine){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE Ordine SET matricola = ? WHERE idOrdine = ?");
+            ps.setString(1, ordine.getMatricola());
+            ps.setString(2, ordine.getIdOrdine());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void deleteOrdiniByEmail(String email){
         List<Ordine> ordini = this.doRetrieveByUtente(email);

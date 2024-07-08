@@ -4,7 +4,7 @@
 
         <div class="col">
             <img src="./images/logo.png" class="logo">
-            <p>Footer sito web example</p>
+            <p>AEMME</p>
         </div>
 
         <div class="col">
