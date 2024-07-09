@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="./css/footerAdmin.css">
 
     <style>
-        .header{
+        header{
             text-align: center;
             border-bottom-style: groove;
             padding: 10px;

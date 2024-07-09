@@ -1,5 +1,5 @@
 
-<div class="header">
+<header>
     <div class="container">
         <div class="icons-and-menu">
             <div class="icons">
@@ -9,5 +9,5 @@
             </div>
         </div>
     </div>
-</div>
+</header>
 

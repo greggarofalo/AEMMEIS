@@ -33,9 +33,7 @@
         }
         .content {
             flex: 1;
-        }
-        footer {
-            margin-top: auto;
+            padding-bottom: 20px;
         }
     </style>
 </head>

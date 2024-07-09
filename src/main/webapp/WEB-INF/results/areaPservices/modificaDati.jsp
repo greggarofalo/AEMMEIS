@@ -17,16 +17,17 @@
         }
 
         .email form{
-            width: 100%;
+            /*width: 100%;*/
             margin:10px;
-            padding-right: 15px;
+            /*padding-right: 15px;*/
         }
 
         .email .fieldset{
             text-align: center;
             padding: 20px;
-            margin: 0 auto; /* Center the fieldset */
+            /*margin: 0 auto; /* Center the fieldset */
             margin-bottom: 20px;
+            margin-top: 15px;
 
         }
 
@@ -44,7 +45,7 @@
             font-size: 16px;
             border: none; /* Rimuove il contorno */
             padding: 6px;
-            border-radius: 10px; /* Bordo arrotondato */
+            border-radius: 5px; /* Bordo arrotondato */
             margin-top: 5px;
         }
 

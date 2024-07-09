@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="header">
+<header>
     <div class="container">
         <div class="search-bar">
             <input type="search" placeholder="Search">
@@ -33,7 +33,7 @@
             </c:if>
         </c:forEach>
     </ul>
-</div>
+</header>
 
 
 <script>

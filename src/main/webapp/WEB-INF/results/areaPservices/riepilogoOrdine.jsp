@@ -25,9 +25,6 @@
         .content {
             flex: 1;
         }
-        footer {
-            margin-top: auto;
-        }
 
         .ordine-actions .button {
             display: flex;

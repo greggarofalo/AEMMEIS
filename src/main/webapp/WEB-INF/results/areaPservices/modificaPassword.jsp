@@ -59,7 +59,7 @@
             font-size: 16px;
             border: none; /* Rimuove il contorno */
             padding: 6px;
-            border-radius: 10px; /* Bordo arrotondato */
+            border-radius: 5px; /* Bordo arrotondato */
             margin-top: 5px;
         }
 
