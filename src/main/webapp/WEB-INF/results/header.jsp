@@ -2,8 +2,13 @@
 
 <header>
     <div class="container">
-        <div class="search-bar">
-            <input type="search" placeholder="Search">
+        <div class="logo-searchBar">
+            <div class="logoHeader">
+                <img src="./images/logo.png" alt="AEMME" width="88" class="image">
+            </div>
+            <div class="search-bar">
+                <input type="search" placeholder="Search">
+            </div>
         </div>
 
         <div class="icons-and-menu">

@@ -21,7 +21,11 @@ header {
     align-items: center; /* Allinea il pulsante del menu e le icone sulla stessa linea */
 }
 
-
+.logo-searchBar{
+    display: flex;
+    gap: 30px;
+    margin-left: 40px;
+}
 
 .search-bar{
     margin-top: 10px;
@@ -92,6 +96,11 @@ header li a:hover:not(.active) {
         align-items: flex-start; /* Allinea gli elementi all'inizio */
     }
 
+    .logo-searchBar{
+     /*   justify-content: space-between;*/
+        align-items: center;
+    }
+
     .search-bar {
         flex-grow: 1;
         width: 100%; /* La barra di ricerca occupa tutta la larghezza disponibile */
@@ -138,6 +147,10 @@ header li a:hover:not(.active) {
         font-size: 14px; /* Riduce ulteriormente la dimensione del font */
     }
 
+    .logoHeader{
+        display: none; /* tolgo il logo*/
+    }
+
     .icons a img {
         width: 20px; /* Riduce la dimensione delle icone */
         height: 20px; /* Riduce la dimensione delle icone */
@@ -154,7 +167,20 @@ header li a:hover:not(.active) {
     .search-bar{
         padding: 13px 50px;
     }
+
+    .logo-searchBar{
+        gap: 20px;
+    }
+
+    .logoHeader img{
+        width: 66px;
+    }
 }
 
+@media (min-width: 769px) and (max-width: 930px) {
+    .search-bar input[type="search"]{
+        width: 70%;
+    }
+}
 
 
