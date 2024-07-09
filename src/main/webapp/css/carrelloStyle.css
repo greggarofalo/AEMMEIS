@@ -122,14 +122,11 @@ body {
     background-color: #427b8a;
     color: white;
     border: none; /* Rimuove il bordo */
+    border-radius: 5px;
 }
 .cart-actions .button:hover {
     background-color: #356876; /* Sfondo verde più scuro */
 }
-
-/* Media Queries per rendere il layout responsive */
-
-
 
 /* Media Queries per rendere il layout responsive */
 

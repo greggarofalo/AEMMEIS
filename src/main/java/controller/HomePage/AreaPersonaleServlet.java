@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.utenteService.Utente;
 
 import java.io.IOException;
 
@@ -20,6 +21,9 @@ public class AreaPersonaleServlet extends HttpServlet {
         String address;
         if (session != null && session.getAttribute("utente") != null) {
             address = "/WEB-INF/results/areaPersonale.jsp";
+            Utente utente = (Utente) session.getAttribute("utente");
+            if(utente.getTipo().equalsIgnoreCase("amministratore"))
+                address = "/WEB-INF/results/admin/areaPersonaleAdmin.jsp";
         } else {
             address = "/WEB-INF/results/login.jsp";
         }

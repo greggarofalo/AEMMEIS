@@ -14,8 +14,8 @@
 
 <body>
     <%@include file="header.jsp"%>
-
-    <div class="dati">
+<div class="content">
+    <div class="elementi">
 
             <div class="azioni">
                 <ul>
@@ -24,64 +24,67 @@
                     <li><a href="log-out" onclick="return confirm('Sei sicuro di voler fare logout?')">Logout</a></li>
                 </ul>
             </div>
+            <div class="non-azioni">
+                <fieldset class="blocco dati">
+                    <legend><h3>I miei dati</h3></legend>
+                    <ul>
+                        <li>${utente.nomeUtente}</li>
+                        <li>${utente.tipo}</li>
+                        <c:forEach items="${utente.telefoni}" var="telefono">
+                            <li>${telefono}</li>
+                        </c:forEach>
+                    </ul>
+                    <form action="modifica-dati-supporto">
+                        <input type="submit" class="button" value="Modifica dati">
+                    </form>
+                </fieldset>
 
-            <fieldset class="blocco dati">
-                <legend><h3>I miei dati</h3></legend>
-                <ul>
-                    <li>${utente.nomeUtente}</li>
-                    <li>${utente.tipo}</li>
-                    <c:forEach items="${utente.telefoni}" var="telefono">
-                        <li>${telefono}</li>
-                    </c:forEach>
-                </ul>
-                <a href="modifica-dati-supporto" class="button"> Modifica dati
-                </a>
-            </fieldset>
+                <fieldset class="blocco email">
+                    <legend><h3>Email</h3></legend>
+                    <ul>
+                        <li>${utente.email}</li>
 
-            <fieldset class="blocco email">
-                <legend><h3>Email</h3></legend>
-                <ul>
-                    <li>${utente.email}</li>
-
-                </ul>
-            </fieldset>
-
-
-            <fieldset class="blocco password">
-                <legend><h3>Password</h3></legend>
-                <form action="modifica-password-supporto">
-                    <input type="submit" value="Modifica password" class="button">
-                </form>
-            </fieldset>
+                    </ul>
+                </fieldset>
 
 
+                <fieldset class="blocco password">
+                    <legend><h3>Password</h3></legend>
+                    <form action="modifica-password-supporto">
+                        <input type="submit" value="Modifica password" class="button">
+                    </form>
+                   <!-- <a href="modifica-password-supporto" class="button">Modifica password</a>-->
+                </fieldset>
 
-            <fieldset class="blocco tessera">
 
-                <legend><h3>Tessera</h3></legend>
-                <% Utente utente = (Utente) session.getAttribute("utente");
-                    if(utente.getTipo().equalsIgnoreCase("premium")){
-                        TesseraDAO serviceTessera = new TesseraDAO();
-                        Tessera tessera = serviceTessera.doRetrieveByEmail(utente.getEmail());
-                %>
-                <li>
-                    Numero tessera: <%= tessera.getNumero()%>
-                </li>
-                <li>
-                    Punti tessera: <%= tessera.getPunti() %>
-                </li>
-                <form id="standardForm" action="cambia-tipo" >
-                    <input type="submit" value="Diventa utente Standard" class="button">
-                </form>
-                <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
-                <form id="premiumForm" action="cambia-tipo">
-                    <input type="submit" value="Diventa utente Premium" class="button">
-                </form>
-                <% } %>
 
-            </fieldset>
-        </div>
+                <fieldset class="blocco tessera">
 
+                    <legend><h3>Tessera</h3></legend>
+                    <% Utente utente = (Utente) session.getAttribute("utente");
+                        if(utente.getTipo().equalsIgnoreCase("premium")){
+                            TesseraDAO serviceTessera = new TesseraDAO();
+                            Tessera tessera = serviceTessera.doRetrieveByEmail(utente.getEmail());
+                    %>
+                    <li>
+                        Numero tessera: <%= tessera.getNumero()%>
+                    </li>
+                    <li>
+                        Punti tessera: <%= tessera.getPunti() %>
+                    </li>
+                    <form id="standardForm" action="cambia-tipo" >
+                        <input type="submit" value="Diventa utente Standard" class="button">
+                    </form>
+                    <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
+                    <form id="premiumForm" action="cambia-tipo">
+                        <input type="submit" value="Diventa utente Premium" class="button">
+                    </form>
+                    <% } %>
+
+                </fieldset>
+            </div>
+    </div>
+</div>
         <%@include file="footer.jsp"%>
 
         <script>

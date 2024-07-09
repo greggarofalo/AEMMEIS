@@ -29,10 +29,9 @@
         }
         .content {
             flex: 1;
+            margin: 10px 10px 30px 10px;
         }
-        footer {
-            margin-top: auto;
-        }
+
     </style>
 </head>
 <body>
@@ -61,11 +60,6 @@
                     </div>
                 </div>
                 </c:forEach>
-                <div class="cart-summary">
-                    <div class="cart-actions">
-                        <button onclick="window.location.href='index.html'">HomePage</button>
-                    </div>
-                </div>
             </div>
         </div>
         <%@include file="footer.jsp"%>

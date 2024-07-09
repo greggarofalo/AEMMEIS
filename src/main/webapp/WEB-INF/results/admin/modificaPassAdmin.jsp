@@ -1,24 +1,21 @@
-<%@ page import="model.utenteService.Utente" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: aless
-  Date: 25/05/2024
-  Time: 23:40
+  Date: 08/07/2024
+  Time: 22:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Modifica password</title>
-    <link rel="stylesheet" type="text/css" href="./css/generale.css">
-    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerAdmin.css">
 
     <style>
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        .header{
+            text-align: center;
+            border-bottom-style: groove;
+            padding: 10px;
         }
         .wrapper {
             display: flex;
@@ -71,14 +68,13 @@
 </head>
 <body>
 <div class="wrapper">
-    <%@include file="/WEB-INF/results/header.jsp"%>
+    <%@include file="headerAdmin.jsp"%>
     <div class="content">
 
         <div class="pass">
-            <form action="area-personale">
+            <form action="area-personaleAdmin">
                 <input type="submit" value="Torna indietro">
             </form>
-
             <form action="modifica-password" class="pm">
                 <label for="pass">Password</label>
                 <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>
