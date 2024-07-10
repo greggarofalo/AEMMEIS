@@ -16,11 +16,11 @@
             margin: 30px;
             display: flex;
             flex-direction: row;
-            gap: 30px;
+            gap: 50px;
             align-items: center;
         }
         .ordine .image{
-            width: 60%;
+            width: 50%;
             box-shadow: 0 0 30px #427b8a; /* Ombra leggera attorno al contenitore */
             border-radius: 8px; /* Angoli arrotondati */
         }
@@ -43,13 +43,15 @@
             border-radius: 4px;
             border: 2px solid #356876;
             padding: 10px;
-            box-shadow: 0 0 2px 5px #427b8a, 0 0 7px 10px #afb2b3;
-
+            box-shadow: 0 0 20px #427b8a;
         }
 
         @media (max-width: 560px) {
             .ordine{
                 flex-direction: column;
+            }
+            .ordine .image{
+                width: 60%;
             }
         }
     </style>
