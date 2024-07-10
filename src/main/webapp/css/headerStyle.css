@@ -127,7 +127,6 @@ header li a:hover:not(.active) {
 }
 
 
-
 /* Media Queries per rendere l'header responsive */
 @media (max-width: 768px) {
     .container {
