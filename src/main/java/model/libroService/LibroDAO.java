@@ -252,5 +252,31 @@ public class LibroDAO {
         }
     }
 
+    public List<Libro> Search(String query) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Libro WHERE titolo LIKE ? OR isbn LIKE ?");
+            ps.setString(1, "%" + query + "%");
+            ps.setString(2, query + "%");
 
+            ResultSet rs = ps.executeQuery();
+            List<Libro> libri = new ArrayList<>();
+            while (rs.next()) {
+                Libro p = new Libro();
+                p.setIsbn(rs.getString(1));
+                p.setTitolo(rs.getString(2));
+                p.setGenere(rs.getString(3));
+                p.setAnnoPubblicazioni(rs.getString(4));
+                p.setPrezzo(rs.getDouble(5));
+                p.setSconto(rs.getInt(6));
+                p.setTrama(rs.getString(7));
+                p.setImmagine(rs.getString(8));
+                p.setDisponibile(rs.getBoolean(9));
+                p.setAutori(this.getScrittura(p.getIsbn()));
+                libri.add(p);
+            }
+            return libri;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -18,7 +18,7 @@ import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 
 @WebServlet(name = "insertUtente", value = "/insert-utente")
-public class RegistroUtente extends HttpServlet {
+public class RegistroUtente extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -27,19 +27,18 @@ public class RegistroUtente extends HttpServlet {
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
-        if(nomeUtente==null || nomeUtente.length()==0 || (email==null || email.length()==0 || !email.contains("@")) ||
-                codiceSicurezza==null || codiceSicurezza.length()==0 || tipo==null){
+        if (nomeUtente == null || nomeUtente.length() == 0 || (email == null || email.length() == 0 || !email.contains("@")) ||
+                codiceSicurezza == null || codiceSicurezza.length() == 0 || tipo == null) {
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
         String[] numeriTelefono = request.getParameterValues("telefono");
-        List<String> telefoni=new ArrayList<>();
-        for(String telefono : numeriTelefono){
-            if(telefono.length()!=10){
+        List<String> telefoni = new ArrayList<>();
+        for (String telefono : numeriTelefono) {
+            if (telefono.length() != 10) {
                 //pagina di errore per inserimento parametri errato
                 response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
-            }
-            else telefoni.add(telefono);
+            } else telefoni.add(telefono);
         }
 
 
@@ -50,13 +49,11 @@ public class RegistroUtente extends HttpServlet {
         utente.setTelefoni(telefoni);
 
 
-
-        if(codiceSicurezza.length() > 16){
+        if (codiceSicurezza.length() > 16) {
             //rimanda a una pagina di errore per password troppo lunga
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
-        }
-        else {
+        } else {
             UtenteDAO utenteService = new UtenteDAO();
             if (utenteService.doRetrieveById(utente.getEmail()) == null) {
                 utenteService.doSave(utente);
@@ -103,11 +100,10 @@ public class RegistroUtente extends HttpServlet {
         }
 
 
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req,resp);
+        this.doGet(req, resp);
     }
 }

@@ -25,6 +25,7 @@ header {
     display: flex;
     gap: 30px;
     margin-left: 40px;
+    position: relative;
 }
 
 .search-bar{
@@ -52,6 +53,7 @@ header {
 
 .container a {
     text-decoration: none;
+    color: black;
 }
 
 header ul {
@@ -86,6 +88,30 @@ header li a:hover:not(.active) {
     background: transparent; /* Imposta lo sfondo trasparente */
     border: none; /* Rimuove eventuali bordi */
     cursor: pointer; /* Cambia il cursore quando si passa sopra */
+}
+
+.suggestions {
+    overflow-y: scroll;
+    max-height: 200px;
+    left: 0;
+    width: 76%;
+    z-index: 1000;
+    background: white;
+    text-align: left;
+    position: absolute;
+    margin-left: 150px;
+    margin-top: 14px;
+    border-radius: 10px;
+}
+.suggestion {
+    padding: 7px;
+    line-height: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.suggestion:hover {
+    background-color: lightgray;
+    border-radius: 10px;
 }
 
 

@@ -41,11 +41,12 @@ label {
 }
 
 .checkbox {
+    font-size: smaller;
+    font-weight: 550;
     font-family: 'Arial', sans-serif; /* Font dei campi */
     display: flex; /* Usa Flexbox per l'allineamento */
     align-items: center; /* Allinea verticalmente al centro */
     margin: 0px;
-    flex-wrap: wrap; /* Permette di andare a capo se necessario */
 }
 
 /* Margine delle checkbox */
