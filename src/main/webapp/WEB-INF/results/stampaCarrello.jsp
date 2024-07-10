@@ -167,8 +167,8 @@
 
             // Definisce la funzione di gestione degli eventi per la risposta ricevuta
             xhttp.onreadystatechange = function() {
-                if (this.readyState == 4){
-                    if(this.status == 200){
+                if (this.readyState === 4){
+                    if(this.status === 200){
                         // Se la richiesta ha avuto successo, aggiorna la pagina
                         location.reload();
                     } else {

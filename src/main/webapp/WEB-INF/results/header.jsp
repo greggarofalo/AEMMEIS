@@ -8,7 +8,12 @@
                     <img src="./images/logo.png" alt="AEMME" width="88" class="image">
                 </div>
                 <div class="search-bar">
-                    <input type="search" id="search" onkeyup="search()" placeholder="Search">
+                    <div class="barra">
+                        <input type="text" id="search" onkeyup="search()" placeholder="Search">
+                        <a href="">
+                            <img src="./images/search-icon.png" width="25" height="25" class="image">
+                        </a>
+                    </div>
                     <div id="suggestions" class="suggestions"></div>
                 </div>
             </div>
