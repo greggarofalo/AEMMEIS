@@ -12,6 +12,7 @@ import model.carrelloService.RigaCarrello;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
 import model.utenteService.Utente;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class AggiungiCartServlet extends HttpServlet {
                 address = "mostra-libro";
             else if (source.equals("riepilogoOrdine"))
                 address = "riepilogo-ordine";
+            else if(source.equals("ricerca")) {
+                address = "ricerca-servlet?q="+request.getParameter("q");
+            }
         }
 
         LibroDAO libroService = new LibroDAO();
@@ -58,10 +62,11 @@ public class AggiungiCartServlet extends HttpServlet {
             righeCarrello.add(riga);
         }
 
-        session.setAttribute("carrello", carrello);
+            session.setAttribute("carrello", carrello);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+            dispatcher.forward(request, response);
+
     }
 
 }

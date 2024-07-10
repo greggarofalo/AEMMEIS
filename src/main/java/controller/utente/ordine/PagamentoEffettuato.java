@@ -77,7 +77,7 @@ public class PagamentoEffettuato extends HttpServlet {
         try {
             LocalDate.parse(dateStr); // Prova a fare il parsing della stringa come LocalDate
             return true;
-        } catch(Exception e) {
+        }catch(Exception e){
             return false; // Se l'eccezione viene lanciata, la stringa non è una data valida
         }
     }

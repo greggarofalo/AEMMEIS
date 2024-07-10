@@ -10,7 +10,7 @@
                 <div class="search-bar">
                     <div class="barra">
                         <input type="text" id="search" onkeyup="search()" placeholder="Search">
-                        <a href="">
+                        <a id="search-icon" href="#">
                             <img src="./images/search-icon.png" width="25" height="25" class="image">
                         </a>
                     </div>
@@ -77,6 +77,12 @@
         };
         xhr.send();
     }
+
+    document.getElementById("search-icon").addEventListener("click", function(event) {
+        event.preventDefault();  // Prevent default link behavior
+        let query = document.getElementById("search").value;
+        window.location.href = "ricerca-servlet?q=" + encodeURIComponent(query);
+    });
 
 
 </script>

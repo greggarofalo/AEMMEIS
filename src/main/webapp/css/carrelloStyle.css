@@ -80,13 +80,13 @@ body {
     gap: 10px;
 }
 
-.favorite-button, .remove-button {
+.favorite-button, .cart-button, .remove-button{
     background: none;
     border: none;
     cursor: pointer;
 }
 
-.favorite-button img, .remove-button img {
+.favorite-button img, .cart-button img, .remove-button img {
     width: 20px;
     height: 20px;
 }
