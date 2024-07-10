@@ -17,18 +17,15 @@
         }
 
         .email form{
-            /*width: 100%;*/
             margin:10px;
-            /*padding-right: 15px;*/
         }
 
         .email .fieldset{
             text-align: center;
             padding: 20px;
-            /*margin: 0 auto; /* Center the fieldset */
             margin-bottom: 20px;
             margin-top: 15px;
-
+            border-radius: 10px;
         }
 
         .email .fieldset label, .email .fieldset input{
@@ -36,7 +33,6 @@
             width: 100%;
             text-align: left;
             margin: 10px 0;
-
         }
 
         input[type="submit"] {
@@ -66,14 +62,15 @@
 
         <fieldset class="fieldset">
             <legend><h3>Dati</h3></legend>
-                <form action="modifica-dati" method="post">
+                <form action="modifica-dati">
                     <label for="nomeUtente">Nome utente: </label>
-                    <input type="email" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
+                    <input type="text" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
 
                     <c:forEach items="${utente.telefoni}" var="telefono">
                        <br><br><label for="telefono">Telefono</label>
                         <input type="text" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}"><br><br>
                     </c:forEach>
+
                     <input type="submit" value="Conferma">
                 </form>
         </fieldset>

@@ -5,10 +5,8 @@
 }
 
 .imgReparto {
-    /*width: 1500px; /* Imposta la larghezza dell'immagine al 100% del contenitore */
     height: 400px;
     width: 100%; /* Imposta la larghezza massima al 100% del contenitore */
-    /*height: auto; /* Mantieni l'aspect ratio */
     display: block;
 }
 

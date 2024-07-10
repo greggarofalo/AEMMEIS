@@ -110,11 +110,10 @@ UtenteDAO {
 
     public void updateUtente(Utente utente){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE utente SET nomeUtente = ?, codiceSicurezza = ?, tipo = ? WHERE email = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET nomeUtente = ?, tipo = ? WHERE email = ?");
             ps.setString(1, utente.getNomeUtente());
-            ps.setString(2, utente.getCodiceSicurezza());
-            ps.setString(3, utente.getTipo());
-            ps.setString(4, utente.getEmail());
+            ps.setString(2, utente.getTipo());
+            ps.setString(3, utente.getEmail());
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("UPDATE error.");
             List<String> telefoni = this.cercaTelefoni(utente.getEmail());
@@ -126,7 +125,19 @@ UtenteDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public void updateUtentePassword(Utente utente){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET codiceSicurezza = ? WHERE email = ?");
+            ps.setString(1, utente.getCodiceSicurezza());
+            ps.setString(2, utente.getEmail());
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteUtente(String email){

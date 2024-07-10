@@ -73,6 +73,21 @@
         .ordine .button:hover {
             background-color: #356876;
         }
+
+        input[type="submit"] {
+            background-color: #427b8a;
+            color: #fff;
+            font-size: 16px;
+            border: none; /* Rimuove il contorno */
+            padding: 6px;
+            border-radius: 5px; /* Bordo arrotondato */
+            margin-top: 5px;
+            margin-bottom: 7px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #356876;
+        }
         @media (max-width: 768px) {
             .ordine {
                 padding: 15px;
@@ -86,6 +101,10 @@
     <%@include file="/WEB-INF/results/header.jsp"%>
         <div class="content">
 
+            <form action="area-personale">
+                <input type="submit" value="Torna indietro">
+            </form>
+
             <div class="ordini">
                 <c:forEach items="${ordini}" var="ordine">
                     <div class="ordine">
@@ -93,7 +112,10 @@
                             <li><h3>ID ORDINE: </h3> ${ordine.idOrdine}</li>
                             <li><h3>COSTO: </h3> ${ordine.costo}€</li>
                             <li><h3>INDIRIZZO SPEDIZIONE: </h3> ${ordine.indirizzoSpedizione} (${ordine.citta})</li>
+                            <% Utente utente = (Utente) session.getAttribute("utente");
+                            if(utente.getTipo().equalsIgnoreCase("premium")){%>
                             <li><h3>PUNTI OTTENUTI: </h3> ${ordine.puntiOttenuti}</li>
+                            <%}%>
                             <li><h3>DATA EFFETTUAZIONE: </h3> ${ordine.dataEffettuazione}</li>
                             <li>
                                 <h3>STATO: </h3> ${ordine.stato}

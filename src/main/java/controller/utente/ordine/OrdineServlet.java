@@ -89,7 +89,8 @@ public class OrdineServlet extends HttpServlet {
             righeOrdine.add(riga);
 
             costo += ((rigaCarrello.getQuantita() * prezzoUnitario) - (ordine.getPuntiSpesi() * 0.10)); //tolgo
-            puntiAcquisiti += 5* rigaCarrello.getQuantita();
+            if(utente.getTipo().equalsIgnoreCase("premium"))
+                puntiAcquisiti += 5* rigaCarrello.getQuantita();
 
 
             //quando scorro la losgta delle righe del carrello che voglio acquistare
@@ -112,8 +113,6 @@ public class OrdineServlet extends HttpServlet {
                     break;
                 }
             }
-
-            //rigaCarrelloDAO.deleteRigaCarrello(l.getIsbn(), carrello.getIdCarrello()); //cancello la riga carrello poichè ho acquistato
 
         }
 

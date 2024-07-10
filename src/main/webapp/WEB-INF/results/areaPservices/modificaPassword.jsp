@@ -61,6 +61,7 @@
             padding: 6px;
             border-radius: 5px; /* Bordo arrotondato */
             margin-top: 5px;
+            margin-left: 10px;
         }
 
         input[type="submit"]:hover {

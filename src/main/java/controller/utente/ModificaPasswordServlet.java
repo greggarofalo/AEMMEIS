@@ -21,7 +21,7 @@ public class ModificaPasswordServlet extends HttpServlet {
         UtenteDAO serviceUtente = new UtenteDAO();
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         utente.setCodiceSicurezza(password);
-        serviceUtente.updateUtente(utente);
+        serviceUtente.updateUtentePassword(utente);
         RequestDispatcher dispatcher = request.getRequestDispatcher("area-personale");
         dispatcher.forward(request, response);
     }

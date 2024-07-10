@@ -184,6 +184,5 @@ body {
 @media (max-width: 768px) {
     .book-description-details ul {
         display: block; /* Assicura che gli elementi siano ancora visibili */
-        /*padding: 10px; /* Aggiungi padding appropriato */
     }
 }

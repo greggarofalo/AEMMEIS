@@ -34,7 +34,6 @@ label {
     margin-bottom: 5px; /* Spazio sotto le etichette */
     color: #333; /* Colore del testo delle etichette */
     font-family: 'Arial', sans-serif; /* Font delle etichette */
-    /*width: 80%;*/
 }
 
 .checkbox{
