@@ -19,35 +19,45 @@
 <body>
 <%@include file="header.jsp"%>
 <div class="book-container">
-    <h1>${libro.titolo}</h1>
 
-    <h2><h3 style="display: inline;">di </h3></h2>
-    <c:forEach items="${autori}" var="autore" varStatus="status">
-        <!-- Aggiunta dell'attributo varStatus="status" al tag forEach
-        Questo introduce una variabile status che tiene traccia dello stato del loop,
-        inclusa la proprietà last che indica se l'elemento corrente è l'ultimo nell'iterazione. -->
-        <h3 style="display: inline;">${autore.nome} ${autore.cognome}</h3>
-        <c:if test="${!status.last}">, </c:if>
-    </c:forEach>
     <div class="book-details">
         <div class="book-image">
             <img src="${libro.immagine}" alt="${libro.titolo}">
         </div>
         <div class="book-info">
-            <p>Prezzo: <span id="prezzo-originale" class="original-price">${libro.prezzo}€</span>
-                <c:choose>
-                    <c:when test="${libro.sconto != 0}">
-                        <span id="prezzo-scontato" class="discounted-price"></span>
-                        (<span id="percentuale-sconto">-${libro.sconto}%</span>)
-                    </c:when>
-                    <c:otherwise>
-                        <span id="prezzo-scontato" class="discounted-price">${libro.prezzo}€</span>
-                    </c:otherwise>
-                </c:choose>
-            </p>
+            <div class="info">
+                <h1>${libro.titolo}</h1>
+
+                <h2><h3 style="display: inline;">di </h3></h2>
+                <c:forEach items="${autori}" var="autore" varStatus="status">
+                    <!-- Aggiunta dell'attributo varStatus="status" al tag forEach
+                    Questo introduce una variabile status che tiene traccia dello stato del loop,
+                    inclusa la proprietà last che indica se l'elemento corrente è l'ultimo nell'iterazione. -->
+                    <h3 style="display: inline;">${autore.nome} ${autore.cognome}</h3>
+                    <c:if test="${!status.last}">, </c:if>
+                </c:forEach>
+            </div>
+
+            <c:choose>
+                <c:when test="${libro.sconto != 0}">
+                    <br><br>
+                    <p>Prezzo: <span id="prezzo-originale" class="original-price">${libro.prezzo}€</span>
+                    <span id="prezzo-scontato" class="discounted-price"></span>
+                    (<span id="percentuale-sconto">-${libro.sconto}%</span>)
+                    <br><br>
+                </c:when>
+                <c:otherwise>
+                    <br><br>
+                    <p>Prezzo: <span id="prezzo" class="prezzo">${libro.prezzo}€</span> </p>
+                    <br><br>
+                </c:otherwise>
+            </c:choose>
+
             <c:choose>
                 <c:when test="${libro.disponibile}">
                     <form action="aggiungi-carrello">
+                        <p class="available">Disponibile</p>
+                        <br><br>
                         <input type="hidden" name="isbn" value="${libro.isbn}">
                         <input type="hidden" name="source" value="mostraLibro">
                         <input class="add-to-cart" type="submit" value="Aggiungi al carrello">
@@ -55,6 +65,7 @@
                 </c:when>
                 <c:otherwise>
                     <p class="not-available">Libro non disponibile</p>
+                    <br><br>
                     <button class="add-to-cart" disabled style="background-color: #ccc;">Aggiungi al carrello</button>
                 </c:otherwise>
             </c:choose>

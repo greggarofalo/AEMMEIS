@@ -17,12 +17,8 @@ body {
 /* Stile per la sezione dettagli del libro */
 .book-details {
     display: flex; /* Utilizza il layout flexbox */
-
-    flex-wrap: wrap; /* Permette di avvolgere i contenuti */
-
     align-items: flex-start; /* Allinea gli elementi all'inizio verticalmente */
-
-    overflow: visible; /* Assicura che il contenuto sia visibile */
+    margin: 10px;
 }
 
 /* Stile per la sezione immagine del libro */
@@ -33,24 +29,32 @@ body {
 
 /* Stile per l'immagine del libro */
 .book-image img {
-    max-width: 100%; /* L'immagine occupa la larghezza massima del contenitore, mantenendo le proporzioni */
+    margin-left: 30px;
+    max-width: 80%; /* L'immagine occupa la larghezza massima del contenitore, mantenendo le proporzioni */
     border-radius: 8px; /* Angoli arrotondati per l'immagine */
 }
 
 /* Stile per la sezione informazioni del libro */
 .book-info {
-    flex: 2; /* Occupa due parti del contenitore, in proporzione al .book-image */
+    flex: 2;
+    margin: 20px;
 }
 
 /* Stile per i paragrafi all'interno di .book-info */
 .book-info p {
-    margin: 10px 0; /* Margine verticale di 10px */
+    margin: 10px;
 }
 
 /* Stile per il prezzo originale del libro */
 .book-info .original-price {
     text-decoration: line-through; /* Linea attraverso il testo per indicare il prezzo scontato */
     color: #888; /* Colore grigio */
+}
+
+.book-info .prezzo {
+    font-size: 1.2em; /* Dimensione del font leggermente più grande */
+    font-weight: bold; /* Testo in grassetto */
+    color: #000000; /* Colore nero */
 }
 
 /* Stile per il prezzo scontato del libro */
@@ -61,13 +65,19 @@ body {
 }
 
 /* Stile per la disponibilità del libro */
-.book-info .availability {
+.book-info .available {
     color: green; /* Colore verde */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+.book-info .not-available {
+    color: red; /* Colore verde */
     font-weight: bold; /* Testo in grassetto */
 }
 
 /* Stile per il pulsante "Aggiungi al carrello" */
 .add-to-cart {
+    font-size: 15px;
     background-color: #427b8a; /* Sfondo verde */
     color: white; /* Testo bianco */
     padding: 10px 20px; /* Padding interno */
