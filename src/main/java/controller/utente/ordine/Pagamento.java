@@ -40,7 +40,10 @@ public class Pagamento extends HttpServlet {
         if(type.equals("indirizzo")){
             String indirizzo = request.getParameter("indirizzo") + ", " + request.getParameter("cap");
             String citta = request.getParameter("citta");
-            if(indirizzo==null || indirizzo.isEmpty() || citta==null || citta.isEmpty() || !isNumeric(request.getParameter("cap")) || request.getParameter("cap").length()>5) {
+            if(request.getParameter("indirizzo")==null|| request.getParameter("cap")==null
+                    || request.getParameter("indirizzo").isEmpty()|| request.getParameter("cap").isEmpty()
+                    || citta==null || citta.isEmpty() || !isNumeric(request.getParameter("cap"))
+                    || request.getParameter("cap").length()>5) {
                 //pagina di errore per inserimento parametri errato
                 response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
             }

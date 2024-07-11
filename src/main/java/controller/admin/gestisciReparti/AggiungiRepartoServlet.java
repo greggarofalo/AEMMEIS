@@ -19,7 +19,7 @@ public class AggiungiRepartoServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String descrizione = request.getParameter("descrizione");
         String immagine = request.getParameter("immagine");
-        if(nome==null || nome.length()==0 || descrizione==null || descrizione.length()==0 || immagine==null || immagine.length()==0){
+        if(nome==null || nome.isEmpty() || descrizione==null || descrizione.isEmpty() || immagine==null || immagine.isEmpty()){
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
