@@ -17,9 +17,12 @@
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/homePageStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/repartiStyle2.css">
+
   </head>
   <body>
+  <div class="wrapper">
      <%@include file="header.jsp"%>
+       <div class="content">
      <% WishList wishList = (WishList) session.getAttribute("wishList");
        Reparto reparto = (Reparto) request.getAttribute("reparto");
        //List<Reparto> reparti = (List<Reparto>) session.getAttribute("reparti");
@@ -101,7 +104,8 @@
            }
          };
        </script>
-
+       </div>
        <%@include file="footer.jsp" %>
+       </div>
   </body>
 </html>

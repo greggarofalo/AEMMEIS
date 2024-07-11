@@ -12,25 +12,6 @@
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/homePageStyle.css">
-    <!--questo style aggiuntivo serve per spostare il footer in basso alla bagina-->
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .content {
-            flex: 1;
-        }
-        footer {
-            margin-top: auto;
-        }
-    </style>
 </head>
 
 <body>

@@ -14,7 +14,7 @@
 
 <body>
     <%@include file="header.jsp"%>
-<div class="content">
+<div class="contenuto">
     <div class="elementi">
 
             <div class="azioni">

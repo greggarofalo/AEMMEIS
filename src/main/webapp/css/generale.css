@@ -8,3 +8,18 @@ html {
     padding: 0;
     font-family: 'poppins', sans-serif;
 }
+/*questo style aggiuntivo serve per spostare il footer in basso alla bagina*/
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex: 1;
+    padding-bottom: 20px;
+}

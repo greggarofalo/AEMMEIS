@@ -58,6 +58,7 @@
             align-items: center;
         }
 
+
         @media (max-width: 457px) {
             .containerIndirizzo {
                 width: 90%;
@@ -66,8 +67,9 @@
     </style>
 </head>
 <body>
+<div class="wrapper">
 <%@include file="header.jsp"%>
-
+    <div class="content">
     <div class="containerIndirizzo">
         <div class="button-row">
             <button class="choice-button" onclick="showSection('indirizzo')">Indirizzo</button>
@@ -76,8 +78,9 @@
 
         <div id="content"></div>
     </div>
-
+    </div>
 <%@include file="footer.jsp"%>
+</div>
 <script>
     function showSection(section) {
         let content = document.getElementById('content');

@@ -21,8 +21,9 @@
 </head>
 
 <body>
+<div class="wrapper">
 <%@include file="header.jsp"%>
-
+<div class="content">
 <div class="book-list">
     <%
         List<RigaCarrello> righe = (List<RigaCarrello>) session.getAttribute("righeDisponibili");
@@ -102,8 +103,9 @@
         </form>
     </div>
 </div>
-
+</div>
 <%@include file="footer.jsp"%>
+</div>
 
 <script>
     function addToFavorites(isbn) {
