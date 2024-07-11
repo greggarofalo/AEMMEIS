@@ -27,8 +27,8 @@ public class RegistroUtente extends HttpServlet{
         String email = request.getParameter("email");
         String codiceSicurezza = request.getParameter("pw");
         String tipo = request.getParameter("tipo");
-        if (nomeUtente == null || nomeUtente.length() == 0 || (email == null || email.length() == 0 || !email.contains("@")) ||
-                codiceSicurezza == null || codiceSicurezza.length() == 0 || tipo == null) {
+        if (nomeUtente == null || nomeUtente.isEmpty() || (email == null || email.isEmpty() || !email.contains("@")) ||
+                codiceSicurezza == null || codiceSicurezza.isEmpty() || tipo == null) {
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
         }
@@ -95,7 +95,9 @@ public class RegistroUtente extends HttpServlet{
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
                 dispatcher.forward(request, response);
             } else {
-                //creare pagina di errore dicendo che è già presente un utente con la stessa email, chiedere se vuole fare il login
+                //pagina di errore nel caso l'email fosse già presente nel db
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/utentePresente.jsp");
+                dispatcher.forward(request, response);
             }
         }
 
