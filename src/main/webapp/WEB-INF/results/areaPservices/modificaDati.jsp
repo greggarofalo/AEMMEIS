@@ -49,35 +49,98 @@
             background-color: #356876;
         }
 
+        .add-phone, .remove-phone{
+            background: transparent;
+            border: none;
+            margin-left: 80%;
+            margin-bottom: 3px;
+
+            display: block; /* Mostra come blocco */
+        }
+
     </style>
 </head>
 <body>
 
-    <%@include file="/WEB-INF/results/header.jsp"%>
+<%@include file="/WEB-INF/results/header.jsp"%>
 
-    <div class="email">
-        <form action="area-personale">
-            <input type="submit" value="Torna indietro">
+<div class="email">
+    <form action="area-personale">
+        <input type="submit" value="Torna indietro">
+    </form>
+
+    <fieldset class="fieldset">
+        <legend><h3>Dati</h3></legend>
+        <form action="modifica-dati">
+            <label for="nomeUtente">Nome utente: </label>
+            <input type="text" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
+
+            <div class="phone-container">
+                <c:forEach items="${utente.telefoni}" var="telefono">
+                    <div class="phone-item">
+                        <div id="phone">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}" readonly>
+                        </div>
+                        <button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
+                            <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
+                        </button>
+                    </div>
+                </c:forEach>
+            </div>
+
+
+            <br><br>
+            <button type="button" class="add-phone" onclick="addPhoneField()">
+                <img src="images/add-icon3.png" alt="Menu" width="18" height="18"><br>
+            </button>
+
+            <input type="submit" value="Conferma">
         </form>
+    </fieldset>
+</div>
 
-        <fieldset class="fieldset">
-            <legend><h3>Dati</h3></legend>
-                <form action="modifica-dati">
-                    <label for="nomeUtente">Nome utente: </label>
-                    <input type="text" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
+<script>
+    function addPhoneField() {
+        var container = document.getElementById('phone');
+        var newField = document.createElement('div');
+        newField.innerHTML = '<input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
+        container.appendChild(newField);
+    }
 
-                    <c:forEach items="${utente.telefoni}" var="telefono">
-                       <br><br><label for="telefono">Telefono</label>
-                        <input type="text" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}"><br><br>
-                    </c:forEach>
+    function removePhoneField(button) {
+        var phoneFields = document.querySelectorAll('input[name="telefono"]');
+        if (phoneFields.length <= 1) {
+            alert('Deve esserci almeno un numero di telefono.');
+            return;
+        }
 
-                    <input type="submit" value="Conferma">
-                </form>
-        </fieldset>
-    </div>
+        var telefonoDaRimuovere = button.getAttribute('data-telefono');
+        var emailUtente = "${utente.email}";
 
+        // Esegui una chiamata AJAX per rimuovere il telefono tramite la Servlet
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'rimuovi-telefono', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log('Telefono rimosso dal database con successo.');
+                // Rimuovi il campo telefono dall'interfaccia utente
+                var phoneField = button.closest('.phone-container');
+                phoneField.remove();
+            } else {
+                console.log('Errore durante la rimozione del telefono dal database.');
+                // Gestisci eventuali errori o fornisci feedback all'utente
+            }
+        };
+        var data = JSON.stringify({ email: emailUtente, telefono: telefonoDaRimuovere });
 
-    <%@include file="/WEB-INF/results/footer.jsp"%>
+        // Invia la richiesta con i dati
+        xhr.send(data);
+    }
+</script>
+
+<%@include file="/WEB-INF/results/footer.jsp"%>
 
 
 </body>

@@ -11,6 +11,8 @@ import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet("/modifica-dati")
 public class ModificaDatiServlet extends HttpServlet {
@@ -33,12 +35,26 @@ public class ModificaDatiServlet extends HttpServlet {
             }
         }
 
+        List<String> tele = Arrays.asList(telefoni);
+
+        if(!utente.getTelefoni().equals(tele)){
+            for (String tel : utente.getTelefoni()) {
+                if (!tel.isEmpty() && !(utente.getTelefoni().contains(tel))) {
+                    utente.getTelefoni().remove(tel);
+                }
+            }
+        }
+
         if(!nomeUtente.isEmpty()){
             utente.setNomeUtente(nomeUtente);
         }
 
         services.updateUtente(utente); //cambio tutto nel db
-      //  response.sendRedirect("modifica-dati-supporto");
+
+        // Aggiorna l'utente in sessione
+        session.setAttribute("utente", utente);
+
+        //response.sendRedirect("modifica-dati-supporto");
         RequestDispatcher dispatcher = request.getRequestDispatcher("modifica-dati-supporto");
         dispatcher.forward(request, response);
 

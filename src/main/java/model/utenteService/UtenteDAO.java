@@ -122,6 +122,12 @@ UtenteDAO {
                     this.addTelefono(utente.getEmail(), tel);
                 }
             }
+            for (String tel : telefoni ){
+                if(!(utente.getTelefoni().contains(tel))){
+                    this.deleteTelefono(utente.getEmail(), tel);
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
