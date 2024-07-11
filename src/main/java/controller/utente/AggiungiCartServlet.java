@@ -36,6 +36,9 @@ public class AggiungiCartServlet extends HttpServlet {
                 address = "riepilogo-ordine";
             else if(source.equals("ricerca")) {
                 address = "ricerca-servlet?q="+request.getParameter("q");
+            }else if(source.equals("aggiungi-carrello")) {
+                address = "mostra-reparto";
+
             }
         }
 

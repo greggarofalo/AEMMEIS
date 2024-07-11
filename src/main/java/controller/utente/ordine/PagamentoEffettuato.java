@@ -14,7 +14,6 @@ import model.utenteService.Utente;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 @WebServlet("/pagamento-effettuato")
 public class PagamentoEffettuato extends HttpServlet {
@@ -28,14 +27,14 @@ public class PagamentoEffettuato extends HttpServlet {
         ordine.setCitta(request.getParameter("citta"));
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
         ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
-        ordine.setPuntiSpesi(0);
-
+       // ordine.setPuntiSpesi(0);
+        int punti = 0;
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
-            int punti = 0;
+
             if(puntiString != null && (!puntiString.isEmpty()))
                 punti = Integer.parseInt(puntiString);
-            Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
+           /* Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
             if(tessera.getDataScadenza().isAfter(LocalDate.now())){
                 ordine.setPuntiSpesi(punti);
                 tessera.setPunti(tessera.getPunti() - punti);
@@ -49,8 +48,9 @@ public class PagamentoEffettuato extends HttpServlet {
                 tesseraDAO.updateTessera(newTess);
             } else{
                 ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
-            }
+            }*/
         }
+        ordine.setPuntiSpesi(punti);
 
         //effettuare controlli su dati dell'uetnet che acquista
         String cardName = request.getParameter("cardName");

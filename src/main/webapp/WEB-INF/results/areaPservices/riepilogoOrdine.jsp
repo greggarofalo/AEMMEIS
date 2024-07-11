@@ -34,6 +34,7 @@
             background-color: #427b8a;
             color: white;
             border: none; /* Rimuove il bordo*/
+            border-radius: 5px;
         }
         .add-to-cart {
             background-color: #427b8a; /* Sfondo verde*/

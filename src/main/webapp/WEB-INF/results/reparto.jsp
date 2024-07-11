@@ -63,12 +63,16 @@
           <div class="azioni">
             <form action="modifica-preferiti">
               <input type="hidden" name="isbn" value="${libro.isbn}">
+              <input type="hidden" name="source" value="reparto">
+              <input type="hidden" name="repartoAttuale" value="${repartoAttuale}">
               <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
             </form>
             <c:choose>
               <c:when test="${libro.disponibile}">
                 <form action="aggiungi-carrello">
                   <input type="hidden" name="isbn" value="${libro.isbn}">
+                  <input type="hidden" name="source" value="aggiungi-carrello">
+                  <input type="hidden" name="id" value="${repartoAttuale}">
                   <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
                 </form>
               </c:when>

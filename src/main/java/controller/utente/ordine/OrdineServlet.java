@@ -18,6 +18,8 @@ import model.ordineService.Ordine;
 import model.ordineService.OrdineDAO;
 import model.ordineService.RigaOrdine;
 import model.ordineService.RigaOrdineDAO;
+import model.tesseraService.Tessera;
+import model.tesseraService.TesseraDAO;
 import model.utenteService.Utente;
 
 import java.io.IOException;
@@ -45,19 +47,22 @@ public class OrdineServlet extends HttpServlet {
         RigaOrdineDAO rigaOrdineDAO = new RigaOrdineDAO();
         RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
         CarrelloDAO carrelloDAO = new CarrelloDAO();
+        TesseraDAO tesseraDAO = new TesseraDAO();
         Carrello carrelloDB = carrelloDAO.doRetriveByUtente(utente.getEmail());
 
         //parametri passati da servlet a jsp...
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
         ordine.setCitta(request.getParameter("citta"));
 
-        if(utente.getTipo().equalsIgnoreCase("premium")){
+       // if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
             int punti = 0;
             if(puntiString != null && !puntiString.isEmpty())
                 punti = Integer.parseInt(puntiString);
             ordine.setPuntiSpesi(punti);
-        }
+       // }
+
+
 
         //parametri calcolati
         double costo = 0;
@@ -116,10 +121,26 @@ public class OrdineServlet extends HttpServlet {
 
         }
 
-       // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
-        ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza
         ordine.setPuntiOttenuti(puntiAcquisiti);
 
+        //aggiorno tessera
+        Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
+        if(tessera.getDataScadenza().isAfter(LocalDate.now())){
+            tessera.setPunti(tessera.getPunti() - ordine.getPuntiSpesi() + ordine.getPuntiOttenuti());
+         /*   Tessera newTess = new Tessera();
+            newTess.setPunti(tessera.getPunti());
+            newTess.setNumero(tessera.getNumero());
+            newTess.setDataScadenza(tessera.getDataScadenza());
+            newTess.setEmail(tessera.getEmail());
+            newTess.setDataCreazione(tessera.getDataCreazione());*/
+
+            tesseraDAO.updateTessera(tessera);
+        } else{
+            ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
+        }
+
+        // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
+        ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza
             //utente che effettua l'ordine
         ordine.setEmail(utente.getEmail());
             //quando si fa l'ordine: nel momento di invocazione della servlet
