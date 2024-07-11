@@ -33,15 +33,15 @@ public class NuovoLibroServlet extends HttpServlet {
         String immagine = request.getParameter("immagine");
 
 
-        if(isbn==null || isbn.length()==0 || titolo==null || titolo.length()==0 || genere==null || genere.length()==0 ||
-                annoPubblicazioni==null || annoPubblicazioni.length()==0 || price==null || price.length()==0 ||
+        if(isbn==null || isbn.isEmpty() || titolo==null || titolo.isEmpty() || genere==null || genere.isEmpty() ||
+                annoPubblicazioni==null || annoPubblicazioni.isEmpty() || price==null || price.isEmpty() ||
                 sconto1==null || trama==null || immagine==null){
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
         }
         try {
             double prezzo = Double.parseDouble(price);
             int sconto;
-            if(sconto1.length()==0)
+            if(sconto1.isEmpty())
                 sconto=0;
             else {
                 sconto = Integer.parseInt(sconto1);
@@ -55,7 +55,7 @@ public class NuovoLibroServlet extends HttpServlet {
 
             if (nomiAutori != null && cognomiAutori != null && cfAutori != null) {
                 for (int i = 0; i < nomiAutori.length; i++) {
-                    if(nomiAutori[i].length()==0 || cognomiAutori[i].length()==0 || cfAutori[i].length()==0) {
+                    if(nomiAutori[i].isEmpty() || cognomiAutori[i].isEmpty() || cfAutori[i].isEmpty()) {
                         response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
                     }
                     Autore autore = new Autore();
