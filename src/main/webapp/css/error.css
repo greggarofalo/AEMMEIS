@@ -1,0 +1,71 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+.error-class{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+    margin:50px
+}
+
+.error-class .message p{
+    border-bottom: 5px solid #427b8a;
+    border-radius: 10px;
+    padding: 15px
+}
+
+.message{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="submit"] {
+    background: transparent;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 5px solid #427b8a;
+    color: black;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 10px; /* Bordo arrotondato */
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #427b8a;
+    color: white;
+}
+
+@media (max-width: 576px) {
+    .error-class{
+        flex-direction: column;
+        gap: 30px;
+        margin: 30px;
+    }
+
+    .image{
+        width: 70%;
+    }
+
+    .error-class .message p, input[type="submit"] {
+        padding: 10px
+    }
+}
+
+@media (max-width: 380px){
+    .error-class{
+        margin: 15px;
+    }
+    .image{
+        width: 100%;
+    }
+
+    .error-class .message p, input[type="submit"] {
+        font-size: 13px;
+    }
+
+}

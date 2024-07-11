@@ -1,17 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: M.DELUCIA18
-  Date: 31/05/2024
-  Time: 19:26
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Errore parametri</title>
+    <title>Errore</title>
+    <link rel="stylesheet" type="text/css" href="./css/generale.css">
+    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/error.css">
 </head>
 <body>
-<h2>Errore formato parametri form</h2>
-
+<div class="error-class">
+    <img src="./images/warning.png" width="50%" alt="warning-image" class="image">
+    <div class="message">
+        <p>
+            Valore inserito non valido
+        </p>
+        <form action="index.html">
+            <input type="submit" value="Torna alla homepage">
+        </form>
+    </div>
+</div>
+<%@include file="/WEB-INF/results/footer.jsp"%>
 </body>
 </html>

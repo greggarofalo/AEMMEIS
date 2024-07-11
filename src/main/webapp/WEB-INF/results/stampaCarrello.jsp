@@ -2,13 +2,7 @@
 <%@ page import="model.carrelloService.RigaCarrello" %>
 <%@ page import="model.carrelloService.Carrello" %>
 <%@ page import="model.libroService.Libro" %>
-<%@ page import="model.wishList.WishList" %><%--
-  Created by IntelliJ IDEA.
-  User: M.DELUCIA18
-  Date: 24/05/2024
-  Time: 13:54
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.wishList.WishList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>

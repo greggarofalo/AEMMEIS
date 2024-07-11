@@ -54,7 +54,7 @@ public class OrdineServlet extends HttpServlet {
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
             int punti = 0;
-            if(puntiString != null)
+            if(puntiString != null && !puntiString.isEmpty())
                 punti = Integer.parseInt(puntiString);
             ordine.setPuntiSpesi(punti);
         }
@@ -88,7 +88,7 @@ public class OrdineServlet extends HttpServlet {
         //    rigaOrdineDAO.doSave(riga); //salvo nel db la riga ordine
             righeOrdine.add(riga);
 
-            costo += ((rigaCarrello.getQuantita() * prezzoUnitario) - (ordine.getPuntiSpesi() * 0.10)); //tolgo
+            costo += ((rigaCarrello.getQuantita() * prezzoUnitario) /*- (ordine.getPuntiSpesi() * 0.10)*/); //tolgo
             if(utente.getTipo().equalsIgnoreCase("premium"))
                 puntiAcquisiti += 5* rigaCarrello.getQuantita();
 
@@ -117,7 +117,7 @@ public class OrdineServlet extends HttpServlet {
         }
 
        // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
-        ordine.setCosto(costo); //lo ricalcolo per sicurezza
+        ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza
         ordine.setPuntiOttenuti(puntiAcquisiti);
 
             //utente che effettua l'ordine

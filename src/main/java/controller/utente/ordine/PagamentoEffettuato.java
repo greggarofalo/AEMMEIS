@@ -28,14 +28,15 @@ public class PagamentoEffettuato extends HttpServlet {
         ordine.setCitta(request.getParameter("citta"));
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
         ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
+        ordine.setPuntiSpesi(0);
 
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
             int punti = 0;
-            if((!puntiString.isEmpty()) && puntiString != null)
+            if(puntiString != null && (!puntiString.isEmpty()))
                 punti = Integer.parseInt(puntiString);
             Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
-            if(tessera.getDataScadenza().isBefore(LocalDate.now())){
+            if(tessera.getDataScadenza().isAfter(LocalDate.now())){
                 ordine.setPuntiSpesi(punti);
                 tessera.setPunti(tessera.getPunti() - punti);
                 Tessera newTess = new Tessera();
@@ -49,7 +50,6 @@ public class PagamentoEffettuato extends HttpServlet {
             } else{
                 ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
             }
-
         }
 
         //effettuare controlli su dati dell'uetnet che acquista
@@ -61,6 +61,7 @@ public class PagamentoEffettuato extends HttpServlet {
         if(cardName==null || cardName.isEmpty() || !isNumeric(cardNumber) || expiryDate==null || /*isValidDate(expiryDate) ||*/ !isNumeric(cvv)){
             //pagina di errore per inserimento parametri errato
             response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+            return;
         }
 
         request.setAttribute("ordine", ordine);
@@ -70,7 +71,7 @@ public class PagamentoEffettuato extends HttpServlet {
     }
 
     private static boolean isNumeric(String str) {//metodo che utilizza espressione regolare per verificare che una stringa contenga solo numeri
-        return str != null && str.matches("\\d+");
+        return str != null && !str.isEmpty() && str.matches("\\d+");
     }
 
     private boolean isValidDate(String dateStr) {
