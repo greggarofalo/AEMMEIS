@@ -66,7 +66,7 @@ public class WishListDAO {
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM wishList WHERE email=?");
             ps.setString(1, email);
-            if(ps.executeUpdate() != 1)
+            if(ps.executeUpdate() == 0)
                 throw new RuntimeException("DELETE error.");
         } catch (SQLException e) {
             throw new RuntimeException(e);

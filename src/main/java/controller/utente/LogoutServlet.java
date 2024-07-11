@@ -25,6 +25,7 @@ public class LogoutServlet extends HttpServlet {
         Carrello carrello = (Carrello) session.getAttribute("carrello");
         WishList wishList = (WishList) session.getAttribute("wishList");
         Utente utente = (Utente) session.getAttribute("utente");
+        wishList.setEmail(utente.getEmail());
 
         try{
             RigaCarrelloDAO rigaCarrelloService = new RigaCarrelloDAO();
