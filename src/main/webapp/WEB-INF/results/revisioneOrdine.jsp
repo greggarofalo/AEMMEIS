@@ -39,14 +39,7 @@
         <div class="book-price">
             <%if(libro.getSconto()!=0){%>
             <span class="book-discount">-<%=libro.getSconto()%>%</span>
-            <span id="newPrice" class="book-new-price"><script>
-                        function myFunction(p1, p2) {
-                            return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
-                        }
-
-                        let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
-                        document.getElementById("newPrice").innerHTML = result;
-                    </script>€</span>
+            <span class="book-new-price" data-price="<%=libro.getPrezzo()%>" data-sconto="<%=libro.getSconto()%>" data-quantita="<%=riga.getQuantita()%>">€</span>
             <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
             <%
             }else {
@@ -109,6 +102,33 @@
 </div>
 
 <script>
+
+    document.addEventListener('DOMContentLoaded', updateDiscountPrices)
+    function updateDiscountPrices() {
+        var bookNewPriceElements = document.querySelectorAll('.book-new-price');
+
+        bookNewPriceElements.forEach(function(span) {
+            var price = parseFloat(span.getAttribute('data-price'));
+            var sconto = parseFloat(span.getAttribute('data-sconto'));
+            var quantita = parseInt(span.getAttribute('data-quantita'));
+
+            console.log("Price:", price);
+            console.log("Sconto:", sconto);
+            console.log("Quantita:", quantita);
+
+            if (!isNaN(price) && !isNaN(sconto) && !isNaN(quantita)) {
+                var newPrice;
+                if (sconto > 0) {
+                    newPrice = (price - (price * sconto / 100)) * quantita;
+                } else {
+                    newPrice = price * quantita;
+                }
+
+                span.innerText = newPrice.toFixed(2) + ' €';
+            }
+        });
+    }
+
     function addToFavorites(isbn) {
         // Crea una nuova istanza di XMLHttpRequest
         var xhttp = new XMLHttpRequest();

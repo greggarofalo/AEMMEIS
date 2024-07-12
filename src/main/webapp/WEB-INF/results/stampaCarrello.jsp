@@ -22,7 +22,6 @@
                 <%
                     Carrello cart = (Carrello) session.getAttribute("carrello");
                     if(cart.getRigheCarrello()!=null){
-                        int i=0;
                         for(RigaCarrello riga : cart.getRigheCarrello()){
                             Libro libro = riga.getLibro();
                 %><div class="book-item">
@@ -73,7 +72,7 @@
 
                     </div>
                         <%
-                                    i++;}
+                        }
                             }
                         %>
             </div>
@@ -111,15 +110,16 @@
                 console.log("Sconto:", sconto);
                 console.log("Quantita:", quantita);
 
+                if (!isNaN(price) && !isNaN(sconto) && !isNaN(quantita)) {
+                    var newPrice;
+                    if (sconto > 0) {
+                        newPrice = (price - (price * sconto / 100)) * quantita;
+                    } else {
+                        newPrice = price * quantita;
+                    }
 
-                var newPrice;
-                if (sconto > 0) {
-                    newPrice = (price - (price * sconto / 100)) * quantita;
-                } else {
-                    newPrice = price * quantita;
+                    span.innerText = newPrice.toFixed(2) + ' €';
                 }
-
-                span.innerText = newPrice.toFixed(2) + ' €';
             });
         }
 
