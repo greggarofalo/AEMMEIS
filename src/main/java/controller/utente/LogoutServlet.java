@@ -11,11 +11,15 @@ import model.carrelloService.CarrelloDAO;
 import model.carrelloService.RigaCarrello;
 import model.carrelloService.RigaCarrelloDAO;
 import model.libroService.Libro;
+import model.libroService.Reparto;
+import model.libroService.RepartoDAO;
 import model.utenteService.Utente;
 import model.wishList.WishList;
 import model.wishList.WishListDAO;
 
 import java.io.IOException;
+import java.util.List;
+
 @WebServlet("/log-out")
 public class LogoutServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,6 +55,14 @@ public class LogoutServlet extends HttpServlet {
 
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+
+        //Se l'admin modifica i reparti è necessario apportare modifiche alla lista salvata del serveltContext
+        if(utente.getTipo().equalsIgnoreCase("amministratore")){
+            getServletContext().removeAttribute("reparti");
+            RepartoDAO service = new RepartoDAO();
+            List<Reparto> reparti = service.doRetrivedAll();
+            getServletContext().setAttribute("reparti", reparti);
         }
         session.invalidate();
         response.sendRedirect("index.html");

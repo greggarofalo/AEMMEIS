@@ -27,6 +27,7 @@ public class Pagamento extends HttpServlet {
       //  OrdineDAO ordineDAO = new OrdineDAO();
         SedeDAO sedeDAO = new SedeDAO();
         String type = request.getParameter("typeForm");
+        String address = null;
 
         double costo = 0;
         for(RigaCarrello r : righe){
@@ -45,7 +46,8 @@ public class Pagamento extends HttpServlet {
                     || citta==null || citta.isEmpty() || !isNumeric(request.getParameter("cap"))
                     || request.getParameter("cap").length()>5) {
                 //pagina di errore per inserimento parametri errato
-                response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+                address = "/WEB-INF/errorJsp/erroreForm.jsp";
+              //  response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
             }
             else {
                 ordine.setCitta(citta);
@@ -55,17 +57,19 @@ public class Pagamento extends HttpServlet {
         else{
             if(request.getParameter("sede")==null || request.getParameter("sede").isEmpty())
                 //pagina di errore per inserimento parametri errato
-                response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+                address = "/WEB-INF/errorJsp/erroreForm.jsp";
+               // response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
             else {
                 Sede sede = sedeDAO.doRetrieveById(Integer.parseInt(request.getParameter("sede")));
                 ordine.setCitta(sede.getCitta());
                 ordine.setIndirizzoSpedizione(sede.getVia() + ", " + sede.getCivico() + ", " + sede.getCap());
+                address = "/WEB-INF/results/pagamentoOrdine.jsp";
             }
         }
         //inizio a salvare dati per l'ordine e l'ordine in sessione, così dopo il pagamento la servlet lavora su quest'ordine
         request.setAttribute("ordine", ordine);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/pagamentoOrdine.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }
 

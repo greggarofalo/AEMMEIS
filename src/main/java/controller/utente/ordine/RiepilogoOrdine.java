@@ -23,9 +23,6 @@ public class RiepilogoOrdine extends HttpServlet {
         OrdineDAO ordineDAO = new OrdineDAO();
         Ordine ordine = ordineDAO.doRetrieveById(idOrdine);
         session.setAttribute("ordine", ordine);
-        //    RigaOrdineDAO rigaOrdineDAO = new RigaOrdineDAO();
-        //    List<RigaOrdine> righeOrdine = rigaOrdineDAO.doRetrivedByOrdine(idORdine);
-        //    session.setAttribute("righeOrdine", righeOrdine);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/areaPservices/riepilogoOrdine.jsp");
         dispatcher.forward(request, response);

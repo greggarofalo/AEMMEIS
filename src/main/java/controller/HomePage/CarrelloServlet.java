@@ -17,11 +17,6 @@ import java.util.List;
 @WebServlet("/cart-servlet")
 public class CarrelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //da cambiare tutto
-        //potrebbe non servire
-        //HttpSession session = request.getSession();
-        //Carrello carrello = (Carrello) session.getAttribute("carrello");
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/stampaCarrello.jsp");
         dispatcher.forward(request, response);
     }

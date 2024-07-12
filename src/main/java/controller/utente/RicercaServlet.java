@@ -17,10 +17,9 @@ public class RicercaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String query = request.getParameter("q");
         LibroDAO libroService = new LibroDAO();
-        String address=null;
+        String address = null;
         if(query==null){
-            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
-            return;
+            address = "/WEB-INF/errorJsp/erroreForm.jsp";
         }
         else if(query.isEmpty()){
             address="index.html";

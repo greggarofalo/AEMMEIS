@@ -38,12 +38,11 @@ public class ProcediOrdine extends HttpServlet {
                     //se un libro non ha una delle sedi non la rendo visibile al momento della scelta dell'indirizzo
                     if(!(sedeLibro.contains(s)))
                         sediDaAggiungere.remove(s);
-
                 }
             }
         }
 
-//per la questione sedi non sono molto sicura...perchè si potrebbe anche far arrivare il libro in una sede senza che
+        //per la questione sedi non sono molto sicura...perchè si potrebbe anche far arrivare il libro in una sede senza che
         //esso sia già disponibile in quella sede. Da valutare !!!
         request.setAttribute("sedi", sediDaAggiungere);
 

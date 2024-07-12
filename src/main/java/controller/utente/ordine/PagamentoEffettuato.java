@@ -22,37 +22,23 @@ public class PagamentoEffettuato extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
         TesseraDAO tesseraDAO = new TesseraDAO();
         Ordine ordine = new Ordine();
+        String address = null;
         //sto salvando sempre sulla request questi parametri poichè li devo mantenere fino a salvataggio ordine
         //dubbio sul metterlo direttamente in sessione...anche se non credo sia giusto salvarlo in sessione.
         ordine.setCitta(request.getParameter("citta"));
         ordine.setIndirizzoSpedizione(request.getParameter("indirizzo"));
         ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
-       // ordine.setPuntiSpesi(0);
+
         int punti = 0;
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
 
             if(puntiString != null && (!puntiString.isEmpty()))
                 punti = Integer.parseInt(puntiString);
-           /* Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
-            if(tessera.getDataScadenza().isAfter(LocalDate.now())){
-                ordine.setPuntiSpesi(punti);
-                tessera.setPunti(tessera.getPunti() - punti);
-                Tessera newTess = new Tessera();
-                newTess.setPunti(tessera.getPunti());
-                newTess.setNumero(tessera.getNumero());
-                newTess.setDataScadenza(tessera.getDataScadenza());
-                newTess.setEmail(tessera.getEmail());
-                newTess.setDataCreazione(tessera.getDataCreazione());
-
-                tesseraDAO.updateTessera(newTess);
-            } else{
-                ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
-            }*/
         }
         ordine.setPuntiSpesi(punti);
 
-        //effettuare controlli su dati dell'uetnet che acquista
+        //effettuare controlli su dati dell'utente che acquista
         String cardName = request.getParameter("cardName");
         String cardNumber = request.getParameter("cardNumber");
         String expiryDate = request.getParameter("expiryDate");
@@ -60,13 +46,15 @@ public class PagamentoEffettuato extends HttpServlet {
 
         if(cardName==null || cardName.isEmpty() || !isNumeric(cardNumber) || expiryDate==null || /*isValidDate(expiryDate) ||*/ !isNumeric(cvv)){
             //pagina di errore per inserimento parametri errato
-            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
-            return;
+            address = "/WEB-INF/errorJsp/erroreForm.jsp";
+            //response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");//forse
+
+        }else{
+            address = "/WEB-INF/results/ordineEffettuato.jsp";
+            request.setAttribute("ordine", ordine);
         }
 
-        request.setAttribute("ordine", ordine);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/ordineEffettuato.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }
 

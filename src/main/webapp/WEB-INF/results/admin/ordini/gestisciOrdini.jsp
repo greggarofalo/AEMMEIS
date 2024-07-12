@@ -101,6 +101,11 @@
     </form>
 </div>
 <div class="container">
+    <c:if test="${utenti==null || utenti.isEmpty()}">
+        <div class="blocco">
+            Non ci sono utenti!
+        </div>
+    </c:if>
     <c:forEach items="${utenti}" var="utente">
         <div class="blocco">
             <img src="./images/delivery-icon.png" alt="Icona consegna">

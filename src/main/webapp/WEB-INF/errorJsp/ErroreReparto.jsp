@@ -14,8 +14,8 @@
         <p>
             Errore reparto
         </p>
-        <form action="login-servlet">
-            <input type="submit" value="Torna al login">
+        <form action="index.html">
+            <input type="submit" value="Torna alla home">
         </form>
     </div>
 </div>

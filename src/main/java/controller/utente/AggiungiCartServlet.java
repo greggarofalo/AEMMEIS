@@ -25,7 +25,7 @@ public class AggiungiCartServlet extends HttpServlet {
         String source= request.getParameter("source");
 
         HttpSession session = request.getSession();
-        Utente utente = (Utente) session.getAttribute("utente");
+       // Utente utente = (Utente) session.getAttribute("utente");
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 
         String address="index.html";

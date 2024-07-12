@@ -55,6 +55,7 @@ public class OrdineServlet extends HttpServlet {
         ordine.setCitta(request.getParameter("citta"));
 
        // if(utente.getTipo().equalsIgnoreCase("premium")){
+        //setto i punti, se è un utente standard sono a 0
             String puntiString = request.getParameter("punti");
             int punti = 0;
             if(puntiString != null && !puntiString.isEmpty())
@@ -135,11 +136,11 @@ public class OrdineServlet extends HttpServlet {
             newTess.setEmail(tessera.getEmail());
             newTess.setDataCreazione(tessera.getDataCreazione());*/
 
-               tesseraDAO.updateTessera(tessera);
-           } else{
-               ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
-           }
-       }
+                tesseraDAO.updateTessera(tessera);
+            } else {
+                ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
+            }
+        }
 
         // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
         ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza

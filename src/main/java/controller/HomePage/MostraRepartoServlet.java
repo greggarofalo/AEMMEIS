@@ -29,9 +29,7 @@ public class MostraRepartoServlet extends HttpServlet {
         }
 
         if (reparto != null) {
-          //  List<Reparto> reparti = service.doRetrivedAll();
             request.setAttribute("reparto", reparto);
-         //   request.setAttribute("reparti", reparti);
 
             HttpSession session = request.getSession();
             session.setAttribute("repartoAttuale", idReparto);
