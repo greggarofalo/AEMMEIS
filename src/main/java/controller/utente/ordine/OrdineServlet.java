@@ -98,7 +98,7 @@ public class OrdineServlet extends HttpServlet {
                 puntiAcquisiti += 5* rigaCarrello.getQuantita();
 
 
-            //quando scorro la losgta delle righe del carrello che voglio acquistare
+            //quando scorro la lista delle righe del carrello che voglio acquistare
             //devo eventualmente cancellare la riga in sessione e nel db, o settare la quantità.
             for(int i=0; i<carrelloDB.getRigheCarrello().size(); i++){
                 RigaCarrello rc = carrelloDB.getRigheCarrello().get(i);
@@ -124,9 +124,10 @@ public class OrdineServlet extends HttpServlet {
         ordine.setPuntiOttenuti(puntiAcquisiti);
 
         //aggiorno tessera
-        Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
-        if(tessera.getDataScadenza().isAfter(LocalDate.now())){
-            tessera.setPunti(tessera.getPunti() - ordine.getPuntiSpesi() + ordine.getPuntiOttenuti());
+       if(utente.getTipo().equalsIgnoreCase("premium")){
+           Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
+           if(tessera.getDataScadenza().isAfter(LocalDate.now())){
+               tessera.setPunti(tessera.getPunti() - ordine.getPuntiSpesi() + ordine.getPuntiOttenuti());
          /*   Tessera newTess = new Tessera();
             newTess.setPunti(tessera.getPunti());
             newTess.setNumero(tessera.getNumero());
@@ -134,10 +135,11 @@ public class OrdineServlet extends HttpServlet {
             newTess.setEmail(tessera.getEmail());
             newTess.setDataCreazione(tessera.getDataCreazione());*/
 
-            tesseraDAO.updateTessera(tessera);
-        } else{
-            ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
-        }
+               tesseraDAO.updateTessera(tessera);
+           } else{
+               ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
+           }
+       }
 
         // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
         ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza
