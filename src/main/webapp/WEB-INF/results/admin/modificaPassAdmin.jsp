@@ -75,7 +75,7 @@
             <form action="area-personaleAdmin">
                 <input type="submit" value="Torna indietro">
             </form>
-            <form action="modifica-password" class="pm">
+            <form action="modifica-password" class="pm" method="post">
                 <label for="pass">Password</label>
                 <input type="password" id="pass" name="password" placeholder="*****"  maxlength="16" required><br><br>
                 <input type="submit" value="Conferma" class="bottone">

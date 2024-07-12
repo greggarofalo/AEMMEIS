@@ -31,14 +31,17 @@ footer{
 }
 
 .links{
-    width: fit-content;
-    border-bottom: 1px solid #ccc;
+    /*width: fit-content;
+    border-bottom: 1px solid #ccc;*/
     margin: 20px 0;
 }
 
 .ls{
     color: white;
     text-decoration: none;
+    text-align: center; /*centro il testo all'interno dell'elemento*/
+    display: block; /* <a> bloccati per l'allineamento*/
+    width: 100%; /* <a> riempono la larghezza del contenitore*/
 }
 
 .ls:hover{
@@ -60,6 +63,20 @@ footer{
     width: fit-content;
     margin: 20px 0;
     color:white;
+    text-decoration: none;
+}
+
+.email-id:hover{
+    color: #000;
+}
+
+.numeri a {
+    color: white;
+    text-decoration: none;
+}
+
+.numeri :hover{
+    color: black;
 }
 
 .footer-social .social-icons{

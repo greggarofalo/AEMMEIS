@@ -15,4 +15,8 @@ public class ModificaUtenteSupporto extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/areaPservices/modificaDati.jsp");
         dispatcher.forward(request, response);
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

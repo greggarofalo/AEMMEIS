@@ -49,4 +49,7 @@ public class ModificaTipoServlet extends HttpServlet {
         utenteDAO.updateUtente(utente); //cambio nel db i parametri cambiati
         response.sendRedirect("area-personale");
     }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

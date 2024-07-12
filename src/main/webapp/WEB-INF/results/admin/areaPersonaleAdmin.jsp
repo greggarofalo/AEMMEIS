@@ -180,7 +180,7 @@
 
     <fieldset class="blocco">
         <legend><h3>Password</h3></legend>
-        <form action="modifica-password-supporto">
+        <form action="modifica-password-supporto" method="post">
             <input type="submit" value="Modifica password" class="button">
         </form>
     </fieldset>
