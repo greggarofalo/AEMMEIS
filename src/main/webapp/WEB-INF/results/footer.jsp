@@ -22,8 +22,8 @@
         <div class="col">
             <h3>Links</h3>
             <p class="links"><a href="index.html" class="ls">Home</a> </p>
-            <p class="links"><a href="services.jsp" class="ls">Services</a> </p>
-            <p class="links"><a href="about-us.jsp" class="ls">About Us</a> </p><br>
+            <p class="links"><a href="services" class="ls">Services</a> </p>
+            <p class="links"><a href="about-us" class="ls">About Us</a> </p><br>
         </div>
 
         <div class="col">

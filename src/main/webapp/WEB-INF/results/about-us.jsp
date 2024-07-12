@@ -10,11 +10,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     <title>Chi Siamo - AEMME</title>
+
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/ServiceStyle.css">
     <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+
+    <style>
+        /* Stile generale per il corpo */
+
+        /* Stile per il contenuto principale */
+        main {
+            padding: 20px;
+        }
+
+        /* Stile per i titoli */
+        h1, h2 {
+            color: #222;
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Stile per i paragrafi */
+        p {
+            line-height: 1.6;
+            color: #000000;
+        }
+
+        /* Stile per la sezione Chi Siamo */
+        .about-us {
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 20px 50px;
+            max-width:fit-content;
+        }
+
+        .about-us .founders {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .about-us .founder {
+            flex-basis: 30%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .about-us .founder h2 {
+            color: #000000;
+        }
+
+        .about-us .founder p {
+            color: #000000;
+        }
+    </style>
+
 </head>
 <body>
 <div class="wrapper">
