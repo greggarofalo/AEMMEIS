@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AboutUsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Imposta il tipo di contenuto
-        response.setContentType("text/html;charset=UTF-8");
+        //response.setContentType("text/html;charset=UTF-8");
 
         // Inoltra la richiesta alla JSP
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/about-us.jsp");

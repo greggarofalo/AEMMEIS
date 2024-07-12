@@ -14,8 +14,8 @@ footer{
 .row{
     width: 85%;
     margin: auto;
-    display: flex; <%-- questo rende il posizionamento dei blocchi figli flessibile %-->
-    flex-wrap: wrap; <%-- Quando imposti flex-wrap: wrap;, stai dicendo al contenitore flexbox che i suoi elementi figlio possono andare su più righe, se lo spazio nella riga principale non è sufficiente per contenerli tutti. --%>
+    display: flex; /* questo rende il posizionamento dei blocchi figli flessibile */
+    flex-wrap: wrap; /* Quando imposti flex-wrap: wrap;, stai dicendo al contenitore flexbox che i suoi elementi figlio possono andare su più righe, se lo spazio nella riga principale non è sufficiente per contenerli tutti. */
     align-items: flex-start;
     justify-content: space-between;
 }

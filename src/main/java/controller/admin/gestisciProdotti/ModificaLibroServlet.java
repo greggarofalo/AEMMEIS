@@ -50,4 +50,7 @@ public class ModificaLibroServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

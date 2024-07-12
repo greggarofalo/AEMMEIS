@@ -34,7 +34,7 @@
                             <li>${telefono}</li>
                         </c:forEach>
                     </ul>
-                    <form action="modifica-dati-supporto">
+                    <form action="modifica-dati-supporto" method="post">
                         <input type="submit" class="button" value="Modifica dati">
                     </form>
                 </fieldset>
@@ -50,7 +50,7 @@
 
                 <fieldset class="blocco password">
                     <legend><h3>Password</h3></legend>
-                    <form action="modifica-password-supporto">
+                    <form action="modifica-password-supporto" method="post">
                         <input type="submit" value="Modifica password" class="button">
                     </form>
                    <!-- <a href="modifica-password-supporto" class="button">Modifica password</a>-->
@@ -72,11 +72,11 @@
                     <li>
                         Punti tessera: <%= tessera.getPunti() %>
                     </li>
-                    <form id="standardForm" action="cambia-tipo" >
+                    <form id="standardForm" action="cambia-tipo" method="post">
                         <input type="submit" value="Diventa utente Standard" class="button">
                     </form>
                     <% } else if (utente.getTipo().equalsIgnoreCase("standard")) { %>
-                    <form id="premiumForm" action="cambia-tipo">
+                    <form id="premiumForm" action="cambia-tipo" method="post">
                         <input type="submit" value="Diventa utente Premium" class="button">
                     </form>
                     <% } %>

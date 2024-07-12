@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.utenteService.Utente" %><%--
   Created by IntelliJ IDEA.
   User: carla
   Date: 12/07/2024
@@ -16,9 +16,22 @@
     <title>Servizi - AEMME</title>
 
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
-    <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
-    <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
+    <!-- se non è amministratore si includono cose, se lo è altre -->
+    <%  Utente utente = (Utente) session.getAttribute("utente");
+        if((utente==null) || !(utente.getTipo().equalsIgnoreCase("amministratore"))){ %>
+        <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
+        <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
+    <%}else{%>
+        <link rel="stylesheet" type="text/css" href="./css/footerAdmin.css">
+        <style>
+            header{
+                text-align: center;
+                border-bottom-style: groove;
+                padding: 10px;
+            }
+        </style>
+    <%}%>
     <style>
         /* Stile per il contenuto principale */
         main {
@@ -68,7 +81,14 @@
 
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<c:choose>
+    <c:when test="${utente != null && utente.tipo == 'Amministratore'}">
+        <%@include file="/WEB-INF/results/admin/headerAdmin.jsp"%>
+    </c:when>
+    <c:otherwise>
+        <%@ include file="header.jsp" %>
+    </c:otherwise>
+</c:choose>
 
     <section class="services">
         <h1>I Nostri Servizi</h1><br>
