@@ -75,16 +75,19 @@
             <label for="nomeUtente">Nome utente: </label>
             <input type="text" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
 
-            <div class="phone-container">
+            <div class="phone-container" id="phone-container">
                 <c:forEach items="${utente.telefoni}" var="telefono">
                     <div class="phone-item">
                         <div id="phone">
                             <label for="telefono">Telefono</label>
                             <input type="text" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}" readonly>
+                            <button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
+                                <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
+                            </button>
                         </div>
-                        <button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
+                        <!--<button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
                             <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
-                        </button>
+                        </button>-->
                     </div>
                 </c:forEach>
             </div>
@@ -102,9 +105,18 @@
 
 <script>
     function addPhoneField() {
-        var container = document.getElementById('phone');
+        var container = document.getElementById('phone-container');
         var newField = document.createElement('div');
-        newField.innerHTML = '<input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
+        newField.className = 'phone-item'; // Aggiungi la classe phone-item al nuovo div
+
+        newField.innerHTML = `
+        <div id="phone">
+            <label for="telefono">Telefono</label>
+            <input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">
+        </div>
+    `;
+
+        // Aggiungi il nuovo campo al contenitore principale
         container.appendChild(newField);
     }
 
@@ -126,7 +138,9 @@
             if (xhr.status === 200) {
                 console.log('Telefono rimosso dal database con successo.');
                 // Rimuovi il campo telefono dall'interfaccia utente
-                var phoneField = button.closest('.phone-container');
+                var phoneField = button.closest('.phone-item');//Il metodo closest cerca l'antenato più vicino dell'elemento specificato,
+                // il che significa che rimuoverà solo il div .phone-item che contiene il pulsante di rimozione su cui hai cliccato.
+                // Non eliminerà tutti gli elementi .phone-item, solo quello specifico.
                 phoneField.remove();
             } else {
                 console.log('Errore durante la rimozione del telefono dal database.');

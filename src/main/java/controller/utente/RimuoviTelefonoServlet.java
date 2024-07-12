@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.utenteService.Utente;
 import model.utenteService.UtenteDAO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,12 +15,15 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @WebServlet("/rimuovi-telefono")
 public class RimuoviTelefonoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // JSON parser object to parse read JSON data from request
         JSONParser jsonParser = new JSONParser();
+        HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
 
         try (InputStreamReader reader = new InputStreamReader(request.getInputStream())) {
             // Parse JSON data
@@ -31,7 +36,20 @@ public class RimuoviTelefonoServlet extends HttpServlet {
 
             // Chiamata alla funzione del DAO per rimuovere il telefono
             UtenteDAO service = new UtenteDAO();
-            service.deleteTelefono(email, telefono);
+            List<String> telefoni = service.cercaTelefoni(email);
+            if(telefoni.contains(telefono)) {
+                service.deleteTelefono(email, telefono);
+            }
+            List<String> telefoniSession = utente.getTelefoni();
+            boolean flag=true;
+            for(int i=0; i < telefoniSession.size() && flag; i++){
+                if(telefoniSession.get(i).equals(telefono)) {
+                    telefoniSession.remove(i);
+                    flag=false;
+                }
+            }
+            session.setAttribute("utente", utente);
+
 
             // Invia una risposta al client
             response.setContentType("text/plain");

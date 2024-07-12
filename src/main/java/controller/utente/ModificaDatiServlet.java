@@ -35,15 +35,14 @@ public class ModificaDatiServlet extends HttpServlet {
             }
         }
 
-        List<String> tele = Arrays.asList(telefoni);
-
-        if(!utente.getTelefoni().equals(tele)){
+        //non dovrebbe servire più perchè viene fatto dinamicamente con ajax
+        /*if(!utente.getTelefoni().equals(tele)){
             for (String tel : utente.getTelefoni()) {
                 if (!tel.isEmpty() && !(utente.getTelefoni().contains(tel))) {
                     utente.getTelefoni().remove(tel);
                 }
             }
-        }
+        }*/
 
         if(!nomeUtente.isEmpty()){
             utente.setNomeUtente(nomeUtente);
