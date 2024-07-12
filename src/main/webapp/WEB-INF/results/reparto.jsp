@@ -28,7 +28,7 @@
        //List<Reparto> reparti = (List<Reparto>) session.getAttribute("reparti");
       int i = 0;%>
      <div class="reparto">
-       <img class="imgReparto" src="<%=reparto.getImmagine()%>">
+       <img class="imgReparto" alt="immagine <%=reparto.getNome()%>"src="<%=reparto.getImmagine()%>">
        <div class="dropdown-container">
          <form id="repartoForm" action="mostra-reparto" method="GET">
            <select id="repartoSelect" class="dropdown-menu" name="id" onchange="document.getElementById('repartoForm').submit()">
@@ -49,7 +49,7 @@
       <c:forEach items="${reparto.libri}" var="libro" varStatus="status">
         <div class="item" id="libro-${status.index}">
           <a href="mostra-libro?isbn=${libro.isbn}">
-            <img class="img" src="${libro.immagine}">
+            <img class="img" alt="${libro.titolo}" src="${libro.immagine}">
           </a>
 
           <% String path="./images/hearts-icon.png";

@@ -58,7 +58,7 @@
 </head>
 <body>
         <div class="ordine">
-            <img src="./images/carrello.png" class="image">
+            <img src="./images/carrello.png" alt="successo" class="image">
             <div class="words">
                 <p>
                     L'ordine è avvenuto con successo...

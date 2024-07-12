@@ -31,8 +31,8 @@
                     <div class="book-details">
                         <h3 class="book-title">${libro.titolo}</h3>
                         <div class="book-actions">
-                            <a  href="modifica-preferiti?isbn=${libro.isbn}&source=wishList">
-                                <img src="images/heartsBlack-icon.png" width="30" height="30" class="image">
+                            <a href="modifica-preferiti?isbn=${libro.isbn}&source=wishList">
+                                <img src="images/heartsBlack-icon.png" alt="togli dai preferiti" width="30" height="30" class="image">
                             </a>
                             <%--<form action="modifica-preferiti">
                                 <input type="hidden" name="isbn" value="${libro.isbn}">

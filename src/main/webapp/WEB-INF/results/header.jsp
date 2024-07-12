@@ -11,7 +11,7 @@
                     <div class="barra">
                         <input type="text" id="search" onkeyup="search()" placeholder="Search">
                         <a id="search-icon" href="#">
-                            <img src="./images/search-icon.png" width="25" height="25" class="image">
+                            <img src="./images/search-icon.png" alt="search" width="25" height="25" class="image">
                         </a>
                     </div>
                     <div id="suggestions" class="suggestions"></div>
@@ -25,13 +25,13 @@
             </button> <!-- Pulsante per il menu a discesa -->
             <div class="icons">
                 <a href="show-wishlist">
-                    <img src="./images/hearts-icon.png" width="25" height="25" class="image">
+                    <img src="./images/hearts-icon.png" alt="wishList" width="25" height="25" class="image">
                 </a>
                 <a href="cart-servlet">
-                    <img src="./images/icon-cart.png" width="25" height="25" class="spaced-image image">
+                    <img src="./images/icon-cart.png" alt="cart" width="25" height="25" class="spaced-image image">
                 </a>
                 <a href="area-personale">
-                    <img src="./images/icon-user.png" width="24" height="25" class="image">
+                    <img src="./images/icon-user.png" alt="area personale" width="24" height="25" class="image">
                 </a>
             </div>
         </div>

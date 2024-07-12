@@ -64,6 +64,7 @@
                 <c:forEach items="${repartiNonPresenti}" var="reparto2">
                     <input type="checkbox" id="reparto<%=i%>" name="repartoSelezionato" value="${reparto2.idReparto}">
                     <label for="reparto<%=i%>">${reparto2.nome}</label><br>
+                    <% i++;%>
                 </c:forEach>
 
                 <input type="hidden" name="isbn" value="${libro.isbn}">
@@ -90,6 +91,7 @@
                 <c:forEach items="${sediNonPresenti}" var="sede2">
                     <input type="checkbox" id="sede<%=i%>" name="sedeSelezionata" value="${sede2.idSede}">
                     <label for="sede<%=i%>">${sede2.citta} (${sede2.via}, ${sede2.civico})</label><br>
+                    <%i++;%>
                 </c:forEach>
 
                 <input type="hidden" name="isbn" value="${libro.isbn}">

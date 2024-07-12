@@ -132,7 +132,7 @@
         <input type="submit" value="Nuovo Reparto">
     </form>
 </div>
-
+<%int i=0;%>
 <c:forEach items="${reparti}" var="reparto">
     <div class="reparto-container">
 
@@ -164,10 +164,10 @@
                 <div class="aggiorna-reparto">
                     <form action="aggiorna-reparto">
                         <input type="hidden" name="idReparto" value="${reparto.idReparto}">
-                        <label for="descrizione">Descrizione</label>
-                        <textarea id="descrizione" name="descrizione" rows="4" cols="50">${reparto.descrizione}</textarea><br><br>
-                        <label for="immagine">Immagine</label>
-                        <input type="text" id="immagine" name="immagine" value="${reparto.immagine}"><br><br>
+                        <label for="descrizione<%=i%>">Descrizione</label>
+                        <textarea id="descrizione<%=i%>" name="descrizione" rows="4" cols="50">${reparto.descrizione}</textarea><br><br>
+                        <label for="immagine<%=i%>">Immagine</label>
+                        <input type="text" id="immagine<%=i%>" name="immagine" value="${reparto.immagine}"><br><br>
                         <input type="submit" value="Modifica">
                     </form>
                 </div>
@@ -181,6 +181,7 @@
             </div>
         </div>
     </div>
+    <%i++;%>
 </c:forEach>
 
 </body>

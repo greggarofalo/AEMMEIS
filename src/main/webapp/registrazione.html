@@ -44,7 +44,8 @@
     function addPhoneField() {
         var container = document.getElementById('phone-fields');
         var newField = document.createElement('div');
-        newField.innerHTML = '<input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
+        newField.innerHTML = '<label for="ntelefono">Numero di Telefono</label>'+
+            '<input type="text" name="telefono" pattern="[0-9]{10}" placeholder="Inserisci numero di telefono">';
         container.appendChild(newField);
     }
 </script>

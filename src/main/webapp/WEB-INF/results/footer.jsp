@@ -3,7 +3,7 @@
     <div class="row">
 
         <div class="col">
-            <img src="./images/logo.png" class="logo">
+            <img src="./images/logo.png" alt="AEMME" class="logo">
             <p>AEMME</p>
         </div>
 

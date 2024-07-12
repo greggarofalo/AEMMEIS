@@ -76,11 +76,11 @@
             <input type="text" id="nomeUtente" name="nomeUtente" placeholder=${utente.nomeUtente}>
 
             <div class="phone-container" id="phone-container">
-                <c:forEach items="${utente.telefoni}" var="telefono">
+                <c:forEach items="${utente.telefoni}" var="telefono" varStatus="status">
                     <div class="phone-item">
                         <div id="phone">
-                            <label for="telefono">Telefono</label>
-                            <input type="text" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}" readonly>
+                            <label for="telefono${status.index}">Telefono</label>
+                            <input type="text" id="telefono${status.index}" name="telefono" pattern="[0-9]{10}" placeholder="${telefono}" readonly>
                             <button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
                                 <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
                             </button>

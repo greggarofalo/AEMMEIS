@@ -125,6 +125,9 @@ header li a:hover:not(.active) {
 .barra .image{
     margin:0;
 }
+#search :focus{
+    border-radius: 5px;
+}
 
 
 /* Media Queries per rendere l'header responsive */

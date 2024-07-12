@@ -61,7 +61,8 @@
                                     <img src="images/trash-icon.png" alt="Rimuovi">
                                 </button>
                                 <div class="book-quantity">
-                                    <input type="number" name="quantita" value="<%=riga.getQuantita()%>" min="1" onchange="updateQuantity(this, '<%=libro.getIsbn()%>')">
+                                    <lable for="quantita">Qtà.</lable>
+                                    <input  type="number" name="quantita"id="quantita" value="<%=riga.getQuantita()%>" min="1" onchange="updateQuantity(this, '<%=libro.getIsbn()%>')">
                                 </div>
                             </div>
 

@@ -94,28 +94,28 @@
     <div class="contenitore">
         <div class="iconAmm">
             <a href="gestisci-prodotti">
-                <img src="./images/book-icon.png" width="50" height="50" class="image">
+                <img src="./images/book-icon.png" alt="gestisci prodotti" width="50" height="50" class="image">
                 <a href="gestisci-prodotti">Modifica Prodotti</a><br><br>
             </a>
         </div>
 
         <div class="iconAmm">
             <a href="gestisci-reparti">
-                <img src="./images/elenco-icon.png" width="60" height="70" class="image">
+                <img src="./images/elenco-icon.png" alt="gestisci reparti" width="60" height="70" class="image">
                 <a href="gestisci-reparti">Modifica Reparti</a><br><br>
             </a>
         </div>
 
         <div class="iconAmm">
             <a href="gestisci-sedi">
-                <img src="./images/sede-icon.png" width="30" height="45" class="image">
+                <img src="./images/sede-icon.png" alt="gestisci sedi" width="30" height="45" class="image">
                 <a href="gestisci-sedi">Modifica Sedi</a><br><br>
             </a>
         </div>
 
         <div class="iconAmm">
             <a href="gestisci-ordini">
-                <img src="./images/procurement.png" width="48" height="50" class="image">
+                <img src="./images/procurement.png" alt="gestisci ordini" width="48" height="50" class="image">
                 <a href="gestisci-ordini">Modifica Ordini</a><br><br>
             </a>
         </div>
