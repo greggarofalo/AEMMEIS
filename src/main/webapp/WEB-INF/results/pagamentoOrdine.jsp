@@ -86,7 +86,7 @@
             let costoOrdine = document.getElementById('costoIniziale').value;
             let costoAggiornato = document.getElementById('costoAggiornato');
             let sconto = parseInt(punti) * 0.10; // Ogni punto vale 10 centesimi di euro
-            let nuovoCosto = Math.max(0, parseInt(costoOrdine) - sconto);
+            let nuovoCosto = Math.max(0, parseFloat(costoOrdine) - sconto);
             costoAggiornato.innerHTML = nuovoCosto.toFixed(2); // Mostra il nuovo costo con due cifre decimali
         }
     </script>
