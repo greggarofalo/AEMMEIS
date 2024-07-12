@@ -12,18 +12,18 @@
             <a href="mailto:a.raia7@studenti.unisa.it" class="email-id">a.raia7@studenti.unisa.it</a>
             <a href="mailto:m.delucia18@studenti.unisa.it" class="email-id">m.delucia18@studenti.unisa.it</a>
             <a href="mailto:c.stefanile1@studenti.unisa.it" class="email-id">c.stefanile1@studenti.unisa.it</a>
-            <h4>+39 - 3347628932</h4>
-            <h4>+39 - 3312055191</h4>
-            <h4>+39 - 3936504913</h4>
-
+            <div class="numeri">
+                <a href="https://wa.me/3347628932" >+39 - 3347628932</a><br>
+                <a href="https://wa.me/3312055191" >+39 - 3312055191</a><br>
+                <a href="https://wa.me/3936504913" >+39 - 3936504913</a><br><br>
+            </div>
         </div>
 
         <div class="col">
             <h3>Links</h3>
             <p class="links"><a href="index.html" class="ls">Home</a> </p>
-            <p class="links"><a href="" class="ls">Services</a> </p>
-            <p class="links"><a href="" class="ls">About Us</a> </p>
-            <p class="links"><a href="" class="ls">Contacts</a> </p>
+            <p class="links"><a href="services.jsp" class="ls">Services</a> </p>
+            <p class="links"><a href="about-us.jsp" class="ls">About Us</a> </p><br>
         </div>
 
         <div class="col">
