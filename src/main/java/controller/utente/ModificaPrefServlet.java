@@ -22,6 +22,7 @@ public class ModificaPrefServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
         String source=request.getParameter("source");
+        String position = request.getParameter("position");
 
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
@@ -66,6 +67,10 @@ public class ModificaPrefServlet extends HttpServlet {
                 wishList.getLibri().add(libro);
             }
             session.setAttribute("wishList", wishList);
+
+            if (position != null) {
+                address += "#" + position;
+            }
 
         }
 

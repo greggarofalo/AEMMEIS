@@ -23,6 +23,7 @@ public class AggiungiCartServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
         String source= request.getParameter("source");
+        String position = request.getParameter("position");
 
         HttpSession session = request.getSession();
        // Utente utente = (Utente) session.getAttribute("utente");
@@ -65,9 +66,15 @@ public class AggiungiCartServlet extends HttpServlet {
             righeCarrello.add(riga);
         }
 
+
             session.setAttribute("carrello", carrello);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        if (position != null) {
+            address += "#" + position;
+        }
+
+        //response.sendRedirect(address);//supporta l'ancoraggio*/
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
             dispatcher.forward(request, response);
 
     }

@@ -46,8 +46,8 @@
      <p class="descrizione">${reparto.descrizione}</p>
 
     <div class="griglia">
-      <c:forEach items="${reparto.libri}" var="libro">
-        <div class="item">
+      <c:forEach items="${reparto.libri}" var="libro" varStatus="status">
+        <div class="item" id="libro-${status.index}">
           <a href="mostra-libro?isbn=${libro.isbn}">
             <img class="img" src="${libro.immagine}">
           </a>
@@ -65,6 +65,7 @@
               <input type="hidden" name="isbn" value="${libro.isbn}">
               <input type="hidden" name="source" value="reparto">
               <input type="hidden" name="repartoAttuale" value="${repartoAttuale}">
+              <input type="hidden" name="position" value="libro-${status.index}">
               <input type="image" src="<%=path%>" name="aggPreferBut" alt="Preferiti" width="20" height="20">
             </form>
             <c:choose>
@@ -73,6 +74,7 @@
                   <input type="hidden" name="isbn" value="${libro.isbn}">
                   <input type="hidden" name="source" value="aggiungi-carrello">
                   <input type="hidden" name="id" value="${repartoAttuale}">
+                  <input type="hidden" name="position" value="libro-${status.index}">
                   <input type="image" src="./images/icon-cart.png" name="aggCarBut" alt="Carrello" width="20" height="20">
                 </form>
               </c:when>
@@ -111,5 +113,29 @@
        </div>
        <%@include file="footer.jsp" %>
        </div>
+
+  <script>
+    window.onload = function() {
+      // Ottieni la query string dalla URL
+      var queryString = window.location.search;
+
+      // Crea un oggetto URLSearchParams per gestire i parametri della query string
+      var searchParams = new URLSearchParams(queryString);
+
+      // Ottieni il valore del parametro 'position' (o qualsiasi altro nome tu abbia usato)
+      var position = searchParams.get('position');
+
+      // Se 'position' è definito, crea l'ancoraggio con quel valore
+      if (position) {
+        var elementId = position;
+        var element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: "auto", block: "start", inline: "nearest" });
+        }
+      }
+    };
+  </script>
   </body>
+
+
 </html>

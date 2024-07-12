@@ -19,6 +19,9 @@ import java.util.List;
 public class MostraRepartoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idReparto = Integer.parseInt(request.getParameter("id"));
+        String position = request.getParameter("position");
+        System.out.println(position);
+        String address="/WEB-INF/results/reparto.jsp";
 
         Reparto reparto = new Reparto();
         List<Reparto> reparti = (List<Reparto>) getServletContext().getAttribute("reparti");
@@ -33,13 +36,17 @@ public class MostraRepartoServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("repartoAttuale", idReparto);
+            if (position != null) {
+                address += "#"+position;
+                System.out.println("address: "+address);
+            }
         } else {
             RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/errorJsp/ErroreReparto.jsp");
             dispatcher.forward(request, response); //provvisorio
             request.setAttribute("repartoNonTrovato", true);
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/reparto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }
 }
