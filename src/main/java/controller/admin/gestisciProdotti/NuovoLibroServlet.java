@@ -36,63 +36,76 @@ public class NuovoLibroServlet extends HttpServlet {
         if(isbn==null || isbn.isEmpty() || titolo==null || titolo.isEmpty() || genere==null || genere.isEmpty() ||
                 annoPubblicazioni==null || annoPubblicazioni.isEmpty() || price==null || price.isEmpty() ||
                 sconto1==null || trama==null || immagine==null){
-            response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
-        }
-        try {
-            double prezzo = Double.parseDouble(price);
-            int sconto;
-            if(sconto1.isEmpty())
-                sconto=0;
-            else {
-                sconto = Integer.parseInt(sconto1);
-            }
-
-            String[] nomiAutori = request.getParameterValues("nome");
-            String[] cognomiAutori = request.getParameterValues("cognome");
-            String[] cfAutori = request.getParameterValues("cf");
-
-            List<Autore> autori = new ArrayList<>();
-
-            if (nomiAutori != null && cognomiAutori != null && cfAutori != null) {
-                for (int i = 0; i < nomiAutori.length; i++) {
-                    if(nomiAutori[i].isEmpty() || cognomiAutori[i].isEmpty() || cfAutori[i].isEmpty()) {
-                        response.sendRedirect("/WEB-INF/errorJsp/erroreForm.jsp");
-                    }
-                    Autore autore = new Autore();
-                    autore.setNome(nomiAutori[i]);
-                    autore.setCognome(cognomiAutori[i]);
-                    autore.setCf(cfAutori[i]);
-                    autori.add(autore);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+                dispatcher.forward(request, response);
+        }else {
+            try {
+                double prezzo = Double.parseDouble(price);
+                int sconto = 0;
+                if (sconto1.isEmpty())
+                    sconto = 0;
+                else if (isValid(sconto1)) {
+                    sconto = Integer.parseInt(sconto1);
+                }else{
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+                    dispatcher.forward(request, response);
                 }
-            }
 
-            libro.setIsbn(isbn);
-            libro.setTitolo(titolo);
-            libro.setGenere(genere);
-            libro.setAnnoPubblicazioni(annoPubblicazioni);
-            libro.setPrezzo(prezzo);
-            libro.setSconto(sconto);
-            libro.setTrama(trama);
-            libro.setImmagine(immagine);
-            libro.setDisponibile(true);
-            libro.setAutori(autori);
+                String[] nomiAutori = request.getParameterValues("nome");
+                String[] cognomiAutori = request.getParameterValues("cognome");
+                String[] cfAutori = request.getParameterValues("cf");
 
-            List<Libro> libri= libroService.doRetriveAll();
-            if(!libri.contains(libro)) {
-                libroService.doSave(libro);
-                response.sendRedirect("gestisci-prodotti");
-            }
-            else {
-                request.setAttribute("esito", "non riuscito");//per poter mostrare un errore nell'inserimento
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/prodotti/nuovoProdotto.jsp");
+                List<Autore> autori = new ArrayList<>();
+
+                if (nomiAutori != null && cognomiAutori != null && cfAutori != null) {
+                    for (int i = 0; i < nomiAutori.length; i++) {
+                        if (nomiAutori[i].isEmpty() || cognomiAutori[i].isEmpty() || cfAutori[i].isEmpty()) {
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+                            dispatcher.forward(request, response);
+                        }
+                        Autore autore = new Autore();
+                        autore.setNome(nomiAutori[i]);
+                        autore.setCognome(cognomiAutori[i]);
+                        autore.setCf(cfAutori[i]);
+                        autori.add(autore);
+                    }
+                }
+
+                libro.setIsbn(isbn);
+                libro.setTitolo(titolo);
+                libro.setGenere(genere);
+                libro.setAnnoPubblicazioni(annoPubblicazioni);
+                libro.setPrezzo(prezzo);
+                libro.setSconto(sconto);
+                libro.setTrama(trama);
+                libro.setImmagine(immagine);
+                libro.setDisponibile(true);
+                libro.setAutori(autori);
+
+                List<Libro> libri = libroService.doRetriveAll();
+                boolean flag = true;
+                for(Libro l: libri) {
+                    if(l.getIsbn().equals(isbn)) {
+                        request.setAttribute("esito", "non riuscito");//per poter mostrare un errore nell'inserimento
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/prodotti/nuovoProdotto.jsp");
+                        dispatcher.forward(request, response);
+                        flag = false;
+                    }
+                }
+                if(flag) {
+                    libroService.doSave(libro);
+                    response.sendRedirect("gestisci-prodotti");
+                }
+
+            } catch (NumberFormatException e) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                 dispatcher.forward(request, response);
             }
-
-
-        }catch(NumberFormatException e){
-            response.sendRedirect("/WEB-INF/errorJsp/erroreFormato.jsp");
-
         }
+    }
+
+    public boolean isValid(String str){
+        return str.matches("\\d+");
     }
 
     @Override

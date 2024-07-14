@@ -18,10 +18,32 @@ public class AggiornaLibroServlet extends HttpServlet {
         String isbn=request.getParameter("isbn");
         String annoPubb=request.getParameter("annoPubb");
         String genere=request.getParameter("genere");
-        Double prezzo = Double.valueOf(request.getParameter("prezzo"));
-        int sconto = Integer.parseInt(request.getParameter("sconto"));
+        String prezzo1 = request.getParameter("prezzo");
+        String sconto1 = (request.getParameter("sconto"));
         String trama=request.getParameter("trama");
         String immagine=request.getParameter("immagine");
+
+        if(titolo == null || titolo.isEmpty() || isbn == null || annoPubb == null || annoPubb.isEmpty() ||
+        genere == null || genere.isEmpty() || prezzo1 == null || trama == null || immagine == null) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        double prezzo = 0;
+        try{
+            prezzo = Double.parseDouble(prezzo1);
+        }catch (NumberFormatException e){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        int sconto = 0;
+        if(isValid(sconto1))
+            sconto = Integer.parseInt(sconto1);
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+            dispatcher.forward(request, response);
+        }
 
         LibroDAO libroService = new LibroDAO();
         Libro libro = new Libro();
@@ -37,6 +59,10 @@ public class AggiornaLibroServlet extends HttpServlet {
         libroService.updateLibro(libro);
         RequestDispatcher dispatcher = request.getRequestDispatcher("modifica-libro");
         dispatcher.forward(request, response);
+    }
+
+    public boolean isValid(String str){
+        return str.matches("\\d+");
     }
 
     @Override
