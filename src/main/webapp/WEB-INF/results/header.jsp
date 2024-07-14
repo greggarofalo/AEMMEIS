@@ -81,7 +81,7 @@
     document.getElementById("search-icon").addEventListener("click", function(event) {
         event.preventDefault();  // Prevent default link behavior
         let query = document.getElementById("search").value;
-        window.location.href = "ricerca-servlet?q=" + encodeURIComponent(query);
+        window.location.href = "ricerca-servlet?q=" + encodeURIComponent(query);//encodeURIComponent è usato per assicurarsi che i caratteri speciali nel valore della ricerca siano correttamente codificati.
     });
 
 

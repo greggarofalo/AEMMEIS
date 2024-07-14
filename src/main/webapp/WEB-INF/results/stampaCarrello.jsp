@@ -138,21 +138,25 @@
 
             // Definisce la funzione di gestione degli eventi per la risposta ricevuta
             xhttp.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                    // La richiesta è stata completata e la risposta è pronta
-                    // Parsa la risposta JSON
-                    var data = JSON.parse(this.responseText);
-
-                    // Aggiorna l'icona del cuoricino
-                    const favoriteButton = document.querySelector(`button[class="favorite-button"][data-isbn="` + isbn + `"]`);
-                    if (data.isInWishList) {
-                        favoriteButton.querySelector('img').src = "images/heartsBlack-icon.png";
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        // La richiesta è stata completata e la risposta è pronta
+                        // Parsa la risposta JSON
+                        var data = JSON.parse(this.responseText);
+                        // Aggiorna l'icona del cuoricino
+                        const favoriteButton = document.querySelector(`button[class="favorite-button"][data-isbn="` + isbn + `"]`);
+                        if (data.isInWishList) {
+                            favoriteButton.querySelector('img').src = "images/heartsBlack-icon.png";
+                        } else {
+                            favoriteButton.querySelector('img').src = "images/hearts-icon.png";
+                        }
+                    } else if (this.status === 401) {
+                        // Gestisce il reindirizzamento alla pagina di login in caso di errore 401 (Unauthorized)
+                        window.location.href = "area-personale";
                     } else {
-                        favoriteButton.querySelector('img').src = "images/hearts-icon.png";
+                        // Gestisci eventuali errori
+                        console.error('Errore durante l\'aggiunta ai preferiti:', this.status);
                     }
-                } else {
-                    // Gestisci eventuali errori
-                    console.error('Errore durante l\'aggiunta ai preferiti:', this.status);
                 }
             };
 
@@ -180,7 +184,7 @@
                     } else {
                         // Se si è verificato un errore, mostra un messaggio di errore
                         console.error('Errore durante la rimozione dal carrello:', this.status);
-                }
+                    }
                 }
             };
 

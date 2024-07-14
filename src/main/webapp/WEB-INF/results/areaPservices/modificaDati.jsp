@@ -85,9 +85,6 @@
                                 <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
                             </button>
                         </div>
-                        <!--<button type="button" class="remove-phone" onclick="removePhoneField(this)" data-telefono="${telefono}">
-                            <img src="images/trash-bin.png" alt="Menu" width="18" height="18"><br>
-                        </button>-->
                     </div>
                 </c:forEach>
             </div>

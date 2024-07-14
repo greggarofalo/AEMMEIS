@@ -34,7 +34,7 @@ public class LogoutServlet extends HttpServlet {
         try{
             RigaCarrelloDAO rigaCarrelloService = new RigaCarrelloDAO();
             if(carrelloDAO.doRetriveByUtente(utente.getEmail()) != null && !(carrelloDAO.doRetriveByUtente(utente.getEmail()).getRigheCarrello().isEmpty())) {
-                Carrello carrello2=carrelloDAO.doRetriveByUtente(utente.getEmail());
+                //Carrello carrello2=carrelloDAO.doRetriveByUtente(utente.getEmail());
                 rigaCarrelloService.deleteRigheCarrelloByIdCarrello(carrelloDAO.doRetriveByUtente(utente.getEmail()).getIdCarrello());//elimino ciò che è presente nel db
             }
             WishListDAO wishListService = new WishListDAO();

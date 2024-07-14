@@ -83,7 +83,7 @@
         // Crea un oggetto URLSearchParams per gestire i parametri della query string
         var searchParams = new URLSearchParams(queryString);
 
-        // Ottieni il valore del parametro 'position' (o qualsiasi altro nome tu abbia usato)
+        // Ottieni il valore del parametro 'position'
         var position = searchParams.get('position');
 
         // Se 'position' è definito, crea l'ancoraggio con quel valore

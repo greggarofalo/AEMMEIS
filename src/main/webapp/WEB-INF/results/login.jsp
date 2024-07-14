@@ -97,7 +97,7 @@
             }
 
             .block {
-                width: 80%; /* Imposta la larghezza al 100% */
+                width: 80%;
                 margin-bottom: 10px; /* Aggiunge spazio sotto i blocchi */
             }
             /* Stile per i campi di input */
