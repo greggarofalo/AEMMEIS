@@ -36,7 +36,7 @@
         <label for="prezzo">Prezzo</label>
         <input type="text" id="prezzo" name="prezzo" required><br><br>
         <label for="sconto">Sconto</label>
-        <input type="text" id="sconto" name="sconto"><br><br>
+        <input type="text" id="sconto" name="sconto" pattern="[0-9]{0,3}" oninput="validateSconto()"><br><br>
         <label for="trama">Trama</label>
         <textarea id="trama" name="trama"> </textarea><br><br>
         <label for="immagine">Immagine</label>
@@ -83,5 +83,23 @@ function addAuthor() {
     // Aggiunta del nuovo set di campi al div contenitore degli autori
     document.getElementById('authors').appendChild(div);
 }
+    function validateSconto() {
+        var scontoInput = document.getElementById('sconto');
+        var scontoValue = scontoInput.value.trim(); // Ottieni il valore e rimuovi spazi vuoti
+
+        // Se il campo è vuoto, non fare alcuna validazione
+        if (scontoValue === "") {
+        scontoInput.setCustomValidity(""); // Nessun messaggio di errore
+        return;
+        }
+
+        // Verifica se il valore è un numero valido tra 0 e 100
+        var intValue = parseInt(scontoValue);
+        if (isNaN(intValue) || intValue < 0 || intValue > 100) {
+        scontoInput.setCustomValidity("Inserisci un numero valido tra 0 e 100.");
+        } else {
+            scontoInput.setCustomValidity(""); // Nessun messaggio di errore personalizzato
+        }
+    }
 </script>
 </html>

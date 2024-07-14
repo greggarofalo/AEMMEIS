@@ -20,16 +20,20 @@ public class AggiornaRepartoServlet extends HttpServlet {
             int id= Integer.parseInt(request.getParameter("idReparto"));
             String descrizione=request.getParameter("descrizione");
             String immagine=request.getParameter("immagine");
+            String address="/WEB-INF/results/admin/reparti/gestisciReparti.jsp";
+            if(descrizione==null || immagine==null){
+                    address="/WEB-INF/errorJsp/erroreForm.jsp";
+            }
+            else {
+                    RepartoDAO repartoService = new RepartoDAO();
+                    Reparto reparto = new Reparto();
+                    reparto.setIdReparto(id);
+                    reparto.setDescrizione(descrizione);
+                    reparto.setImmagine(immagine);
 
-            RepartoDAO repartoService = new RepartoDAO();
-            Reparto reparto= new Reparto();
-            reparto.setIdReparto(id);
-            reparto.setDescrizione(descrizione);
-            reparto.setImmagine(immagine);
-
-            repartoService.updateReparto(reparto);
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/reparti/gestisciReparti.jsp");
+                    repartoService.updateReparto(reparto);
+            }
+            RequestDispatcher dispatcher = request.getRequestDispatcher(address);
             dispatcher.forward(request, response);
     }
 }

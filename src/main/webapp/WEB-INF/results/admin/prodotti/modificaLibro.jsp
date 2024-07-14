@@ -25,17 +25,17 @@
         <div class="info-libro">
             <form action="aggiorna-libro" method="post">
                 <label for="titolo">Titolo</label>
-                <input type="text" id="titolo" name="titolo" value="${libro.titolo}"><br><br>
+                <input type="text" id="titolo" name="titolo" value="${libro.titolo}" required><br><br>
                 <label for="isbn">Isbn</label>
                 <input type="text" id="isbn" name="isbn" pattern="[0-9]{13}" value="${libro.isbn}" readonly><br><br>
                 <label for="annoPubb">Anno Pubblicazione</label>
-                <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}"><br><br>
+                <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}" required><br><br>
                 <label for="genere">Genere</label>
-                <input type="text" id="genere" name="genere" value="${libro.genere}"><br><br>
+                <input type="text" id="genere" name="genere" value="${libro.genere}" required><br><br>
                 <label for="prezzo">Prezzo</label>
-                <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}"><br><br>
+                <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}" required><br><br>
                 <label for="sconto">Sconto</label>
-                <input type="text" id="sconto" name="sconto" value="${libro.sconto}"><br><br>
+                <input type="text" id="sconto" name="sconto" value="${libro.sconto}" pattern="[0-9]{0,3}" oninput="validateSconto()"><br><br>
                 <label for="immagine">Immagine</label>
                 <input type="text" id="immagine" name="immagine" value="${libro.immagine}"><br><br>
                 <label for="trama">Trama</label>
@@ -102,6 +102,27 @@
 
 </div>
 
+
+<script>
+    function validateSconto() {
+        var scontoInput = document.getElementById('sconto');
+        var scontoValue = scontoInput.value.trim(); // Ottieni il valore e rimuovi spazi vuoti
+
+        // Se il campo è vuoto, non fare alcuna validazione
+        if (scontoValue === "") {
+            scontoInput.setCustomValidity(""); // Nessun messaggio di errore
+            return;
+        }
+
+        // Verifica se il valore è un numero valido tra 0 e 100
+        var intValue = parseInt(scontoValue);
+        if (isNaN(intValue) || intValue < 0 || intValue > 100) {
+            scontoInput.setCustomValidity("Inserisci un numero valido tra 0 e 100.");
+        } else {
+            scontoInput.setCustomValidity(""); // Nessun messaggio di errore personalizzato
+        }
+    }
+</script>
 
 </body>
 </html>
