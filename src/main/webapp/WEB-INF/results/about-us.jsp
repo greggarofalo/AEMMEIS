@@ -39,8 +39,14 @@
             padding: 20px;
         }
 
+        h1 {
+            color: #000000;
+            font-family: 'Merriweather', serif;
+            text-align: center;
+        }
+
         /* Stile per i titoli */
-        h1, h2 {
+         h2 {
             color: #222;
             font-family: 'Merriweather', serif;
         }
@@ -94,7 +100,7 @@
     </c:choose>
     <div class="content">
         <section class="about-us">
-            <h1>Chi Siamo</h1>
+            <h1>Chi Siamo</h1><br>
             <p>AEMME è stata fondata da tre appassionate studentesse dell'Università degli Studi di Salerno, che frequentano la facoltà di informatica. La nostra missione è rendere accessibile una vasta gamma di libri a tutti, fornendo un'esperienza arricchente per tutti i lettori.</p>
             <div class="founders">
                 <div class="founder">
