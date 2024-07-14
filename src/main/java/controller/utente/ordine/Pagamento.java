@@ -52,6 +52,7 @@ public class Pagamento extends HttpServlet {
             else {
                 ordine.setCitta(citta);
                 ordine.setIndirizzoSpedizione(indirizzo);
+                address = "/WEB-INF/results/pagamentoOrdine.jsp";
             }
         }
         else{

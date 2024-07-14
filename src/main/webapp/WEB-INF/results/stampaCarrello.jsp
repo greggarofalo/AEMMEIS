@@ -85,9 +85,17 @@
                     Punti Aemme: <span id="aemme-points">0</span>
                 </div>
                 <div class="cart-actions">
+                    <%
+                     //   Carrello cart = (Carrello) session.getAttribute("carrello");
+                        if(cart.getRigheCarrello().isEmpty()){
+                    %><button onclick="return alert('Carrello vuoto...inserisci almeno un prodotto' +
+                     ' nel carrello per acquistare')" class="button">Acquista ora </button>
+                    <%}else{%>
+
                     <form action="ordine-supporto" id="form">
-                    <button type="submit" form="form" class="button">Acquista ora </button>
+                        <button type="submit" form="form" class="button">Acquista ora </button>
                     </form>
+                    <%}%>
                     <button onclick="closeCart()" class="button">Chiudi carrello</button>
                 </div>
             </div>
@@ -126,6 +134,7 @@
         function addToFavorites(isbn) {
             // Crea una nuova istanza di XMLHttpRequest
             var xhttp = new XMLHttpRequest();
+
 
             // Definisce la funzione di gestione degli eventi per la risposta ricevuta
             xhttp.onreadystatechange = function() {
