@@ -35,16 +35,15 @@ public class PagamentoEffettuato extends HttpServlet {
 
             if(isNumeric(puntiString)) {
                 punti = Integer.parseInt(puntiString);
-                if(punti < 0 || punti>tesseraDAO.doRetrieveByEmail(utente.getEmail()).getPunti()) {
+                if (punti < 0 || punti > tesseraDAO.doRetrieveByEmail(utente.getEmail()).getPunti()) {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                     dispatcher.forward(request, response);
                 }
-            else{
+            }else{
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                     dispatcher.forward(request, response);
-                }
-
             }
+
 
 
 
