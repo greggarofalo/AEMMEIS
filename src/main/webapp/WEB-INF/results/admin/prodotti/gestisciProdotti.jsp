@@ -22,7 +22,7 @@
             text-align: center;
         }
         .container {
-            width: 80%;
+            width: 85%;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
@@ -72,13 +72,22 @@
             align-items: center;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1047px) {
             .container {
-                width: 90%;
+                width: 92%;
+            }
+            .container {
                 padding: 15px;
             }
+
+        }
+
+        @media (max-width: 935px) {
+            .container {
+                padding: 10px;
+            }
             th, td {
-                padding: 8px;
+                padding: 11px;
             }
             input[type="submit"] {
                 font-size: 14px;
@@ -87,7 +96,7 @@
             }
         }
 
-        @media (max-width: 590px) {
+        @media (max-width: 821px) {
             .container {
                 width: 100%; /* La larghezza del contenitore diventa il 100% della larghezza dello schermo */
                 padding: 10px; /* Riduzione del padding per adattarsi meglio agli schermi più piccoli */
