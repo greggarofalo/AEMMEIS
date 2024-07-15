@@ -198,50 +198,6 @@
             xhttp.send();
         }
 
-/*
-        function saveCart() {
-            // Seleziona tutti gli elementi del carrello (assumendo che ogni libro nel carrello sia contenuto in un elemento con la classe 'book-item')
-            var cartItems = document.querySelectorAll('.book-item');
-            var cartData = []; // Array per memorizzare i dati del carrello da inviare al server
-
-            // Itera su ciascun elemento del carrello per raccogliere i dati necessari
-            cartItems.forEach(function(item) {
-                // Ottiene l'ISBN del libro dall'attributo 'data-isbn' del pulsante di preferiti
-                var isbn = item.querySelector('.favorite-button').getAttribute('data-isbn');
-                // Ottiene la quantità aggiornata del libro dall'input dell'utente
-                var quantity = item.querySelector('input[name="quantita"]').value;
-                // Aggiunge un oggetto contenente l'ISBN e la quantità all'array cartData
-                cartData.push({ isbn: isbn, quantity: quantity });
-            });
-
-            // Crea una nuova istanza di XMLHttpRequest per inviare una richiesta AJAX al server
-            var xhttp = new XMLHttpRequest();
-
-            // Definisce la funzione di gestione degli eventi per la risposta ricevuta
-            xhttp.onreadystatechange = function() {
-                if (this.readyState === 4) { // Verifica se la richiesta è stata completata
-                    if (this.status === 200) { // Verifica se la risposta ha avuto successo
-                        // Carrello salvato con successo
-                        console.log('Carrello aggiornato con successo');
-                    } else {
-                        // Gestisce eventuali errori, se lo stato della risposta non è 200 (successo)
-                        console.error('Errore durante l\'aggiornamento del carrello:', this.status);
-                    }
-                }
-            };
-
-            // Imposta il metodo e l'URL della richiesta
-            xhttp.open("POST", "aggiorna-carrello", true);
-
-            // Imposta l'intestazione Content-Type per indicare che i dati sono in formato JSON
-            xhttp.setRequestHeader("Content-Type", "application/json");
-
-            // Invia la richiesta al server con i dati del carrello in formato JSON
-            xhttp.send(JSON.stringify(cartData));
-
-            closeCart();
-        }*/
-
         function closeCart() {
                 window.location.href = "index.html";
         }
