@@ -35,7 +35,7 @@ public class ModificaLibroServlet extends HttpServlet {
         List<Reparto> repartiNonPresenti = repartoService.doRetrivedAll();
         for(int i=0; i<repartiNonPresenti.size(); i++){
             Reparto reparto=repartiNonPresenti.get(i);
-            if(sedi.contains(reparto)) {
+            if(reparti.contains(reparto)) {
                 repartiNonPresenti.remove(i);
             }
         }
