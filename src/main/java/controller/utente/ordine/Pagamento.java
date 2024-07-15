@@ -16,6 +16,8 @@ import model.ordineService.RigaOrdine;
 import model.utenteService.Utente;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @WebServlet("/do-pagamento")
@@ -29,14 +31,17 @@ public class Pagamento extends HttpServlet {
         String type = request.getParameter("typeForm");
         String address = null;
 
-        double costo = 0;
+        double costo = 0.00;
         for(RigaCarrello r : righe){
             Libro libro = r.getLibro();
-            double prezzoUnitario = libro.getPrezzo() - (libro.getPrezzo() * libro.getSconto()/100);
+            double prezzoUnitario = libro.getPrezzo() - (libro.getPrezzo() * libro.getSconto()/100.00);
             costo += r.getQuantita() * prezzoUnitario;
         }
 
-        ordine.setCosto(costo);
+        BigDecimal bd = new BigDecimal(costo).setScale(2, RoundingMode.HALF_UP);
+        double costoArrotondato = bd.doubleValue();
+
+        ordine.setCosto(costoArrotondato);
 
         if(type.equals("indirizzo")){
             String indirizzo = request.getParameter("indirizzo") + ", " + request.getParameter("cap");

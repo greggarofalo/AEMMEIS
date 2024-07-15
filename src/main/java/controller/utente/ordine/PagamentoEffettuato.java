@@ -33,8 +33,21 @@ public class PagamentoEffettuato extends HttpServlet {
         if(utente.getTipo().equalsIgnoreCase("premium")){
             String puntiString = request.getParameter("punti");
 
-            if(puntiString != null && (!puntiString.isEmpty()))
+            if(isNumeric(puntiString)) {
                 punti = Integer.parseInt(puntiString);
+                if(punti < 0 || punti>tesseraDAO.doRetrieveByEmail(utente.getEmail()).getPunti()) {
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+                    dispatcher.forward(request, response);
+                }
+            else{
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
+                    dispatcher.forward(request, response);
+                }
+
+            }
+
+
+
         }
         ordine.setPuntiSpesi(punti);
 

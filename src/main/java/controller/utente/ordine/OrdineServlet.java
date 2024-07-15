@@ -23,6 +23,8 @@ import model.tesseraService.TesseraDAO;
 import model.utenteService.Utente;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,10 +142,13 @@ public class OrdineServlet extends HttpServlet {
             } else {
                 ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.
             }
-        }
+       }
 
         // ordine.setCosto(Double.parseDouble(request.getParameter("costo")));
-        ordine.setCosto(costo - (ordine.getPuntiSpesi() * 0.10)); //lo ricalcolo per sicurezza
+        double costoAggiornato=costo - (ordine.getPuntiSpesi() * 0.10);
+        BigDecimal bd = new BigDecimal(costoAggiornato).setScale(2, RoundingMode.HALF_UP);
+        double costoArrotondato = bd.doubleValue();
+        ordine.setCosto(costoArrotondato); //lo ricalcolo per sicurezza
             //utente che effettua l'ordine
         ordine.setEmail(utente.getEmail());
             //quando si fa l'ordine: nel momento di invocazione della servlet
