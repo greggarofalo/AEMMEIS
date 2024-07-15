@@ -1,4 +1,5 @@
-<%--
+<%@ page import="model.wishList.WishList" %>
+<%@ page import="model.libroService.Libro" %><%--
   Created by IntelliJ IDEA.
   User: M.DELUCIA18
   Date: 25/05/2024
@@ -53,22 +54,36 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:choose>
-                <c:when test="${libro.disponibile}">
-                    <form action="aggiungi-carrello">
-                        <p class="available">Disponibile</p>
+            <div class="bottoni-azioni">
+                <c:choose>
+                    <c:when test="${libro.disponibile}">
+                        <form action="aggiungi-carrello">
+                            <p class="available">Disponibile</p>
+                            <br><br>
+                            <input type="hidden" name="isbn" value="${libro.isbn}">
+                            <input type="hidden" name="source" value="mostraLibro">
+                            <input class="add-to-cart" type="submit" value="Aggiungi al carrello">
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="not-available">Libro non disponibile</p>
                         <br><br>
-                        <input type="hidden" name="isbn" value="${libro.isbn}">
-                        <input type="hidden" name="source" value="mostraLibro">
-                        <input class="add-to-cart" type="submit" value="Aggiungi al carrello">
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <p class="not-available">Libro non disponibile</p>
-                    <br><br>
-                    <button class="add-to-cart" disabled style="background-color: #ccc;">Aggiungi al carrello</button>
-                </c:otherwise>
-            </c:choose>
+                        <button class="add-to-cart" disabled style="background-color: #ccc;">Aggiungi al carrello</button>
+                    </c:otherwise>
+                </c:choose><br>
+                <form action="modifica-preferiti">
+                    <input type="hidden" name="isbn" value="${libro.isbn}">
+                    <input type="hidden" name="source" value="mostraLibro">
+                    <%WishList ws = (WishList) session.getAttribute("wishList");
+                        Libro l = (Libro) request.getAttribute("libro");
+                        if( (ws != null) && (ws.getLibri().contains(l)) ){
+                    %>
+                        <input class="add-to-cart" type="submit" value="Rimuovi dai preferiti">
+                    <%}else{%>
+                        <input class="add-to-cart" type="submit" value="Aggiungi ai preferiti">
+                    <%}%>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -95,6 +110,7 @@
             </c:forEach></li>
             <li>Anno edizione: ${libro.annoPubblicazioni}</li>
             <li>ISBN: ${libro.isbn}</li>
+            <li>Genere: ${libro.genere}</li>
         </ul>
     </div>
 </div>

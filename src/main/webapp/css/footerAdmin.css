@@ -96,7 +96,7 @@ footer{
 }
 
 /* Stili responsivi */
-@media (max-width: 576px) {  /* Media query per schermi con larghezza massima di 576px */
+@media (max-width: 645px) {  /* Media query per schermi con larghezza massima di 576px */
     .row {
         flex-direction: column;  /* Dispone i blocchi figli in una colonna invece che in una riga */
         align-items: center;     /* Allinea gli elementi al centro della colonna */

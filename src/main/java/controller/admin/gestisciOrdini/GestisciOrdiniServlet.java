@@ -20,6 +20,10 @@ public class GestisciOrdiniServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         UtenteDAO utenteDAO = new UtenteDAO();
         List<Utente> utenti = utenteDAO.doRetrieveAll();
+        for(int i = 0; i < utenti.size(); i++){
+            if(utenti.get(i).getTipo().equalsIgnoreCase("amministratore"))
+                utenti.remove(i);
+        }
         request.setAttribute("utenti", utenti);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/ordini/gestisciOrdini.jsp");

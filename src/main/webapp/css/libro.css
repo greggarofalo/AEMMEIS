@@ -226,8 +226,24 @@ body {
     }
 }
 
+@media (max-width: 1070px) and (min-width: 768px){
+    .book-image img {
+        max-width: 80%; /* L'immagine occupa la larghezza massima del contenitore, mantenendo le proporzioni */
+        height: auto;
+        border-radius: 8px; /* Angoli arrotondati per l'immagine */
+    }
+
+    .book-info {
+        max-width: 40%;
+    }
+    .book-info .info h1 {
+        font-size: 30px;
+    }
+}
+
 /* Media Query per schermi piccoli */
 @media (max-width: 768px) {
+
     .book-details {
         display: block; /* Disposizione a blocchi per far sì che gli elementi si dispongano verticalmente */
         text-align: center; /* Centra il testo */
@@ -243,5 +259,9 @@ body {
 
     .book-info {
         margin: 0 auto; /* Centra le informazioni */
+    }
+
+    .book-info .info h1{
+        font-size: 27px;
     }
 }

@@ -50,6 +50,9 @@ public class ModificaPrefServlet extends HttpServlet {
                     }
                     address = "/WEB-INF/results/reparto.jsp";
                 }
+            }else if(source!= null && source.equals("mostraLibro")){
+                address = "/WEB-INF/results/mostraLibro.jsp";
+                request.setAttribute("libro", libro);
             }
             WishList wishList = (WishList) session.getAttribute("wishList");
             boolean flag = true; // libro non presente
