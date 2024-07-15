@@ -31,6 +31,7 @@ body {
 .book-image img {
     margin-left: 30px;
     max-width: 80%; /* L'immagine occupa la larghezza massima del contenitore, mantenendo le proporzioni */
+    height: auto;
     border-radius: 8px; /* Angoli arrotondati per l'immagine */
 }
 
@@ -107,8 +108,6 @@ body {
     text-decoration: underline; /* Sottolineatura al passaggio del mouse */
 }
 
-
-
 /* Stile per i link di navigazione */
 .nav-tabs {
     margin-top: 30px;
@@ -137,8 +136,7 @@ body {
     margin-top: 20px; /* Spazio sopra la nuova sezione */
     padding: 20px; /* Padding interno */
     border-top: 1px solid #ddd; /* Bordo superiore per separare dalla sezione sopra */
-
-    overflow: visible;/* Assicura che il contenuto sia visibile */
+    overflow: visible; /* Assicura che il contenuto sia visibile */
 }
 
 /* Stile per il titolo della descrizione */
@@ -190,9 +188,60 @@ body {
     color: #888; /* Colore grigio per i valori */
 }
 
-/* Stile per i dettagli del libro quando lo schermo è ridotto */
+/* Stile per i dettagli del libro */
+.book-details-list {
+    margin-top: 10px; /* Spazio sopra la lista */
+    margin-left: 10px;
+}
+
+/* Stile per il titolo dei dettagli */
+.book-details-list dt {
+    font-weight: bold; /* Testo in grassetto */
+    margin-bottom: 5px; /* Spazio sotto il titolo */
+    color: #333; /* Colore del testo */
+}
+
+/* Stile per i dettagli */
+.book-details-list dd {
+    margin-bottom: 10px; /* Spazio sotto ogni dettaglio */
+    color: #555; /* Colore del testo */
+}
+
+/* Stile per i paragrafi dei dettagli */
+.book-details-list p {
+    margin: 10px 0; /* Spazio sopra e sotto */
+}
+
+/* Stile per la descrizione dei dettagli */
+.book-details-list .description {
+    margin-top: 10px; /* Spazio sopra */
+    margin-left: 20px; /* Spazio a sinistra */
+}
+
+@media (max-width: 768px) and (min-width: 500px){
+    .book-image img {
+        max-width: 60%; /* L'immagine occupa la larghezza massima del contenitore, mantenendo le proporzioni */
+        height: auto;
+        border-radius: 8px; /* Angoli arrotondati per l'immagine */
+    }
+}
+
+/* Media Query per schermi piccoli */
 @media (max-width: 768px) {
-    .book-description-details ul {
-        display: block; /* Assicura che gli elementi siano ancora visibili */
+    .book-details {
+        display: block; /* Disposizione a blocchi per far sì che gli elementi si dispongano verticalmente */
+        text-align: center; /* Centra il testo */
+    }
+
+    .book-image {
+        padding-right: 0; /* Rimuove il padding a destra */
+    }
+
+    .book-image img{
+        margin: 20px 0px; /* Centra l'immagine e aggiunge spazio sotto */
+    }
+
+    .book-info {
+        margin: 0 auto; /* Centra le informazioni */
     }
 }
