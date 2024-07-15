@@ -91,22 +91,9 @@
                     <div class="book-details">
                         <h3 class="book-title"><%=libro.getTitolo()%></h3>
                         <div class="book-price">
-                            <%if(libro.getSconto()!=0){%>
-                            <span class="book-discount">-<%=libro.getSconto()%>%</span>
-                            <span id="newPrice" class="book-new-price"><script>
-                                function myFunction(p1, p2) {
-                                    return (p1 - (p1 * p2 / 100))*<%=riga.getQuantita()%>
-                                }
 
-                                let result = myFunction(<%=libro.getPrezzo()%>, <%=libro.getSconto()%>);
-                                document.getElementById("newPrice").innerHTML = result;
-                            </script>€</span>
-                            <span class="book-old-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                            <%
-                            }else {
-                            %>
-                            <span class="book-new-price"><%=libro.getPrezzo()* riga.getQuantita()%> €</span>
-                            <%}%>
+                            <span class="book-new-price"><%=riga.getPrezzoUnitario()* riga.getQuantita()%> €</span>
+
                         </div>
                         <div class="book-actions">
                             <form action="aggiungi-carrello">

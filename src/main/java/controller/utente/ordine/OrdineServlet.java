@@ -89,7 +89,9 @@ public class OrdineServlet extends HttpServlet {
             riga.setIdOrdine(ordine.getIdOrdine());
             riga.setLibro(l);
 
-            double prezzoUnitario = (l.getPrezzo() - (l.getPrezzo()*l.getSconto()/100));
+            double prezzoUnitarioPrima = (l.getPrezzo() - (l.getPrezzo()*l.getSconto()/100));
+            BigDecimal bd = new BigDecimal(prezzoUnitarioPrima).setScale(2, RoundingMode.HALF_UP);
+            double prezzoUnitario = bd.doubleValue();
             riga.setPrezzoUnitario(prezzoUnitario);
             riga.setQuantita(rigaCarrello.getQuantita());
 
@@ -131,13 +133,6 @@ public class OrdineServlet extends HttpServlet {
            Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
            if(tessera.getDataScadenza().isAfter(LocalDate.now())){
                tessera.setPunti(tessera.getPunti() - ordine.getPuntiSpesi() + ordine.getPuntiOttenuti());
-         /*   Tessera newTess = new Tessera();
-            newTess.setPunti(tessera.getPunti());
-            newTess.setNumero(tessera.getNumero());
-            newTess.setDataScadenza(tessera.getDataScadenza());
-            newTess.setEmail(tessera.getEmail());
-            newTess.setDataCreazione(tessera.getDataCreazione());*/
-
                 tesseraDAO.updateTessera(tessera);
             } else {
                 ordine.setPuntiSpesi(0); //non può spendere punti poichè la tessera è scaduta.

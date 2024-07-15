@@ -39,7 +39,7 @@ public class PagamentoEffettuato extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                     dispatcher.forward(request, response);
                 }
-            }else{
+            }else if(!(puntiString.isEmpty())){
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                     dispatcher.forward(request, response);
             }
