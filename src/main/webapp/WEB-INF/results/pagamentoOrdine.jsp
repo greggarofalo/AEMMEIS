@@ -61,7 +61,7 @@
         %>
             <div class="form-pag">
                 <label for="punti">Vuoi sfruttare dei punti accumulati? (disponibili: <%=tessera.getPunti()%>)</label>
-                <input type="text" id="punti" name="punti" oninput="aggiornaCosto()" max="<%= tessera.getPunti() %>" min="0">
+                <input type="text" id="punti" name="punti" data-max-punti="<%=tessera.getPunti()%>" oninput="aggiornaCosto()">
             </div>
         <%}%>
 
@@ -80,9 +80,24 @@
 
     <script>
         function aggiornaCosto() {
-            let punti = document.getElementById('punti').value;
-            if(!punti)
+            let puntiInput = document.getElementById('punti');
+            let punti = puntiInput.value;
+            let maxPunti = parseInt(puntiInput.dataset.maxPunti);
+
+            // Se il campo è vuoto, considera 0
+            if (!punti) {
                 punti = 0;
+            }
+
+            // Converti punti a intero
+            var intValue = parseInt(punti);
+
+            // Controlla validità
+            if (isNaN(intValue) || intValue < 0 || intValue > maxPunti) {
+                puntiInput.setCustomValidity("Inserisci un numero valido tra 0 e " + maxPunti);
+            } else {
+                puntiInput.setCustomValidity(""); // Nessun messaggio di errore personalizzato
+            }
             let costoOrdine = document.getElementById('costoIniziale').value;
             let costoAggiornato = document.getElementById('costoAggiornato');
             let sconto = parseInt(punti) * 0.10; // Ogni punto vale 10 centesimi di euro
