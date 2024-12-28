@@ -12,6 +12,8 @@ import model.libroService.Libro;
 import model.libroService.LibroDAO;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class NuovoLibroServlet extends HttpServlet {
 
 
         if(isbn==null || isbn.isEmpty() || titolo==null || titolo.isEmpty() || genere==null || genere.isEmpty() ||
-                annoPubblicazioni==null || annoPubblicazioni.isEmpty() || price==null || price.isEmpty() ||
+                annoPubblicazioni==null || annoPubblicazioni.isEmpty() || !isAnnoPubblicazioneValid(annoPubblicazioni) ||
+                price==null || price.isEmpty() ||
                 sconto1==null || trama==null || immagine==null){
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                 dispatcher.forward(request, response);
@@ -42,9 +45,7 @@ public class NuovoLibroServlet extends HttpServlet {
             try {
                 double prezzo = Double.parseDouble(price);
                 int sconto = 0;
-                if (sconto1.isEmpty())
-                    sconto = 0;
-                else if (isValid(sconto1)) {
+                if (!sconto1.isEmpty() && isScontoValid(sconto1) && prezzo > 0) {
                     sconto = Integer.parseInt(sconto1);
                 }else{
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
@@ -104,8 +105,20 @@ public class NuovoLibroServlet extends HttpServlet {
         }
     }
 
-    public boolean isValid(String str){
-        return str.matches("\\d+");
+    public boolean isScontoValid(String str){
+        if(str.matches("\\d+")){
+            int strInt = Integer.parseInt(str);
+            return strInt > 0 && strInt <= 100;
+        }
+        return false;
+    }
+
+    public boolean isAnnoPubblicazioneValid(String str){
+        if(str.matches("\\d+")){
+            int strInt = Integer.parseInt(str);
+            return strInt <= LocalDateTime.now().getYear() && strInt > 0;
+        }
+        return false;
     }
 
     @Override

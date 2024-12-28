@@ -29,11 +29,11 @@
                 <label for="isbn">Isbn</label>
                 <input type="text" id="isbn" name="isbn" pattern="[0-9]{13}" value="${libro.isbn}" readonly><br><br>
                 <label for="annoPubb">Anno Pubblicazione</label>
-                <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}" required><br><br>
+                <input type="text" id="annoPubb" name="annoPubb" value="${libro.annoPubblicazioni}" pattern="[0-9]{4}" required title="Inserisci un anno di 4 cifre (es. 2024)"><br><br>
                 <label for="genere">Genere</label>
                 <input type="text" id="genere" name="genere" value="${libro.genere}" required><br><br>
                 <label for="prezzo">Prezzo</label>
-                <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}" required><br><br>
+                <input type="text" id="prezzo" name="prezzo" value="${libro.prezzo}" pattern="^[0-9]+(\.[0-9]{1,2})?$" required><br><br>
                 <label for="sconto">Sconto</label>
                 <input type="text" id="sconto" name="sconto" value="${libro.sconto}" pattern="[0-9]{0,3}" oninput="validateSconto()"><br><br>
                 <label for="immagine">Immagine</label>
