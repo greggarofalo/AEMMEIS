@@ -16,8 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class
-UtenteDAO {
+public class UtenteDAO {
 
     public Utente doRetrieveById(String email) {
         try (Connection con = ConPool.getConnection()) {

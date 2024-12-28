@@ -67,9 +67,9 @@
 
         .about-us .founders {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-around;
             margin-top: 20px;
+            gap: 20px;
         }
 
         .about-us .founder {
@@ -110,6 +110,11 @@
                 <div class="founder">
                     <h2>Martina De Lucia</h2>
                     <p>Martina ama esplorare nuovi generi letterari. Con la sua esperienza in sviluppo software, ha contribuito a creare un'interfaccia utente intuitiva e funzionale per la nostra libreria online.</p>
+                </div>
+                <div class="founder">
+                    <h2>Gregorio Garofalo</h2>
+                    <p>Gregorio è un esperto nel settore dell'e-commerce, con una profonda conoscenza delle dinamiche digitali. La sua passione è aiutare i lettori a scoprire e acquistare libri in modo semplice e veloce, rendendo l'esperienza online intuitiva e piacevole.
+                    </p>
                 </div>
                 <div class="founder">
                     <h2>Carla Stefanile</h2>

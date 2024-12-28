@@ -11,10 +11,12 @@
             <h3>Contact us</h3>
             <a href="mailto:a.raia7@studenti.unisa.it" class="email-id">a.raia7@studenti.unisa.it</a>
             <a href="mailto:m.delucia18@studenti.unisa.it" class="email-id">m.delucia18@studenti.unisa.it</a>
+            <a href="mailto:g.garofalo31@studenti.unisa.it" class="email-id">g.garofalo31@studenti.unisa.it</a>
             <a href="mailto:c.stefanile1@studenti.unisa.it" class="email-id">c.stefanile1@studenti.unisa.it</a>
             <div class="numeri">
                 <a href="https://wa.me/3347628932" >+39 - 3347628932</a><br>
                 <a href="https://wa.me/3312055191" >+39 - 3312055191</a><br>
+                <a href="https://wa.me/3894705626" >+39 - 3894705626</a><br>
                 <a href="https://wa.me/3936504913" >+39 - 3936504913</a><br><br>
             </div>
         </div>
