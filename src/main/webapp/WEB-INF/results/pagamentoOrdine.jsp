@@ -51,7 +51,8 @@
 
         <div class="form-pag">
             <label for="expiryDate">Data di Scadenza</label>
-            <input type="date" id="expiryDate" name="expiryDate" required>
+            <%--<input type="date" id="expiryDate" name="expiryDate" required>--%>
+            <input type="date" id="expiryDate" name="expiryDate" min="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>" required>
         </div>
 
         <% Utente utente = (Utente) session.getAttribute("utente");
@@ -104,6 +105,17 @@
             let nuovoCosto = Math.max(0, parseFloat(costoOrdine) - sconto);
             costoAggiornato.innerHTML = nuovoCosto.toFixed(2); // Mostra il nuovo costo con due cifre decimali
         }
+
+        document.getElementById("expiryDate").addEventListener("input", function () {
+            const expiryDateInput = this;
+            const today = new Date().toISOString().split("T")[0]; // Ottieni la data odierna in formato "yyyy-MM-dd"
+
+            if (expiryDateInput.value < today) {
+                expiryDateInput.setCustomValidity("Carta scaduta");
+            } else {
+                expiryDateInput.setCustomValidity(""); // Resetta l'errore
+            }
+        });
     </script>
 </body>
 </html>
