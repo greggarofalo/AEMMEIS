@@ -1,4 +1,5 @@
-<%@ page import="model.utenteService.Utente" %><%--
+<%@ page import="model.utenteService.Utente" %>
+<%@ page import="controller.utils.Validator" %><%--
   Created by IntelliJ IDEA.
   User: carla
   Date: 12/07/2024
@@ -16,7 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="./css/generale.css">
     <%  Utente utente = (Utente) session.getAttribute("utente");
-        if((utente==null) || !(utente.getTipo().equalsIgnoreCase("amministratore"))){ %>
+        if (!Validator.checkIfUserAdmin(utente)) { %>
         <link rel="stylesheet" type="text/css" href="./css/headerStyle.css">
         <link rel="stylesheet" type="text/css" href="./css/footerStyle.css">
 
@@ -91,7 +92,7 @@
 <body>
 <div class="wrapper">
     <c:choose>
-    <c:when test="${utente != null && utente.tipo == 'Amministratore'}">
+    <c:when test="${utente != null && (utente.tipo == 'GestoreCatalogo'  || utente.tipo == 'GestoreSedi' ||  utente.tipo == 'GestoreOrdine')}">
         <%@include file="/WEB-INF/results/admin/headerAdmin.jsp"%>
     </c:when>
     <c:otherwise>

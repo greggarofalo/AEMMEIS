@@ -12,7 +12,7 @@ public class SedeDAO {
     public void doSave(Sede sede){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Sede (citta, via, numeroCivico, cap) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO sede (citta, via, numeroCivico, cap) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sede.getCitta());
             ps.setString(2, sede.getVia());
             ps.setInt(3, sede.getCivico());
@@ -44,7 +44,7 @@ public class SedeDAO {
             }
             //poi elimino il reparto in questione
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM Sede WHERE idSede=?");
+                    con.prepareStatement("DELETE FROM sede WHERE idSede=?");
             ps.setInt(1, idSede);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");
@@ -55,7 +55,7 @@ public class SedeDAO {
 
     public void updateSede(Sede sede){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Sede SET citta = ?, via = ?, numeroCivico = ?, cap = ? WHERE idSede = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE sede SET citta = ?, via = ?, numeroCivico = ?, cap = ? WHERE idSede = ?");
             ps.setString(1, sede.getCitta());
             ps.setString(2, sede.getVia());
             ps.setInt(3, sede.getCivico());
@@ -172,7 +172,7 @@ public class SedeDAO {
     public void deleteFromPresenzaLibro(int idSede, String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM Presenza WHERE idSede=? AND isbn=?");
+                    con.prepareStatement("DELETE FROM presenza WHERE idSede=? AND isbn=?");
             ps.setInt(1, idSede);
             ps.setString(2, isbn);
             if(ps.executeUpdate() != 1)
@@ -185,7 +185,7 @@ public class SedeDAO {
     public void doSavePresenza(int idSede, String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Presenza (idSede, isbn) VALUES(?,?)");
+                    "INSERT INTO presenza (idSede, isbn) VALUES(?,?)");
             ps.setInt(1, idSede);
             ps.setString(2, isbn);
             if (ps.executeUpdate() != 1) {

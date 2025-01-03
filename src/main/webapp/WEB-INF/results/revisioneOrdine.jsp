@@ -91,7 +91,16 @@
         Punti Aemme: <span id="aemme-points">0</span>
     </div>
     <div class="cart-actions">
+        <%
+            if (righe.isEmpty()) {
+        %>
+        <button onclick="return alert('Carrello vuoto...inserisci almeno un prodotto' +
+                     ' nel carrello per acquistare')" class="button">Procedi all'ordine
+        </button>
+        <%} else {%>
         <button onclick="procediOrdine()" class="button">Procedi all'ordine</button>
+        <%}%>
+
         <form action="index.html" id="form">
             <button type="submit" form="form" class="button">Continua ad acquistare</button>
         </form>

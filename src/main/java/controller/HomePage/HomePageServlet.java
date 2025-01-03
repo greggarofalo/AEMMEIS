@@ -1,5 +1,6 @@
 package controller.HomePage;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,12 +27,11 @@ public class HomePageServlet extends HttpServlet {
         Carrello carrello = (Carrello) session.getAttribute("carrello");// Verifica se il carrello è già presente nella sessione
         Utente utente=(Utente) session.getAttribute("utente");
 
-        if(utente!=null) { // se l'utente ha effettuato il login
-            if(utente.getTipo().equals("Amministratore")) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
-                dispatcher.forward(request, response);
-            }
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
         }
+
 
         if (carrello == null) { // Se il carrello non è presente nella sessione, ne crea uno nuovo
             carrello = new Carrello();

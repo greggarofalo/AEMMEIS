@@ -35,10 +35,10 @@ public class NuovoLibroServlet extends HttpServlet {
         String immagine = request.getParameter("immagine");
 
 
-        if(isbn==null || isbn.isEmpty() || titolo==null || titolo.isEmpty() || genere==null || genere.isEmpty() ||
-                annoPubblicazioni==null || annoPubblicazioni.isEmpty() || !isAnnoPubblicazioneValid(annoPubblicazioni) ||
-                price==null || price.isEmpty() ||
-                sconto1==null || trama==null || immagine==null){
+        if(isbn == null || isbn.length() != 13 || titolo == null || titolo.isEmpty() || genere == null || genere.isEmpty() ||
+                annoPubblicazioni == null || annoPubblicazioni.isEmpty() || !isAnnoPubblicazioneValid(annoPubblicazioni) ||
+                price == null || price.isEmpty() ||
+                sconto1 == null || trama == null || immagine == null){
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp");
                 dispatcher.forward(request, response);
         }else {

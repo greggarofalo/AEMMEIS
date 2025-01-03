@@ -1,5 +1,6 @@
 package controller.admin.gestisciOrdini;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ public class GestisciOrdiniServlet extends HttpServlet {
         UtenteDAO utenteDAO = new UtenteDAO();
         List<Utente> utenti = utenteDAO.doRetrieveAll();
         for(int i = 0; i < utenti.size(); i++){
-            if(utenti.get(i).getTipo().equalsIgnoreCase("amministratore"))
+            if(Validator.checkIfUserAdmin(utenti.get(i)))
                 utenti.remove(i);
         }
         request.setAttribute("utenti", utenti);

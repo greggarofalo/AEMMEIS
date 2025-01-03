@@ -13,7 +13,7 @@ public class OrdineDAO {
     public void doSave(Ordine ordine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Ordine (idOrdine, costo, indirizzoSpedizione, citta, puntiOttenuti, puntiSpesi, dataEffettuazione, stato,matricola, email) VALUES(?,?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO ordine (idOrdine, costo, indirizzoSpedizione, citta, puntiOttenuti, puntiSpesi, dataEffettuazione, stato,matricola, email) VALUES(?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, ordine.getIdOrdine());
             ps.setDouble(2, ordine.getCosto());
             ps.setString(3, ordine.getIndirizzoSpedizione());
@@ -39,7 +39,7 @@ public class OrdineDAO {
     public Ordine doRetrieveById(String idOrdine) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Ordine WHERE idOrdine=?");
+                    con.prepareStatement("SELECT * FROM ordine WHERE idOrdine=?");
             ps.setString(1, idOrdine);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -79,7 +79,7 @@ public class OrdineDAO {
     public List<Ordine> doRetrieveByUtente(String email) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Ordine WHERE email=?");
+                    con.prepareStatement("SELECT * FROM ordine WHERE email=?");
             ps.setString(1, email);
             List<Ordine> ordini=new ArrayList<>();
             ResultSet rs = ps.executeQuery();
@@ -94,7 +94,7 @@ public class OrdineDAO {
     //modifico stato e data arrivo dell'ordine
     public void updateOrdine(Ordine ordine){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Ordine SET stato = ?, dataArrivo = ? WHERE idOrdine = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE ordine SET stato = ?, dataArrivo = ? WHERE idOrdine = ?");
             ps.setString(1, ordine.getStato());
             ps.setDate(2, Date.valueOf(ordine.getDataArrivo()));
             ps.setString(3, ordine.getIdOrdine());
@@ -106,7 +106,7 @@ public class OrdineDAO {
     }
     public void updateStato(Ordine ordine){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Ordine SET stato = ? WHERE idOrdine = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE ordine SET stato = ? WHERE idOrdine = ?");
             ps.setString(1, ordine.getStato());
             ps.setString(2, ordine.getIdOrdine());
             if(ps.executeUpdate() != 1)
@@ -118,7 +118,7 @@ public class OrdineDAO {
 
     public void updateOrdineMatricola(Ordine ordine){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Ordine SET matricola = ? WHERE idOrdine = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE ordine SET matricola = ? WHERE idOrdine = ?");
             ps.setString(1, ordine.getMatricola());
             ps.setString(2, ordine.getIdOrdine());
             if(ps.executeUpdate() != 1)
@@ -151,7 +151,7 @@ public class OrdineDAO {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM Ordine WHERE idOrdine=?");
+                    con.prepareStatement("DELETE FROM ordine WHERE idOrdine=?");
             ps.setString(1, idOrdine);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE error.");

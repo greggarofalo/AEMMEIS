@@ -1,5 +1,6 @@
 package controller.utente;
 
+import controller.utils.Validator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -58,7 +59,7 @@ public class LogoutServlet extends HttpServlet {
         }
 
         //Se l'admin modifica i reparti è necessario apportare modifiche alla lista salvata del serveltContext
-        if(utente.getTipo().equalsIgnoreCase("amministratore")){
+        if(Validator.checkIfUserAdmin(utente)){
             getServletContext().removeAttribute("reparti");
             RepartoDAO service = new RepartoDAO();
             List<Reparto> reparti = service.doRetrivedAll();

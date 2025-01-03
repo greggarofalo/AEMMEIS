@@ -1,5 +1,6 @@
 package controller.HomePage;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import model.libroService.Libro;
 import model.libroService.LibroDAO;
 import model.libroService.Reparto;
 import model.libroService.RepartoDAO;
+import model.utenteService.Utente;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +20,10 @@ import java.util.List;
 @WebServlet("/mostra-reparto")
 public class MostraRepartoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(Validator.checkIfUserAdmin((Utente) request.getSession().getAttribute("utente"))) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         int idReparto = Integer.parseInt(request.getParameter("id"));
         String position = request.getParameter("position");
         System.out.println(position);

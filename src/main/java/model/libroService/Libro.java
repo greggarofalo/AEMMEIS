@@ -93,7 +93,7 @@ public class Libro {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Libro libro = (Libro) o;
-        return prezzo==libro.prezzo && sconto == libro.sconto && isbn.equals(libro.isbn) && titolo.equals(libro.titolo) && genere.equals(libro.genere) && annoPubblicazioni.equals(libro.annoPubblicazioni);
+        return isbn.equals(libro.isbn);
         //si potrebbe fare anche solo sull'isbn
     }
 

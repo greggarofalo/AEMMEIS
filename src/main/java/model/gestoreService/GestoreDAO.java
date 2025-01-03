@@ -38,7 +38,7 @@ public class GestoreDAO {
 
     public void updateGestore(Gestore gestore){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("UPDATE Gestore SET stipendio = ? WHERE matricola = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE gestore SET stipendio = ? WHERE matricola = ?");
             ps.setDouble(1, gestore.getStipendio());
             ps.setString(2, gestore.getMatricola());
             if(ps.executeUpdate() != 1)
@@ -53,7 +53,7 @@ public class GestoreDAO {
         List<Gestore> gestori = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Gestore");
+                    con.prepareStatement("SELECT * FROM gestore");
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

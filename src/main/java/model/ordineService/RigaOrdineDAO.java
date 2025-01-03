@@ -16,7 +16,7 @@ public class RigaOrdineDAO {
     public void doSave(RigaOrdine rigaOrdine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO rigaOrdine (idOrdine, isbn, prezzoUnitario, quantita) VALUES(?,?,?, ?)");
+                    "INSERT INTO rigaordine (idOrdine, isbn, prezzoUnitario, quantita) VALUES(?,?,?, ?)");
             ps.setString(1, rigaOrdine.getIdOrdine());
             ps.setString(2, rigaOrdine.getLibro().getIsbn());
             ps.setDouble(3, rigaOrdine.getPrezzoUnitario());
@@ -31,7 +31,7 @@ public class RigaOrdineDAO {
     public List<RigaOrdine> doRetrivedByOrdine(String idOrdine) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM rigaOrdine WHERE idOrdine=?");
+                    con.prepareStatement("SELECT * FROM rigaordine WHERE idOrdine=?");
             ps.setString(1, idOrdine);
             ResultSet rs = ps.executeQuery();
             List<RigaOrdine> lista = new ArrayList<>();
@@ -55,7 +55,7 @@ public class RigaOrdineDAO {
     public RigaOrdine doRetriveById(String idOrdine, String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM rigaOrdine WHERE idOrdine=? AND isbn=?");
+                    con.prepareStatement("SELECT * FROM rigaordine WHERE idOrdine=? AND isbn=?");
             ps.setString(1, idOrdine);
             ps.setString(2, isbn);
             ResultSet rs = ps.executeQuery();
@@ -77,7 +77,7 @@ public class RigaOrdineDAO {
     public void deleteRigaOrdine(String isbn, String idOrdine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM rigaOrdine WHERE idOrdine=? AND isbn =?");
+                    con.prepareStatement("DELETE FROM rigaordine WHERE idOrdine=? AND isbn =?");
             ps.setString(1, idOrdine);
             ps.setString(2, isbn);
             if(ps.executeUpdate() != 1)
@@ -90,7 +90,7 @@ public class RigaOrdineDAO {
     public void deleteRigaOrdineByIdOrdine(String idOrdine){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM rigaOrdine WHERE idOrdine=?");
+                    con.prepareStatement("DELETE FROM rigaordine WHERE idOrdine=?");
             ps.setString(1, idOrdine);
             if(ps.executeUpdate() < 1)
                 throw new RuntimeException("DELETE error.");

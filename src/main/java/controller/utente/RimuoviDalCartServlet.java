@@ -1,5 +1,7 @@
 package controller.utente;
 
+import controller.utils.Validator;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +25,10 @@ public class RimuoviDalCartServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 
         LibroDAO libroService = new LibroDAO();

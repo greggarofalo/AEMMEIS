@@ -1,5 +1,6 @@
 package controller.utente.ordine;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +24,11 @@ import java.util.List;
 @WebServlet("/do-pagamento")
 public class Pagamento extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session= request.getSession();
+        if(Validator.checkIfUserAdmin((Utente) session.getAttribute("utente"))) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         List<RigaCarrello> righe = (List<RigaCarrello>) session.getAttribute("righeDisponibili");
         Ordine ordine = new Ordine();
       //  OrdineDAO ordineDAO = new OrdineDAO();

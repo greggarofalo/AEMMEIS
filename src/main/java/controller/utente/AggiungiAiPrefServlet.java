@@ -1,5 +1,6 @@
 package controller.utente;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +27,10 @@ public class AggiungiAiPrefServlet extends HttpServlet {
         Libro libro = libroService.doRetrieveById(isbn);
         HttpSession session = request.getSession();
         Utente utente= (Utente) session.getAttribute("utente");
-        if(utente==null){
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        } else if(utente==null){
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not logged in");
         }
         else {

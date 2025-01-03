@@ -27,6 +27,16 @@ body {
     flex-grow: 1;
 }
 
+.book-disponibile {
+    color: green; /* Colore verde */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+.book-nondisponibile {
+    color: red; /* Colore verde */
+    font-weight: bold; /* Testo in grassetto */
+}
+
 .book-title {
     font-size: 18px;
     margin: 0;

@@ -1,5 +1,6 @@
 package controller.utente.ordine;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,9 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.carrelloService.Carrello;
 import model.carrelloService.RigaCarrello;
-import model.carrelloService.RigaCarrelloDAO;
-import model.libroService.Libro;
-import model.libroService.LibroDAO;
 import model.utenteService.Utente;
 
 import java.io.IOException;
@@ -23,10 +21,15 @@ public class OrdineSupporto extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
-        //controllo che l'utente sia in sessione altrimenti non può acquistare
-        if(utente == null){
+        if (Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (utente == null) { //controllo che l'utente sia in sessione altrimenti non può acquistare
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
             dispatcher.forward(request, response);
+            return;
         }
 
         //controllo che i libri nel carrello siano tutti disponibili per l'acquisto e aggiungo la lista nella sessione

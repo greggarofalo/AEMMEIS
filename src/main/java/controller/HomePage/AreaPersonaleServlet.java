@@ -1,5 +1,6 @@
 package controller.HomePage;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -22,7 +23,7 @@ public class AreaPersonaleServlet extends HttpServlet {
         if (session != null && session.getAttribute("utente") != null) {
             address = "/WEB-INF/results/areaPersonale.jsp";
             Utente utente = (Utente) session.getAttribute("utente");
-            if(utente.getTipo().equalsIgnoreCase("amministratore"))
+            if(Validator.checkIfUserAdmin(utente))
                 address = "/WEB-INF/results/admin/areaPersonaleAdmin.jsp";
         } else {
             address = "/WEB-INF/results/login.jsp";

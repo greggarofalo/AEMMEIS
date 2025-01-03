@@ -38,7 +38,7 @@ public class RegistroUtente extends HttpServlet{
             List<String> telefoni = new ArrayList<>();
             for (String telefono : numeriTelefono) {
                 if (!isNumeric(telefono) && telefono.length() != 10) {
-                    //pagina di errore per inserimento parametri errato
+                    //pagina dai errore per inserimento parametri errato
                     address = "/WEB-INF/errorJsp/erroreForm.jsp";
                 } else telefoni.add(telefono);
             }

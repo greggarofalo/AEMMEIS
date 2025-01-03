@@ -1,6 +1,7 @@
 package controller.utente.supporto;
 
 import com.mysql.cj.Session;
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ public class ModificaPasswordSupporto extends HttpServlet {
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
 
-        if(utente.getTipo().equalsIgnoreCase("Amministratore")){
+        if(Validator.checkIfUserAdmin(utente)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/modificaPassAdmin.jsp");
             dispatcher.forward(request, response);
         }else{

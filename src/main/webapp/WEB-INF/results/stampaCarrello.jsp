@@ -42,6 +42,17 @@
                                 <%}%>
 
                             </div>
+
+                            <%if (libro.isDisponibile()) {%>
+                            <p class="book-disponibile">Disponibile</p>
+                            <br>
+                            <%
+                            } else {
+                            %>
+                            <p class="book-nondisponibile">Non disponibile</p>
+                            <br>
+                            <%}%>
+
                             <%
                                 WishList wishList = (WishList) session.getAttribute("wishList");
                                 String address="images/hearts-icon.png";

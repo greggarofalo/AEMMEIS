@@ -1,12 +1,16 @@
 package controller.utente;
 
+import controller.utils.Validator;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
+import model.utenteService.Utente;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -20,6 +24,12 @@ public class SearchBarServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         String query = request.getParameter("q");
         LibroDAO libroService = new LibroDAO();
 

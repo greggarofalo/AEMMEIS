@@ -1,6 +1,7 @@
 package controller.utente;
 
 import com.oracle.wls.shaded.org.apache.xml.utils.SystemIDResolver;
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.carrelloService.Carrello;
 import model.carrelloService.RigaCarrello;
+import model.utenteService.Utente;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,6 +27,11 @@ public class AggiornaCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 
         if (carrello == null) {

@@ -1,5 +1,6 @@
 package controller.utente.ordine;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,10 @@ public class VisualizzaOrdini extends HttpServlet {
         //gestire meglio la stampa
         HttpSession session = request.getSession();
         Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         OrdineDAO ordineDAO = new OrdineDAO();
         List<Ordine> ordini = ordineDAO.doRetrieveByUtente(utente.getEmail());
         session.setAttribute("ordini", ordini);

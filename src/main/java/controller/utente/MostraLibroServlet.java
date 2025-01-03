@@ -1,5 +1,6 @@
 package controller.utente;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import model.carrelloService.RigaCarrello;
 import model.libroService.Autore;
 import model.libroService.Libro;
 import model.libroService.LibroDAO;
+import model.utenteService.Utente;
 import model.wishList.WishList;
 
 import java.io.IOException;
@@ -23,6 +25,11 @@ public class MostraLibroServlet extends HttpServlet {
 
         String isbn=request.getParameter("isbn");
         HttpSession session= request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         Carrello carrello= (Carrello) session.getAttribute("carrello");
         WishList wishList = (WishList) session.getAttribute("wishList");
         Libro libro  =new Libro();

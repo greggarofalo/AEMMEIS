@@ -33,12 +33,12 @@ public class LibroDAO {
     public void deleteLibro(String isbn){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM rigaCarrello WHERE isbn=?");
+                    con.prepareStatement("DELETE FROM rigacarrello WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE1 error.");
 
-            ps = con.prepareStatement("DELETE FROM wishList WHERE isbn=?");
+            ps = con.prepareStatement("DELETE FROM wishlist WHERE isbn=?");
             ps.setString(1, isbn);
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("DELETE2 error.");
@@ -219,7 +219,7 @@ public class LibroDAO {
     public void deleteAutoreScrittura(String isbn, Autore autore){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM Scrittura WHERE isbn=? AND cf=?");
+                    con.prepareStatement("DELETE FROM scrittura WHERE isbn=? AND cf=?");
             ps.setString(1, isbn);
             ps.setString(2, autore.getCf());
 
@@ -254,7 +254,7 @@ public class LibroDAO {
 
     public List<Libro> Search(String query) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Libro WHERE titolo LIKE ? OR isbn LIKE ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM libro WHERE titolo LIKE ? OR isbn LIKE ?");
             ps.setString(1, "%" + query + "%");
             ps.setString(2, query + "%");
 

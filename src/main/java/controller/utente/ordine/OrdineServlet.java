@@ -1,6 +1,8 @@
 package controller.utente.ordine;
 
 
+import controller.utils.Validator;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,7 +36,11 @@ import java.util.Random;
 public class OrdineServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //prendo ciò che ho in  sessione
-        HttpSession session = request.getSession();
+        HttpSession session= request.getSession();
+        if(Validator.checkIfUserAdmin((Utente) session.getAttribute("utente"))) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
 
         //non faccio il controllo poichè lo faccio negli step prima...quindi se non ci fossero righe non dovrebbe
         //proprio arrivare a questo punto.

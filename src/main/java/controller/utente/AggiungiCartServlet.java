@@ -1,5 +1,6 @@
 package controller.utente;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,6 +27,11 @@ public class AggiungiCartServlet extends HttpServlet {
         String position = request.getParameter("position");
 
         HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
        // Utente utente = (Utente) session.getAttribute("utente");
         Carrello carrello = (Carrello) session.getAttribute("carrello");
 

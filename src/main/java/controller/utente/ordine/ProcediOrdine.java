@@ -1,5 +1,6 @@
 package controller.utente.ordine;
 
+import controller.utils.Validator;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import model.libroService.Libro;
 import model.libroService.LibroDAO;
 import model.libroService.Sede;
 import model.libroService.SedeDAO;
+import model.utenteService.Utente;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +23,11 @@ import java.util.List;
 public class ProcediOrdine extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
         LibroDAO libroDAO = new LibroDAO();
         SedeDAO sedeDAO = new SedeDAO();
 
