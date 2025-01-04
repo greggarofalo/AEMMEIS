@@ -33,14 +33,22 @@ public class RegistroUtente extends HttpServlet{
                 codiceSicurezza == null || codiceSicurezza.isEmpty()  || codiceSicurezza.length()>16 || tipo == null) {
             //pagina di errore per inserimento parametri errato
             address = "/WEB-INF/errorJsp/erroreForm.jsp";
-        }else {
+        }else{
             String[] numeriTelefono = request.getParameterValues("telefono");
             List<String> telefoni = new ArrayList<>();
             for (String telefono : numeriTelefono) {
-                if (!isNumeric(telefono) && telefono.length() != 10) {
+                if (!isNumeric(telefono) || telefono.length() != 10) {
                     //pagina dai errore per inserimento parametri errato
                     address = "/WEB-INF/errorJsp/erroreForm.jsp";
                 } else telefoni.add(telefono);
+            }
+
+            //se un telefono è già esistente nel DB va in errore
+            UtenteDAO utenteService = new UtenteDAO();
+            List<String> telefoniDB = utenteService.doRetrieveAllTelefoni();
+            for(String telefono: telefoni){
+                if(telefoniDB.contains(telefono))
+                    address = "/WEB-INF/errorJsp/erroreForm.jsp"; // da cambiare
             }
 
             utente.setNomeUtente(nomeUtente);
@@ -49,7 +57,6 @@ public class RegistroUtente extends HttpServlet{
             utente.setCodiceSicurezza(codiceSicurezza);
             utente.setTelefoni(telefoni);
 
-            UtenteDAO utenteService = new UtenteDAO();
             if (utenteService.doRetrieveById(utente.getEmail()) == null) {
                 utenteService.doSave(utente);
                 if (utente.getTipo().equalsIgnoreCase("premium")) {
@@ -85,11 +92,13 @@ public class RegistroUtente extends HttpServlet{
                 carrello.setIdCarrello(newId);
                 carrelloService.doSave(carrello);
 
-                address = "/WEB-INF/results/login.jsp";
+                if(address == null)
+                  address = "/WEB-INF/results/login.jsp";
 
             } else {
+                if(address == null)
                 //pagina di errore nel caso l'email fosse già presente nel db
-                address = "/WEB-INF/errorJsp/utentePresente.jsp";
+                    address = "/WEB-INF/errorJsp/utentePresente.jsp";
 
             }
         }

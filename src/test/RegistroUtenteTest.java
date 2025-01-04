@@ -31,19 +31,47 @@ public class RegistroUtenteTest {
         utenteDAO = mock(UtenteDAO.class);
 
         when(request.getSession()).thenReturn(session);
+
     }
 
     @Test
     void testDoGet_SuccessRegistration() throws ServletException, IOException {
         // Parametri validi
         when(request.getParameter("nomeUtente")).thenReturn("MarioRossi");
-        when(request.getParameter("email")).thenReturn("mario@example.com");
+        when(request.getParameter("email")).thenReturn("mario@example1.com");
         when(request.getParameter("pw")).thenReturn("password");
         when(request.getParameter("tipo")).thenReturn("premium");
-        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234567890"});
+        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234567899"});
 
         // La mail non è presente nel DB
-        when(utenteDAO.doRetrieveById("mario@example.com")).thenReturn(null);
+        when(utenteDAO.doRetrieveById("mario@example1.com")).thenReturn(null);
+
+        // Mock del dispatcher
+        when(request.getRequestDispatcher("/WEB-INF/results/login.jsp")).thenReturn(dispatcher);
+
+        // Eseguiamo la servlet
+        servlet.doGet(request, response);
+
+        // Verifica che venga fatto forward a login.jsp (perché la registrazione è riuscita)
+        verify(dispatcher).forward(request, response);
+        verify(session, never()).setAttribute(eq("utente"), any(Utente.class));
+        // o se in futuro decidi di salvare l’utente in sessione, controlli di riflesso
+    }
+
+    @Test
+    void testDoGet_SuccessRegistrationPiuTelefoni() throws ServletException, IOException {
+        // Parametri validi
+        when(request.getParameter("nomeUtente")).thenReturn("MarioRossi");
+        when(request.getParameter("email")).thenReturn("mari1@gmail.com");
+        when(request.getParameter("pw")).thenReturn("password");
+        when(request.getParameter("tipo")).thenReturn("premium");
+        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234007890", "1029136125"});
+
+        //non c'è il controllo sui numeri di telefono già esistenti perchè in un caso reale non ci
+        //dovrebbero essere duplicati
+
+        // La mail non è presente nel DB
+        when(utenteDAO.doRetrieveById("mari1@gmail.com")).thenReturn(null);
 
         // Mock del dispatcher
         when(request.getRequestDispatcher("/WEB-INF/results/login.jsp")).thenReturn(dispatcher);
@@ -89,6 +117,28 @@ public class RegistroUtenteTest {
         when(request.getParameter("pw")).thenReturn("password");
         when(request.getParameter("tipo")).thenReturn("standard");
         when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234567890"});
+
+        // Il dispatcher per la pagina di errore
+        when(request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp")).thenReturn(dispatcher);
+
+        servlet.doGet(request, response);
+
+        verify(dispatcher).forward(request, response);
+    }
+
+    //per quanto riguarda i form non validi controllo se la funzione isValid() funziona per i valori numerici
+
+    //per come è stato scritto il codice, il controllo sul telefono errato viene fatto prima del controllo sull'email
+    //già presente nel db, per cui ho aggiunto dei controlli prima di settare address nella servlet
+    //in modo che se si trova un errore, gli altri errori non impattano sull'address
+    @Test
+    void testDoGet_isValidCheck() throws ServletException, IOException {
+        // Parametri NON validi (telefono non numerico)
+        when(request.getParameter("nomeUtente")).thenReturn("Aless");
+        when(request.getParameter("email")).thenReturn("ales@gmail.com");
+        when(request.getParameter("pw")).thenReturn("password");
+        when(request.getParameter("tipo")).thenReturn("standard");
+        when(request.getParameterValues("telefono")).thenReturn(new String[]{"12E4OO7890"});
 
         // Il dispatcher per la pagina di errore
         when(request.getRequestDispatcher("/WEB-INF/errorJsp/erroreForm.jsp")).thenReturn(dispatcher);

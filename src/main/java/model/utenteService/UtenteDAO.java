@@ -234,4 +234,19 @@ public class UtenteDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<String> doRetrieveAllTelefoni() {
+        List<String> telefoni = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT numeroTelefono FROM telefono");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               telefoni.add(rs.getString(1));
+            }
+            return telefoni;
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
