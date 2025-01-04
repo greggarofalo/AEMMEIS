@@ -19,6 +19,14 @@ import model.utenteService.UtenteDAO;
 
 @WebServlet(name = "insertUtente", value = "/insert-utente")
 public class RegistroUtente extends HttpServlet{
+    private UtenteDAO utenteDAO = new UtenteDAO();
+    private TesseraDAO tesseraDAO = new TesseraDAO();
+    public void setUtenteDAO(UtenteDAO utenteDAO){
+        this.utenteDAO = utenteDAO;
+    }
+    public void setTesseraDAO(TesseraDAO tesseraDAO){
+        this.tesseraDAO = tesseraDAO;
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -44,12 +52,19 @@ public class RegistroUtente extends HttpServlet{
             }
 
             //se un telefono è già esistente nel DB va in errore
-            UtenteDAO utenteService = new UtenteDAO();
+            UtenteDAO utenteService = utenteDAO;
+
+
             List<String> telefoniDB = utenteService.doRetrieveAllTelefoni();
-            for(String telefono: telefoni){
-                if(telefoniDB.contains(telefono))
-                    address = "/WEB-INF/errorJsp/erroreForm.jsp"; // da cambiare
+            if(!telefoniDB.isEmpty()){
+                for(String telefono: telefoni){
+                    if (telefoniDB.contains(telefono)) {
+                        address = "/WEB-INF/errorJsp/erroreForm.jsp"; // da cambiare
+                        break;
+                    }
+                }
             }
+
 
             utente.setNomeUtente(nomeUtente);
             utente.setEmail(email);
@@ -57,10 +72,11 @@ public class RegistroUtente extends HttpServlet{
             utente.setCodiceSicurezza(codiceSicurezza);
             utente.setTelefoni(telefoni);
 
-            if (utenteService.doRetrieveById(utente.getEmail()) == null) {
+            Utente utenteRetrieved = utenteService.doRetrieveById(utente.getEmail());
+            if (utenteRetrieved == null) {
                 utenteService.doSave(utente);
                 if (utente.getTipo().equalsIgnoreCase("premium")) {
-                    TesseraDAO tesseraService = new TesseraDAO();
+                    TesseraDAO tesseraService = tesseraDAO;
                     Tessera tessera = new Tessera();
                     tessera.setEmail(utente.getEmail());
                     tessera.setDataCreazione(LocalDate.now());

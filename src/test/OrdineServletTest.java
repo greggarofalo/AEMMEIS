@@ -1,10 +1,16 @@
 import controller.utente.ordine.OrdineServlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.carrelloService.Carrello;
+import model.carrelloService.CarrelloDAO;
 import model.carrelloService.RigaCarrello;
+import model.carrelloService.RigaCarrelloDAO;
 import model.libroService.Libro;
+import model.ordineService.Ordine;
+import model.ordineService.OrdineDAO;
 import model.utenteService.Utente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +24,9 @@ import static org.mockito.Mockito.*;
 class OrdineServletTest {
 
     private OrdineServlet servletUnderTest;
+    private RigaCarrelloDAO rigaCarrelloDAO;
+    private CarrelloDAO carrelloDAO;
+    private OrdineDAO ordineDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
@@ -30,7 +39,14 @@ class OrdineServletTest {
         response = mock(HttpServletResponse.class);
         session = mock(HttpSession.class);
         dispatcher = mock(RequestDispatcher.class);
+        ordineDAO = mock(OrdineDAO.class);
+        carrelloDAO = mock(CarrelloDAO.class);
+        rigaCarrelloDAO = mock(RigaCarrelloDAO.class);
 
+        servletUnderTest.setOrdineDAO(ordineDAO);
+        servletUnderTest.setCarrelloDAO(carrelloDAO);
+        servletUnderTest.setRigaCarrelloDAO(rigaCarrelloDAO);
+        doNothing().when(ordineDAO).doSave(any(Ordine.class));
         when(request.getSession()).thenReturn(session);
     }
 
@@ -54,7 +70,7 @@ class OrdineServletTest {
         // righeDisponibili
         List<RigaCarrello> righeDisponibili = new ArrayList<>();
         Libro libro = new Libro();
-        libro.setIsbn("1234123412341");
+        libro.setIsbn("1111111111111");
         libro.setPrezzo(10.0);
         libro.setSconto(10);
         libro.setDisponibile(true);
@@ -63,6 +79,7 @@ class OrdineServletTest {
         rigaCarrello.setLibro(libro);
         righeDisponibili.add(rigaCarrello); // TOT = (10 - 10%)=9 *2=18
 
+        when(ordineDAO.doRetrivedAllByIdOrdini()).thenReturn(new ArrayList<>());
         when(session.getAttribute("righeDisponibili")).thenReturn(righeDisponibili);
 
         // Carrello in session
@@ -73,6 +90,8 @@ class OrdineServletTest {
         carrello.setRigheCarrello(righeCarrello);
 
         when(session.getAttribute("carrello")).thenReturn(carrello);
+        when(carrelloDAO.doRetriveByUtente("mario@example.com")).thenReturn(carrello);
+        doNothing().when(rigaCarrelloDAO).deleteRigaCarrello(anyString(), anyString());
 
         // Esecuzione
         servletUnderTest.doGet(request, response);

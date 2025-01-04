@@ -19,11 +19,16 @@ import java.util.List;
 
 @WebServlet("/insert-libro")
 public class NuovoLibroServlet extends HttpServlet {
+    private LibroDAO libroDAO = new LibroDAO();
+
+    public void setLibroDAO(LibroDAO libroDAO){
+        this.libroDAO = libroDAO;
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Libro libro = new Libro();
-        LibroDAO libroService = new LibroDAO();
+        LibroDAO libroService = libroDAO;
 
         String isbn = request.getParameter("isbn");
         String titolo = request.getParameter("titolo");

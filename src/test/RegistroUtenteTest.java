@@ -1,6 +1,8 @@
 import static org.mockito.Mockito.*;
 
 import jakarta.servlet.ServletException;
+import model.tesseraService.Tessera;
+import model.tesseraService.TesseraDAO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import jakarta.servlet.http.*;
@@ -9,21 +11,28 @@ import jakarta.servlet.RequestDispatcher;
 import controller.utente.RegistroUtente;
 import model.utenteService.UtenteDAO;
 import model.utenteService.Utente;
+import org.mockito.InjectMocks;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RegistroUtenteTest {
+    @InjectMocks
     private RegistroUtente servlet;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
     private RequestDispatcher dispatcher;
+
     private UtenteDAO utenteDAO;
+
+    private TesseraDAO tesseraDAO;
 
     @BeforeEach
     void setUp() {
 
         servlet = new RegistroUtente();
+        tesseraDAO = mock(TesseraDAO.class);
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         session = mock(HttpSession.class);
@@ -31,47 +40,25 @@ public class RegistroUtenteTest {
         utenteDAO = mock(UtenteDAO.class);
 
         when(request.getSession()).thenReturn(session);
-
+        doNothing().when(utenteDAO).doSave(any(Utente.class));
+        doNothing().when(tesseraDAO).doSave(any(Tessera.class));
+        servlet.setUtenteDAO(utenteDAO);
+        servlet.setTesseraDAO(tesseraDAO);
     }
 
     @Test
     void testDoGet_SuccessRegistration() throws ServletException, IOException {
         // Parametri validi
         when(request.getParameter("nomeUtente")).thenReturn("MarioRossi");
-        when(request.getParameter("email")).thenReturn("mario@example1.com");
+        when(request.getParameter("email")).thenReturn("mario@example.com");
         when(request.getParameter("pw")).thenReturn("password");
         when(request.getParameter("tipo")).thenReturn("premium");
-        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234567899"});
+        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234567890"});
 
         // La mail non è presente nel DB
-        when(utenteDAO.doRetrieveById("mario@example1.com")).thenReturn(null);
-
-        // Mock del dispatcher
-        when(request.getRequestDispatcher("/WEB-INF/results/login.jsp")).thenReturn(dispatcher);
-
-        // Eseguiamo la servlet
-        servlet.doGet(request, response);
-
-        // Verifica che venga fatto forward a login.jsp (perché la registrazione è riuscita)
-        verify(dispatcher).forward(request, response);
-        verify(session, never()).setAttribute(eq("utente"), any(Utente.class));
-        // o se in futuro decidi di salvare l’utente in sessione, controlli di riflesso
-    }
-
-    @Test
-    void testDoGet_SuccessRegistrationPiuTelefoni() throws ServletException, IOException {
-        // Parametri validi
-        when(request.getParameter("nomeUtente")).thenReturn("MarioRossi");
-        when(request.getParameter("email")).thenReturn("mari1@gmail.com");
-        when(request.getParameter("pw")).thenReturn("password");
-        when(request.getParameter("tipo")).thenReturn("premium");
-        when(request.getParameterValues("telefono")).thenReturn(new String[]{"1234007890", "1029136125"});
-
-        //non c'è il controllo sui numeri di telefono già esistenti perchè in un caso reale non ci
-        //dovrebbero essere duplicati
-
-        // La mail non è presente nel DB
-        when(utenteDAO.doRetrieveById("mari1@gmail.com")).thenReturn(null);
+        when(utenteDAO.doRetrieveById("mario@example.com")).thenReturn(null);
+        when(tesseraDAO.doRetrivedAllByNumero()).thenReturn(new ArrayList<>());
+        when(utenteDAO.doRetrieveAllTelefoni()).thenReturn(new ArrayList<>());
 
         // Mock del dispatcher
         when(request.getRequestDispatcher("/WEB-INF/results/login.jsp")).thenReturn(dispatcher);

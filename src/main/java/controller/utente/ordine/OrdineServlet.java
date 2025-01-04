@@ -34,6 +34,23 @@ import java.util.Random;
 
 @WebServlet("/do-ordine")
 public class OrdineServlet extends HttpServlet {
+
+    private OrdineDAO ordineDAO = new OrdineDAO();
+    private CarrelloDAO carrelloDAO = new CarrelloDAO();
+
+    private RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
+
+    public void setRigaCarrelloDAO(RigaCarrelloDAO rigaCarrelloDAO) {
+        this.rigaCarrelloDAO = rigaCarrelloDAO;
+    }
+
+    public void setCarrelloDAO(CarrelloDAO carrelloDAO) {
+        this.carrelloDAO = carrelloDAO;
+    }
+
+    public void setOrdineDAO(OrdineDAO ordineDAO){
+        this.ordineDAO = ordineDAO;
+    }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //prendo ciò che ho in  sessione
         HttpSession session= request.getSession();
@@ -50,11 +67,8 @@ public class OrdineServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         //credo gli oggetti che mi serviranno e i relativi services
-        OrdineDAO ordineDAO = new OrdineDAO();
         Ordine ordine = new Ordine();
-        RigaOrdineDAO rigaOrdineDAO = new RigaOrdineDAO();
-        RigaCarrelloDAO rigaCarrelloDAO = new RigaCarrelloDAO();
-        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        //RigaOrdineDAO rigaOrdineDAO = new RigaOrdineDAO();
         TesseraDAO tesseraDAO = new TesseraDAO();
         Carrello carrelloDB = carrelloDAO.doRetriveByUtente(utente.getEmail());
 
@@ -77,7 +91,7 @@ public class OrdineServlet extends HttpServlet {
         double costo = 0;
         int puntiAcquisiti = 0;
         //creo idOrdine
-        List<String> idOrdini = ordineDAO.doRetrivedAllByIdOrdini();
+        List<String> idOrdini = ordineDAO.doRetrivedAllByIdOrdini(); //mock
         String idOrdine;
         Random random =new Random();
         do {

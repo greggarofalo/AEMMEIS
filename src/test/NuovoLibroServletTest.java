@@ -1,14 +1,14 @@
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import jakarta.servlet.http.*;
-import jakarta.servlet.RequestDispatcher;
-
 import controller.admin.gestisciProdotti.NuovoLibroServlet;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.libroService.Libro;
 import model.libroService.LibroDAO;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import static org.mockito.Mockito.*;
 
 class NuovoLibroServletTest {
 
@@ -22,6 +22,7 @@ class NuovoLibroServletTest {
     @BeforeEach
     void setUp() {
         servlet = new NuovoLibroServlet();
+
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         session = mock(HttpSession.class);
@@ -30,8 +31,9 @@ class NuovoLibroServletTest {
         // Se usi un LibroDAO fittizio (mock) interno alla Servlet, potresti dover modificare il codice
         // o passarlo come dipendenza (injection) per testare meglio. Per ora facciamo finta di no.
         libroDAO = mock(LibroDAO.class);
-
+        doNothing().when(libroDAO).doSave(any(Libro.class));
         when(request.getSession()).thenReturn(session);
+        servlet.setLibroDAO(libroDAO);
     }
 
     @Test
