@@ -54,17 +54,17 @@ public class RegistroUtente extends HttpServlet{
             //se un telefono è già esistente nel DB va in errore
             UtenteDAO utenteService = utenteDAO;
 
-
             List<String> telefoniDB = utenteService.doRetrieveAllTelefoni();
             if(!telefoniDB.isEmpty()){
                 for(String telefono: telefoni){
                     if (telefoniDB.contains(telefono)) {
-                        address = "/WEB-INF/errorJsp/erroreForm.jsp"; // da cambiare
-                        break;
+                        address = "/WEB-INF/errorJsp/erroreTelefonoDB.jsp";
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+                        dispatcher.forward(request, response);
+                        return;
                     }
                 }
             }
-
 
             utente.setNomeUtente(nomeUtente);
             utente.setEmail(email);
