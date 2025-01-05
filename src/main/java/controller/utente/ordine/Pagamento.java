@@ -25,10 +25,12 @@ import java.util.List;
 public class Pagamento extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session= request.getSession();
-        if(Validator.checkIfUserAdmin((Utente) session.getAttribute("utente"))) {
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(Validator.checkIfUserAdmin(utente)) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
             dispatcher.forward(request, response);
         }
+
         List<RigaCarrello> righe = (List<RigaCarrello>) session.getAttribute("righeDisponibili");
         Ordine ordine = new Ordine();
       //  OrdineDAO ordineDAO = new OrdineDAO();
@@ -62,7 +64,11 @@ public class Pagamento extends HttpServlet {
             else {
                 ordine.setCitta(citta);
                 ordine.setIndirizzoSpedizione(indirizzo);
-                address = "/WEB-INF/results/pagamentoOrdine.jsp";
+                if(utente.getTipo().equalsIgnoreCase("Standard"))
+                    address = "/WEB-INF/results/pagamentoOrdine.jsp";
+                else{
+                    address = "/WEB-INF/results/puntiPremium.jsp";
+                }
             }
         }
         else{
@@ -74,7 +80,11 @@ public class Pagamento extends HttpServlet {
                 Sede sede = sedeDAO.doRetrieveById(Integer.parseInt(request.getParameter("sede")));
                 ordine.setCitta(sede.getCitta());
                 ordine.setIndirizzoSpedizione(sede.getVia() + ", " + sede.getCivico() + ", " + sede.getCap());
-                address = "/WEB-INF/results/pagamentoOrdine.jsp";
+                if(utente.getTipo().equalsIgnoreCase("Standard"))
+                    address = "/WEB-INF/results/pagamentoOrdine.jsp";
+                else{
+                    address = "/WEB-INF/results/puntiPremium.jsp";
+                }
             }
         }
         //inizio a salvare dati per l'ordine e l'ordine in sessione, così dopo il pagamento la servlet lavora su quest'ordine

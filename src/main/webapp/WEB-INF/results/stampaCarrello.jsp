@@ -97,12 +97,15 @@
                 </div>
                 <div class="cart-actions">
                     <%
+                        String disponibile = (String) request.getAttribute("disponibile");
                      //   Carrello cart = (Carrello) session.getAttribute("carrello");
                         if(cart.getRigheCarrello().isEmpty()){
                     %><button onclick="return alert('Carrello vuoto...inserisci almeno un prodotto' +
                      ' nel carrello per acquistare')" class="button">Acquista ora </button>
+                    <%}else if(disponibile.equals("no")){%>
+                    <button onclick="return alert('Non ci sono articoli disponibili...inserisci almeno un prodotto ' +
+                     'nel carrello per acquistare')" class="button">Acquista ora </button>
                     <%}else{%>
-
                     <form action="ordine-supporto" id="form">
                         <button type="submit" form="form" class="button">Acquista ora </button>
                     </form>

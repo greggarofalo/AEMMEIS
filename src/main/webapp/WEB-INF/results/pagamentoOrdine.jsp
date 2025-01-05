@@ -54,7 +54,11 @@
             <%--<input type="date" id="expiryDate" name="expiryDate" required>--%>
             <input type="date" id="expiryDate" name="expiryDate" min="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>" required>
         </div>
-
+        <div class="form-pag">
+            <br><br><label for="costoAggiornato">Costo:</label>
+            <span id="costoAggiornato">${ordine.costo}</span> €
+        </div>
+<%--
         <% Utente utente = (Utente) session.getAttribute("utente");
             TesseraDAO tesseraDAO = new TesseraDAO();
             Tessera tessera = tesseraDAO.doRetrieveByEmail(utente.getEmail());
@@ -69,10 +73,10 @@
         <div class="form-pag">
            <br><br><label for="costoAggiornato">Costo Aggiornato:</label>
             <span id="costoAggiornato">${ordine.costo}</span> €
-        </div>
-
+        </div>--%>
 
         <input type="hidden" id="costoIniziale" value="${ordine.costo}" name="costo">
+        <input type="hidden" id="punti" value="${ordine.puntiSpesi}" name="punti">
         <input type="submit" value="Paga Ora">
     </form>
 </div>
@@ -80,7 +84,7 @@
 <%@include file="footer.jsp"%>
 
     <script>
-        function aggiornaCosto() {
+     <%--   function aggiornaCosto() {
             let puntiInput = document.getElementById('punti');
             let punti = puntiInput.value;
             let maxPunti = parseInt(puntiInput.dataset.maxPunti);
@@ -104,7 +108,7 @@
             let sconto = parseInt(punti) * 0.10; // Ogni punto vale 10 centesimi di euro
             let nuovoCosto = Math.max(0, parseFloat(costoOrdine) - sconto);
             costoAggiornato.innerHTML = nuovoCosto.toFixed(2); // Mostra il nuovo costo con due cifre decimali
-        }
+        }--%>
 
         document.getElementById("expiryDate").addEventListener("input", function () {
             const expiryDateInput = this;

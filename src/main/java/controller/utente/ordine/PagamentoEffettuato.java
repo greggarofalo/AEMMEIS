@@ -51,8 +51,6 @@ public class PagamentoEffettuato extends HttpServlet {
             }
 
 
-
-
         }
         ordine.setPuntiSpesi(punti);
 

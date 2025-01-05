@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.carrelloService.Carrello;
+import model.carrelloService.RigaCarrello;
 import model.libroService.Reparto;
 import model.libroService.RepartoDAO;
 import model.utenteService.Utente;
@@ -25,6 +26,16 @@ public class CarrelloServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/admin/homepageAdmin.jsp");
             dispatcher.forward(request, response);
         }
+        Carrello carrello = (Carrello) session.getAttribute("carrello");
+        List<RigaCarrello> righe = carrello.getRigheCarrello();
+        String disponibile = "no";
+        for(RigaCarrello r : righe){
+            if(r.getLibro().isDisponibile()) {
+                disponibile = "si";
+                break;
+            }
+        }
+        request.setAttribute("disponibile", disponibile);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/stampaCarrello.jsp");
         dispatcher.forward(request, response);
     }
